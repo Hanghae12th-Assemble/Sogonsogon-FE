@@ -51,7 +51,7 @@ const TeamInfo = styled.div`
 
 const TeamInfoTest = styled.div`
   display: flex;
-  width: 328px;
+  width: 20.5rem;
   justify-content: space-around;
 `;
 

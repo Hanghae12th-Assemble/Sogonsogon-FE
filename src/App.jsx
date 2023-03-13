@@ -1,5 +1,5 @@
 import Router from "./shared/Router";
-import Layout from "./Layout/Layout";
+import Layout from "./layout/Layout";
 import Reset from "./styles/reset";
 
 function App() {
