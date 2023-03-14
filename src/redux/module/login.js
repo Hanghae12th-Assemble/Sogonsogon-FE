@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../../util/axios";
+import { api } from "../../util/api";
 
 export const __login = createAsyncThunk(
   "loginRadio",
