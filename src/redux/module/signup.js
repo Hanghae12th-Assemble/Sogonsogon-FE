@@ -3,9 +3,9 @@ import { api } from "../../util/axios";
 
 export const __siginup = createAsyncThunk(
   "signupRadio",
-  async (logininfo, thunkAPI) => {
+  async (siginupInfo, thunkAPI) => {
     try {
-      const response = await api.post("/api/member/signup", logininfo);
+      const response = await api.post("/api/member/signup", siginupInfo);
       console.log(response);
     } catch (e) {
       console.log(e);
