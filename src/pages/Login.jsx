@@ -1,55 +1,74 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { __login } from "../redux/module/login";
-import Input from "../elements/Input";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 import Button from "../elements/Button";
 
 function Login() {
-  const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
-
-  const handleLogin = (data) => {
-    const loginInfo = {
-      email: data.email,
-      password: data.password,
-    };
-    dispatch(__login(loginInfo));
-    reset();
-  };
-
   return (
-    <div>
-      <form onSubmit={handleSubmit(handleLogin)}>
-        <Input
-          register={register}
-          type={"text"}
-          name={"email"}
-          validation={{
-            required: "이메일은 필수입니다.",
-          }}
-          placeholder={"이메일을 입력해주세요"}
-          errors={errors}
-        />
-        <Input
-          register={register}
-          type={"password"}
-          name={"password"}
-          validation={{
-            required: "비밀번호는 필수입니다.",
-          }}
-          placeholder={"비밀번호를 입력해주세요"}
-          errors={errors}
-        />
-        <Button>제출</Button>
-      </form>
-    </div>
+    <LoginBox>
+      <LoginContainer>
+        <LoginLogoBox>
+          <span>로고</span>
+        </LoginLogoBox>
+        <LoginButtonBox>
+          <LoginButtonDiv>
+            <Button lgBtn>카카오 로그인</Button>
+          </LoginButtonDiv>
+          <LoginButtonDiv>
+            <Button lgBtn>네이버 로그인</Button>
+          </LoginButtonDiv>
+          <LoginButtonDiv>
+            <Button lgBtn>구글로 로그인</Button>
+          </LoginButtonDiv>
+          <LoginSpanDiv>
+            <Link to={"/signup"}>
+              <span>이메일로 로그인 / 회원가입</span>
+            </Link>
+          </LoginSpanDiv>
+        </LoginButtonBox>
+      </LoginContainer>
+    </LoginBox>
   );
 }
 
 export default Login;
+
+const LoginBox = styled.div`
+  //border: 1px solid black;
+  height: 100%;
+`;
+
+const LoginContainer = styled.div`
+  //border: 1px solid black;
+  height: 100%;
+  overflow: auto;
+`;
+
+const LoginLogoBox = styled.div`
+  //border: 1px solid black;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LoginButtonBox = styled.div`
+  //border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3.125rem;
+`;
+
+const LoginButtonDiv = styled.div`
+  //border: 1px solid red;
+  margin-top: 1.25rem;
+`;
+
+const LoginSpanDiv = styled.div`
+  // border: 1px solid red;
+  margin-top: 3.125rem;
+  cursor: pointer;
+`;

@@ -12,10 +12,8 @@ const Button = ({ children, ...props }) => {
 };
 
 const BtnStyle = styled.button`
-  width: 3rem;
-  height: 2rem;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
   font-weight: bold;
   cursor: pointer;
   ${(props) =>
@@ -23,6 +21,12 @@ const BtnStyle = styled.button`
     css`
       width: 1rem;
       height: 1rem;
+    `}
+  ${(props) =>
+    props.lgBtn &&
+    css`
+      width: 25rem;
+      height: 3rem;
     `}
 `;
 
