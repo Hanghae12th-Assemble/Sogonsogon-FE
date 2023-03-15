@@ -7,6 +7,11 @@ function Login() {
   return (
     <LoginBox>
       <LoginContainer>
+        <LoginBackSpan>
+          <Link to={"/"}>
+            <span>나중에 하기</span>
+          </Link>
+        </LoginBackSpan>
         <LoginLogoBox>
           <span>로고</span>
         </LoginLogoBox>
@@ -71,4 +76,12 @@ const LoginSpanDiv = styled.div`
   // border: 1px solid red;
   margin-top: 3.125rem;
   cursor: pointer;
+`;
+
+const LoginBackSpan = styled.div`
+  //border: 1px solid black;
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 30px;
 `;

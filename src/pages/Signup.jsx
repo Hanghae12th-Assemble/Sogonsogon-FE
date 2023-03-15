@@ -19,7 +19,6 @@ function Sginup() {
   } = useForm();
 
   const handleLogin = (data) => {
-    console.log(data);
     const signupInfo = {
       membername: data.membername,
       password: data.password,
@@ -34,9 +33,11 @@ function Sginup() {
     <SignupContainer>
       <SignupNavbarBox>
         <Navbar
+          toNavigate={"/login"}
           iconleft={<AiOutlineArrowLeft size={20} />}
           title={"회원가입"}
           iconright={<AiOutlineClose size={20} />}
+          toClose={"/"}
         />
       </SignupNavbarBox>
       <SignupForm onSubmit={handleSubmit(handleLogin)}>

@@ -1,15 +1,19 @@
 import React from "react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function Navbar({ iconleft, title, iconright }) {
+function Navbar({ iconleft, title, iconright, toNavigate, toClose }) {
   return (
     <NavbarBox>
-      <div>{iconleft}</div>
+      <Link to={toNavigate}>
+        <div>{iconleft}</div>
+      </Link>
       <div>
         <span>{title}</span>
       </div>
-      <div>{iconright}</div>
+      <Link to={toClose}>
+        <div>{iconright}</div>
+      </Link>
     </NavbarBox>
   );
 }

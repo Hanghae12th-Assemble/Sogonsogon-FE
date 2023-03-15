@@ -5,7 +5,7 @@ import Creatradio from "../pages/Createradio";
 import Monitor from "../pages/Monitor";
 import Profile from "../pages/Profile";
 import Tag from "../pages/Tag";
-import Login from "../pages/Login";
+import Login from "../pages/SelectLogin";
 import Signup from "../pages/Signup";
 import Notfound from "../pages/Notfound";
 import { routers } from "../constants/router";
