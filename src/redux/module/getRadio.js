@@ -7,7 +7,7 @@ export const __getRadio = createAsyncThunk('getRadio', async (radio, thunkAPI) =
     return await axios
         .get(`api/radios/`, radio)
         .then((response) => {
-            return thunkAPI.fulfillWithValue(response.data);
+            return thunkAPI.fulfillWithValue(response?.data);
         })
         .catch((error) => console.log(error));
 });
