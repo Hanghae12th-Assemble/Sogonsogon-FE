@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { __login } from "../redux/module/login";
+import Input from "../elements/Input";
 
 function Login() {
   const dispatch = useDispatch();
@@ -24,18 +25,26 @@ function Login() {
   return (
     <div>
       <form onSubmit={handleSubmit(handleLogin)}>
-        <input
-          {...register("email", { required: "이메일을 입력해주세요." })}
-          type="text"
-          placeholder="이메일 입력해주세요."
+        <Input
+          register={register}
+          type={"text"}
+          name={"email"}
+          validation={{
+            required: "이메일은 필수입니다.",
+          }}
+          placeholder={"이메일을 입력해주세요"}
+          errors={errors}
         />
-        <span>{errors?.email?.message}</span>
-        <input
-          {...register("password", { required: "비밀번호를 입력해주세요." })}
-          type="password"
-          placeholder="비밀번호를 입력해주세요."
+        <Input
+          register={register}
+          type={"password"}
+          name={"password"}
+          validation={{
+            required: "비밀번호는 필수입니다.",
+          }}
+          placeholder={"비밀번호를 입력해주세요"}
+          errors={errors}
         />
-        <span>{errors?.password?.message}</span>
         <button>제출</button>
       </form>
     </div>
