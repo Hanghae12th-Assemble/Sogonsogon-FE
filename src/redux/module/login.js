@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../../util/api";
+import Axios from "../../util/api/axios";
+
+const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
 export const __login = createAsyncThunk(
   "loginRadio",
   async (logininfo, thunkAPI) => {
-    try {
-      const response = await api.post("/api/member/login", logininfo);
-      console.log(response);
-    } catch (e) {
-      console.log(e);
-    }
+    return await axios
+      .post("api/member/login", logininfo)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   }
 );
 
