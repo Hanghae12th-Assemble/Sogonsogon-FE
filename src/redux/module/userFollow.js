@@ -14,7 +14,7 @@ export const __userFollow = createAsyncThunk(
 );
 
 const initialState = {
-  user: null,
+  follow: null,
   isLoading: false,
   error: null,
 };
@@ -30,7 +30,7 @@ const userFollow = createSlice({
     });
     builder.addCase(__userFollow.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.user = action.payload;
+      state.follow = action.payload;
       state.error = null;
     });
     builder.addCase(__userFollow.rejected, (state, action) => {

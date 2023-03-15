@@ -1,5 +1,5 @@
 export const routers = Object.freeze({
-  ADDLIVE: "addlive/:id",
+  CREATERADIO: "createradio/:id",
   LOGIN: "login",
   SIGNUP: "signup",
   MONITOR: "monitor/:id",

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
-import Addlive from "../pages/Addlive";
+import Creatradio from "../pages/Createradio";
 import Monitor from "../pages/Monitor";
 import Profile from "../pages/Profile";
 import Tag from "../pages/Tag";
@@ -16,7 +16,7 @@ function Router() {
       <Routes>
         <Route path="/*" element={<Notfound />} />
         <Route path="/" element={<Home />} />
-        <Route path={`/${routers.ADDLIVE}`} element={<Addlive />} />
+        <Route path={`/${routers.CREATERADIO}`} element={<Creatradio />} />
         <Route path={`/${routers.LOGIN}`} element={<Login />} />
         <Route path={`/${routers.SIGNUP}`} element={<Signup />} />
         <Route path={`/${routers.MONITOR}`} element={<Monitor />} />
