@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { __login } from "../redux/module/login";
 import Input from "../elements/Input";
+import Button from "../elements/Button";
 
 function Login() {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ function Login() {
           placeholder={"비밀번호를 입력해주세요"}
           errors={errors}
         />
-        <button>제출</button>
+        <Button>제출</Button>
       </form>
     </div>
   );
