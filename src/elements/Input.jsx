@@ -9,7 +9,9 @@ const Input = ({ register, type, name, placeholder, validation, errors }) => {
         type={type}
         placeholder={placeholder}
       />
-      <span>{errors?.[name]?.message}</span>
+      <InputMessage>
+        <span>{errors?.[name]?.message}</span>
+      </InputMessage>
     </div>
   );
 };
@@ -21,4 +23,8 @@ const InputBox = styled.input`
   width: 25rem;
   height: 3rem;
   border-radius: 0.625rem;
+`;
+
+const InputMessage = styled.div`
+  margin-top: 0.625rem;
 `;
