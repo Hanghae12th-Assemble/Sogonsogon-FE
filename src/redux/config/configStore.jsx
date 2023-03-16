@@ -4,7 +4,7 @@ import loginRadio from "../module/login";
 import userFollow from "../module/userFollow";
 import createRadio from "../module/createRadio";
 import getRadio from "../module/getRadio";
-import radioInfo from "../module/radioButton";
+import radioInfo from "../module/createRadioButton";
 
 const sotre = configureStore({
   reducer: {

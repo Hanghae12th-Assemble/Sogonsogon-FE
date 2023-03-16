@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { handleSelectedButtonClick } from "../util/handleButton";
 import Button from "../elements/Button";
 import { useDispatch } from "react-redux";
-import { butn } from "../redux/module/radioButton";
+import { butn } from "../redux/module/createRadioButton";
 
 function CreateRadioButton() {
   const [selected, setSelected] = useState({

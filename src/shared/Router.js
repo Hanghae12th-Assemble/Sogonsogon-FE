@@ -9,6 +9,7 @@ import Selectlogin from "../pages/SelectLogin";
 import Signup from "../pages/Signup";
 import Emaillogin from "../pages/Emaillogin";
 import Notfound from "../pages/Notfound";
+import Search from "../pages/Search";
 import { routers } from "../constants/router";
 
 function Router() {
@@ -23,6 +24,7 @@ function Router() {
         <Route path={`/${routers.EMAILLOGIN}`} element={<Emaillogin />} />
         <Route path={`/${routers.MONITOR}`} element={<Monitor />} />
         <Route path={`/${routers.PROFILE}`} element={<Profile />} />
+        <Route path={`/${routers.SEARCH}`} element={<Search />} />
         <Route path={`/${routers.TAG}`} element={<Tag />} />
       </Routes>
     </BrowserRouter>

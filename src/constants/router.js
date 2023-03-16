@@ -6,4 +6,5 @@ export const routers = Object.freeze({
   MONITOR: "monitor/:id",
   PROFILE: "profile/:id",
   TAG: "tag",
+  SEARCH: "search",
 });
