@@ -76,8 +76,9 @@ function Home() {
                     {radio.data.map((item) => {
                         return (
                             <RadioLayout key={item.id}>
-                                <ItemsImgContainer>
-                                    <img src={item.backgroundImageUrl} alt="" />
+                                <ItemsImgContainer backgroundImageUrl={item.backgroundImageUrl}>
+                                    <ViewerCounterContainer>12명</ViewerCounterContainer>
+                                    {/* <img src={item.backgroundImageUrl} alt="" /> */}
                                 </ItemsImgContainer>
                                 <div>{item.title}</div>
                             </RadioLayout>
@@ -92,23 +93,23 @@ function Home() {
 export default Home;
 
 const ItemsImgContainer = styled.div`
-    height: 180px;
+    height: 150px;
     overflow: hidden;
     position: relative;
     background-color: #f5f5f5;
     border-radius: 1rem;
-    > img {
-        position: static; // position 수정
-        width: 100%;
-        height: 180px;
-        margin: auto;
-        object-fit: cover;
-        background-color: #f5f5f5;
-        transition: all 0.5s ease-in-out 0s;
-        :hover {
-            transform: scale(1.02);
-            transition: all 0.3s ease-in-out 0s;
-        }
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.9;
+    z-index: -1;
+    background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row-reverse;
+    :hover {
+        transform: scale(1.05);
+        box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
     }
 `;
 
@@ -121,8 +122,17 @@ const RadioContainer = styled.div`
     flex-wrap: wrap;
 `;
 const RadioLayout = styled.div`
-    /* border: 1px solid black; */
-    width: 200px;
+    border: 1px solid black;
+    width: 220px;
     height: 200px;
     margin: 10px auto;
+`;
+
+const ViewerCounterContainer = styled.div`
+    background-color: green;
+    width: 70px;
+    height: 30px;
+    color: white;
+    margin: 0px 13px 10px 0px; //  위,오른쪽,아래,왼쪽
+    border-radius: 15px;
 `;
