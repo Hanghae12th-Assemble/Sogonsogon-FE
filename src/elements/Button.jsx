@@ -27,6 +27,24 @@ const BtnStyle = styled.button`
     css`
       width: 25rem;
       height: 3rem;
+      &:hover {
+        background-color: #262626;
+        color: white;
+      }
+    `}
+
+    ${(props) =>
+    props.CrRadioBtn &&
+    css`
+      width: 5rem;
+      height: 2.5rem;
+      border-radius: 1.25rem;
+      outline: none;
+      border: none;
+      &:hover {
+        background-color: #262626;
+        color: white;
+      }
     `}
 `;
 

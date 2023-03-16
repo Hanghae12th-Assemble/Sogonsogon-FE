@@ -20,9 +20,11 @@ export default Input;
 
 const InputBox = styled.input`
   outline: none;
-  width: 25rem;
+  width: 460px;
   height: 3rem;
   border-radius: 0.625rem;
+  border: none;
+  background-color: #f1f2f6;
 `;
 
 const InputMessage = styled.div`
