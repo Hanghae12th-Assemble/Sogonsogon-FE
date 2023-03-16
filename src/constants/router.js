@@ -1,6 +1,7 @@
 export const routers = Object.freeze({
   CREATERADIO: "createradio/:id",
-  LOGIN: "login",
+  SELECTLOGIN: "selectlogin",
+  EMAILLOGIN: "maillogin",
   SIGNUP: "signup",
   MONITOR: "monitor/:id",
   PROFILE: "profile/:id",

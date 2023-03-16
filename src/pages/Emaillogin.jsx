@@ -1,15 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { __siginup } from "../redux/module/signup";
-import Input from "../elements/Input";
+import styled from "styled-components";
 import Navbar from "../components/Navbar";
+import Button from "../elements/Button";
+import Input from "../elements/Input";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
-import styled from "styled-components";
-import Button from "../elements/Button";
+import { __login } from "../redux/module/login";
 
-function Sginup() {
+function Emaillogin() {
   const dispatch = useDispatch();
   const {
     register,
@@ -19,13 +19,11 @@ function Sginup() {
   } = useForm();
 
   const handleLogin = (data) => {
-    const signupInfo = {
-      membername: data.membername,
-      password: data.password,
+    const loginInfo = {
       email: data.email,
-      nickname: data.nickname,
+      password: data.password,
     };
-    dispatch(__siginup(signupInfo));
+    dispatch(__login(loginInfo));
     reset();
   };
 
@@ -35,25 +33,12 @@ function Sginup() {
         <Navbar
           toNavigate={"/selectlogin"}
           iconleft={<AiOutlineArrowLeft size={20} />}
-          title={"회원가입"}
+          title={"이메일로 로그인"}
           iconright={<AiOutlineClose size={20} />}
           toClose={"/"}
         />
       </SignupNavbarBox>
       <SignupForm onSubmit={handleSubmit(handleLogin)}>
-        <SignupInputDivBox>
-          <SignupInputTitle>
-            <span>닉네임*</span>
-          </SignupInputTitle>
-          <Input
-            register={register}
-            type={"text"}
-            name={"nickname"}
-            placeholder={"닉네임을 입력해주세요."}
-            validation={{ required: "닉네임를 입력해주세요." }}
-            errors={errors}
-          />
-        </SignupInputDivBox>
         <SignupInputDivBox>
           <SignupInputTitle>
             <span>이메일*</span>
@@ -64,29 +49,10 @@ function Sginup() {
             name={"email"}
             placeholder={"이메일을 입력해주세요."}
             validation={{
-              required: "이메일를 입력해주세요.",
+              required: "이메일을 입력해주세요.",
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                 message: "이메일 형식을 지켜주세요.",
-              },
-            }}
-            errors={errors}
-          />
-        </SignupInputDivBox>
-        <SignupInputDivBox>
-          <SignupInputTitle>
-            <span>ID*</span>
-          </SignupInputTitle>
-          <Input
-            register={register}
-            type={"text"}
-            name={"membername"}
-            placeholder={"아이디를 입력해주세요."}
-            validation={{
-              required: "아이디을 입력해주세요.",
-              pattern: {
-                value: /^(?=.*[a-zA-Z])(?=.*\d).{4,10}$/,
-                message: "영어, 숫자 포함 4-10글자로 해주세요.",
               },
             }}
             errors={errors}
@@ -121,7 +87,7 @@ function Sginup() {
   );
 }
 
-export default Sginup;
+export default Emaillogin;
 
 const SignupContainer = styled.div`
   //border: 1px solid black;

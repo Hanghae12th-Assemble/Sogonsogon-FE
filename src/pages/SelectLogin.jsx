@@ -26,9 +26,10 @@ function Login() {
             <Button lgBtn>구글로 로그인</Button>
           </LoginButtonDiv>
           <LoginSpanDiv>
-            <Link to={"/signup"}>
-              <span>이메일로 로그인 / 회원가입</span>
-            </Link>
+            <span>
+              <Link to={"/maillogin"}>이메일로 로그인</Link> /{" "}
+              <Link to={"/signup"}>회원가입</Link>
+            </span>
           </LoginSpanDiv>
         </LoginButtonBox>
       </LoginContainer>
