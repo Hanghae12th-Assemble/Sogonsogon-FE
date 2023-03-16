@@ -55,11 +55,11 @@ const RadioImgContainer = styled.div`
 
 const RadioContainer = styled.div`
     position: relative;
-    border: 1px solid black;
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    grid-gap: 10px;
     flex-direction: row;
-    flex-wrap: wrap;
     padding: 30px 10px 0px 10px;
     z-index: -1;
     overflow: auto;
@@ -72,7 +72,7 @@ const RadioLayout = styled.div`
     /* border: 1px solid black; */
     width: 200px;
     min-height: 200px;
-    margin: 10px auto;
+    margin: 20px auto;
 `;
 
 const ViewerCounterContainer = styled.div`
