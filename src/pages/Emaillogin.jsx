@@ -94,9 +94,7 @@ const SignupContainer = styled.div`
   height: 90%;
 `;
 
-const SignupNavbarBox = styled.div`
-  margin-top: 2.5rem;
-`;
+const SignupNavbarBox = styled.div``;
 
 const SignupForm = styled.form`
   //border: 1px solid red;
@@ -108,12 +106,12 @@ const SignupForm = styled.form`
 
 const SignupInputDivBox = styled.div`
   //border: 1px solid black;
-  margin-top: 50px;
+  margin-top: 3.125rem;
 `;
 
 const SignupInputTitle = styled.div`
   //border: 1px solid black;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 `;
 
 const SignupButton = styled.div`
@@ -121,5 +119,5 @@ const SignupButton = styled.div`
   height: 100%;
   display: flex;
   align-items: flex-end;
-  padding-bottom: 20px;
+  padding-bottom: 1.25rem;
 `;

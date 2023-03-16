@@ -53,7 +53,7 @@ const LoginContainer = styled.div`
 const LoginLogoBox = styled.div`
   //border: 1px solid black;
   width: 100%;
-  height: 300px;
+  height: 18.75rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,8 +81,8 @@ const LoginSpanDiv = styled.div`
 
 const LoginBackSpan = styled.div`
   //border: 1px solid black;
-  margin-top: 30px;
+  margin-top: 1.875rem;
   display: flex;
   justify-content: flex-end;
-  padding: 0 30px;
+  padding: 0 1.875rem;
 `;

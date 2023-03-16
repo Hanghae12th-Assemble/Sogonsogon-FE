@@ -27,4 +27,5 @@ const NavbarBox = styled.div`
   justify-content: space-between;
   padding: 0px 15px;
   height: 3.125rem;
+  margin-top: 40px;
 `;

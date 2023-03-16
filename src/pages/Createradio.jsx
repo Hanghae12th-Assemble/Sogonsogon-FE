@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
+import Navbar from "../components/Navbar";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import { __createRadio } from "../redux/module/createRadio";
 
 function Createradio() {
@@ -45,44 +49,63 @@ function Createradio() {
   };
 
   return (
-    <div>
-      <div>
-        {preview && (
-          <div>
-            <img
-              style={{
-                width: "80%",
-                height: "60%",
-              }}
-              src={preview}
-              alt="Preview"
-            />
-          </div>
-        )}
-      </div>
-      <form onSubmit={handleSubmit(submitForm)}>
-        <input
-          {...register("title", {
-            required: "타이틀을 입력해주세요.",
-          })}
-          type="text"
-          placeholder="타이틀을 입력해주세요."
+    // <div>
+    //   <div>
+    //     {preview && (
+    //       <div>
+    //         <img
+    //           style={{
+    //             width: "80%",
+    //             height: "60%",
+    //           }}
+    //           src={preview}
+    //           alt="Preview"
+    //         />
+    //       </div>
+    //     )}
+    //   </div>
+    //   <form onSubmit={handleSubmit(submitForm)}>
+    //     <input
+    //       {...register("title", {
+    //         required: "타이틀을 입력해주세요.",
+    //       })}
+    //       type="text"
+    //       placeholder="타이틀을 입력해주세요."
+    //     />
+    //     <span>{errors?.title?.message}</span>
+    //     <input
+    //       {...register("introduction", {
+    //         required: "자기소개를 입력해주세요.",
+    //       })}
+    //       type="text"
+    //       placeholder="자기소개를 입력해주세요."
+    //     />
+    //     <span>{errors?.introduction?.message}</span>
+    //     <input type="file" accept="image/*" onChange={onChangeimge} />
+    //     <span>{errors?.file?.message}</span>
+    //     <button>제출</button>
+    //   </form>
+    // </div>
+
+    <CrRadioContainer>
+      <CrRadioBox>
+        <Navbar
+          toNavigate={"/"}
+          iconleft={<AiOutlineArrowLeft size={20} />}
+          title={"방송하기"}
         />
-        <span>{errors?.title?.message}</span>
-        <input
-          {...register("introduction", {
-            required: "자기소개를 입력해주세요.",
-          })}
-          type="text"
-          placeholder="자기소개를 입력해주세요."
-        />
-        <span>{errors?.introduction?.message}</span>
-        <input type="file" accept="image/*" onChange={onChangeimge} />
-        <span>{errors?.file?.message}</span>
-        <button>제출</button>
-      </form>
-    </div>
+      </CrRadioBox>
+    </CrRadioContainer>
   );
 }
 
 export default Createradio;
+
+const CrRadioContainer = styled.div`
+  border: 1px solid black;
+  height: 100%;
+`;
+
+const CrRadioBox = styled.div`
+  border: 1px solid black;
+`;
