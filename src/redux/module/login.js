@@ -14,7 +14,7 @@ export const __login = createAsyncThunk(
 );
 
 const initialState = {
-  user: null,
+  login: null,
   isLoading: false,
   error: null,
 };
@@ -30,7 +30,7 @@ const login = createSlice({
     });
     builder.addCase(__login.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.user = action.payload;
+      state.login = action.payload;
       state.error = null;
     });
     builder.addCase(__login.rejected, (state, action) => {

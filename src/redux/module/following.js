@@ -3,41 +3,41 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __siginup = createAsyncThunk(
-  "signupRadio",
-  async (siginupInfo, thunkAPI) => {
+export const __getFollowing = createAsyncThunk(
+  "getFollowing",
+  async (number, thunkAPI) => {
     return await axios
-      .post("api/member/signup", siginupInfo)
+      .get(`api/follow/${number}/following`)
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
   }
 );
 
 const initialState = {
-  signup: null,
+  following: [],
   isLoading: false,
   error: null,
 };
 
-const signup = createSlice({
-  name: "signupRadio",
+const getFollowing = createSlice({
+  name: "getFollowing",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__siginup.pending, (state) => {
+    builder.addCase(__getFollowing.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__siginup.fulfilled, (state, action) => {
+    builder.addCase(__getFollowing.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.signup = action.payload;
+      state.following = action.payload;
       state.error = null;
     });
-    builder.addCase(__siginup.rejected, (state, action) => {
+    builder.addCase(__getFollowing.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default signup;
+export default getFollowing;

@@ -3,41 +3,41 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __siginup = createAsyncThunk(
-  "signupRadio",
-  async (siginupInfo, thunkAPI) => {
+export const __removeRadio = createAsyncThunk(
+  "removeRadio",
+  async (radioNumber, thunkAPI) => {
     return await axios
-      .post("api/member/signup", siginupInfo)
+      .delete(`api/radios/${radioNumber}`)
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
   }
 );
 
 const initialState = {
-  signup: null,
+  radio: null,
   isLoading: false,
   error: null,
 };
 
-const signup = createSlice({
-  name: "signupRadio",
+const removeRadio = createSlice({
+  name: "removeRadio",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__siginup.pending, (state) => {
+    builder.addCase(__removeRadio.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__siginup.fulfilled, (state, action) => {
+    builder.addCase(__removeRadio.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.signup = action.payload;
+      state.radio = action.payload;
       state.error = null;
     });
-    builder.addCase(__siginup.rejected, (state, action) => {
+    builder.addCase(__removeRadio.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default signup;
+export default removeRadio;

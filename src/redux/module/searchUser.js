@@ -3,41 +3,41 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __siginup = createAsyncThunk(
-  "signupRadio",
-  async (siginupInfo, thunkAPI) => {
+export const __searchUser = createAsyncThunk(
+  "searchUser",
+  async (searchInfo, thunkAPI) => {
     return await axios
-      .post("api/member/signup", siginupInfo)
+      .post(`api/member/nickname?nickname=${searchInfo}`)
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
   }
 );
 
 const initialState = {
-  signup: null,
+  user: null,
   isLoading: false,
   error: null,
 };
 
-const signup = createSlice({
-  name: "signupRadio",
+const searchUser = createSlice({
+  name: "searchUser",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__siginup.pending, (state) => {
+    builder.addCase(__searchUser.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__siginup.fulfilled, (state, action) => {
+    builder.addCase(__searchUser.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.signup = action.payload;
+      state.user = action.payload;
       state.error = null;
     });
-    builder.addCase(__siginup.rejected, (state, action) => {
+    builder.addCase(__searchUser.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default signup;
+export default searchUser;

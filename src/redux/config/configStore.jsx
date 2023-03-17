@@ -6,6 +6,11 @@ import createRadio from "../module/createRadio";
 import getRadio from "../module/getRadio";
 import radioInfo from "../module/createRadioButton";
 import profileInfo from "../module/profileModifyButton";
+import searchRadio from "../module/searchRadio";
+import searchUser from "../module/searchUser";
+import getFollowing from "../module/following";
+import getFollower from "../module/follower";
+import removeRadio from "../module/removeRadio";
 
 const sotre = configureStore({
   reducer: {
@@ -16,6 +21,11 @@ const sotre = configureStore({
     gettingRadio: getRadio.reducer,
     radioButn: radioInfo.reducer,
     profileButn: profileInfo.reducer,
+    searchingRadio: searchRadio.reducer,
+    searchingUser: searchUser.reducer,
+    gettingFollowing: getFollowing.reducer,
+    gettingFollower: getFollower.reducer,
+    removingRadio: removeRadio.reducer,
   },
 });
 

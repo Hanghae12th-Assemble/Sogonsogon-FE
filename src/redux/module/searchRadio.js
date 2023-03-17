@@ -3,41 +3,41 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __siginup = createAsyncThunk(
-  "signupRadio",
-  async (siginupInfo, thunkAPI) => {
+export const __searchRadio = createAsyncThunk(
+  "searchRadio",
+  async (searchInfo, thunkAPI) => {
     return await axios
-      .post("api/member/signup", siginupInfo)
+      .post(`api/radios/find?title=${searchInfo}`)
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
   }
 );
 
 const initialState = {
-  signup: null,
+  live: null,
   isLoading: false,
   error: null,
 };
 
-const signup = createSlice({
-  name: "signupRadio",
+const searchRadio = createSlice({
+  name: "searchRadio",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__siginup.pending, (state) => {
+    builder.addCase(__searchRadio.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__siginup.fulfilled, (state, action) => {
+    builder.addCase(__searchRadio.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.signup = action.payload;
+      state.live = action.payload;
       state.error = null;
     });
-    builder.addCase(__siginup.rejected, (state, action) => {
+    builder.addCase(__searchRadio.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default signup;
+export default searchRadio;
