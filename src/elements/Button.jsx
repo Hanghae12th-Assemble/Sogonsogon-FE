@@ -62,13 +62,31 @@ const BtnStyle = styled.button`
             border-radius: 100%;
             border: none;
             font-size: 22px;
-            bottom: 165px;
+            bottom: 100px;
             left: 440px;
             z-index: 900;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+        `}
+
+        ${(props) =>
+        props.SortBtn &&
+        css`
+            width: fit-content;
+            height: fit-content;
+            border: none;
+            font-size: 20px;
+            background-color: white;
+            color: rgb(153, 153, 153);
+            cursor: pointer;
+            margin-right: 12px;
+            &.active {
+                color: #000;
+                font-weight: bold;
+                outline: none;
+            }
         `}
 `;
 

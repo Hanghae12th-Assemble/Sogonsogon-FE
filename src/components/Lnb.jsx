@@ -8,7 +8,7 @@ function Lnb({ isOpen, handleItemClick }) {
     const cookies = new Cookies();
     const token = cookies.get('access-token');
     const info = localStorage.getItem('userInfo');
-    const USERINFO = JSON.parse(info);
+    const username = JSON.parse(info);
     const navigate = useNavigate();
 
     const [items, setItems] = useState([
@@ -32,19 +32,21 @@ function Lnb({ isOpen, handleItemClick }) {
                 </LnbCloseBtn>
             </LnbCloseBtnContainer>
             {token ? (
-                <LoginTrueFalseContainer to={`/profile/${USERINFO.id}`}>
-                    {USERINFO.userName === 'undefined' ? (
-                        <div>프로필을 등록해주세요</div>
-                    ) : (
-                        <div>{USERINFO.userName}</div>
-                    )}
-                    <AiOutlineRight size={20} />
-                </LoginTrueFalseContainer>
+                <>
+                    <LoginTrueFalseContainer to={`/profile/${username.userName}`}>
+                        <div>{username.userName}님</div>
+                        <AiOutlineRight size={20} />
+                    </LoginTrueFalseContainer>
+                    <LoginHiLayout>안녕하세요!</LoginHiLayout>
+                </>
             ) : (
-                <LoginTrueFalseContainer to={'/selectlogin'}>
-                    <div>로그인/회원가입</div>
-                    <AiOutlineRight size={20} />
-                </LoginTrueFalseContainer>
+                <>
+                    <LoginTrueFalseContainer to={'/selectlogin'}>
+                        <div>로그인/회원가입</div>
+                        <AiOutlineRight size={20} />
+                    </LoginTrueFalseContainer>
+                    <LoginHiLayout />
+                </>
             )}
             <LnbMenuLayout>
                 {items.map((item) => (
@@ -78,6 +80,7 @@ const LnbMenuLayout = styled.div`
     height: 300px;
     padding: 25px;
     /* border: 1px solid black; */
+    margin-top: 20px;
     a {
         height: fit-content;
         width: fit-content;
@@ -104,8 +107,7 @@ const LnbCloseBtn = styled.button`
     cursor: pointer;
 `;
 const LoginTrueFalseContainer = styled(Link)`
-    margin: 40px 0px 40px 0px;
-    /* border: 1px solid black; */
+    margin: 40px 0px 0px 0px;
     width: 100%;
     height: 30px;
     padding: 0px 10px 0px 25px;
@@ -113,6 +115,15 @@ const LoginTrueFalseContainer = styled(Link)`
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
+`;
+const LoginHiLayout = styled.div`
+    width: 100%;
+    height: 30px;
+    padding: 0px 0px 0px 25px;
+    display: flex;
+    align-items: center;
+    color: grey;
+    font-size: 14px;
 `;
 
 const LogoutBtnLayout = styled.div`
