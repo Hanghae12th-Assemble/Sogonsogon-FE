@@ -55,20 +55,21 @@ const BtnStyle = styled.button`
         props.TopBtn &&
         css`
             position: absolute;
-            width: 30px;
-            height: 30px;
-            background-color: #aaa6a6;
+            width: 40px;
+            height: 40px;
+            background-color: #e7dbdb;
             color: black;
             border-radius: 100%;
             border: none;
             font-size: 22px;
             bottom: 100px;
-            left: 440px;
+            left: 430px;
             z-index: 900;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
         `}
 
         ${(props) =>
