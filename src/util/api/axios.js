@@ -12,20 +12,20 @@ export default class Axios {
       (response) => {
         const token = response.headers.authorization;
 
-        if (response.data.data) {
-          localStorage.setItem(
-            "userInfo",
-            JSON.stringify({
-              id: `${response.data.data.id}`,
-              userName: `${response.data.data.membername}`,
-              nickName: `${response.data.data.nickname}`,
-            })
-          );
-        }
-
         if (token) {
           const [, parseToken] = token.split(" ");
           setCookie(QUERY.COOKIE.COOKIE_NAME, parseToken);
+
+          if (response.data.data) {
+            localStorage.setItem(
+              "userInfo",
+              JSON.stringify({
+                id: `${response.data.data.id}`,
+                userName: `${response.data.data.membername}`,
+                nickName: `${response.data.data.nickname}`,
+              })
+            );
+          }
         }
 
         return response;
