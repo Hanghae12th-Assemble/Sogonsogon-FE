@@ -88,7 +88,7 @@ function Search() {
                             {user?.data.map((item) => {
                                 return (
                                     <SearchUserLayout
-                                        to={`/profile/${item.nickname}`}
+                                        to={`/profile/${item.membername}`}
                                         key={item.id}
                                     >
                                         <SearchUserImgContainer>
