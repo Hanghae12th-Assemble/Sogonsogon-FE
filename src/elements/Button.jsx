@@ -19,8 +19,12 @@ const BtnStyle = styled.button`
   ${(props) =>
     props.smBtn &&
     css`
-      width: 1rem;
-      height: 1rem;
+      width: 10.9375rem;
+      height: 3.25rem;
+      &:hover {
+        background-color: #262626;
+        color: white;
+      }
     `}
   ${(props) =>
     props.lgBtn &&

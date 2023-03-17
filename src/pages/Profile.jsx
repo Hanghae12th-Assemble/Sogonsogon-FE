@@ -1,32 +1,55 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { __userFollow } from "../redux/module/userFollow";
+import React, { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import Input from "../elements/Input";
+import Button from "../elements/Button";
+import ProfileMidumContainer from "../components/ProfileMidumContainer";
+import { useDispatch, useSelector } from "react-redux";
+import { pageswitch } from "../redux/module/profileModifyButton";
 
 function Profile() {
-  const dispatch = useDispatch();
+  const [formImagin, setFormformImagin] = useState(new FormData());
+  const [preview, setPreview] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+  const dispatch = useDispatch();
+  const selectBtn = useSelector((state) => state.profileButn);
 
-  const followBtn = () => {
-    dispatch(__userFollow());
+  const onChangeimge = (e) => {
+    const img = e.target.files[0];
+    const formImg = new FormData();
+    formImg.append("backgroundImageUrl", img);
+    const reader = new FileReader();
+    setFormformImagin(formImg);
+    reader.onloadend = () => {
+      setPreview(reader.result);
+    };
+
+    if (img) {
+      reader.readAsDataURL(img);
+    } else {
+      setPreview("");
+    }
+  };
+
+  const onPageClick = () => {
+    dispatch(pageswitch(!selectBtn));
   };
 
   return (
     <ProfileContainer>
-      <Navbar
-        toNavigate={"/"}
-        iconleft={<AiOutlineArrowLeft size={20} />}
-        title={"프로필"}
-      />
+      <ProfileNavbarfixed>
+        <Navbar
+          toNavigate={"/"}
+          iconleft={<AiOutlineArrowLeft size={20} />}
+          title={"프로필"}
+        />
+      </ProfileNavbarfixed>
       <ProfileTop>
         <ProfileTopPhoto>사진</ProfileTopPhoto>
         <ProfileTopName>
@@ -35,43 +58,51 @@ function Profile() {
         <ProfileTopMbti>
           <span>MBTI</span>
         </ProfileTopMbti>
-        <ProfileTopFollow>
-          <ProfileTopFollower>
-            <span>팔로워</span>
-            <span>88</span>
-          </ProfileTopFollower>
-          <ProfileTopFollowing>
-            <span>팔로잉</span>
-            <span>87</span>
-          </ProfileTopFollowing>
-        </ProfileTopFollow>
       </ProfileTop>
-      <button onClick={followBtn}>팔로우하기</button>
-      <ProfileMidum>
-        <ProfileMidumInput>
-          <span>닉네임</span>
-          <ProfileMidumInputbox>
-            <span>고은</span>
-          </ProfileMidumInputbox>
-        </ProfileMidumInput>
-        <ProfileMidumInput>
-          <span>ID</span>
-          <ProfileMidumInputbox>
-            <span>Gosliver</span>
-          </ProfileMidumInputbox>
-        </ProfileMidumInput>
-      </ProfileMidum>
-      <ProfileBottom>
-        <div>
-          <ProfileBottomTitle>
-            <span>자기소개</span>
-          </ProfileBottomTitle>
-          <ProfileBottomBox></ProfileBottomBox>
-        </div>
-      </ProfileBottom>
-      <div>
-        <button>수정</button>
-      </div>
+      {selectBtn ? (
+        <>
+          <div>
+            <ProfileMidumInput>
+              <span>닉네임</span>
+              <ProfileMidumInputbox>
+                <span>고은</span>
+              </ProfileMidumInputbox>
+            </ProfileMidumInput>
+            <ProfileMidumInput>
+              <span>ID</span>
+              <ProfileMidumInputbox>
+                <span>Gosliver</span>
+              </ProfileMidumInputbox>
+            </ProfileMidumInput>
+          </div>
+          <ProfileBottom>
+            <div>
+              <ProfileBottomTitle>
+                <span>자기소개</span>
+              </ProfileBottomTitle>
+              <ProfileBottomBox placeholder="자기소개를 해주세요." />
+            </div>
+          </ProfileBottom>
+          <ProfileButtonSpanBox>
+            <span>이미지</span>
+            <ProfilePublicScopButton>
+              <ProfileFileInput
+                type="file"
+                accept="image/*"
+                onChange={onChangeimge}
+              />
+            </ProfilePublicScopButton>
+          </ProfileButtonSpanBox>
+          <ProfileBottomButton>
+            <Button smBtn onClick={onPageClick}>
+              취소
+            </Button>
+            <Button smBtn>완료</Button>
+          </ProfileBottomButton>{" "}
+        </>
+      ) : (
+        <ProfileMidumContainer />
+      )}
     </ProfileContainer>
   );
 }
@@ -80,15 +111,28 @@ export default Profile;
 
 const ProfileContainer = styled.div`
   padding: 0px 20px;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 0.5em; /* 스크롤바 너비 */
+    height: 0.5em; /* 스크롤바 높이 */
+  }
+`;
+
+const ProfileNavbarfixed = styled.div`
+  //border: 1px solid black;
+  background-color: white;
+  position: fixed;
+  width: 28.75rem; ;
 `;
 
 const ProfileTop = styled.div`
-  border: 1px solid black;
+  //border: 1px solid black;
   height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 90px;
 `;
 
 const ProfileTopPhoto = styled.div`
@@ -116,37 +160,8 @@ const ProfileTopMbti = styled.div`
   margin-top: 20px;
 `;
 
-const ProfileTopFollow = styled.div`
-  border: 1px solid black;
-  width: 450px;
-  height: 86px;
-  margin-top: 20px;
-  display: flex;
-  box-shadow: 5px 5px 5px 5px rgba(228, 220, 207, 0.3);
-`;
-
-const ProfileTopFollower = styled.div`
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-`;
-
-const ProfileTopFollowing = styled.div`
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-`;
-
-const ProfileMidum = styled.div`
-  margin-top: 80px;
-`;
-
 const ProfileMidumInput = styled.div`
-  margin-top: 50px;
+  margin-bottom: 50px;
 `;
 
 const ProfileMidumInputbox = styled.div`
@@ -163,7 +178,7 @@ const ProfileMidumInputbox = styled.div`
 `;
 
 const ProfileBottom = styled.div`
-  border: 1px solid black;
+  //border: 1px solid black;
   margin-top: 50px;
 `;
 
@@ -171,9 +186,48 @@ const ProfileBottomTitle = styled.div`
   margin-bottom: 20px;
 `;
 
-const ProfileBottomBox = styled.div`
-  border: 1px solid black;
+const ProfileBottomBox = styled.textarea`
+  //border: 1px solid black;
   width: 460px;
   height: 118px;
   border-radius: 10px;
+  padding: 10px;
+  resize: none;
+`;
+
+const ProfileBottomButton = styled.div`
+  //border: 1px solid blue;
+  padding: 20px;
+  width: 100%;
+  height: 180px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+
+const ProfileButtonSpanBox = styled.div`
+  //border: 1px solid black;
+  margin-top: 40px;
+`;
+
+const ProfilePublicScopButton = styled.div`
+  margin-top: 10px;
+  //border: 1px solid black;
+`;
+
+const ProfileFileInput = styled.input`
+  margin-bottom: 30px;
+  ::file-selector-button {
+    width: 370px;
+    height: 48px;
+    background: #f1f2f6;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+      background-color: #262626;
+      color: white;
+    }
+  }
 `;
