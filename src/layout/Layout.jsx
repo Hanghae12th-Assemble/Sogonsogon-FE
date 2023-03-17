@@ -60,7 +60,7 @@ const DivLayout2 = styled.div`
     width: 100%;
     margin: auto;
   }
-  border: 1px solid black;
+  //border: 1px solid black;
   width: 31.25rem;
   height: 100vh;
   position: absolute;

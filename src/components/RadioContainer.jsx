@@ -24,7 +24,6 @@ function RadioContainer(props) {
                   </ViewerCounterContainer>
                 </RadioImgContainer>
                 <RadioTitleLayout>{item.title}</RadioTitleLayout>
-
                 <RadioNameLayout>소곤이</RadioNameLayout>
               </RadioLayout>
             );

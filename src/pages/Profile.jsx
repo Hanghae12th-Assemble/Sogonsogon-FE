@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
+//import { useForm } from "react-hook-form";
 import Button from "../elements/Button";
 import ProfileMidumContainer from "../components/ProfileMidumContainer";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,12 +11,12 @@ import { pageswitch } from "../redux/module/profileModifyButton";
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  //   reset,
+  // } = useForm();
   const dispatch = useDispatch();
   const selectBtn = useSelector((state) => state.profileButn);
 
@@ -68,12 +68,12 @@ function Profile() {
                 <span>고은</span>
               </ProfileMidumInputbox>
             </ProfileMidumInput>
-            <ProfileMidumInput>
+            {/* <ProfileMidumInput>
               <span>ID</span>
               <ProfileMidumInputbox>
                 <span>Gosliver</span>
               </ProfileMidumInputbox>
-            </ProfileMidumInput>
+            </ProfileMidumInput> */}
           </div>
           <ProfileBottom>
             <div>
@@ -113,8 +113,8 @@ const ProfileContainer = styled.div`
   padding: 0px 20px;
   overflow: auto;
   ::-webkit-scrollbar {
-    width: 0.5em; /* 스크롤바 너비 */
-    height: 0.5em; /* 스크롤바 높이 */
+    width: 0.5em;
+    height: 0.5em;
   }
 `;
 
@@ -132,7 +132,7 @@ const ProfileTop = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 90px;
+  margin-top: 80px;
 `;
 
 const ProfileTopPhoto = styled.div`

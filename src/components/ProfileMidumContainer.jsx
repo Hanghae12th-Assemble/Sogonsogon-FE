@@ -4,10 +4,13 @@ import styled from "styled-components";
 import Button from "../elements/Button";
 import { __userFollow } from "../redux/module/userFollow";
 import { pageswitch } from "../redux/module/profileModifyButton";
+import { useParams } from "react-router-dom";
 
 function ProfileMidumContainer() {
   const dispatch = useDispatch();
   const [pageState, setPageState] = useState(false);
+  const { id } = useParams();
+  const info = JSON.parse(localStorage.getItem("userInfo"));
 
   const followBtn = () => {
     dispatch(__userFollow());
@@ -29,9 +32,13 @@ function ProfileMidumContainer() {
           <span>87</span>
         </ProfileTopFollowing>
       </ProfileTopFollow>
-      <div>
-        <button onClick={followBtn}>팔로우하기</button>
-      </div>
+      <ProfileButtonBox>
+        {id === info.userName ? null : (
+          <Button lgBtn onClick={followBtn}>
+            팔로우하기
+          </Button>
+        )}
+      </ProfileButtonBox>
       <ProfileMidum>
         <ProfileMidumInput>
           <span>닉네임</span>
@@ -137,4 +144,11 @@ const ProfileBottomButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
+`;
+
+const ProfileButtonBox = styled.div`
+  //border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
 `;
