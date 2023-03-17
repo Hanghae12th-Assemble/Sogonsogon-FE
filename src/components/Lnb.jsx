@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { AiOutlineLeft } from 'react-icons/ai';
+import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { Cookies } from 'react-cookie';
 
 function Lnb({ isOpen, handleItemClick }) {
     const cookies = new Cookies();
     const token = cookies.get('access-token');
-    console.log(token);
+    const info = localStorage.getItem('userInfo');
+    const USERINFO = JSON.parse(info);
+    const navigate = useNavigate();
 
     const [items, setItems] = useState([
         { id: 1, name: '홈', link: '/' },
@@ -17,6 +19,11 @@ function Lnb({ isOpen, handleItemClick }) {
         { id: 5, name: 'ASMR', link: '/' },
     ]);
 
+    const LogoutBtnHandler = () => {
+        cookies.remove('access-token');
+        navigate('/selectlogin');
+    };
+
     return (
         <LnbLayout isOpen={isOpen}>
             <LnbCloseBtnContainer>
@@ -24,10 +31,21 @@ function Lnb({ isOpen, handleItemClick }) {
                     <AiOutlineLeft size={20} />{' '}
                 </LnbCloseBtn>
             </LnbCloseBtnContainer>
-            <LoginTrueFalseContainer>
-                <div>로그인/회원가입</div>
-                <div>누구님</div>
-            </LoginTrueFalseContainer>
+            {token ? (
+                <LoginTrueFalseContainer to={`/profile/${USERINFO.id}`}>
+                    {USERINFO.userName === 'undefined' ? (
+                        <div>프로필을 등록해주세요</div>
+                    ) : (
+                        <div>{USERINFO.userName}</div>
+                    )}
+                    <AiOutlineRight size={20} />
+                </LoginTrueFalseContainer>
+            ) : (
+                <LoginTrueFalseContainer to={'/selectlogin'}>
+                    <div>로그인/회원가입</div>
+                    <AiOutlineRight size={20} />
+                </LoginTrueFalseContainer>
+            )}
             <LnbMenuLayout>
                 {items.map((item) => (
                     <div key={item.id}>
@@ -37,6 +55,7 @@ function Lnb({ isOpen, handleItemClick }) {
                     </div>
                 ))}
             </LnbMenuLayout>
+            {token && <LogoutBtnLayout onClick={LogoutBtnHandler}>로그아웃</LogoutBtnLayout>}
         </LnbLayout>
     );
 }
@@ -44,37 +63,39 @@ function Lnb({ isOpen, handleItemClick }) {
 export default Lnb;
 
 const LnbLayout = styled.div`
-    opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
+    display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
     width: ${({ isOpen }) => (isOpen ? '350px' : '0px')};
     position: absolute;
     top: 0;
     left: 0;
-    height: 90%;
+    height: 95.4%;
     transition: opacity 0.2s ease, width 0.3s ease;
     background-color: white;
     z-index: 999;
     margin-top: 40px;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 `;
 const LnbMenuLayout = styled.div`
     height: 300px;
-    padding: 10px;
-    border: 1px solid black;
+    padding: 25px;
+    /* border: 1px solid black; */
     a {
-        border: 1px solid black;
+        height: fit-content;
+        width: fit-content;
+        /* border: 1px solid black; */
         display: block;
-        margin-bottom: 10px;
+        font-size: 20px;
+        margin-bottom: 20px;
         color: #333;
         text-decoration: none;
     }
 `;
 const LnbCloseBtnContainer = styled.div`
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 40px;
     width: 100%;
     display: flex;
     justify-content: flex-end;
+    padding-right: 3px;
 `;
 
 const LnbCloseBtn = styled.button`
@@ -82,9 +103,24 @@ const LnbCloseBtn = styled.button`
     border: none;
     cursor: pointer;
 `;
-const LoginTrueFalseContainer = styled.div`
-    margin-top: 30px;
+const LoginTrueFalseContainer = styled(Link)`
+    margin: 40px 0px 40px 0px;
+    /* border: 1px solid black; */
     width: 100%;
-    height: 120px;
-    border: 1px solid black;
+    height: 30px;
+    padding: 0px 10px 0px 25px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
+const LogoutBtnLayout = styled.div`
+    margin: 30px 0px 0px 25px;
+    width: 54px;
+    height: 17px;
+    font-size: 13px;
+    color: grey;
+    /* border: 1px solid black; */
+    cursor: pointer;
 `;

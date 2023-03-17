@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getRadio } from '../redux/module/getRadio';
 import Navbar from '../components/Navbar';
-import { AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineArrowUp, AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
 import Lnb from '../components/Lnb';
 import RadioContainer from '../components/RadioContainer';
 
@@ -30,17 +30,15 @@ function Home() {
         return <div>로딩중입니다</div>;
     }
     if (error) return;
-
-    console.log('radio.data', radio?.data);
     return (
         <>
             <Lnb isOpen={isLnbOpen} handleItemClick={handleItemClick} />
 
             <Navbar
                 iconleft={<AiOutlineMenu size={20} onClick={toggleLnb} />}
-                title={'sgsg'}
+                title={'SGSG'}
                 iconright={<AiOutlineSearch size={20} />}
-                toClose={'/'}
+                toClose={'/search'}
             />
             <RadioContainer radio={radio?.data} />
         </>

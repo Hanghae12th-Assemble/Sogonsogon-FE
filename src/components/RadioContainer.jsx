@@ -1,12 +1,18 @@
-import React from 'react';
-import { AiOutlineUser } from 'react-icons/ai';
+import React, { useRef } from 'react';
+import { AiOutlineArrowUp, AiOutlineUser } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function RadionContainer(props) {
+    const radioContainerRef = useRef();
+
+    const topBtnHandler = () => {
+        radioContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    };
     return (
         <>
             {props.radio && (
-                <RadioContainer>
+                <RadioContainer ref={radioContainerRef} f>
                     {props.radio.map((item) => {
                         return (
                             <RadioLayout key={item.id}>
@@ -24,6 +30,10 @@ function RadionContainer(props) {
                     })}
                 </RadioContainer>
             )}
+            <CreateRadioBtn to={'/createradio'}>방송하기</CreateRadioBtn>
+            <TopBtn onClick={topBtnHandler}>
+                <AiOutlineArrowUp size={15} />
+            </TopBtn>
         </>
     );
 }
@@ -64,10 +74,11 @@ const RadioContainer = styled.div`
     z-index: -1;
     overflow: auto;
     ::-webkit-scrollbar {
-        width: 0.5em; /* 스크롤바 너비 */
-        height: 0.5em; /* 스크롤바 높이 */
+        width: 0.1em;
+        height: 0.1em;
     }
 `;
+
 const RadioLayout = styled.div`
     /* border: 1px solid black; */
     width: 200px;
@@ -114,4 +125,39 @@ const RadioNameLayout = styled.div`
     font-size: 12px;
     padding-left: 5px;
     /* border: 1px solid black; */
+`;
+
+const CreateRadioBtn = styled(Link)`
+    position: absolute;
+    width: 444px;
+    height: 50px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-size: 22px;
+    bottom: 100px;
+    left: 28px;
+    z-index: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const TopBtn = styled.button`
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #aaa6a6;
+    color: black;
+    border-radius: 100%;
+    border: none;
+    font-size: 22px;
+    bottom: 165px;
+    left: 440px;
+    z-index: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
