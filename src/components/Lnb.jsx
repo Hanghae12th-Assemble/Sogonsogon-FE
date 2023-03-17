@@ -32,19 +32,21 @@ function Lnb({ isOpen, handleItemClick }) {
         </LnbCloseBtn>
       </LnbCloseBtnContainer>
       {token ? (
-        <LoginTrueFalseContainer to={`/profile/${username.userName}`}>
-          {username.userName === "undefined" ? (
-            <div>프로필을 등록해주세요</div>
-          ) : (
-            <div>{username.userName}</div>
-          )}
-          <AiOutlineRight size={20} />
-        </LoginTrueFalseContainer>
+        <>
+          <LoginTrueFalseContainer to={`/profile/${username.userName}`}>
+            <div>{username.userName}님</div>
+            <AiOutlineRight size={20} />
+          </LoginTrueFalseContainer>
+          <LoginHiLayout>안녕하세요!</LoginHiLayout>
+        </>
       ) : (
-        <LoginTrueFalseContainer to={"/selectlogin"}>
-          <div>로그인/회원가입</div>
-          <AiOutlineRight size={20} />
-        </LoginTrueFalseContainer>
+        <>
+          <LoginTrueFalseContainer to={"/selectlogin"}>
+            <div>로그인/회원가입</div>
+            <AiOutlineRight size={20} />
+          </LoginTrueFalseContainer>
+          <LoginHiLayout />
+        </>
       )}
       <LnbMenuLayout>
         {items.map((item) => (
@@ -84,13 +86,20 @@ const LnbMenuLayout = styled.div`
     height: fit-content;
     width: fit-content;
     /* border: 1px solid black; */
-    display: block;
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: #333;
-    text-decoration: none;
+    margin-top: 20px;
+    a {
+      height: fit-content;
+      width: fit-content;
+      /* border: 1px solid black; */
+      display: block;
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #333;
+      text-decoration: none;
+    }
   }
 `;
+
 const LnbCloseBtnContainer = styled.div`
   /* border: 1px solid black; */
   height: 40px;
@@ -106,8 +115,7 @@ const LnbCloseBtn = styled.button`
   cursor: pointer;
 `;
 const LoginTrueFalseContainer = styled(Link)`
-  margin: 40px 0px 40px 0px;
-  /* border: 1px solid black; */
+  margin: 40px 0px 0px 0px;
   width: 100%;
   height: 30px;
   padding: 0px 10px 0px 25px;
@@ -115,6 +123,15 @@ const LoginTrueFalseContainer = styled(Link)`
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+`;
+const LoginHiLayout = styled.div`
+  width: 100%;
+  height: 30px;
+  padding: 0px 0px 0px 25px;
+  display: flex;
+  align-items: center;
+  color: grey;
+  font-size: 14px;
 `;
 
 const LogoutBtnLayout = styled.div`

@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __getRadio } from "../redux/module/getRadio";
 import Navbar from "../components/Navbar";
-import {
-  AiOutlineArrowUp,
-  AiOutlineMenu,
-  AiOutlineSearch,
-} from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 import Lnb from "../components/Lnb";
 import RadioContainer from "../components/RadioContainer";
 

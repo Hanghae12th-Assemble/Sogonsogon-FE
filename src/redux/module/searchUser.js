@@ -8,7 +8,9 @@ export const __searchUser = createAsyncThunk(
   async (searchInfo, thunkAPI) => {
     return await axios
       .get(`api/member/nickname?nickname=${searchInfo}`)
-      .then((response) => console.log(response))
+      .then((response) => {
+        return thunkAPI.fulfillWithValue(response?.data);
+      })
       .catch((error) => console.log(error));
   }
 );

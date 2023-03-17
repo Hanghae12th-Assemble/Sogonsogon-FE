@@ -6,6 +6,7 @@ import Button from "../elements/Button";
 
 function RadioContainer(props) {
   const radioContainerRef = useRef();
+  console.log(props);
 
   const topBtnHandler = () => {
     radioContainerRef.current.scrollTo({ top: 0, behavior: "smooth" });
@@ -24,6 +25,7 @@ function RadioContainer(props) {
                   </ViewerCounterContainer>
                 </RadioImgContainer>
                 <RadioTitleLayout>{item.title}</RadioTitleLayout>
+
                 <RadioNameLayout>소곤이</RadioNameLayout>
               </RadioLayout>
             );
@@ -70,7 +72,7 @@ const StRadioContainer = styled.div`
   grid-template-columns: repeat(2, 2fr);
   grid-gap: 10px;
   flex-direction: row;
-  padding: 30px 10px 0px 10px;
+  padding: 0px 10px 0px 10px;
   z-index: -1;
   overflow: auto;
   ::-webkit-scrollbar {
@@ -131,7 +133,7 @@ const AddRadioBtn = styled(Link)`
   color: white;
   border-radius: 10px;
   font-size: 22px;
-  bottom: 100px;
+  bottom: 40px;
   left: 28px;
   z-index: 900;
   cursor: pointer;

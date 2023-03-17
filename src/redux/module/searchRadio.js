@@ -8,7 +8,9 @@ export const __searchRadio = createAsyncThunk(
   async (searchInfo, thunkAPI) => {
     return await axios
       .get(`api/radios/find?title=${searchInfo}`)
-      .then((response) => console.log(response))
+      .then((response) => {
+        return thunkAPI.fulfillWithValue(response?.data);
+      })
       .catch((error) => console.log(error));
   }
 );
