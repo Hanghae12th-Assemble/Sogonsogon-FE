@@ -2,8 +2,9 @@ import React, { useRef } from "react";
 import { AiOutlineArrowUp, AiOutlineUser } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Button from "../elements/Button";
 
-function RadionContainer(props) {
+function RadioContainer(props) {
   const radioContainerRef = useRef();
 
   const topBtnHandler = () => {
@@ -12,7 +13,7 @@ function RadionContainer(props) {
   return (
     <>
       {props.radio && (
-        <RadioContainer ref={radioContainerRef} f>
+        <StRadioContainer ref={radioContainerRef} f>
           {props.radio.map((item) => {
             return (
               <RadioLayout key={item.id}>
@@ -23,21 +24,22 @@ function RadionContainer(props) {
                   </ViewerCounterContainer>
                 </RadioImgContainer>
                 <RadioTitleLayout>{item.title}</RadioTitleLayout>
+
                 <RadioNameLayout>소곤이</RadioNameLayout>
               </RadioLayout>
             );
           })}
-        </RadioContainer>
+        </StRadioContainer>
       )}
-      <CreateRadioBtn to={"/createradio"}>방송하기</CreateRadioBtn>
-      <TopBtn onClick={topBtnHandler}>
+      <AddRadioBtn to={"/createradio"}>방송하기</AddRadioBtn>
+      <Button TopBtn onClick={topBtnHandler}>
         <AiOutlineArrowUp size={15} />
-      </TopBtn>
+      </Button>
     </>
   );
 }
 
-export default RadionContainer;
+export default RadioContainer;
 
 const RadioImgContainer = styled.div`
   height: 150px;
@@ -62,7 +64,7 @@ const RadioImgContainer = styled.div`
   }
 `;
 
-const RadioContainer = styled.div`
+const StRadioContainer = styled.div`
   position: relative;
   width: 100%;
   display: grid;
@@ -79,7 +81,6 @@ const RadioContainer = styled.div`
 `;
 
 const RadioLayout = styled.div`
-  /* border: 1px solid black; */
   width: 200px;
   min-height: 200px;
   margin: 20px auto;
@@ -113,8 +114,6 @@ const RadioTitleLayout = styled.div`
   font-size: 15px;
   font-weight: bold;
   padding-left: 5px;
-
-  /* border: 1px solid black; */
 `;
 
 const RadioNameLayout = styled.div`
@@ -123,10 +122,9 @@ const RadioNameLayout = styled.div`
   padding: 10px 0px 0px 0px;
   font-size: 12px;
   padding-left: 5px;
-  /* border: 1px solid black; */
 `;
 
-const CreateRadioBtn = styled(Link)`
+const AddRadioBtn = styled(Link)`
   position: absolute;
   width: 444px;
   height: 50px;
@@ -136,24 +134,6 @@ const CreateRadioBtn = styled(Link)`
   font-size: 22px;
   bottom: 100px;
   left: 28px;
-  z-index: 900;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const TopBtn = styled.button`
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  background-color: #aaa6a6;
-  color: black;
-  border-radius: 100%;
-  border: none;
-  font-size: 22px;
-  bottom: 165px;
-  left: 440px;
   z-index: 900;
   cursor: pointer;
   display: flex;
