@@ -1,16 +1,10 @@
 import React from 'react';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
-import Navbar from '../components/Navbar';
+import SearchBar from '../components/SearchBar';
 
 function Search() {
     return (
         <>
-            <Navbar
-                toNavigate={'/'}
-                iconleft={<AiOutlineArrowLeft size={20} />}
-                title={'검색페이지'}
-            />
-
+            <SearchBar />
             <div>Search</div>
         </>
     );
