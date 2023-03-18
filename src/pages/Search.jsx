@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,60 +8,105 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import RadioContainer from '../components/RadioContainer';
 import Button from '../elements/Button';
+import SearchHistory from '../components/SearchHistory';
+
 function Search() {
+    useEffect(() => {
+        const histories = localStorage.getItem('searchHistory');
+        if (histories) {
+            setSearchHistory(JSON.parse(histories));
+        }
+    }, []);
+
     const {
         register,
         handleSubmit,
         formState: { errors },
         reset,
     } = useForm();
+
     const dispatch = useDispatch();
 
+    const [isSearch, setIsSearch] = useState(false); // 검색 발생 여부 스테이트
     const [sort, setSort] = useState(true);
     const [searchInfo, setSearchInfo] = useState();
+    const [searchHistory, setSearchHistory] = useState([]);
 
     const onSearch = (data) => {
         setSearchInfo(data.searchValue);
+        setIsSearch(true);
         dispatch(__searchUser(data.searchValue));
         setSort(true);
         reset();
+        addSearchHistory(data.searchValue);
+    };
+    // 새로운 검색어를 로컬스토리지에 추가하는 함수
+    const addSearchHistory = (newKeyword) => {
+        let updatedHistory = [...searchHistory];
+        updatedHistory.unshift(newKeyword);
+        updatedHistory = [...new Set(updatedHistory)].slice(0, 10); // 중복 검색어 방지 및 최근 5개까지 저장
+        setSearchHistory(updatedHistory);
+        localStorage.setItem('searchHistory', JSON.stringify(updatedHistory));
+    };
+
+    //클릭한 검색기록 객체 정보와 인덱스 전달하는 함수 정의
+    const deleteSearchHistory = (idx, value) => {
+        setSearchHistory(searchHistory.filter((item, index) => idx !== index));
+        // 로컬 스토리지에서도 삭제
+        localStorage.setItem(
+            'searchHistory',
+            JSON.stringify(searchHistory.filter((item, index) => idx !== index))
+        );
+    };
+
+    // 저장된 검색어 모두 삭제
+    const clearSearchHistory = () => {
+        localStorage.removeItem('searchHistory');
+        setSearchHistory([]);
+    };
+
+    const recentSearchValueHandler = (data) => {
+        setIsSearch(true);
+        setSearchInfo(data);
+        dispatch(__searchUser(data));
     };
 
     const searchUser = () => {
+        setIsSearch(true);
         dispatch(__searchUser(searchInfo));
         setSort(true);
     };
 
     const searchLive = () => {
+        setIsSearch(true);
         dispatch(__searchRadio(searchInfo));
         setSort(false);
     };
-    const {
-        error: userError,
-        isLoading: userIsLoading,
-        user,
-    } = useSelector((state) => {
-        return state.searchingUser;
-    });
 
-    const {
-        error: liveError,
-        isLoading: liveIsLoading,
-        live,
-    } = useSelector((state) => {
-        return state.searchingRadio;
-    });
+    const BackBtnSearchValueHandler = () => {
+        setIsSearch(false);
+        dispatch(__searchUser(null));
+        dispatch(__searchRadio(null));
+        setSort(true);
+    };
 
-    if (userIsLoading || liveIsLoading) {
+    const { searchingUser, searchingRadio } = useSelector((state) => state);
+
+    if (searchingUser.isLoading || searchingRadio.isLoading) {
         return <div>로딩중입니다.</div>;
     }
-    if (userError || liveError) return;
+    if (searchingUser.error || searchingRadio.error) {
+        return;
+    }
+
+    const { user } = searchingUser;
+    const { live } = searchingRadio;
 
     return (
         <>
             <SearchbarBox>
                 <Link to={'/'}>
-                    <AiOutlineArrowLeft size={20} />
+                    <AiOutlineArrowLeft size={20} onClick={BackBtnSearchValueHandler} />
                 </Link>
                 <form onSubmit={handleSubmit(onSearch)}>
                     <SearchInput
@@ -71,61 +116,80 @@ function Search() {
                     />
                 </form>
             </SearchbarBox>
-            <SortBtnContainer>
-                <Button SortBtn className={sort === true ? 'active' : ''} onClick={searchUser}>
-                    프로필
-                </Button>
-                <Button SortBtn className={sort === false ? 'active' : ''} onClick={searchLive}>
-                    라이브
-                </Button>
-            </SortBtnContainer>
-            {sort ? (
+            {isSearch ? (
                 <>
-                    {user?.data.length === 0 ? (
-                        <div>검색 결과가 없습니다. </div>
+                    <SortBtnContainer>
+                        <Button
+                            SortBtn
+                            className={sort === true ? 'active' : ''}
+                            onClick={searchUser}
+                        >
+                            프로필
+                        </Button>
+                        <Button
+                            SortBtn
+                            className={sort === false ? 'active' : ''}
+                            onClick={searchLive}
+                        >
+                            라이브
+                        </Button>
+                    </SortBtnContainer>
+                    {sort ? (
+                        <>
+                            {user?.data.length === 0 ? (
+                                <div>검색 결과가 없습니다. </div>
+                            ) : (
+                                <SearchUserContainer>
+                                    {user?.data.map((item) => {
+                                        return (
+                                            <SearchUserLayout
+                                                to={`/profile/${item.membername}`}
+                                                key={item.id}
+                                            >
+                                                <SearchUserImgContainer>
+                                                    {item.profileImageUrl}
+                                                </SearchUserImgContainer>
+                                                <SearchUserContentContainer>
+                                                    <SearchUserNicknameLayout>
+                                                        {item.nickname}
+                                                    </SearchUserNicknameLayout>
+
+                                                    <SearchUserMembernameLayout>
+                                                        {item.membername}
+                                                    </SearchUserMembernameLayout>
+
+                                                    <SearchUserMembernameLayout>
+                                                        <CenterLine />
+                                                        팔로워 25명
+                                                    </SearchUserMembernameLayout>
+                                                    <SearchUserDescLayout>
+                                                        오늘부터 매일 들어옵니다
+                                                    </SearchUserDescLayout>
+                                                </SearchUserContentContainer>
+                                            </SearchUserLayout>
+                                        );
+                                    })}
+                                </SearchUserContainer>
+                            )}
+                        </>
                     ) : (
-                        <SearchUserContainer>
-                            {user?.data.map((item) => {
-                                return (
-                                    <SearchUserLayout
-                                        to={`/profile/${item.membername}`}
-                                        key={item.id}
-                                    >
-                                        <SearchUserImgContainer>
-                                            {item.profileImageUrl}
-                                        </SearchUserImgContainer>
-                                        <SearchUserContentContainer>
-                                            <SearchUserNicknameLayout>
-                                                {item.nickname}
-                                            </SearchUserNicknameLayout>
-
-                                            <SearchUserMembernameLayout>
-                                                {item.membername}
-                                            </SearchUserMembernameLayout>
-
-                                            <SearchUserMembernameLayout>
-                                                <CenterLine />
-                                                팔로워 25명
-                                            </SearchUserMembernameLayout>
-                                            <SearchUserDescLayout>
-                                                오늘부터 매일 들어옵니다
-                                            </SearchUserDescLayout>
-                                        </SearchUserContentContainer>
-                                    </SearchUserLayout>
-                                );
-                            })}
-                        </SearchUserContainer>
-                    )}
+                        <>
+                            {' '}
+                            {live?.data.length === 0 ? (
+                                <div>검색 결과가 없습니다.</div>
+                            ) : (
+                                <RadioContainer radio={live?.data} />
+                            )}
+                        </>
+                    )}{' '}
                 </>
             ) : (
-                <>
-                    {' '}
-                    {live?.data.length === 0 ? (
-                        <div>검색 결과가 없습니다.</div>
-                    ) : (
-                        <RadioContainer radio={live?.data} />
-                    )}
-                </>
+                <SearchHistory
+                    searchHistory={searchHistory}
+                    recentSearchValueHandler={recentSearchValueHandler}
+                    deleteSearchHistory={deleteSearchHistory}
+                    clearSearchHistory={clearSearchHistory}
+                />
             )}
         </>
     );
@@ -135,7 +199,6 @@ export default Search;
 
 const SearchbarBox = styled.div`
     width: 100%;
-    /* border: 1px solid black; */
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -151,19 +214,15 @@ const SearchInput = styled.input`
     border-radius: 15px;
     margin-left: 20px;
     font-size: 16px;
-    background-image: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png');
-    background-repeat: no-repeat;
-    background-position: 13px center;
-    background-size: contain;
+    background: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png')
+        13px center / contain no-repeat #9b9a9ace;
     border: none;
     outline: none;
-    background-color: #9b9a9ace;
 `;
 
 const SortBtnContainer = styled.div`
     width: 100%;
     height: 40px;
-    /* border: 1px solid black; */
     display: flex;
     align-items: center;
     padding-left: 25px;
@@ -185,7 +244,6 @@ const SearchUserContainer = styled.div`
         width: 0.1em;
         height: 0.1em;
     }
-    /* border: 1px solid black; */
 `;
 
 const SearchUserLayout = styled(Link)`
@@ -194,7 +252,6 @@ const SearchUserLayout = styled(Link)`
     flex-direction: row;
     align-items: center;
     min-height: 100px;
-    /* border: 1px solid black; */
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 `;
 
@@ -237,14 +294,11 @@ const SearchUserNicknameLayout = styled.div`
     font-weight: bold;
     display: flex;
     align-items: center;
-    /* border: 1px solid black; */
 `;
 const SearchUserMembernameLayout = styled.div`
     width: fit-content;
-
     min-height: 25px;
     font-size: 15px;
-    /* border: 1px solid black; */
     display: flex;
     align-items: center;
     color: #1a1919b3;
@@ -262,6 +316,5 @@ const SearchUserDescLayout = styled.div`
     font-size: 12px;
     display: flex;
     align-items: center;
-    /* border: 1px solid black; */
     color: #1a1919b3;
 `;
