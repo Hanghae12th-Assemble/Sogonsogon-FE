@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from "../elements/Button";
 import { __userFollow } from "../redux/module/userFollow";
 import { __getProfile } from "../redux/module/getProfile";
-import { pageswitch } from "../redux/module/profileModifyButton";
+import { pageswitch } from "../redux/module/reduxState/profileModifyButton";
 import { useParams } from "react-router-dom";
 
 function ProfileMidumContainer() {

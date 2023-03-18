@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Button from "../elements/Button";
 import ProfileMidumContainer from "../components/ProfileMidumContainer";
 import { useDispatch, useSelector } from "react-redux";
-import { pageswitch } from "../redux/module/profileModifyButton";
+import { pageswitch } from "../redux/module/reduxState/profileModifyButton";
 
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
