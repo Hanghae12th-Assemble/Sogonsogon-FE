@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Button from "../elements/Button";
 import { __userFollow } from "../redux/module/userFollow";
+import { __getProfile } from "../redux/module/getProfile";
 import { pageswitch } from "../redux/module/profileModifyButton";
 import { useParams } from "react-router-dom";
 
@@ -11,6 +12,10 @@ function ProfileMidumContainer() {
   const [pageState, setPageState] = useState(false);
   const { id } = useParams();
   const info = JSON.parse(localStorage.getItem("userInfo"));
+  const userInfo = useSelector((state) => state?.gettingProfile?.profile?.[0]);
+  useEffect(() => {
+    dispatch(__getProfile(id));
+  }, []);
 
   const followBtn = () => {
     dispatch(__userFollow());
@@ -43,13 +48,13 @@ function ProfileMidumContainer() {
         <ProfileMidumInput>
           <span>닉네임</span>
           <ProfileMidumInputbox>
-            <span>고은</span>
+            <span>{userInfo?.nickname}</span>
           </ProfileMidumInputbox>
         </ProfileMidumInput>
         <ProfileMidumInput>
           <span>ID</span>
           <ProfileMidumInputbox>
-            <span>Gosliver</span>
+            <span>{userInfo?.membername}</span>
           </ProfileMidumInputbox>
         </ProfileMidumInput>
       </ProfileMidum>

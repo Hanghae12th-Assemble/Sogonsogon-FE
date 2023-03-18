@@ -19,6 +19,7 @@ function Profile() {
   // } = useForm();
   const dispatch = useDispatch();
   const selectBtn = useSelector((state) => state.profileButn);
+  const userInfo = useSelector((state) => state?.gettingProfile?.profile?.[0]);
 
   const onChangeimge = (e) => {
     const img = e.target.files[0];
@@ -53,7 +54,7 @@ function Profile() {
       <ProfileTop>
         <ProfileTopPhoto>사진</ProfileTopPhoto>
         <ProfileTopName>
-          <span>이름</span>
+          <span>{userInfo?.membername}</span>
         </ProfileTopName>
         <ProfileTopMbti>
           <span>MBTI</span>

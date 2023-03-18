@@ -3,41 +3,41 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __getRadio = createAsyncThunk(
-  "getRadio",
-  async (radio, thunkAPI) => {
+export const __getProfile = createAsyncThunk(
+  "getProfile",
+  async (profileMembername, thunkAPI) => {
     return await axios
-      .get(`api/radios/`, radio)
-      .then((response) => thunkAPI.fulfillWithValue(response?.data))
+      .get(`api/member/?membername=${profileMembername}`)
+      .then((response) => thunkAPI.fulfillWithValue(response?.data?.data))
       .catch((error) => console.log(error));
   }
 );
 
 const initialState = {
-  radio: null,
+  profile: null,
   isLoading: false,
   error: null,
 };
 
-const getRadio = createSlice({
-  name: "getRadio",
+const getProfile = createSlice({
+  name: "getProfile",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__getRadio.pending, (state) => {
+    builder.addCase(__getProfile.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__getRadio.fulfilled, (state, action) => {
+    builder.addCase(__getProfile.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.radio = action.payload;
+      state.profile = action.payload;
       state.error = null;
     });
-    builder.addCase(__getRadio.rejected, (state, action) => {
+    builder.addCase(__getProfile.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default getRadio;
+export default getProfile;

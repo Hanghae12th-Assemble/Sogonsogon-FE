@@ -11,6 +11,7 @@ import searchUser from "../module/searchUser";
 import getFollowing from "../module/following";
 import getFollower from "../module/follower";
 import removeRadio from "../module/removeRadio";
+import getProfile from "../module/getProfile";
 
 const sotre = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ const sotre = configureStore({
     gettingFollowing: getFollowing.reducer,
     gettingFollower: getFollower.reducer,
     removingRadio: removeRadio.reducer,
+    gettingProfile: getProfile.reducer,
   },
 });
 
