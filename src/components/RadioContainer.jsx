@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { AiOutlineArrowUp, AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineArrowUp, AiOutlineEye, AiOutlineUser } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../elements/Button';
@@ -12,25 +12,36 @@ function RadioContainer(props) {
     return (
         <>
             {props.radio && (
-                <StRadioContainer ref={radioContainerRef} f>
+                <StRadioContainer ref={radioContainerRef}>
                     {props.radio.map((item) => {
                         return (
                             <RadioLayout key={item.id}>
-                                <RadioImgContainer backgroundImageUrl={item.backgroundImageUrl}>
+                                <RadioImgContainer
+                                    to={`radiopreview/${item.id}`}
+                                    backgroundImageUrl={item.backgroundImageUrl}
+                                >
                                     <ViewerCounterContainer>
                                         <AiOutlineUser size={20} />
                                         <ViewerCouterLayout>25명</ViewerCouterLayout>
                                     </ViewerCounterContainer>
                                 </RadioImgContainer>
-                                <RadioTitleLayout>{item.title}</RadioTitleLayout>
+                                <RadioContentLayout>
+                                    <RadioTitleLayout to={`radiopreview/${item.id}`}>
+                                        {item.title}
+                                    </RadioTitleLayout>
+                                    <HitsLayout>
+                                        <AiOutlineEye size={25} />
+                                        30
+                                    </HitsLayout>
 
-                                <RadioNameLayout>소곤이</RadioNameLayout>
+                                    <RadioNameLayout>소곤이</RadioNameLayout>
+                                </RadioContentLayout>
                             </RadioLayout>
                         );
                     })}
                 </StRadioContainer>
             )}
-            <AddRadioBtn to={'/createradio'}>방송하기</AddRadioBtn>
+
             <Button TopBtn onClick={topBtnHandler}>
                 <AiOutlineArrowUp size={15} />
             </Button>
@@ -40,13 +51,11 @@ function RadioContainer(props) {
 
 export default RadioContainer;
 
-const RadioImgContainer = styled.div`
-    height: 150px;
-    overflow: hidden;
+const RadioImgContainer = styled(Link)`
+    min-height: 150px;
     position: relative;
     background-color: #f5f5f5;
     border-radius: 15px;
-
     opacity: 0.9;
     background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
     background-repeat: no-repeat;
@@ -82,11 +91,11 @@ const StRadioContainer = styled.div`
 const RadioLayout = styled.div`
     width: 200px;
     min-height: 200px;
-    margin: 20px auto;
+    margin: 10px auto;
 `;
 
 const ViewerCounterContainer = styled.div`
-    background-color: green;
+    background-color: #6d6d6d;
     width: 80px;
     height: 28px;
     color: white;
@@ -105,9 +114,16 @@ const ViewerCouterLayout = styled.div`
     justify-content: center;
 `;
 
-const RadioTitleLayout = styled.div`
-    width: 150px;
-    min-height: 25px;
+const RadioContentLayout = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+`;
+
+const RadioTitleLayout = styled(Link)`
+    width: 145px;
+    min-height: 20px;
     padding: 10px 0px 0px 0px;
     line-height: 1.5;
     font-size: 15px;
@@ -116,26 +132,18 @@ const RadioTitleLayout = styled.div`
 `;
 
 const RadioNameLayout = styled.div`
-    width: 150px;
+    width: 145px;
     min-height: 25px;
     padding: 10px 0px 0px 0px;
     font-size: 12px;
     padding-left: 5px;
+    color: #6d6d6d;
 `;
-
-const AddRadioBtn = styled(Link)`
-    position: absolute;
-    width: 444px;
+const HitsLayout = styled.div`
+    width: 50px;
     height: 50px;
-    background-color: black;
-    color: white;
-    border-radius: 10px;
-    font-size: 22px;
-    bottom: 40px;
-    left: 28px;
-    z-index: 900;
-    cursor: pointer;
+    font-size: 15px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    color: #6d6d6d;
 `;

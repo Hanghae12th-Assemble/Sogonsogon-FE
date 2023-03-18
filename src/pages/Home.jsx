@@ -5,6 +5,8 @@ import Navbar from '../components/Navbar';
 import { AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
 import Lnb from '../components/Lnb';
 import RadioContainer from '../components/RadioContainer';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 function Home() {
     const dispatch = useDispatch();
@@ -37,8 +39,25 @@ function Home() {
                 toClose={'/search'}
             />
             <RadioContainer radio={radio?.data} />
+            <AddRadioBtn to={'/createradio'}>방송하기</AddRadioBtn>
         </>
     );
 }
 
 export default Home;
+const AddRadioBtn = styled(Link)`
+    position: absolute;
+    width: 444px;
+    height: 50px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-size: 22px;
+    bottom: 40px;
+    left: 28px;
+    z-index: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;

@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import RadioContainer from '../components/RadioContainer';
 import Button from '../elements/Button';
 import SearchHistory from '../components/SearchHistory';
+import { RadioPreviewProfileImg } from './RadioPreview';
 
 function Search() {
     useEffect(() => {
@@ -146,9 +147,9 @@ function Search() {
                                                 to={`/profile/${item.membername}`}
                                                 key={item.id}
                                             >
-                                                <SearchUserImgContainer>
+                                                <RadioPreviewProfileImg>
                                                     {item.profileImageUrl}
-                                                </SearchUserImgContainer>
+                                                </RadioPreviewProfileImg>
                                                 <SearchUserContentContainer>
                                                     <SearchUserNicknameLayout>
                                                         {item.nickname}
@@ -253,30 +254,6 @@ const SearchUserLayout = styled(Link)`
     align-items: center;
     min-height: 100px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-`;
-
-const SearchUserImgContainer = styled.div`
-    min-width: 70px;
-    min-height: 70px;
-    overflow: hidden;
-    position: relative;
-    background-color: #aeabab52;
-    border-radius: 100%;
-    margin: 0px 20px 0px 20px;
-    opacity: 0.9;
-    background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    align-items: flex-end;
-    display: flex;
-    flex-direction: row-reverse;
-    transition: all 0.5s ease-in-out 0s;
-    :hover {
-        transform: scale(1);
-        box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease-in-out 0s;
-    }
 `;
 
 const SearchUserContentContainer = styled.div`
