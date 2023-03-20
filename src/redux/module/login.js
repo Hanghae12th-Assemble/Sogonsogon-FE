@@ -8,7 +8,13 @@ export const __login = createAsyncThunk(
   async (logininfo, thunkAPI) => {
     return await axios
       .post("api/member/login", logininfo)
-      .then((response) => console.log(response))
+      .then((response) =>
+        alert(
+          response.data.statusCode === 200
+            ? "로그인 되었습니다."
+            : "로그인에 문제가 생겼습니다."
+        )
+      )
       .catch((error) => console.log(error));
   }
 );

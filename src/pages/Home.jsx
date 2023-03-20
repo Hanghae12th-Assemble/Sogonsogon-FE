@@ -10,24 +10,25 @@ import styled from "styled-components";
 
 function Home() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(__getRadio());
   }, [dispatch]);
+
   const { isLoading, error, radio } = useSelector((state) => {
     return state.gettingRadio;
   });
+
   const [isLnbOpen, setIsLnbOpen] = useState(false);
+
   const toggleLnb = () => {
     setIsLnbOpen(!isLnbOpen);
   };
+
   const handleItemClick = () => {
     setIsLnbOpen(false);
   };
 
-  if (isLoading) {
-    return <div>로딩중입니다</div>;
-  }
-  if (error) return;
   return (
     <>
       <Lnb isOpen={isLnbOpen} handleItemClick={handleItemClick} />

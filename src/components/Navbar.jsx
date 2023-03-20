@@ -1,19 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function Navbar({ iconleft, title, iconright, toNavigate, toClose }) {
+  const navigate = useNavigate();
+
   return (
     <NavbarBox>
-      <Link to={toNavigate}>
-        <div>{iconleft}</div>
-      </Link>
+      <div
+        onClick={() => {
+          document.startViewTransition(() => navigate(toNavigate));
+        }}
+      >
+        {iconleft}
+      </div>
       <div>
         <span>{title}</span>
       </div>
-      <Link to={toClose}>
-        <div>{iconright}</div>
-      </Link>
+      <div
+        onClick={() => {
+          document.startViewTransition(() => navigate(toClose));
+        }}
+      >
+        {iconright}
+      </div>
     </NavbarBox>
   );
 }

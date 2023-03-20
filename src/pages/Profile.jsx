@@ -69,12 +69,6 @@ function Profile() {
                 <span>고은</span>
               </ProfileMidumInputbox>
             </ProfileMidumInput>
-            {/* <ProfileMidumInput>
-              <span>ID</span>
-              <ProfileMidumInputbox>
-                <span>Gosliver</span>
-              </ProfileMidumInputbox>
-            </ProfileMidumInput> */}
           </div>
           <ProfileBottom>
             <div>
