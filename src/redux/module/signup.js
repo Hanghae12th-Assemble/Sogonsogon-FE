@@ -8,8 +8,8 @@ export const __siginup = createAsyncThunk(
   async (siginupInfo, thunkAPI) => {
     return await axios
       .post("api/member/signup", siginupInfo)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((response) => alert(response && "회원가입에 성공하였습니다."))
+      .catch((error) => alert(error && "회원가입에 실패하였습니다."));
   }
 );
 

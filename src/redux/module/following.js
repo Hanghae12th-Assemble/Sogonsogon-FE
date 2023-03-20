@@ -8,8 +8,8 @@ export const __getFollowing = createAsyncThunk(
   async (number, thunkAPI) => {
     return await axios
       .get(`api/follow/${number}/following`)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((response) => alert(response && "팔로잉 조회에 성공하였습니다."))
+      .catch((error) => alert(error && "다시 팔로잉 조회를 해주세요."));
   }
 );
 

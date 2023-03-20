@@ -41,21 +41,15 @@ function Createradio() {
   };
 
   const submitForm = (data) => {
-    console.log(
-      "방송 주제:",
-      selectBtn.title,
-      "공개 범위:",
-      selectBtn.scope,
-      data
-    );
-    // const formData = new FormData();
-    // formData.append("title", data.title);
-    // formData.append("introduction", data.introduction);
-    // for (const keyValue of formImagin) {
-    //   formData.append(keyValue[0], keyValue[1]);
-    // }
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("hashtag", data.hashtag);
+    formData.append("introduction", data.introduction);
+    for (const keyValue of formImagin) {
+      formData.append(keyValue[0], keyValue[1]);
+    }
 
-    // dispatch(__createRadio(formData));
+    dispatch(__createRadio(formData));
     reset();
   };
 
@@ -63,12 +57,12 @@ function Createradio() {
     <CrRadioContainer>
       <div>
         <div>
-          {preview && (
+          {preview ? (
             <div>
               <CrRadioBackgroundOVeraly />
               <CrRadioImg src={preview} alt="Preview" />
             </div>
-          )}
+          ) : null}
         </div>
       </div>
       <CrRadioContainerBox>
@@ -115,7 +109,7 @@ function Createradio() {
               <Input
                 register={register}
                 type={"text"}
-                name={"notice"}
+                name={"introduction"}
                 placeholder={"방송 공지를 입력해주세요."}
                 validation={{
                   required: "방송 공지를 입력해주세요.",

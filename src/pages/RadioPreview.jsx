@@ -11,11 +11,13 @@ function RadioPreview() {
 
   const getRadioData = gettingRadio.radio?.data;
 
-  const foundRadio = getRadioData?.find((item) => item.id == params.id);
+  const foundRadio = getRadioData?.find(
+    (item) => item.id === Number(params.id)
+  );
   return (
     <>
       <RadioPreviewImgContainer
-        backgroundImageUrl={foundRadio.backgroundImageUrl}
+        backgroundImageUrl={foundRadio?.backgroundImageUrl}
       >
         <RadioPreviewContainer>
           <RadioPreviewTopContainer>
@@ -38,7 +40,7 @@ function RadioPreview() {
                     닉네임
                   </RadioPreviewProfileNicknameLayout>
                   <RadioPreviewProfileTitleLayout>
-                    {foundRadio.title}
+                    {foundRadio?.title}
                   </RadioPreviewProfileTitleLayout>
                 </RadioPreviewPfContentContainer>
               </RadioPreviewProfileLayout>
@@ -49,8 +51,7 @@ function RadioPreview() {
                     <div>시청자수:30</div>
                     <div>방송시간 05:30</div>
                   </LayoutBox3>
-
-                  <div>{foundRadio.introduction}</div>
+                  <div>{foundRadio?.introduction}</div>
                 </LayoutBox2>
               </LayoutContainer>
             </RadioPreviewProfileContainer>

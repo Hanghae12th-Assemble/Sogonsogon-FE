@@ -9,7 +9,7 @@ export const __getRadio = createAsyncThunk(
     return await axios
       .get(`api/radios/`, radio)
       .then((response) => thunkAPI.fulfillWithValue(response?.data))
-      .catch((error) => console.log(error));
+      .catch((error) => alert(error && "다시 라디오를 조회해주세요."));
   }
 );
 

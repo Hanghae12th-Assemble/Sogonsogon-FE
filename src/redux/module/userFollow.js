@@ -8,8 +8,8 @@ export const __userFollow = createAsyncThunk(
   async (memberId, thunkAPI) => {
     return await axios
       .post(`api/follow/${memberId}`, {})
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((response) => alert(response && "팔로우에 성공했습니다."))
+      .catch((error) => alert(error && "팔로우에 실패했습니다."));
   }
 );
 

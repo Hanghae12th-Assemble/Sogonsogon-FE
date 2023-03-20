@@ -11,7 +11,7 @@ export const __searchUser = createAsyncThunk(
       .then((response) => {
         return thunkAPI.fulfillWithValue(response?.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => error);
   }
 );
 

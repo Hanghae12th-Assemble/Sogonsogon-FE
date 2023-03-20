@@ -9,7 +9,7 @@ export const __getProfile = createAsyncThunk(
     return await axios
       .get(`api/member/?membername=${profileMembername}`)
       .then((response) => thunkAPI.fulfillWithValue(response?.data?.data))
-      .catch((error) => console.log(error));
+      .catch((error) => alert(error && "다시 프로필을 조회 해주세요."));
   }
 );
 

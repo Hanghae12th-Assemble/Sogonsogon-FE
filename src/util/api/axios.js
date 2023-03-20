@@ -8,40 +8,26 @@ export default class Axios {
       baseURL: url,
     });
 
-    this.axiosInstance.interceptors.response.use(
-      (response) => {
-        const token = response.headers.authorization;
+    this.axiosInstance.interceptors.response.use((response) => {
+      const token = response.headers.authorization;
 
-        if (token) {
-          const [, parseToken] = token.split(" ");
-          setCookie(QUERY.COOKIE.COOKIE_NAME, parseToken);
+      if (token) {
+        const [, parseToken] = token.split(" ");
+        setCookie(QUERY.COOKIE.COOKIE_NAME, parseToken);
 
-          if (response.data.data) {
-            localStorage.setItem(
-              "userInfo",
-              JSON.stringify({
-                id: `${response.data.data.id}`,
-                userName: `${response.data.data.membername}`,
-                nickName: `${response.data.data.nickname}`,
-              })
-            );
-          }
+        if (response.data.data) {
+          localStorage.setItem(
+            "userInfo",
+            JSON.stringify({
+              id: `${response.data.data.id}`,
+              userName: `${response.data.data.membername}`,
+              nickName: `${response.data.data.nickname}`,
+            })
+          );
         }
-
-        return response;
-      },
-
-      (error) => {
-        const errorMessage = error.response.data.errorMessage;
-        if (errorMessage === "Token Error") {
-          console.log(error);
-        } else {
-          alert(errorMessage);
-        }
-
-        return Promise.reject(error);
       }
-    );
+      return response;
+    });
   }
 
   getAuthHeader() {

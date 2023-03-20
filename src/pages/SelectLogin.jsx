@@ -1,16 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../elements/Button";
 
 function Login() {
+  const navigate = useNavigate();
+
   return (
     <LoginBox>
       <LoginContainer>
         <LoginBackSpan>
-          <Link to={"/"}>
-            <span>나중에 하기</span>
-          </Link>
+          <span
+            onClick={() => {
+              document.startViewTransition(() => navigate("/"));
+            }}
+          >
+            나중에 하기
+          </span>
         </LoginBackSpan>
         <LoginLogoBox>
           <span>로고</span>
@@ -26,10 +32,23 @@ function Login() {
             <Button lgBtn>구글로 로그인</Button>
           </LoginButtonDiv>
           <LoginSpanDiv>
-            <span>
-              <Link to={"/maillogin"}>이메일로 로그인</Link> /{" "}
-              <Link to={"/signup"}>회원가입</Link>
-            </span>
+            <LoginSpanText>
+              <div
+                onClick={() => {
+                  document.startViewTransition(() => navigate("/maillogin"));
+                }}
+              >
+                이메일로 로그인
+              </div>{" "}
+              /{" "}
+              <div
+                onClick={() => {
+                  document.startViewTransition(() => navigate("/signup"));
+                }}
+              >
+                회원가입
+              </div>
+            </LoginSpanText>
           </LoginSpanDiv>
         </LoginButtonBox>
       </LoginContainer>
@@ -74,9 +93,15 @@ const LoginButtonDiv = styled.div`
 `;
 
 const LoginSpanDiv = styled.div`
-  // border: 1px solid red;
+  //border: 1px solid red;
   margin-top: 3.125rem;
   cursor: pointer;
+`;
+const LoginSpanText = styled.span`
+  //border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+  width: 11.25rem;
 `;
 
 const LoginBackSpan = styled.div`

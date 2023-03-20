@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function Navbar({ iconleft, title, iconright, toNavigate, toClose }) {
@@ -7,23 +7,23 @@ function Navbar({ iconleft, title, iconright, toNavigate, toClose }) {
 
   return (
     <NavbarBox>
-      <div
+      <NavbarCursor
         onClick={() => {
           document.startViewTransition(() => navigate(toNavigate));
         }}
       >
         {iconleft}
-      </div>
+      </NavbarCursor>
       <div>
         <span>{title}</span>
       </div>
-      <div
+      <NavbarCursor
         onClick={() => {
           document.startViewTransition(() => navigate(toClose));
         }}
       >
         {iconright}
-      </div>
+      </NavbarCursor>
     </NavbarBox>
   );
 }
@@ -38,4 +38,8 @@ const NavbarBox = styled.div`
   padding: 0px 15px;
   min-height: 3.125rem;
   margin-top: 2.5rem;
+`;
+
+const NavbarCursor = styled.div`
+  cursor: pointer;
 `;
