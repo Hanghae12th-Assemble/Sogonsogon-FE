@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { AiOutlineArrowLeft, AiOutlineArrowUp } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { __searchRadio } from '../redux/module/searchRadio';
 import { __searchUser } from '../redux/module/searchUser';
@@ -10,6 +10,7 @@ import RadioContainer from '../components/RadioContainer';
 import Button from '../elements/Button';
 import SearchHistory from '../components/SearchHistory';
 import { RadioPreviewProfileImg } from './RadioPreview';
+import useScroll from '../hooks/useScroll';
 
 function Search() {
     useEffect(() => {
@@ -38,14 +39,13 @@ function Search() {
         setIsSearch(true);
         dispatch(__searchUser(data.searchValue));
         setSort(true);
-        reset();
         addSearchHistory(data.searchValue);
     };
     // 새로운 검색어를 로컬스토리지에 추가하는 함수
     const addSearchHistory = (newKeyword) => {
         let updatedHistory = [...searchHistory];
         updatedHistory.unshift(newKeyword);
-        updatedHistory = [...new Set(updatedHistory)].slice(0, 10); // 중복 검색어 방지 및 최근 5개까지 저장
+        updatedHistory = [...new Set(updatedHistory)].slice(0, 10); // 중복 검색어 방지 및 최근 10개까지 저장
         setSearchHistory(updatedHistory);
         localStorage.setItem('searchHistory', JSON.stringify(updatedHistory));
     };
@@ -89,6 +89,12 @@ function Search() {
         dispatch(__searchUser(null));
         dispatch(__searchRadio(null));
         setSort(true);
+    };
+
+    const SearchUserContainerRef = useRef();
+    const scrollPos = useScroll(SearchUserContainerRef);
+    const topBtnHandler = () => {
+        SearchUserContainerRef?.current.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const { searchingUser, searchingRadio } = useSelector((state) => state);
@@ -140,37 +146,44 @@ function Search() {
                             {user?.data.length === 0 ? (
                                 <div>검색 결과가 없습니다. </div>
                             ) : (
-                                <SearchUserContainer>
-                                    {user?.data.map((item) => {
-                                        return (
-                                            <SearchUserLayout
-                                                to={`/profile/${item.membername}`}
-                                                key={item.id}
-                                            >
-                                                <RadioPreviewProfileImg>
-                                                    {item.profileImageUrl}
-                                                </RadioPreviewProfileImg>
-                                                <SearchUserContentContainer>
-                                                    <SearchUserNicknameLayout>
-                                                        {item.nickname}
-                                                    </SearchUserNicknameLayout>
+                                <>
+                                    <SearchUserContainer ref={SearchUserContainerRef}>
+                                        {user?.data.map((item) => {
+                                            return (
+                                                <SearchUserLayout
+                                                    to={`/profile/${item.membername}`}
+                                                    key={item.id}
+                                                >
+                                                    <RadioPreviewProfileImg>
+                                                        {item.profileImageUrl}
+                                                    </RadioPreviewProfileImg>
+                                                    <SearchUserContentContainer>
+                                                        <SearchUserNicknameLayout>
+                                                            {item.nickname}
+                                                        </SearchUserNicknameLayout>
 
-                                                    <SearchUserMembernameLayout>
-                                                        {item.membername}
-                                                    </SearchUserMembernameLayout>
+                                                        <SearchUserMembernameLayout>
+                                                            {item.membername}
+                                                        </SearchUserMembernameLayout>
 
-                                                    <SearchUserMembernameLayout>
-                                                        <CenterLine />
-                                                        팔로워 25명
-                                                    </SearchUserMembernameLayout>
-                                                    <SearchUserDescLayout>
-                                                        오늘부터 매일 들어옵니다
-                                                    </SearchUserDescLayout>
-                                                </SearchUserContentContainer>
-                                            </SearchUserLayout>
-                                        );
-                                    })}
-                                </SearchUserContainer>
+                                                        <SearchUserMembernameLayout>
+                                                            <CenterLine />
+                                                            팔로워 25명
+                                                        </SearchUserMembernameLayout>
+                                                        <SearchUserDescLayout>
+                                                            오늘부터 매일 들어옵니다
+                                                        </SearchUserDescLayout>
+                                                    </SearchUserContentContainer>
+                                                </SearchUserLayout>
+                                            );
+                                        })}
+                                    </SearchUserContainer>
+                                </>
+                            )}
+                            {SearchUserContainerRef && scrollPos > 10 && (
+                                <Button TopBtn onClick={topBtnHandler}>
+                                    <AiOutlineArrowUp size={15} />
+                                </Button>
                             )}
                         </>
                     ) : (

@@ -10,10 +10,8 @@ function RadioPreview() {
     const { gettingRadio } = useSelector((state) => state);
 
     const getRadioData = gettingRadio.radio?.data;
-    console.log(getRadioData);
 
     const foundRadio = getRadioData?.find((item) => item.id == params.id);
-    console.log(foundRadio);
     return (
         <>
             <RadioPreviewImgContainer backgroundImageUrl={foundRadio.backgroundImageUrl}>
@@ -66,7 +64,6 @@ const RadioPreviewImgContainer = styled.div`
     height: 100%;
     padding: 40px 25px 25px 25px;
     position: relative;
-    background-color: #f5f5f5;
     border-radius: 15px;
     opacity: 0.9;
     background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
@@ -127,7 +124,7 @@ export const RadioPreviewProfileImg = styled.div`
     min-height: 70px;
     overflow: hidden;
     position: relative;
-    background-color: #fdfffe6f;
+    background-color: #393b3a6e;
     border-radius: 100%;
     margin: 0px 20px 0px 20px;
     opacity: 0.9;

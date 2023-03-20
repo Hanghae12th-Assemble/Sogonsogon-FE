@@ -3,12 +3,15 @@ import { AiOutlineArrowUp, AiOutlineEye, AiOutlineUser } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../elements/Button';
+import useScroll from '../hooks/useScroll';
 
 function RadioContainer(props) {
     const radioContainerRef = useRef();
+    const scrollPos = useScroll(radioContainerRef);
     const topBtnHandler = () => {
         radioContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
     return (
         <>
             {props.radio && (
@@ -17,8 +20,8 @@ function RadioContainer(props) {
                         return (
                             <RadioLayout key={item.id}>
                                 <RadioImgContainer
-                                    to={`radiopreview/${item.id}`}
-                                    backgroundImageUrl={item.backgroundImageUrl}
+                                    to={`/radiopreview/${item.id}`}
+                                    style={{ backgroundImage: `url(${item.backgroundImageUrl})` }}
                                 >
                                     <ViewerCounterContainer>
                                         <AiOutlineUser size={20} />
@@ -26,25 +29,31 @@ function RadioContainer(props) {
                                     </ViewerCounterContainer>
                                 </RadioImgContainer>
                                 <RadioContentLayout>
-                                    <RadioTitleLayout to={`radiopreview/${item.id}`}>
-                                        {item.title}
-                                    </RadioTitleLayout>
-                                    <HitsLayout>
-                                        <AiOutlineEye size={25} />
-                                        30
-                                    </HitsLayout>
+                                    <RadionContentMiniLayout>
+                                        <RadioTitleLayout to={`/radiopreview/${item.id}`}>
+                                            {item.title}
+                                        </RadioTitleLayout>
 
-                                    <RadioNameLayout>소곤이</RadioNameLayout>
+                                        <RadioNameLayout>소곤이</RadioNameLayout>
+                                    </RadionContentMiniLayout>
+
+                                    <HitsContainer>
+                                        <HitsLayout>
+                                            <AiOutlineEye size={25} />
+                                            30
+                                        </HitsLayout>
+                                    </HitsContainer>
                                 </RadioContentLayout>
                             </RadioLayout>
                         );
                     })}
                 </StRadioContainer>
             )}
-
-            <Button TopBtn onClick={topBtnHandler}>
-                <AiOutlineArrowUp size={15} />
-            </Button>
+            {scrollPos > 10 && (
+                <Button TopBtn onClick={topBtnHandler}>
+                    <AiOutlineArrowUp size={15} />
+                </Button>
+            )}
         </>
     );
 }
@@ -57,7 +66,6 @@ const RadioImgContainer = styled(Link)`
     background-color: #f5f5f5;
     border-radius: 15px;
     opacity: 0.9;
-    background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -119,31 +127,44 @@ const RadioContentLayout = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    /* border: 1px solid black; */
 `;
 
 const RadioTitleLayout = styled(Link)`
-    width: 145px;
-    min-height: 20px;
-    padding: 10px 0px 0px 0px;
-    line-height: 1.5;
     font-size: 15px;
     font-weight: bold;
     padding-left: 5px;
+    line-height: 1.5;
+    /* border: 1px solid black; */
 `;
 
 const RadioNameLayout = styled.div`
     width: 145px;
-    min-height: 25px;
-    padding: 10px 0px 0px 0px;
+    min-height: 20px;
+    padding: 5px 0px 0px 0px;
     font-size: 12px;
     padding-left: 5px;
     color: #6d6d6d;
+    /* border: 1px solid black; */
+`;
+
+const HitsContainer = styled.div`
+    width: 48px;
+    min-height: 50px;
+    /* border: 1px solid black; */
 `;
 const HitsLayout = styled.div`
-    width: 50px;
-    height: 50px;
+    width: fit-content;
+    height: fit-content;
     font-size: 15px;
     display: flex;
     align-items: center;
     color: #6d6d6d;
+    /* border: 1px solid black; */
+`;
+
+const RadionContentMiniLayout = styled.div`
+    width: 150px;
+    min-height: 50px;
+    /* border: 1px solid black; */
 `;
