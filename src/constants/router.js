@@ -5,7 +5,7 @@ export const routers = Object.freeze({
   SIGNUP: "signup",
   PROFILE: "profile/:id",
   LISTENRADIO: "listen/:id",
-  TAG: "tag",
+  TAG: "tag/:id",
   SEARCH: "search",
   RADIOPREVIEW: "radiopreview/:id",
 });

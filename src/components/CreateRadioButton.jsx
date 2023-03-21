@@ -44,7 +44,7 @@ function CreateRadioButton() {
       <CrRadioButtonSpanBox>
         <span>방송 주제*</span>
         <CrRadioPublicScopButton>
-          {["음악", "생활", "도서", "ASMR"].map((text, i) => {
+          {["음악", "일상", "도서", "ASMR"].map((text, i) => {
             return (
               <CrRadioButton
                 key={i}
