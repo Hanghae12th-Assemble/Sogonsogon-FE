@@ -75,6 +75,7 @@ export default RadioContainer;
 
 const RadioImgContainer = styled.div`
     min-height: 150px;
+    margin-bottom: 10px;
     position: relative;
     background-color: #f5f5f5;
     border-radius: 15px;
@@ -86,6 +87,7 @@ const RadioImgContainer = styled.div`
     display: flex;
     flex-direction: row-reverse;
     transition: all 0.5s ease-in-out 0s;
+    cursor: pointer;
     :hover {
         transform: scale(1.02);
         box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
@@ -98,9 +100,8 @@ const StRadioContainer = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 2fr);
-    grid-gap: 10px;
     flex-direction: row;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 20px;
     z-index: -1;
     overflow: auto;
     ::-webkit-scrollbar {
@@ -111,7 +112,7 @@ const StRadioContainer = styled.div`
 
 const RadioLayout = styled.div`
     width: 200px;
-    min-height: 200px;
+    min-height: 220px;
     margin: 10px auto;
 `;
 
@@ -144,7 +145,7 @@ const RadioContentLayout = styled.div`
 `;
 
 const RadioTitleLayout = styled(Link)`
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
     padding-left: 5px;
     line-height: 1.5;

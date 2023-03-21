@@ -57,7 +57,7 @@ const BtnStyle = styled.button`
             position: absolute;
             width: 40px;
             height: 40px;
-            background-color: #e7dbdb;
+            background-color: #ffffff;
             color: black;
             border-radius: 100%;
             border: none;
@@ -69,7 +69,7 @@ const BtnStyle = styled.button`
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px 0px;
         `}
 
         ${(props) =>
@@ -82,7 +82,7 @@ const BtnStyle = styled.button`
             background-color: white;
             color: rgb(153, 153, 153);
             cursor: pointer;
-            margin-right: 12px;
+            margin-right: 8px;
             &.active {
                 color: #000;
                 font-weight: bold;

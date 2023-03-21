@@ -21,6 +21,7 @@ function Lnb({ isOpen, handleItemClick }) {
 
     const LogoutBtnHandler = () => {
         cookies.remove('access-token');
+        localStorage.removeItem('userInfo');
         document.startViewTransition(() => navigate('/selectlogin'));
     };
 

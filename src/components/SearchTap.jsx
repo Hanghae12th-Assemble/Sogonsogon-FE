@@ -1,51 +1,51 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import Button from "../elements/Button";
-import { __searchRadio } from "../redux/module/searchRadio";
-import { __searchUser } from "../redux/module/searchUser";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import Button from '../elements/Button';
+import { __searchRadio } from '../redux/module/searchRadio';
+import { __searchUser } from '../redux/module/searchUser';
 
 function SearchTap({ searchInfo, sort, setIsSearch, setSort }) {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  const search = (type) => {
-    setIsSearch(true);
-    if (type === "user") {
-      dispatch(__searchUser(searchInfo));
-      setSort(true);
-    } else if (type === "live") {
-      dispatch(__searchRadio(searchInfo));
-      setSort(false);
-    }
-  };
+    const search = (type) => {
+        setIsSearch(true);
+        if (type === 'user') {
+            dispatch(__searchUser(searchInfo));
+            setSort(true);
+        } else if (type === 'live') {
+            dispatch(__searchRadio(searchInfo));
+            setSort(false);
+        }
+    };
 
-  return (
-    <SortBtnContainer>
-      <Button
-        SortBtn
-        className={sort === true ? "active" : ""}
-        onClick={() => search("user")}
-      >
-        프로필
-      </Button>
-      <Button
-        SortBtn
-        className={sort === false ? "active" : ""}
-        onClick={() => search("live")}
-      >
-        라이브
-      </Button>
-    </SortBtnContainer>
-  );
+    return (
+        <SortBtnContainer>
+            <Button
+                SortBtn
+                className={sort === true ? 'active' : ''}
+                onClick={() => search('user')}
+            >
+                프로필
+            </Button>
+            <Button
+                SortBtn
+                className={sort === false ? 'active' : ''}
+                onClick={() => search('live')}
+            >
+                라이브
+            </Button>
+        </SortBtnContainer>
+    );
 }
 
 export default SearchTap;
 
 const SortBtnContainer = styled.div`
-  width: 100%;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  padding-left: 25px;
-  margin-top: 10px;
+    width: 100%;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 32px;
+    margin-top: 10px;
 `;
