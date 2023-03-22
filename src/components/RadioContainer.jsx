@@ -1,22 +1,15 @@
-import React, { useRef } from "react";
-import { AiOutlineArrowUp, AiOutlineEye, AiOutlineUser } from "react-icons/ai";
+import React from "react";
+import { AiOutlineEye, AiOutlineUser } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Button from "../elements/Button";
-import useScroll from "../hooks/useScroll";
 
 function RadioContainer(props) {
-  const radioContainerRef = useRef();
   const navigate = useNavigate();
-  const scrollPos = useScroll(radioContainerRef);
-  const topBtnHandler = () => {
-    radioContainerRef.current.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
     <>
       {props.radio && (
-        <StRadioContainer ref={radioContainerRef}>
+        <>
           {props.radio.map((item) => {
             return (
               <RadioLayout key={item.id}>
@@ -60,12 +53,7 @@ function RadioContainer(props) {
               </RadioLayout>
             );
           })}
-        </StRadioContainer>
-      )}
-      {scrollPos > 10 && (
-        <Button TopBtn onClick={topBtnHandler}>
-          <AiOutlineArrowUp size={15} />
-        </Button>
+        </>
       )}
     </>
   );
@@ -92,22 +80,6 @@ const RadioImgContainer = styled.div`
     transform: scale(1.02);
     box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease-in-out 0s;
-  }
-`;
-
-const StRadioContainer = styled.div`
-  border: 1px solid black;
-  position: relative;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 2fr);
-  flex-direction: row;
-  padding: 0px 20px;
-  z-index: -1;
-  overflow: auto;
-  ::-webkit-scrollbar {
-    width: 0.1em;
-    height: 0.1em;
   }
 `;
 

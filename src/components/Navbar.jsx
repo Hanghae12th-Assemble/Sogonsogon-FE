@@ -35,7 +35,7 @@ const NavbarBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0px 30px;
+    padding: 0px 35px;
     min-height: 3.125rem;
     margin-top: 2.5rem;
 `;
