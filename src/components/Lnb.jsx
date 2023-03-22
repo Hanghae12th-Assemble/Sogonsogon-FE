@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineRight } from "react-icons/ai";
 import { Cookies } from "react-cookie";
 
 function Lnb({ isOpen, handleItemClick }) {
