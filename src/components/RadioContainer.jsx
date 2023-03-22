@@ -96,6 +96,7 @@ const RadioImgContainer = styled.div`
 `;
 
 const StRadioContainer = styled.div`
+  border: 1px solid black;
   position: relative;
   width: 100%;
   display: grid;
