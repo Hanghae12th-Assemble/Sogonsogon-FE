@@ -51,7 +51,7 @@ function SearchHistory({ setIsSearch, setSearchInfo }) {
 
                                     <AiOutlineCloseCircle
                                         cursor={'pointer'}
-                                        color={'grey'}
+                                        color={'#ff9900'}
                                         size={24}
                                         onClick={() => deleteSearchHistory(idx, data)}
                                     />
@@ -69,27 +69,26 @@ function SearchHistory({ setIsSearch, setSearchInfo }) {
 export default SearchHistory;
 
 const SearchHistoryContainer = styled.div`
-    /* background-color: #aeabab52; */
+    background-color: #f9f9fa;
     position: relative;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    grid-gap: 20px;
-    padding: 20px 25px 0px 25px;
+    padding: 5px 25px 0px 25px;
     z-index: -1;
     /* border: 1px solid black; */
 `;
 
 const SearchHistoryHeader = styled.div`
-    /* background-color: #aeabab52; */
+    /* border: 1px solid black; */
+    background-color: #f9f9fa;
     width: 100%;
     min-height: 50px;
-    /* border: 1px solid black; */
     display: flex;
     align-items: center;
-    padding-left: 32px;
+    padding: 10px 0px 0px 43px;
     margin-top: 10px;
     font-size: 20px;
     color: #000;
@@ -97,16 +96,16 @@ const SearchHistoryHeader = styled.div`
 `;
 
 const SearchHistoryLayout = styled.div`
+    /* border: 1px solid black; */
     padding: 0px 20px 0px 20px;
     width: 100%;
     min-height: 40px;
-
+    background-color: #f9f9fa;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin-bottom: 10px;
-    /* border: 1px solid black; */
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    /* box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; */
     align-items: center;
 
     justify-content: space-between;

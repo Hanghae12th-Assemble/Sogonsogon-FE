@@ -203,9 +203,9 @@ const JoinRadioBtn = styled(Link)`
     position: relative;
     width: 390px;
     height: 50px;
-    background-color: white;
+    background-color: #ff9900;
     font-weight: bold;
-    color: black;
+    color: white;
     border-radius: 10px;
     font-size: 22px;
     bottom: 40px;

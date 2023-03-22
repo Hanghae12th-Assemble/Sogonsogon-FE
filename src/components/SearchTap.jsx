@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Button from '../elements/Button';
@@ -12,9 +12,11 @@ function SearchTap({ searchInfo, sort, setIsSearch, setSort }) {
         setIsSearch(true);
         if (type === 'user') {
             dispatch(__searchUser(searchInfo));
+            dispatch(__searchRadio(searchInfo));
             setSort(true);
         } else if (type === 'live') {
             dispatch(__searchRadio(searchInfo));
+            dispatch(__searchUser(searchInfo));
             setSort(false);
         }
     };

@@ -62,8 +62,8 @@ const BtnStyle = styled.button`
             border-radius: 100%;
             border: none;
             font-size: 22px;
-            bottom: 100px;
-            left: 430px;
+            bottom: 120px;
+            left: 420px;
             z-index: 900;
             cursor: pointer;
             display: flex;
