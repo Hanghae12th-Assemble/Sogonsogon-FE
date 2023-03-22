@@ -9,7 +9,7 @@ export const __getFollowing = createAsyncThunk(
     return await axios
       .get(`api/follow/${number}/following`)
       .then((response) => alert(response && "팔로잉 조회에 성공하였습니다."))
-      .catch((error) => alert(error && "다시 팔로잉 조회를 해주세요."));
+      .catch((error) => alert(error && "유저이름이 틀렸습니다."));
   }
 );
 

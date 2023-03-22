@@ -3,8 +3,12 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { __searchUser } from "../redux/module/searchUser";
+import { setLocalStorage, removeLocalStorage } from "../util/localStorage";
 
 function SearchHistory({ setIsSearch, setSearchInfo }) {
+  const dispatch = useDispatch();
+  const [searchHistory, setSearchHistory] = useState([]);
+
   useEffect(() => {
     const histories = localStorage.getItem("searchHistory");
     if (histories) {
@@ -12,19 +16,16 @@ function SearchHistory({ setIsSearch, setSearchInfo }) {
     }
   }, []);
 
-  const dispatch = useDispatch();
-  const [searchHistory, setSearchHistory] = useState([]);
-
   const deleteSearchHistory = (idx) => {
     setSearchHistory(searchHistory.filter((item, index) => idx !== index));
-    localStorage.setItem(
+    setLocalStorage(
       "searchHistory",
       JSON.stringify(searchHistory.filter((item, index) => idx !== index))
     );
   };
 
   const clearSearchHistory = () => {
-    localStorage.removeItem("searchHistory");
+    removeLocalStorage("searchHistory");
     setSearchHistory([]);
   };
 

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { AiOutlineClose, AiOutlineRight } from "react-icons/ai";
-import { Cookies } from "react-cookie";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { getCookie, removeCookie } from "../util/cookie";
+import { getLocalStorage, removeLocalStorage } from "../util/localStorage";
 
 function Lnb({ isOpen, handleItemClick }) {
-  const cookies = new Cookies();
-  const token = cookies.get("access-token");
-  const info = localStorage.getItem("userInfo");
-  const username = JSON.parse(info);
+  const token = getCookie("access-token");
+  const username = JSON.parse(getLocalStorage("userInfo"));
   const navigate = useNavigate();
 
   const [items, setItems] = useState([
@@ -25,8 +24,8 @@ function Lnb({ isOpen, handleItemClick }) {
   };
 
   const LogoutBtnHandler = () => {
-    cookies.remove("access-token");
-    localStorage.removeItem("userInfo");
+    removeCookie("access-token");
+    removeLocalStorage("userInfo");
     document.startViewTransition(() => navigate("/selectlogin"));
   };
 
@@ -42,7 +41,7 @@ function Lnb({ isOpen, handleItemClick }) {
           <LoginTrueFalseContainer
             onClick={() => {
               document.startViewTransition(() =>
-                navigate(`profile/${username.userName}`)
+                navigate(`/profile/${username.userName}`)
               );
             }}
           >
@@ -96,6 +95,7 @@ const LnbLayout = styled.div`
   margin-top: 40px;
   /* border: 1px solid black; */
 `;
+
 const LnbMenuLayout = styled.div`
   height: 300px;
   padding: 25px;

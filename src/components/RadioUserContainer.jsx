@@ -10,9 +10,7 @@ function RadioUserContainer(props) {
   const navigate = useNavigate();
   const SearchUserContainerRef = useRef();
   const scrollPos = useScroll(SearchUserContainerRef);
-  const topBtnHandler = () => {
-    SearchUserContainerRef?.current.scrollTo({ top: 0, behavior: "smooth" });
-  };
+
   return (
     <>
       <SearchUserContainer ref={SearchUserContainerRef}>
@@ -51,7 +49,13 @@ function RadioUserContainer(props) {
         })}
       </SearchUserContainer>
       {scrollPos > 10 && (
-        <Button TopBtn onClick={topBtnHandler}>
+        <Button
+          TopBtn
+          onClick={SearchUserContainerRef.current.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          })}
+        >
           <AiOutlineArrowUp size={15} />
         </Button>
       )}

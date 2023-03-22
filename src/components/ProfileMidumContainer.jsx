@@ -6,12 +6,13 @@ import { __userFollow } from "../redux/module/userFollow";
 import { __getProfile } from "../redux/module/getProfile";
 import { pageswitch } from "../redux/module/reduxState/profileModifyButton";
 import { useParams } from "react-router-dom";
+import { getLocalStorage } from "../util/localStorage";
 
 function ProfileMidumContainer() {
   const dispatch = useDispatch();
   const [pageState, setPageState] = useState(false);
   const { id } = useParams();
-  const info = JSON.parse(localStorage.getItem("userInfo"));
+  const info = JSON.parse(getLocalStorage("userInfo"));
   const userInfo = useSelector((state) => state?.gettingProfile?.profile?.[0]);
   useEffect(() => {
     dispatch(__getProfile(id));

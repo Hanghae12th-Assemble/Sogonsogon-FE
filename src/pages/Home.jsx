@@ -18,9 +18,6 @@ function Home() {
   const [isLnbOpen, setIsLnbOpen] = useState(false);
   const radioContainerRef = useRef();
   const scrollPos = useScroll(radioContainerRef);
-  const topBtnHandler = () => {
-    radioContainerRef?.current?.scrollTo({ top: 0, behavior: "smooth" });
-  };
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,18 +28,11 @@ function Home() {
     return state.gettingRadio;
   });
 
-  const toggleLnb = () => {
-    setIsLnbOpen(!isLnbOpen);
-  };
-
-  const handleItemClick = () => {
-    setIsLnbOpen(false);
-  };
+  const toggleLnb = () => setIsLnbOpen((prev) => !prev);
 
   return (
     <>
-      <Lnb isOpen={isLnbOpen} handleItemClick={handleItemClick} />
-
+      <Lnb isOpen={isLnbOpen} handleItemClick={toggleLnb} />
       <Navbar
         iconleft={<AiOutlineMenu size={20} onClick={toggleLnb} />}
         title={"소곤소곤"}
@@ -50,11 +40,15 @@ function Home() {
         toClose={"/search"}
       />
       <StRadioContainer ref={radioContainerRef}>
-        {" "}
         <RadioContainer radio={radio?.data} />
       </StRadioContainer>
       {scrollPos > 10 && (
-        <Button TopBtn onClick={topBtnHandler}>
+        <Button
+          TopBtn
+          onClick={() =>
+            radioContainerRef.current.scrollTo({ top: 0, behavior: "smooth" })
+          }
+        >
           <AiOutlineArrowUp size={15} />
         </Button>
       )}

@@ -9,7 +9,9 @@ export const __createRadio = createAsyncThunk(
     return await axios
       .post(`api/radios`, radioInfo)
       .then((response) => alert(response && "라디오 생성에 성공하였습니다."))
-      .catch((error) => alert(error && "라디오 생성에 실패하였습니다."));
+      .catch((error) =>
+        alert(error && "라디오 이름이 중복되거나 로그인 상태가 아닙니다.")
+      );
   }
 );
 

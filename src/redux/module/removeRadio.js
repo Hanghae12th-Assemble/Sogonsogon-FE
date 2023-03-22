@@ -9,7 +9,9 @@ export const __removeRadio = createAsyncThunk(
     return await axios
       .delete(`api/radios/${radioNumber}`)
       .then((response) => alert(response && "라디오가 삭제되었습니다."))
-      .catch((error) => alert(error && "라디오 삭제에 실패하였습니다."));
+      .catch((error) =>
+        alert(error && "없는 라디오 이거나, 라디오 생성자가 아닙니다.")
+      );
   }
 );
 

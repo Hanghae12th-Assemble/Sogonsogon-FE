@@ -14,28 +14,21 @@ import {
   AiOutlineSearch,
 } from "react-icons/ai";
 import Lnb from "../components/Lnb";
-import { StRadioContainer } from "../pages/Home";
 import useScroll from "../hooks/useScroll";
 import Button from "../elements/Button";
+import styled from "styled-components";
 
 function Tag() {
   let { id } = useParams();
   const page = useRef(1);
+  const radioContainerRef = useRef();
   const [ref, inView] = useInView();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.gettingRadioCategory);
   const [isLnbOpen, setIsLnbOpen] = useState(false);
-  const radioContainerRef = useRef();
   const scrollPos = useScroll(radioContainerRef);
-  const topBtnHandler = () => {
-    radioContainerRef?.current?.scrollTo({ top: 0, behavior: "smooth" });
-  };
-  const toggleLnb = () => {
-    setIsLnbOpen(!isLnbOpen);
-  };
-  const handleItemClick = () => {
-    setIsLnbOpen(false);
-  };
+
+  const toggleLnb = () => setIsLnbOpen((prev) => !prev);
 
   useEffect(() => {
     page.current = 1;
@@ -52,7 +45,7 @@ function Tag() {
 
   return (
     <>
-      <Lnb isOpen={isLnbOpen} handleItemClick={handleItemClick} />
+      <Lnb isOpen={isLnbOpen} handleItemClick={toggleLnb} />
       <Navbar
         iconleft={<AiOutlineMenu size={20} onClick={toggleLnb} />}
         title={id}
@@ -63,12 +56,15 @@ function Tag() {
         {data?.radio.map((item, index) => {
           return <RadioContainer radio={item?.data} key={index} />;
         })}
-        <div ref={ref}>
-          <p>마지막 페이지 입니다.</p>
-        </div>
+        <div ref={ref}></div>
       </StRadioContainer>
       {scrollPos > 10 && (
-        <Button TopBtn onClick={topBtnHandler}>
+        <Button
+          TopBtn
+          onClick={() =>
+            radioContainerRef.current.scrollTo({ top: 0, behavior: "smooth" })
+          }
+        >
           <AiOutlineArrowUp size={15} />
         </Button>
       )}
@@ -77,3 +73,15 @@ function Tag() {
 }
 
 export default Tag;
+
+const StRadioContainer = styled.div`
+  //border: 1px solid black;
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  flex-direction: row;
+  padding: 0px 20px;
+  z-index: -1;
+  overflow: auto;
+`;
