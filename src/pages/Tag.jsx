@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { __getCategoryRadio } from "../redux/module/getRadioCategory";
+import {
+  __getCategoryRadio,
+  initInfinitiScroll,
+} from "../redux/module/getRadioCategory";
 import { useDispatch, useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 import RadioContainer from "../components/RadioContainer";
@@ -21,20 +24,12 @@ function Tag() {
   const [ref, inView] = useInView();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.gettingRadioCategory);
-
-  useEffect(() => {
-    dispatch(__getCategoryRadio({ categoryType: id, page: page.current }));
-  }, []);
-
-  useEffect(() => {
-    if (inView) {
-      page.current += 1;
-      dispatch(__getCategoryRadio({ categoryType: id, page: page.current }));
-    }
-  }, [inView]);
-
   const [isLnbOpen, setIsLnbOpen] = useState(false);
-
+  const radioContainerRef = useRef();
+  const scrollPos = useScroll(radioContainerRef);
+  const topBtnHandler = () => {
+    radioContainerRef?.current?.scrollTo({ top: 0, behavior: "smooth" });
+  };
   const toggleLnb = () => {
     setIsLnbOpen(!isLnbOpen);
   };
@@ -42,11 +37,18 @@ function Tag() {
     setIsLnbOpen(false);
   };
 
-  const radioContainerRef = useRef();
-  const scrollPos = useScroll(radioContainerRef);
-  const topBtnHandler = () => {
-    radioContainerRef?.current?.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  useEffect(() => {
+    page.current = 1;
+    dispatch(initInfinitiScroll());
+    dispatch(__getCategoryRadio({ categoryType: id, page: page.current }));
+  }, [id]);
+
+  useEffect(() => {
+    if (inView) {
+      page.current += 1;
+      dispatch(__getCategoryRadio({ categoryType: id, page: page.current }));
+    }
+  }, [inView]);
 
   return (
     <>

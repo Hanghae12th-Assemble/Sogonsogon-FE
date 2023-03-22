@@ -24,7 +24,13 @@ const initialState = {
 const getProfile = createSlice({
   name: "getProfile",
   initialState,
-  reducers: {},
+  reducers: {
+    initInfinitiScroll: (state, action) => {
+      state.isLoading = false;
+      state.error = false;
+      state.radio = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(__getCategoryRadio.pending, (state) => {
       state.isLoading = true;
@@ -42,4 +48,5 @@ const getProfile = createSlice({
   },
 });
 
+export const { initInfinitiScroll } = getProfile.actions;
 export default getProfile;
