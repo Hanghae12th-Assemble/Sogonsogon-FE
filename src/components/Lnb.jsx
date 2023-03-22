@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineRight } from 'react-icons/ai';
 import { Cookies } from 'react-cookie';
 
 function Lnb({ isOpen, handleItemClick }) {
@@ -19,10 +19,11 @@ function Lnb({ isOpen, handleItemClick }) {
         { id: 5, name: 'ASMR', link: '/tag/ASMR' },
     ]);
 
-    const categoryMenuBtnHandler = (link) => {
-        document.startViewTransition(() => navigate(`${link}`));
-        handleItemClick();
-    };
+    // const categoryMenuBtnHandler = (link) => {
+    //     // document.startViewTransition(() => navigate(`${link}`));
+    //     navigate(`${link}`);
+    //     handleItemClick();
+    // };
 
     const LogoutBtnHandler = () => {
         cookies.remove('access-token');
@@ -33,8 +34,8 @@ function Lnb({ isOpen, handleItemClick }) {
     return (
         <LnbLayout isOpen={isOpen}>
             <LnbCloseBtnContainer>
-                <LnbCloseBtn onClick={handleItemClick}>
-                    <AiOutlineLeft size={20} />{' '}
+                <LnbCloseBtn isOpen={isOpen} onClick={handleItemClick}>
+                    <AiOutlineClose size={20} />{' '}
                 </LnbCloseBtn>
             </LnbCloseBtnContainer>
             {token ? (
@@ -54,20 +55,23 @@ function Lnb({ isOpen, handleItemClick }) {
             ) : (
                 <>
                     <LoginTrueFalseContainer
+                        isOpen={isOpen}
                         onClick={() => {
                             document.startViewTransition(() => navigate('/selectlogin'));
                         }}
                     >
-                        <div>로그인/회원가입</div>
+                        <p>로그인/회원가입</p>
                         <AiOutlineRight size={20} />
                     </LoginTrueFalseContainer>
                     <LoginHiLayout />
                 </>
             )}
-            <LnbMenuLayout>
+            <LnbMenuLayout isOpen={isOpen}>
                 {items.map((item) => (
                     <div key={item.id}>
-                        <div onClick={() => categoryMenuBtnHandler(item.link)}>{item.name}</div>
+                        <Link to={item.link} onClick={handleItemClick}>
+                            {item.name}
+                        </Link>
                     </div>
                 ))}
             </LnbMenuLayout>
@@ -82,11 +86,12 @@ const LnbLayout = styled.div`
     display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
     /* opacity: ${({ isOpen }) => (isOpen ? 1 : 0)}; */
     width: ${({ isOpen }) => (isOpen ? '350px' : '0px')};
+    /* color: ${({ isOpen }) => (isOpen ? 'black' : 'white')}; */
     position: absolute;
     top: 0;
     left: 0;
     height: 95.8%;
-    transition: opacity 0.2s ease, width 0.3s ease-out;
+    transition: opacity 0.3s ease-out, width 0.5s ease-out;
     background-color: white;
     z-index: 999;
     margin-top: 40px;
@@ -96,12 +101,11 @@ const LnbMenuLayout = styled.div`
     height: 300px;
     padding: 25px;
     /* border: 1px solid black; */
-
     div {
         cursor: pointer;
         height: fit-content;
         width: fit-content;
-        display: block;
+        /* display: block; */
         font-size: 20px;
         margin-bottom: 20px;
         color: #333;
