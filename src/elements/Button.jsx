@@ -55,15 +55,34 @@ const BtnStyle = styled.button`
         props.TopBtn &&
         css`
             position: absolute;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background-color: #ffffff;
             color: black;
             border-radius: 100%;
             border: none;
-            font-size: 22px;
             bottom: 120px;
-            left: 420px;
+            left: 410px;
+            z-index: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px 0px;
+        `}
+
+        ${(props) =>
+        props.AddRadioBtn &&
+        css`
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            background-color: #ff9900;
+            color: white;
+            border-radius: 100%;
+            border: none;
+            bottom: 60px;
+            left: 410px;
             z-index: 900;
             cursor: pointer;
             display: flex;

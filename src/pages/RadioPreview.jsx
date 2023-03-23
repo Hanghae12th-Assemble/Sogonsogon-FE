@@ -33,7 +33,7 @@ function RadioPreview() {
                                 <RadioPreviewPfContentContainer>
                                     {' '}
                                     <RadioPreviewProfileNicknameLayout>
-                                        닉네임
+                                        {foundRadio?.nickname}
                                     </RadioPreviewProfileNicknameLayout>
                                     <RadioPreviewProfileTitleLayout>
                                         {foundRadio?.title}
@@ -51,7 +51,15 @@ function RadioPreview() {
                                 </LayoutBox2>
                             </LayoutContainer>
                         </RadioPreviewProfileContainer>
-                        <JoinRadioBtn>입장하기</JoinRadioBtn>
+                        <JoinRadioBtn
+                            onClick={() => {
+                                document.startViewTransition(() =>
+                                    navigate(`/listen/${params.id}`)
+                                );
+                            }}
+                        >
+                            입장하기
+                        </JoinRadioBtn>
                     </RadioPreviewBottomContainer>
                 </RadioPreviewContainer>
             </RadioPreviewImgContainer>
@@ -65,7 +73,6 @@ const RadioPreviewImgContainer = styled.div`
     height: 100%;
     padding: 40px 25px 25px 25px;
     position: relative;
-    border-radius: 15px;
     opacity: 0.9;
     background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
     background-repeat: no-repeat;

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getRadio } from '../redux/module/getRadio';
 import Navbar from '../components/Navbar';
-import { AiOutlineArrowUp, AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlinePlus, AiOutlineArrowUp, AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
 import Lnb from '../components/Lnb';
 import RadioContainer from '../components/RadioContainer';
 import { useNavigate } from 'react-router-dom';
@@ -30,12 +30,14 @@ function Home() {
     return (
         <>
             <Lnb isOpen={isLnbOpen} handleItemClick={toggleLnb} />
-            <Navbar
-                iconleft={<AiOutlineMenu size={20} onClick={toggleLnb} />}
-                title={'소곤소곤'}
-                iconright={<AiOutlineSearch size={20} />}
-                toClose={'/search'}
-            />
+            <NavbarContainer>
+                <Navbar
+                    iconleft={<AiOutlineMenu size={20} onClick={toggleLnb} />}
+                    title={'소곤소곤'}
+                    iconright={<AiOutlineSearch size={20} />}
+                    toClose={'/search'}
+                />
+            </NavbarContainer>
             <StRadioContainer ref={radioContainerRef}>
                 <RadioContainer radio={radio?.data} />
             </StRadioContainer>
@@ -46,38 +48,43 @@ function Home() {
                         radioContainerRef.current.scrollTo({ top: 0, behavior: 'smooth' })
                     }
                 >
-                    <AiOutlineArrowUp size={15} />
+                    <AiOutlineArrowUp size={20} />
                 </Button>
             )}
 
-            <AddRadioBtn
+            <Button
+                AddRadioBtn
                 onClick={() => {
                     document.startViewTransition(() => navigate('/createradio'));
                 }}
             >
-                방송하기
-            </AddRadioBtn>
+                <AiOutlinePlus size={20} />
+            </Button>
         </>
     );
 }
 
 export default Home;
-const AddRadioBtn = styled.div`
-    position: absolute;
-    width: 430px;
-    height: 50px;
-    background-color: #ff9900;
-    color: white;
-    border-radius: 10px;
-    font-size: 22px;
-    bottom: 40px;
-    left: 35px;
-    z-index: 900;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+export const NavbarContainer = styled.div`
+    padding: 0px 20px;
 `;
+
+// const AddRadioBtn = styled.div`
+//     position: absolute;
+//     width: 430px;
+//     height: 50px;
+//     background-color: #ff9900;
+//     color: white;
+//     border-radius: 10px;
+//     bottom: 40px;
+//     left: 35px;
+//     z-index: 900;
+//     cursor: pointer;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// `;
 
 export const StRadioContainer = styled.div`
     /* border: 1px solid black; */
