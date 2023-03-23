@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../elements/Button';
 import useScroll from '../hooks/useScroll';
-import { RadioPreviewProfileImg } from '../pages/RadioPreview';
 
 function RadioUserContainer(props) {
     const navigate = useNavigate();
@@ -24,7 +23,7 @@ function RadioUserContainer(props) {
                             }}
                             key={item.id}
                         >
-                            <RadioPreviewProfileImg>{item.profileImageUrl}</RadioPreviewProfileImg>
+                            <RadioPreviewProfileImg backgroundImageUrl={item.profileImageUrl} />
                             <SearchUserContentContainer>
                                 <SearchUserNicknameLayout>{item.nickname}</SearchUserNicknameLayout>
 
@@ -87,7 +86,31 @@ const SearchUserLayout = styled(Link)`
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 `;
 
+const RadioPreviewProfileImg = styled.div`
+    min-width: 70px;
+    min-height: 70px;
+    overflow: hidden;
+    position: relative;
+    background-color: #393b3a6e;
+    border-radius: 100%;
+    margin: 0px 20px 0px 20px;
+    opacity: 0.9;
+    background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row-reverse;
+    transition: all 0.5s ease-in-out 0s;
+    :hover {
+        transform: scale(1);
+        box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease-in-out 0s;
+    }
+`;
 const SearchUserContentContainer = styled.div`
+    /* border: 1px solid black; */
     width: 100%;
     min-height: 80px;
     display: flex;

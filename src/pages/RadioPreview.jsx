@@ -128,7 +128,7 @@ const RadioPreviewProfileLayout = styled.div`
     min-height: 100px;
 `;
 
-export const RadioPreviewProfileImg = styled.div`
+const RadioPreviewProfileImg = styled.div`
     min-width: 70px;
     min-height: 70px;
     overflow: hidden;

@@ -36,7 +36,7 @@ function Lnb({ isOpen, handleItemClick }) {
                     <AiOutlineClose size={20} />{' '}
                 </LnbCloseBtn>
             </LnbCloseBtnContainer>
-            {token ? (
+            {token && username ? (
                 <>
                     <LoginTrueFalseContainer
                         onClick={() => {
@@ -70,7 +70,9 @@ function Lnb({ isOpen, handleItemClick }) {
                     </div>
                 ))}
             </LnbMenuLayout>
-            {token && <LogoutBtnLayout onClick={LogoutBtnHandler}>로그아웃</LogoutBtnLayout>}
+            {token && username && (
+                <LogoutBtnLayout onClick={LogoutBtnHandler}>로그아웃</LogoutBtnLayout>
+            )}
         </LnbLayout>
     );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiOutlineEye, AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineUser } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
