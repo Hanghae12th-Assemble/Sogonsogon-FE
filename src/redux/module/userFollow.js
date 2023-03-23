@@ -5,10 +5,10 @@ const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
 export const __userFollow = createAsyncThunk(
   "userFollow",
-  async (memberId, thunkAPI) => {
+  async (membername, thunkAPI) => {
     return await axios
-      .post(`api/follow/${memberId}`, {})
-      .then((response) => alert(response && "팔로우에 성공했습니다."))
+      .post(`api/follow/${membername}`, {})
+      .then((response) => alert(response && "팔로우 되었습니다."))
       .catch((error) =>
         alert(error && "로그인 혹은 팔로우 대상이 잘못되었습니다.")
       );

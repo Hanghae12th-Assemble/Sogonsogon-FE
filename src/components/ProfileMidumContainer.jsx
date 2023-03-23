@@ -19,7 +19,7 @@ function ProfileMidumContainer() {
   }, []);
 
   const followBtn = () => {
-    dispatch(__userFollow());
+    dispatch(__userFollow(id));
   };
 
   const onPageClick = () => {

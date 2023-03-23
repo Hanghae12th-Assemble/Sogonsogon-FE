@@ -7,16 +7,18 @@ import Button from "../elements/Button";
 import ProfileMidumContainer from "../components/ProfileMidumContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { pageswitch } from "../redux/module/reduxState/profileModifyButton";
+import Input from "../elements/Input";
+import { useForm } from "react-hook-form";
 
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  //   reset,
-  // } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
   const dispatch = useDispatch();
   const selectBtn = useSelector((state) => state.profileButn);
   const userInfo = useSelector((state) => state?.gettingProfile?.profile?.[0]);
@@ -24,7 +26,7 @@ function Profile() {
   const onChangeimge = (e) => {
     const img = e.target.files[0];
     const formImg = new FormData();
-    formImg.append("backgroundImageUrl", img);
+    formImg.append("profileImageUrl", img);
     const reader = new FileReader();
     setFormformImagin(formImg);
     reader.onloadend = () => {
@@ -38,8 +40,23 @@ function Profile() {
     }
   };
 
+  const submitForm = (data) => {
+    const formData = new FormData();
+    formData.append("nickname", data.nickname);
+    formData.append("memberInfo", data.memberInfo);
+    for (const keyValue of formImagin) {
+      formData.append(keyValue[0], keyValue[1]);
+    }
+
+    //for (const value of formData) console.log(value);
+
+    //dispatch(__createRadio(formData));
+    reset();
+  };
+
   const onPageClick = () => {
     dispatch(pageswitch(!selectBtn));
+    setPreview("");
   };
 
   return (
@@ -52,7 +69,13 @@ function Profile() {
         />
       </ProfileNavbarfixed>
       <ProfileTop>
-        <ProfileTopPhoto>사진</ProfileTopPhoto>
+        <ProfileTopPhoto>
+          {preview ? (
+            <div>
+              <ProfileImg src={preview} alt="Preview" />
+            </div>
+          ) : null}
+        </ProfileTopPhoto>
         <ProfileTopName>
           <span>{userInfo?.membername}</span>
         </ProfileTopName>
@@ -61,12 +84,20 @@ function Profile() {
         </ProfileTopMbti>
       </ProfileTop>
       {selectBtn ? (
-        <>
+        <form onSubmit={handleSubmit(submitForm)}>
           <div>
             <ProfileMidumInput>
               <span>닉네임</span>
               <ProfileMidumInputbox>
-                <span>고은</span>
+                <Input
+                  register={register}
+                  type={"text"}
+                  name={"nickname"}
+                  placeholder={"닉네임을 입력해주세요."}
+                  validation={{
+                    required: "닉네임을 입력해주세요.",
+                  }}
+                />
               </ProfileMidumInputbox>
             </ProfileMidumInput>
           </div>
@@ -75,7 +106,17 @@ function Profile() {
               <ProfileBottomTitle>
                 <span>자기소개</span>
               </ProfileBottomTitle>
-              <ProfileBottomBox placeholder="자기소개를 해주세요." />
+              <Input
+                textarea
+                asFor={"textarea"}
+                register={register}
+                type={"text"}
+                name={"memberInfo"}
+                placeholder={"자기소개를 입력해주세요."}
+                validation={{
+                  required: "자기소개를 입력해주세요.",
+                }}
+              />
             </div>
           </ProfileBottom>
           <ProfileButtonSpanBox>
@@ -93,8 +134,8 @@ function Profile() {
               취소
             </Button>
             <Button smBtn>완료</Button>
-          </ProfileBottomButton>{" "}
-        </>
+          </ProfileBottomButton>
+        </form>
       ) : (
         <ProfileMidumContainer />
       )}
@@ -140,6 +181,12 @@ const ProfileTopPhoto = styled.div`
   align-items: center;
 `;
 
+const ProfileImg = styled.img`
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+`;
+
 const ProfileTopName = styled.div`
   margin-top: 20px;
 `;
@@ -179,15 +226,6 @@ const ProfileBottom = styled.div`
 
 const ProfileBottomTitle = styled.div`
   margin-bottom: 20px;
-`;
-
-const ProfileBottomBox = styled.textarea`
-  //border: 1px solid black;
-  width: 460px;
-  height: 118px;
-  border-radius: 10px;
-  padding: 10px;
-  resize: none;
 `;
 
 const ProfileBottomButton = styled.div`
