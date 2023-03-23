@@ -6,13 +6,17 @@ import styled from "styled-components";
 import Button from "../elements/Button";
 import ProfileMidumContainer from "../components/ProfileMidumContainer";
 import { useDispatch, useSelector } from "react-redux";
+import { __updateProfile } from "../redux/module/updateProfile";
 import { pageswitch } from "../redux/module/reduxState/profileModifyButton";
 import Input from "../elements/Input";
 import { useForm } from "react-hook-form";
+import { getLocalStorage } from "../util/localStorage";
+import { __getProfile } from "../redux/module/getProfile";
 
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
+  const { id } = JSON.parse(getLocalStorage("userInfo"));
   const {
     register,
     handleSubmit,
@@ -21,7 +25,7 @@ function Profile() {
   } = useForm();
   const dispatch = useDispatch();
   const selectBtn = useSelector((state) => state.profileButn);
-  const userInfo = useSelector((state) => state?.gettingProfile?.profile?.[0]);
+  const userInfo = useSelector((state) => state?.gettingProfile?.profile);
 
   const onChangeimge = (e) => {
     const img = e.target.files[0];
@@ -48,10 +52,10 @@ function Profile() {
       formData.append(keyValue[0], keyValue[1]);
     }
 
-    //for (const value of formData) console.log(value);
+    dispatch(__updateProfile({ userId: id, profileInfo: formData }));
 
-    //dispatch(__createRadio(formData));
     reset();
+    dispatch(pageswitch(!selectBtn));
   };
 
   const onPageClick = () => {
@@ -74,7 +78,9 @@ function Profile() {
             <div>
               <ProfileImg src={preview} alt="Preview" />
             </div>
-          ) : null}
+          ) : (
+            <ProfileImg src={userInfo?.profileImageUrl} alt="Preview" />
+          )}
         </ProfileTopPhoto>
         <ProfileTopName>
           <span>{userInfo?.membername}</span>
@@ -137,7 +143,7 @@ function Profile() {
           </ProfileBottomButton>
         </form>
       ) : (
-        <ProfileMidumContainer />
+        <ProfileMidumContainer selectBtn={selectBtn} />
       )}
     </ProfileContainer>
   );

@@ -5,10 +5,10 @@ const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
 export const __updateProfile = createAsyncThunk(
   "updateProfile",
-  async ({ memberId, profileInfo }, thunkAPI) => {
+  async ({ userId, profileInfo }, thunkAPI) => {
     return await axios
-      .post(`api/member/update/${memberId}`, profileInfo)
-      .then((response) => console.log(response))
+      .put(`api/member/update/${userId}`, profileInfo)
+      .then((response) => thunkAPI.fulfillWithValue(response?.data?.data))
       .catch((error) => console.log(error));
   }
 );

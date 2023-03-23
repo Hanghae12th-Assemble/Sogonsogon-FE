@@ -55,7 +55,7 @@ export default class Axios {
     return this.axiosInstance.patch(`${path}/${payload}`, option);
   }
 
-  async put(path, payload, option) {
-    return this.axiosInstance.put(path, payload, option);
+  async put(path, payload) {
+    return this.axiosInstance.put(path, payload, this.getAuthHeader());
   }
 }

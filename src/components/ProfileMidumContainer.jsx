@@ -8,15 +8,18 @@ import { pageswitch } from "../redux/module/reduxState/profileModifyButton";
 import { useParams } from "react-router-dom";
 import { getLocalStorage } from "../util/localStorage";
 
-function ProfileMidumContainer() {
+function ProfileMidumContainer({ selectBtn }) {
   const dispatch = useDispatch();
-  const [pageState, setPageState] = useState(false);
+  const [pageState] = useState(false);
   const { id } = useParams();
   const info = JSON.parse(getLocalStorage("userInfo"));
-  const userInfo = useSelector((state) => state?.gettingProfile?.profile?.[0]);
+  const userInfo = useSelector((state) => state?.gettingProfile?.profile);
+
   useEffect(() => {
+    console.log("hi");
     dispatch(__getProfile(id));
-  }, []);
+    console.log("hello");
+  }, [selectBtn]);
 
   const followBtn = () => {
     dispatch(__userFollow(id));
@@ -31,11 +34,11 @@ function ProfileMidumContainer() {
       <ProfileTopFollow>
         <ProfileTopFollower>
           <span>팔로워</span>
-          <span>88</span>
+          <span>{userInfo?.followers}</span>
         </ProfileTopFollower>
         <ProfileTopFollowing>
           <span>팔로잉</span>
-          <span>87</span>
+          <span>{userInfo?.followings}</span>
         </ProfileTopFollowing>
       </ProfileTopFollow>
       <ProfileButtonBox>
@@ -64,7 +67,9 @@ function ProfileMidumContainer() {
           <ProfileBottomTitle>
             <span>자기소개</span>
           </ProfileBottomTitle>
-          <ProfileBottomBox>자기소개를 해주세요.</ProfileBottomBox>
+          <ProfileBottomBox>
+            <p>{userInfo?.introduction}</p>
+          </ProfileBottomBox>
         </div>
       </ProfileBottom>
       <ProfileBottomButton>

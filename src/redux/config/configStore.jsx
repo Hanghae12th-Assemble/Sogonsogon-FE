@@ -13,6 +13,7 @@ import getFollower from "../module/follower";
 import removeRadio from "../module/removeRadio";
 import getProfile from "../module/getProfile";
 import getRadioCategory from "../module/getRadioCategory";
+import updateProfile from "../module/updateProfile";
 
 const sotre = configureStore({
   reducer: {
@@ -30,6 +31,7 @@ const sotre = configureStore({
     removingRadio: removeRadio.reducer,
     gettingProfile: getProfile.reducer,
     gettingRadioCategory: getRadioCategory.reducer,
+    updatingProfile: updateProfile.reducer,
   },
 });
 
