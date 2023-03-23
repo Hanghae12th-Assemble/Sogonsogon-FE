@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { AiOutlineClose, AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineRight } from 'react-icons/ai';
 import { getCookie, removeCookie } from '../util/cookie';
 import { getLocalStorage, removeLocalStorage } from '../util/localStorage';
 

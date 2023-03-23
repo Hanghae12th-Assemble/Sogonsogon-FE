@@ -31,11 +31,11 @@ function Navbar({ iconleft, title, iconright, toNavigate, toClose }) {
 export default Navbar;
 
 const NavbarBox = styled.div`
-  //border: 1px solid black;
+  /* border: 1px solid black; */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 0.625rem;
+  padding: 0px 10px;
   min-height: 3.125rem;
   margin-top: 2.5rem;
 `;

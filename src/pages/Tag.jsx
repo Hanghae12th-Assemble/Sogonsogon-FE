@@ -10,6 +10,7 @@ import Lnb from '../components/Lnb';
 import useScroll from '../hooks/useScroll';
 import Button from '../elements/Button';
 import styled from 'styled-components';
+import { NavbarContainer } from '../pages/Home';
 
 function Tag() {
     let { id } = useParams();
@@ -39,12 +40,14 @@ function Tag() {
     return (
         <>
             <Lnb isOpen={isLnbOpen} handleItemClick={toggleLnb} />
-            <Navbar
-                iconleft={<AiOutlineMenu size={20} onClick={toggleLnb} />}
-                title={id}
-                iconright={<AiOutlineSearch size={20} />}
-                toClose={'/search'}
-            />
+            <NavbarContainer>
+                <Navbar
+                    iconleft={<AiOutlineMenu size={20} onClick={toggleLnb} />}
+                    title={id}
+                    iconright={<AiOutlineSearch size={20} />}
+                    toClose={'/search'}
+                />
+            </NavbarContainer>
             <StRadioContainer ref={radioContainerRef}>
                 {data?.radio.map((item, index) => {
                     return <RadioContainer radio={item?.data} key={index} />;

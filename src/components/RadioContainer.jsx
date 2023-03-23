@@ -43,12 +43,12 @@ function RadioContainer(props) {
                                         </RadioNameLayout>
                                     </RadionContentMiniLayout>
 
-                                    <HitsContainer>
+                                    {/* <HitsContainer>
                                         <HitsLayout>
                                             <AiOutlineEye size={25} />
                                             30
                                         </HitsLayout>
-                                    </HitsContainer>
+                                    </HitsContainer> */}
                                 </RadioContentLayout>
                             </RadioLayout>
                         );
@@ -135,20 +135,20 @@ const RadioNameLayout = styled.div`
     cursor: pointer;
 `;
 
-const HitsContainer = styled.div`
-    width: 48px;
-    min-height: 50px;
-    /* border: 1px solid black; */
-`;
-const HitsLayout = styled.div`
-    width: fit-content;
-    height: fit-content;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    color: #6d6d6d;
-    /* border: 1px solid black; */
-`;
+// const HitsContainer = styled.div`
+//     width: 48px;
+//     min-height: 50px;
+//     /* border: 1px solid black; */
+// `;
+// const HitsLayout = styled.div`
+//     width: fit-content;
+//     height: fit-content;
+//     font-size: 15px;
+//     display: flex;
+//     align-items: center;
+//     color: #6d6d6d;
+//     /* border: 1px solid black; */
+// `;
 
 const RadionContentMiniLayout = styled.div`
     width: 150px;
