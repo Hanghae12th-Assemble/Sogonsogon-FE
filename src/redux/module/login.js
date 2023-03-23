@@ -8,9 +8,9 @@ export const __login = createAsyncThunk(
   async (logininfo, thunkAPI) => {
     return await axios
       .post("api/member/login", logininfo)
-      .then((response) => alert(response && "로그인 성공하였습니다."))
+      .then((response) => alert(response && "로그인 되었습니다."))
       .catch((error) =>
-        alert(error && "아이디 혹은 비밀번호가 잘못되었습니다.")
+        alert(error && "아이디 비밀번호가 없거나, 존재 하지 않는 계정입니다.")
       );
   }
 );

@@ -55,7 +55,7 @@ function Createradio() {
 
   return (
     <CrRadioContainer>
-      <div>
+      <>
         <div>
           {preview ? (
             <div>
@@ -64,7 +64,7 @@ function Createradio() {
             </div>
           ) : null}
         </div>
-      </div>
+      </>
       <CrRadioContainerBox>
         <Navbar
           toNavigate={"/"}

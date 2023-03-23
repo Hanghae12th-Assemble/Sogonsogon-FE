@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Button from "../elements/Button";
@@ -8,9 +8,12 @@ import Input from "../elements/Input";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 import { __login } from "../redux/module/login";
+import { useNavigate } from "react-router-dom";
 
 function Emaillogin() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -24,6 +27,7 @@ function Emaillogin() {
       password: data.password,
     };
     dispatch(__login(loginInfo));
+    navigate("/");
     reset();
   };
 
