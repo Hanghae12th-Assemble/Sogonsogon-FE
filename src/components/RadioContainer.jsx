@@ -16,7 +16,7 @@ function RadioContainer(props) {
                                 <RadioImgContainer
                                     onClick={() => {
                                         document.startViewTransition(() =>
-                                            navigate(`radiopreview/${item.id}`)
+                                            navigate(`/radiopreview/${item.id}`)
                                         );
                                     }}
                                     style={{ backgroundImage: `url(${item.backgroundImageUrl})` }}
