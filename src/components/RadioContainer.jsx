@@ -10,7 +10,7 @@ function RadioContainer(props) {
         <>
             {props.radio && (
                 <>
-                    {props.radio.map((item) => {
+                    {props.radio.result.map((item) => {
                         return (
                             <RadioLayout key={item.id}>
                                 <RadioImgContainer
