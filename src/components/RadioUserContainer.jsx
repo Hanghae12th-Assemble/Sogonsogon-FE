@@ -1,18 +1,12 @@
-import React, { useRef } from 'react';
-import { AiOutlineArrowUp } from 'react-icons/ai';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Button from '../elements/Button';
-import useScroll from '../hooks/useScroll';
-
 function RadioUserContainer(props) {
     const navigate = useNavigate();
-    const SearchUserContainerRef = useRef();
-    const scrollPos = useScroll(SearchUserContainerRef);
 
     return (
         <>
-            <SearchUserContainer ref={SearchUserContainerRef}>
+            <SearchUserContainer>
                 {props.user?.map((item) => {
                     return (
                         <SearchUserLayout
@@ -43,17 +37,6 @@ function RadioUserContainer(props) {
                     );
                 })}
             </SearchUserContainer>
-            {scrollPos > 500 && (
-                <Button
-                    TopBtn
-                    onClick={SearchUserContainerRef.current.scrollTo({
-                        top: 0,
-                        behavior: 'smooth',
-                    })}
-                >
-                    <AiOutlineArrowUp size={15} />
-                </Button>
-            )}
         </>
     );
 }

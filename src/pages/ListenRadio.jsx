@@ -153,7 +153,7 @@ const LSRadioProfileContainer = styled.div`
     flex-direction: column;
     background-color: white;
     border-radius: 25px 25px 0px 0px;
-    margin-top: 145px;
+    margin-top: 150px;
 `;
 
 const LsProfileLayout = styled.div`
