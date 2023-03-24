@@ -15,7 +15,7 @@ import styled from "styled-components";
 import Button from "../elements/Button";
 import useScroll from "../hooks/useScroll";
 import { useInView } from "react-intersection-observer";
-import { initInfinitiScroll } from "../redux/module/getRadioCategory";
+import { initInfinitiScroll } from "../redux/module/getRadio";
 
 function Home() {
   const [isLnbOpen, setIsLnbOpen] = useState(false);
@@ -26,7 +26,6 @@ function Home() {
   const scrollPos = useScroll(radioContainerRef);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log("data", data.radio);
 
   useEffect(() => {
     page.current = 1;
@@ -55,9 +54,10 @@ function Home() {
         />
       </NavbarContainer>
       <StRadioContainer ref={radioContainerRef}>
-        {data?.radio?.data?.result?.map((item, index) => {
-          console.log(item);
-          return <RadioContainer props={item} key={index} />;
+        {data?.radio.map((item) => {
+          return item?.data?.result?.map((props, index) => {
+            return <RadioContainer props={props} key={index} />;
+          });
         })}
         <div ref={ref}></div>
       </StRadioContainer>
@@ -89,22 +89,6 @@ export default Home;
 export const NavbarContainer = styled.div`
   padding: 0px 20px;
 `;
-
-// const AddRadioBtn = styled.div`
-//     position: absolute;
-//     width: 430px;
-//     height: 50px;
-//     background-color: #ff9900;
-//     color: white;
-//     border-radius: 10px;
-//     bottom: 40px;
-//     left: 35px;
-//     z-index: 900;
-//     cursor: pointer;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-// `;
 
 export const StRadioContainer = styled.div`
   /* border: 1px solid black; */

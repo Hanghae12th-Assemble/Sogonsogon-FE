@@ -14,7 +14,7 @@ export const __getRadio = createAsyncThunk(
 );
 
 const initialState = {
-  radio: null,
+  radio: [],
   isLoading: false,
   error: null,
 };
@@ -22,7 +22,13 @@ const initialState = {
 const getRadio = createSlice({
   name: "getRadio",
   initialState,
-  reducers: {},
+  reducers: {
+    initInfinitiScroll: (state, action) => {
+      state.isLoading = false;
+      state.error = false;
+      state.radio = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(__getRadio.pending, (state) => {
       state.isLoading = true;
@@ -30,7 +36,7 @@ const getRadio = createSlice({
     });
     builder.addCase(__getRadio.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.radio = action.payload;
+      state.radio = [...state.radio].concat(action.payload);
       state.error = null;
     });
     builder.addCase(__getRadio.rejected, (state, action) => {
@@ -40,4 +46,5 @@ const getRadio = createSlice({
   },
 });
 
+export const { initInfinitiScroll } = getRadio.actions;
 export default getRadio;
