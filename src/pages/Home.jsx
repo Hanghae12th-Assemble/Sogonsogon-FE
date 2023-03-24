@@ -20,10 +20,9 @@ import { initInfinitiScroll } from "../redux/module/getRadioCategory";
 function Home() {
   const [isLnbOpen, setIsLnbOpen] = useState(false);
   const data = useSelector((state) => state.gettingRadio);
-  console.log(data);
   const page = useRef(1);
-  const [ref, inView] = useInView();
   const radioContainerRef = useRef();
+  const [ref, inView] = useInView();
   const scrollPos = useScroll(radioContainerRef);
   const dispatch = useDispatch();
   const navigate = useNavigate();
