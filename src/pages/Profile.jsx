@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
@@ -25,7 +25,8 @@ function Profile() {
   } = useForm();
   const dispatch = useDispatch();
   const selectBtn = useSelector((state) => state.profileButn);
-  const userInfo = useSelector((state) => state?.gettingProfile?.profile);
+  const getUserInfo = useSelector((state) => state?.gettingProfile?.profile);
+  const userInfo = useSelector((state) => state?.updatingProfile?.profile);
 
   const onChangeimge = (e) => {
     const img = e.target.files[0];
@@ -53,9 +54,8 @@ function Profile() {
     }
 
     dispatch(__updateProfile({ userId: id, profileInfo: formData }));
-
-    reset();
     dispatch(pageswitch(!selectBtn));
+    reset();
   };
 
   const onPageClick = () => {
@@ -79,15 +79,23 @@ function Profile() {
               <ProfileImg src={preview} alt="Preview" />
             </div>
           ) : (
-            <ProfileImg src={userInfo?.profileImageUrl} alt="Preview" />
+            <ProfileImg src={getUserInfo?.profileImageUrl} alt="Preview" />
           )}
         </ProfileTopPhoto>
         <ProfileTopName>
-          <span>{userInfo?.membername}</span>
+          <ProfileTopnicknameMembername>
+            <ProfileTopMembername>
+              {userInfo?.membername
+                ? userInfo?.membername
+                : getUserInfo?.membername}
+            </ProfileTopMembername>
+          </ProfileTopnicknameMembername>
+          <ProfileTopnicknameMembername>
+            <span>
+              @{userInfo?.nickname ? userInfo?.nickname : getUserInfo?.nickname}
+            </span>
+          </ProfileTopnicknameMembername>
         </ProfileTopName>
-        <ProfileTopMbti>
-          <span>MBTI</span>
-        </ProfileTopMbti>
       </ProfileTop>
       {selectBtn ? (
         <form onSubmit={handleSubmit(submitForm)}>
@@ -143,7 +151,7 @@ function Profile() {
           </ProfileBottomButton>
         </form>
       ) : (
-        <ProfileMidumContainer selectBtn={selectBtn} />
+        <ProfileMidumContainer />
       )}
     </ProfileContainer>
   );
@@ -169,16 +177,14 @@ const ProfileNavbarfixed = styled.div`
 
 const ProfileTop = styled.div`
   //border: 1px solid black;
-  height: 300px;
+  height: 200px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-direction: column;
   margin-top: 80px;
 `;
 
 const ProfileTopPhoto = styled.div`
-  border: 1px solid black;
+  //border: 1px solid black;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -188,23 +194,25 @@ const ProfileTopPhoto = styled.div`
 `;
 
 const ProfileImg = styled.img`
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
 `;
 
-const ProfileTopName = styled.div`
-  margin-top: 20px;
+const ProfileTopnicknameMembername = styled.div`
+  margin-bottom: 10px;
+  margin-left: 10px;
+  position: relative;
+  bottom: 10px;
 `;
 
-const ProfileTopMbti = styled.div`
-  border: 1px solid black;
-  width: 80px;
-  height: 34px;
-  border-radius: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const ProfileTopMembername = styled.span`
+  font-size: 20px;
+  font-weight: bolder;
+`;
+
+const ProfileTopName = styled.div`
+  //border: 1px solid red;
   margin-top: 20px;
 `;
 
