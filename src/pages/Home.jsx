@@ -21,16 +21,18 @@ function Home() {
   const [isLnbOpen, setIsLnbOpen] = useState(false);
   const data = useSelector((state) => state.gettingRadio);
   const page = useRef(1);
-  const radioContainerRef = useRef();
   const [ref, inView] = useInView();
+  const radioContainerRef = useRef();
   const scrollPos = useScroll(radioContainerRef);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log("data", data.radio);
 
   useEffect(() => {
+    page.current = 1;
     dispatch(initInfinitiScroll());
     dispatch(__getRadio(page.current));
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     if (inView) {
@@ -53,7 +55,10 @@ function Home() {
         />
       </NavbarContainer>
       <StRadioContainer ref={radioContainerRef}>
-        {data?.radio?.result}
+        {data?.radio?.data?.result?.map((item, index) => {
+          console.log(item);
+          return <RadioContainer props={item} key={index} />;
+        })}
         <div ref={ref}></div>
       </StRadioContainer>
       {scrollPos > 500 && (

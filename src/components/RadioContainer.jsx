@@ -3,58 +3,50 @@ import { AiOutlineUser } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function RadioContainer(props) {
+function RadioContainer({ props }) {
   const navigate = useNavigate();
 
   return (
     <>
-      {props?.radio && (
-        <>
-          {props?.radio?.result.map((item) => {
-            return (
-              <RadioLayout key={item.id}>
-                <RadioImgContainer
-                  onClick={() => {
-                    document.startViewTransition(() =>
-                      navigate(`/radiopreview/${item.id}`)
-                    );
-                  }}
-                  style={{ backgroundImage: `url(${item.backgroundImageUrl})` }}
-                >
-                  <ViewerCounterContainer>
-                    <AiOutlineUser size={20} />
-                    <ViewerCouterLayout>{item.enterCnt}명</ViewerCouterLayout>
-                  </ViewerCounterContainer>
-                </RadioImgContainer>
-                <RadioContentLayout>
-                  <RadionContentMiniLayout>
-                    <RadioTitleLayout to={`/radiopreview/${item.id}`}>
-                      {item.title}
-                    </RadioTitleLayout>
+      <RadioLayout key={props?.id}>
+        <RadioImgContainer
+          onClick={() => {
+            document.startViewTransition(() =>
+              navigate(`/radiopreview/${props.id}`)
+            );
+          }}
+          style={{ backgroundImage: `url(${props?.backgroundImageUrl})` }}
+        >
+          <ViewerCounterContainer>
+            <AiOutlineUser size={20} />
+            <ViewerCouterLayout>{props?.enterCnt}명</ViewerCouterLayout>
+          </ViewerCounterContainer>
+        </RadioImgContainer>
+        <RadioContentLayout>
+          <RadionContentMiniLayout>
+            <RadioTitleLayout to={`/radiopreview/${props?.id}`}>
+              {props?.title}
+            </RadioTitleLayout>
 
-                    <RadioNameLayout
-                      onClick={() => {
-                        document.startViewTransition(() =>
-                          navigate(`/profile/${item.membername}`)
-                        );
-                      }}
-                    >
-                      {item.nickname}
-                    </RadioNameLayout>
-                  </RadionContentMiniLayout>
+            <RadioNameLayout
+              onClick={() => {
+                document.startViewTransition(() =>
+                  navigate(`/profile/${props?.membername}`)
+                );
+              }}
+            >
+              {props?.nickname}
+            </RadioNameLayout>
+          </RadionContentMiniLayout>
 
-                  {/* <HitsContainer>
+          {/* <HitsContainer>
                                         <HitsLayout>
                                             <AiOutlineEye size={25} />
                                             30
                                         </HitsLayout>
                                     </HitsContainer> */}
-                </RadioContentLayout>
-              </RadioLayout>
-            );
-          })}
-        </>
-      )}
+        </RadioContentLayout>
+      </RadioLayout>
     </>
   );
 }
