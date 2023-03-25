@@ -1,12 +1,11 @@
 import React from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import RadioInfobar from '../components/RadioInfobar';
 
 function ListenRadio() {
     const { id } = useParams();
-    const navigate = useNavigate();
 
     const { gettingRadio } = useSelector((state) => state);
 
@@ -21,26 +20,7 @@ function ListenRadio() {
     return (
         <LSRadio>
             <LSRadioTopBox backgroundImageUrl={foundRadio[0]?.backgroundImageUrl}>
-                <LSRadioTop>
-                    <LsRadioTopLayout>
-                        <LSRadioTopLive>
-                            <span>Live</span>
-                        </LSRadioTopLive>
-                        <LSRadioTopMember>
-                            <span>30</span>
-                        </LSRadioTopMember>
-                    </LsRadioTopLayout>
-                    <LsRadioTopLayout>
-                        <LSRadioTopNotice>공지</LSRadioTopNotice>
-                        <AiOutlineClose
-                            size={20}
-                            cursor={'pointer'}
-                            onClick={() => {
-                                document.startViewTransition(() => navigate('/'));
-                            }}
-                        />
-                    </LsRadioTopLayout>
-                </LSRadioTop>
+                <RadioInfobar />
                 <LSRadioProfileContainer>
                     <LsProfileLayout>
                         {' '}
@@ -51,7 +31,7 @@ function ListenRadio() {
                         <span>{foundRadio[0]?.title}</span>
                     </LSRadioTopTitle>
                 </LSRadioProfileContainer>
-                <LsCenterDiv />
+                <LsBlackBackground />
             </LSRadioTopBox>
             <LSRadioChattingBox>
                 <LsBottomContainer>
@@ -70,113 +50,80 @@ export default ListenRadio;
 const LSRadio = styled.div`
     /* border: 1px solid blue; */
     height: 100%;
-
     border-radius: 15px;
-
     display: flex;
     flex-direction: column;
+`;
+const LsBlackBackground = styled.div`
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.5;
 `;
 
 const LSRadioTopBox = styled.div`
     position: relative;
-    opacity: 0.8;
     background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     /* border: 1px solid black; */
     width: 100%;
-    height: 350px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     background-color: #dddcdc;
 `;
 
-const LSRadioTop = styled.div`
-    /* border: 1px solid red; */
-    margin-top: 30px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0px 25px 0px 25px;
-`;
-const LsRadioTopLayout = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-`;
-const LSRadioTopLive = styled.div`
-    border: 1px solid black;
-    width: 50px;
-    height: 30px;
-    border-radius: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-`;
-
-const LSRadioTopMember = styled(LSRadioTopLive)`
-    margin-left: 10px;
-`;
-
-const LSRadioTopNotice = styled.div`
-    border: 1px solid black;
-    width: 50px;
-    height: 30px;
-    border-radius: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-right: 10px;
-`;
-
 const LSRadioTopTitle = styled.div`
     /* border: 1px solid black; */
     display: flex;
-    padding: 5px 25px 20px 25px;
-    font-size: 20px;
+    padding: 5px 25px 15px 30px;
+    font-size: 18px;
     font-weight: bold;
 `;
 
 const LSRadioTopTitlePhoto = styled.div`
-    /* border: 1px solid black; */
+    border: 3px solid #ff601c;
+    box-shadow: inset 0 0 0 2px #fff;
     width: 60px;
     height: 60px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     background-color: #c8bebe;
+    transition: all 0.5s ease-in-out 0s;
+    :hover {
+        transform: scale(1.1);
+        box-shadow: 0px 0px 3px 2px #000000;
+        transition: all 0.2s ease-in-out 0s;
+    }
 `;
 
 const LSRadioProfileContainer = styled.div`
-    /* border: 1px solid black; */
+    border-bottom: 1px solid #d9d7d7;
     display: flex;
     justify-content: center;
     flex-direction: column;
     background-color: white;
     border-radius: 25px 25px 0px 0px;
-    margin-top: 150px;
+    margin-top: 211px;
+    z-index: 1;
 `;
 
 const LsProfileLayout = styled.div`
     /* border: 1px solid black; */
-    padding: 15px 25px 10px 25px;
+    padding: 25px 25px 10px 25px;
     display: flex;
     flex-direction: row;
     span {
-        margin-left: 10px;
+        font-size: 20px;
+        margin-left: 15px;
         display: flex;
         align-items: center;
     }
-`;
-
-const LsCenterDiv = styled.div`
-    width: 100%;
-    height: 10px;
-    background-color: #dddcdc;
 `;
 
 const LSRadioChattingBox = styled.div`
@@ -199,7 +146,7 @@ const LsInputContainer = styled.label`
     position: relative;
     input {
         width: 300px;
-        height: 40px;
+        height: 45px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         border: none;
         border-radius: 25px;
@@ -209,14 +156,15 @@ const LsInputContainer = styled.label`
     }
     button {
         position: absolute;
-        top: 0;
-        right: 6px;
-        border-radius: 25px;
+        top: -8px;
+        bottom: 0;
+        right: 4px;
+        border-radius: 100%;
         font-size: 10px;
-        width: 40px;
-        height: 25px;
+        width: 39px;
+        height: 39px;
         border: none;
-        background-color: #ff5b0d;
+        background-color: #ebbf6a;
         color: white;
         cursor: pointer;
     }
