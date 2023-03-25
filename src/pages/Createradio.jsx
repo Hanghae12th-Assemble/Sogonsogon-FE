@@ -41,6 +41,7 @@ function Createradio() {
   };
 
   const submitForm = (data) => {
+    console.log(data);
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("hashtag", data.hashtag);
@@ -56,14 +57,7 @@ function Createradio() {
   return (
     <CrRadioContainer>
       <>
-        <div>
-          {preview ? (
-            <div>
-              <CrRadioBackgroundOVeraly />
-              <CrRadioImg src={preview} alt="Preview" />
-            </div>
-          ) : null}
-        </div>
+        <div></div>
       </>
       <CrRadioContainerBox>
         <Navbar
@@ -127,6 +121,17 @@ function Createradio() {
                 onChange={onChangeimge}
               />
             </CrRadioPublicScopButton>
+            <CrPreviewDiv>
+              {preview ? (
+                <div>
+                  <CrRadioImg src={preview} alt="Preview" />
+                </div>
+              ) : (
+                <CrPreviewDivSpan>
+                  <span>이미지를 업로드 해주세요.</span>
+                </CrPreviewDivSpan>
+              )}
+            </CrPreviewDiv>
           </CrRadioButtonSpanBox>
           <CrRadioButtonNext>
             <Button lgBtn>만들기</Button>
@@ -179,27 +184,29 @@ const CrFileInput = styled.input`
   }
 `;
 
-const CrRadioImg = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+const CrPreviewDiv = styled.div`
+  //border: 1px solid black;
+  height: 400px;
 `;
 
-const CrRadioBackgroundOVeraly = styled.div`
-  background-color: rgba(0, 0, 0, 0.3); /* 원하는 연한 배경색을 설정하세요. */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+const CrPreviewDivSpan = styled.div`
+  border: 1px solid black;
+  height: 400px;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  span {
+    font-size: 20px;
+    font-weight: bolder;
+  }
+`;
+
+const CrRadioImg = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 400px;
+  border-radius: 10px;
 `;
 
 const CrRadioButtonNext = styled.div`
@@ -209,4 +216,5 @@ const CrRadioButtonNext = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  margin-bottom: 20px;
 `;

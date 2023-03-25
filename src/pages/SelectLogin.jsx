@@ -23,22 +23,22 @@ function Login() {
         </LoginLogoBox>
         <LoginButtonBox>
           <LoginButtonDiv>
-            <Button lgBtn>카카오 로그인</Button>
+            <Button KlgBtn>카카오 로그인</Button>
           </LoginButtonDiv>
           <LoginButtonDiv>
-            <Button lgBtn>네이버 로그인</Button>
+            <Button NlgBtn>네이버 로그인</Button>
           </LoginButtonDiv>
           <LoginButtonDiv>
-            <Button lgBtn>구글로 로그인</Button>
+            <Button GlgBtn>구글로 로그인</Button>
           </LoginButtonDiv>
           <LoginSpanDiv>
             <LoginSpanText>
               <div
                 onClick={() => {
-                  document.startViewTransition(() => navigate("/maillogin"));
+                  document.startViewTransition(() => navigate("/"));
                 }}
               >
-                이메일로 로그인
+                통합 회원정보 찾기
               </div>{" "}
               /{" "}
               <div

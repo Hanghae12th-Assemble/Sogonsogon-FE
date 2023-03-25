@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { MdOutlineModeEditOutline } from "react-icons/md";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
-//import { useForm } from "react-hook-form";
 import Button from "../elements/Button";
 import ProfileMidumContainer from "../components/ProfileMidumContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { __updateProfile } from "../redux/module/updateProfile";
+import { __getProfile } from "../redux/module/getProfile";
 import { pageswitch } from "../redux/module/reduxState/profileModifyButton";
 import Input from "../elements/Input";
 import { useForm } from "react-hook-form";
 import { getLocalStorage } from "../util/localStorage";
-import { __getProfile } from "../redux/module/getProfile";
+import { useParams } from "react-router-dom";
 
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
+  const [pageState] = useState(false);
   const { id } = JSON.parse(getLocalStorage("userInfo"));
+  const { id: urlId } = useParams();
   const {
     register,
     handleSubmit,
@@ -27,6 +30,10 @@ function Profile() {
   const selectBtn = useSelector((state) => state.profileButn);
   const getUserInfo = useSelector((state) => state?.gettingProfile?.profile);
   const userInfo = useSelector((state) => state?.updatingProfile?.profile);
+
+  useEffect(() => {
+    dispatch(__getProfile(urlId));
+  }, [urlId, dispatch]);
 
   const onChangeimge = (e) => {
     const img = e.target.files[0];
@@ -59,8 +66,12 @@ function Profile() {
   };
 
   const onPageClick = () => {
-    dispatch(pageswitch(!selectBtn));
+    dispatch(pageswitch(false));
     setPreview("");
+  };
+
+  const onPageModiClick = () => {
+    dispatch(pageswitch(!pageState));
   };
 
   return (
@@ -68,8 +79,11 @@ function Profile() {
       <ProfileNavbarfixed>
         <Navbar
           toNavigate={"/"}
-          iconleft={<AiOutlineArrowLeft size={20} />}
+          iconleft={<AiOutlineArrowLeft size={20} onClick={onPageClick} />}
           title={"프로필"}
+          iconright={
+            <MdOutlineModeEditOutline size={20} onClick={onPageModiClick} />
+          }
         />
       </ProfileNavbarfixed>
       <ProfileTop>
@@ -85,9 +99,7 @@ function Profile() {
         <ProfileTopName>
           <ProfileTopnicknameMembername>
             <ProfileTopMembername>
-              {userInfo?.membername
-                ? userInfo?.membername
-                : getUserInfo?.membername}
+              {getUserInfo?.membername}
             </ProfileTopMembername>
           </ProfileTopnicknameMembername>
           <ProfileTopnicknameMembername>
@@ -144,10 +156,7 @@ function Profile() {
             </ProfilePublicScopButton>
           </ProfileButtonSpanBox>
           <ProfileBottomButton>
-            <Button smBtn onClick={onPageClick}>
-              취소
-            </Button>
-            <Button smBtn>완료</Button>
+            <Button lgBtn>완료</Button>
           </ProfileBottomButton>
         </form>
       ) : (
@@ -169,14 +178,12 @@ const ProfileContainer = styled.div`
 `;
 
 const ProfileNavbarfixed = styled.div`
-  //border: 1px solid black;
   background-color: white;
   position: fixed;
   width: 28.75rem; ;
 `;
 
 const ProfileTop = styled.div`
-  //border: 1px solid black;
   height: 200px;
   display: flex;
   align-items: center;
@@ -184,7 +191,6 @@ const ProfileTop = styled.div`
 `;
 
 const ProfileTopPhoto = styled.div`
-  //border: 1px solid black;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -212,7 +218,6 @@ const ProfileTopMembername = styled.span`
 `;
 
 const ProfileTopName = styled.div`
-  //border: 1px solid red;
   margin-top: 20px;
 `;
 
@@ -234,7 +239,6 @@ const ProfileMidumInputbox = styled.div`
 `;
 
 const ProfileBottom = styled.div`
-  //border: 1px solid black;
   margin-top: 50px;
 `;
 
@@ -243,7 +247,6 @@ const ProfileBottomTitle = styled.div`
 `;
 
 const ProfileBottomButton = styled.div`
-  //border: 1px solid blue;
   padding: 20px;
   width: 100%;
   height: 180px;
@@ -253,13 +256,11 @@ const ProfileBottomButton = styled.div`
 `;
 
 const ProfileButtonSpanBox = styled.div`
-  //border: 1px solid black;
   margin-top: 40px;
 `;
 
 const ProfilePublicScopButton = styled.div`
   margin-top: 10px;
-  //border: 1px solid black;
 `;
 
 const ProfileFileInput = styled.input`
