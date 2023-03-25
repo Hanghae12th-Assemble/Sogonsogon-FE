@@ -1,62 +1,83 @@
 import React from 'react';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { AiFillCloseCircle } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 function RadioPreview() {
-    const params = useParams();
+    const { id } = useParams();
     const navigate = useNavigate();
+
     const { gettingRadio } = useSelector((state) => state);
-    console.log(gettingRadio);
 
-    const getRadioData = gettingRadio.radio?.data;
+    const getRadioData = gettingRadio?.radio?.map((item) => item.data.result.map((i) => i));
 
-    const foundRadio = getRadioData?.find((item) => item.id === Number(params.id));
+    const radioData = getRadioData?.map((item, i) => item.find((i) => i.id === Number(id)));
+    const foundRadio = radioData.filter((item) => {
+        if (item !== undefined) {
+            return item;
+        }
+    });
     return (
         <>
-            <RadioPreviewImgContainer backgroundImageUrl={foundRadio?.backgroundImageUrl}>
-                <RadioPreviewTopContainer>
-                    <AiOutlineArrowLeft
-                        cursor={'pointer'}
-                        size={25}
-                        onClick={() => {
-                            document.startViewTransition(() => navigate(-1));
-                        }}
-                    />
-                    Live
-                </RadioPreviewTopContainer>
-                <RadioPreviewPfContainer>
-                    <RadioPreviewProfileLayout>
-                        <RadioPreviewProfileImg />
-                        <RadioPreviewPfContentContainer>
-                            {' '}
-                            <RadioPreviewProfileNicknameLayout>
-                                {foundRadio?.nickname}
-                            </RadioPreviewProfileNicknameLayout>
-                        </RadioPreviewPfContentContainer>
-                    </RadioPreviewProfileLayout>
-                </RadioPreviewPfContainer>
-            </RadioPreviewImgContainer>
-            <RadioPreviewBottomContainer>
-                <RadioPreviewBottomLayout>
-                    <RadioPreviewContentContainer>
-                        <RadioPreviewProfileTitleLayout>
-                            {foundRadio?.title}
-                        </RadioPreviewProfileTitleLayout>
-                        <LayoutContainer>
-                            <div>{foundRadio?.introduction}</div>
-                        </LayoutContainer>
-                    </RadioPreviewContentContainer>
-                    <JoinRadioBtn
-                        onClick={() => {
-                            document.startViewTransition(() => navigate(`/listen/${params.id}`));
-                        }}
+            {foundRadio && (
+                <>
+                    <RadioPreviewImgContainer
+                        backgroundImageUrl={foundRadio[0]?.backgroundImageUrl}
                     >
-                        입장하기
-                    </JoinRadioBtn>
-                </RadioPreviewBottomLayout>
-            </RadioPreviewBottomContainer>
+                        <RadioPreviewTopContainer>
+                            <RaidoPreviewTopLayout>
+                                <RaidoPreviewTopInfoLayout>
+                                    <div>Live</div>
+                                    <p>05:30</p>
+                                </RaidoPreviewTopInfoLayout>
+
+                                <RaidoPreviewTopInfoLayout>7</RaidoPreviewTopInfoLayout>
+                            </RaidoPreviewTopLayout>
+                            <RadioPreviwPgCloseBtn>
+                                <AiFillCloseCircle
+                                    color={'black'}
+                                    cursor={'pointer'}
+                                    size={35}
+                                    onClick={() => {
+                                        document.startViewTransition(() => navigate(-1));
+                                    }}
+                                />
+                            </RadioPreviwPgCloseBtn>
+                        </RadioPreviewTopContainer>
+                        <RadioPreviewPfContainer>
+                            <RadioPreviewProfileLayout>
+                                <RadioPreviewProfileImg />
+                                <RadioPreviewPfContentContainer>
+                                    {' '}
+                                    <RadioPreviewProfileNicknameLayout>
+                                        {foundRadio[0]?.nickname}
+                                    </RadioPreviewProfileNicknameLayout>
+                                </RadioPreviewPfContentContainer>
+                            </RadioPreviewProfileLayout>
+                        </RadioPreviewPfContainer>
+                    </RadioPreviewImgContainer>
+                    <RadioPreviewBottomContainer>
+                        <RadioPreviewBottomLayout>
+                            <RadioPreviewContentContainer>
+                                <RadioPreviewProfileTitleLayout>
+                                    {foundRadio[0]?.title}
+                                </RadioPreviewProfileTitleLayout>
+                                <LayoutContainer>
+                                    <div>{foundRadio[0]?.introduction}</div>
+                                </LayoutContainer>
+                            </RadioPreviewContentContainer>
+                            <JoinRadioBtn
+                                onClick={() => {
+                                    document.startViewTransition(() => navigate(`/listen/${id}`));
+                                }}
+                            >
+                                입장하기
+                            </JoinRadioBtn>
+                        </RadioPreviewBottomLayout>
+                    </RadioPreviewBottomContainer>
+                </>
+            )}
         </>
     );
 }
@@ -65,7 +86,6 @@ export default RadioPreview;
 
 const RadioPreviewImgContainer = styled.div`
     height: 100%;
-    /* padding: 40px 25px 0px 25px; */
     background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
     background-repeat: no-repeat;
     background-size: cover;
@@ -75,7 +95,6 @@ const RadioPreviewImgContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    z-index: -1;
 `;
 
 const RadioPreviewBottomContainer = styled.div`
@@ -90,17 +109,47 @@ const RadioPreviewBottomContainer = styled.div`
 `;
 
 const RadioPreviewTopContainer = styled.div`
-    border: 1px solid red;
     width: 100%;
-    height: 50px;
-    color: #ffffffa2;
+    height: 40px;
+    margin-top: 20px;
     padding: 0px 10px;
     border-radius: 15px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #9c949490;
+`;
+
+const RaidoPreviewTopLayout = styled.div`
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 20px;
+`;
+
+const RaidoPreviewTopInfoLayout = styled.div`
+    padding: 10px;
+    font-size: 20px;
+    height: 36px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 20px;
+    margin-right: 10px;
+    background-color: #262524;
+    color: white;
+    div {
+        width: 40px;
+        height: 22px;
+        font-size: 14px;
+        border-radius: 20px;
+        margin-right: 5px;
+        display: flex;
+        align-items: center;
+        background-color: #ff601c;
+        justify-content: center;
+    }
 `;
 
 const RadioPreviewBottomLayout = styled.div`
@@ -155,7 +204,6 @@ const RadioPreviewProfileImg = styled.div`
 `;
 
 const RadioPreviewPfContentContainer = styled.div`
-    /* border: 1px solid yellow; */
     width: 100%;
     min-height: 80px;
     display: flex;
@@ -185,7 +233,7 @@ const RadioPreviewProfileTitleLayout = styled.div`
 
 const LayoutContainer = styled.div`
     background-color: #1e1e1d;
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
     width: 100%;
     min-height: 100px;
@@ -220,4 +268,8 @@ const RadioPreviewPfContainer = styled.div`
     align-items: flex-end;
     padding: 0px 25px 0px 25px;
     background: linear-gradient(to top, #000000 10%, #0a0a0a 16%, #121212 20%, transparent 60%);
+`;
+
+const RadioPreviwPgCloseBtn = styled.div`
+    margin-right: 20px;
 `;

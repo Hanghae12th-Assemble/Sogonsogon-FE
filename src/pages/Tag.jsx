@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { __getCategoryRadio, initInfinitiScroll } from '../redux/module/getRadioCategory';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import RadioContainer from '../components/RadioContainer';
 import Navbar from '../components/Navbar';
-import { AiOutlineArrowUp, AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineArrowUp, AiOutlineMenu, AiOutlinePlus, AiOutlineSearch } from 'react-icons/ai';
 import Lnb from '../components/Lnb';
 import useScroll from '../hooks/useScroll';
 import Button from '../elements/Button';
@@ -21,6 +21,7 @@ function Tag() {
     const data = useSelector((state) => state.gettingRadioCategory);
     const [isLnbOpen, setIsLnbOpen] = useState(false);
     const scrollPos = useScroll(radioContainerRef);
+    const navigate = useNavigate();
 
     const toggleLnb = () => setIsLnbOpen((prev) => !prev);
     useEffect(() => {
@@ -65,6 +66,15 @@ function Tag() {
                     <AiOutlineArrowUp size={15} />
                 </Button>
             )}
+
+            <Button
+                AddRadioBtn
+                onClick={() => {
+                    document.startViewTransition(() => navigate('/createradio'));
+                }}
+            >
+                <AiOutlinePlus size={20} />
+            </Button>
         </>
     );
 }

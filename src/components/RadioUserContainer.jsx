@@ -20,15 +20,17 @@ function RadioUserContainer(props) {
                             <RadioPreviewProfileImg backgroundImageUrl={item.profileImageUrl} />
                             <SearchUserContentContainer>
                                 <SearchUserNicknameLayout>{item.nickname}</SearchUserNicknameLayout>
+                                <SearchUserContentLayout>
+                                    {' '}
+                                    <SearchUserMembernameLayout>
+                                        {item.membername}
+                                    </SearchUserMembernameLayout>
+                                    <SearchUserMembernameLayout>
+                                        <CenterLine />
+                                        팔로워 25명
+                                    </SearchUserMembernameLayout>
+                                </SearchUserContentLayout>
 
-                                <SearchUserMembernameLayout>
-                                    {item.membername}
-                                </SearchUserMembernameLayout>
-
-                                <SearchUserMembernameLayout>
-                                    <CenterLine />
-                                    팔로워 25명
-                                </SearchUserMembernameLayout>
                                 <SearchUserDescLayout>
                                     오늘부터 매일 들어옵니다
                                 </SearchUserDescLayout>
@@ -49,11 +51,12 @@ const SearchUserContainer = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     grid-gap: 20px;
     padding: 20px 25px 0px 25px;
     z-index: -1;
     overflow: auto;
+
     ::-webkit-scrollbar {
         width: 0.1em;
         height: 0.1em;
@@ -61,12 +64,10 @@ const SearchUserContainer = styled.div`
 `;
 
 const SearchUserLayout = styled(Link)`
-    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     min-height: 100px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 `;
 
 const RadioPreviewProfileImg = styled.div`
@@ -93,22 +94,24 @@ const RadioPreviewProfileImg = styled.div`
     }
 `;
 const SearchUserContentContainer = styled.div`
-    /* border: 1px solid black; */
-    width: 100%;
     min-height: 80px;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
 `;
 
 const SearchUserNicknameLayout = styled.div`
-    width: 100%;
     min-height: 25px;
     font-size: 18px;
     font-weight: bold;
     display: flex;
     align-items: center;
 `;
+
+const SearchUserContentLayout = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
 const SearchUserMembernameLayout = styled.div`
     width: fit-content;
     min-height: 25px;
@@ -125,7 +128,6 @@ const CenterLine = styled.div`
 `;
 
 const SearchUserDescLayout = styled.div`
-    width: 100%;
     min-height: 25px;
     font-size: 12px;
     display: flex;
