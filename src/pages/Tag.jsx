@@ -11,6 +11,7 @@ import useScroll from '../hooks/useScroll';
 import Button from '../elements/Button';
 import styled from 'styled-components';
 import { NavbarContainer } from '../pages/Home';
+import RadioCountContainer from '../components/RadioCountContainer';
 
 function Tag() {
     let { id } = useParams();
@@ -48,6 +49,7 @@ function Tag() {
                     toClose={'/search'}
                 />
             </NavbarContainer>
+            <RadioCountContainer props={data} />
             <StRadioContainer ref={radioContainerRef}>
                 {data?.radio.map((item, index) => {
                     return item?.data?.result?.map((props, index) => {

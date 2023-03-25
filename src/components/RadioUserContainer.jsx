@@ -27,13 +27,11 @@ function RadioUserContainer(props) {
                                     </SearchUserMembernameLayout>
                                     <SearchUserMembernameLayout>
                                         <CenterLine />
-                                        팔로워 25명
+                                        팔로워 {item.followers}명
                                     </SearchUserMembernameLayout>
                                 </SearchUserContentLayout>
 
-                                <SearchUserDescLayout>
-                                    오늘부터 매일 들어옵니다
-                                </SearchUserDescLayout>
+                                <SearchUserDescLayout>{item.introduction}</SearchUserDescLayout>
                             </SearchUserContentContainer>
                         </SearchUserLayout>
                     );

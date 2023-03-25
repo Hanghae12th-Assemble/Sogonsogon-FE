@@ -1,8 +1,8 @@
 import React from 'react';
-import { AiFillCloseCircle } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import RadioInfobar from '../components/RadioInfobar';
 
 function RadioPreview() {
     const { id } = useParams();
@@ -25,26 +25,7 @@ function RadioPreview() {
                     <RadioPreviewImgContainer
                         backgroundImageUrl={foundRadio[0]?.backgroundImageUrl}
                     >
-                        <RadioPreviewTopContainer>
-                            <RaidoPreviewTopLayout>
-                                <RaidoPreviewTopInfoLayout>
-                                    <div>Live</div>
-                                    <p>05:30</p>
-                                </RaidoPreviewTopInfoLayout>
-
-                                <RaidoPreviewTopInfoLayout>7</RaidoPreviewTopInfoLayout>
-                            </RaidoPreviewTopLayout>
-                            <RadioPreviwPgCloseBtn>
-                                <AiFillCloseCircle
-                                    color={'black'}
-                                    cursor={'pointer'}
-                                    size={35}
-                                    onClick={() => {
-                                        document.startViewTransition(() => navigate(-1));
-                                    }}
-                                />
-                            </RadioPreviwPgCloseBtn>
-                        </RadioPreviewTopContainer>
+                        <RadioInfobar />
                         <RadioPreviewPfContainer>
                             <RadioPreviewProfileLayout>
                                 <RadioPreviewProfileImg />
@@ -108,50 +89,6 @@ const RadioPreviewBottomContainer = styled.div`
     z-index: 0;
 `;
 
-const RadioPreviewTopContainer = styled.div`
-    width: 100%;
-    height: 40px;
-    margin-top: 20px;
-    padding: 0px 10px;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-`;
-
-const RaidoPreviewTopLayout = styled.div`
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-left: 20px;
-`;
-
-const RaidoPreviewTopInfoLayout = styled.div`
-    padding: 10px;
-    font-size: 20px;
-    height: 36px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border-radius: 20px;
-    margin-right: 10px;
-    background-color: #262524;
-    color: white;
-    div {
-        width: 40px;
-        height: 22px;
-        font-size: 14px;
-        border-radius: 20px;
-        margin-right: 5px;
-        display: flex;
-        align-items: center;
-        background-color: #ff601c;
-        justify-content: center;
-    }
-`;
-
 const RadioPreviewBottomLayout = styled.div`
     padding-top: 20px;
     width: 100%;
@@ -168,6 +105,7 @@ const RadioPreviewContentContainer = styled.div`
     color: white;
     border-radius: 15px;
     padding: 15px 20px 15px 20px;
+    margin-bottom: 10px;
 `;
 
 const RadioPreviewProfileLayout = styled.div`
@@ -186,8 +124,7 @@ const RadioPreviewProfileImg = styled.div`
     position: relative;
     background-color: #ffffff;
     border-radius: 100%;
-    margin: 0px 20px 0px 0px;
-    opacity: 0.9;
+    margin-right: 20px;
     background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
     background-repeat: no-repeat;
     background-size: cover;
@@ -197,8 +134,8 @@ const RadioPreviewProfileImg = styled.div`
     flex-direction: row-reverse;
     transition: all 0.5s ease-in-out 0s;
     :hover {
-        transform: scale(1);
-        box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+        transform: scale(1.1);
+        box-shadow: 0px 0px 3px 2px #ffffff;
         transition: all 0.3s ease-in-out 0s;
     }
 `;
@@ -243,17 +180,14 @@ const LayoutContainer = styled.div`
 `;
 
 const JoinRadioBtn = styled(Link)`
-    position: relative;
-    width: 450px;
+    margin: 0px 0px 30px 0px;
+    width: 100%;
     height: 60px;
     background-color: #ff9900;
     font-weight: bold;
     color: white;
     border-radius: 10px;
     font-size: 22px;
-    bottom: 40px;
-    left: 0px;
-    z-index: 900;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -268,8 +202,4 @@ const RadioPreviewPfContainer = styled.div`
     align-items: flex-end;
     padding: 0px 25px 0px 25px;
     background: linear-gradient(to top, #000000 10%, #0a0a0a 16%, #121212 20%, transparent 60%);
-`;
-
-const RadioPreviwPgCloseBtn = styled.div`
-    margin-right: 20px;
 `;

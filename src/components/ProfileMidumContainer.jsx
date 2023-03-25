@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Button from "../elements/Button";
 import { __userFollow } from "../redux/module/userFollow";
 import { __getProfile } from "../redux/module/getProfile";
+import { pageswitch } from "../redux/module/reduxState/profileModifyButton";
 import { useParams } from "react-router-dom";
 import { getLocalStorage } from "../util/localStorage";
 
 function ProfileMidumContainer() {
   const dispatch = useDispatch();
+  const [pageState] = useState(false);
   const { id } = useParams();
   const info = JSON.parse(getLocalStorage("userInfo"));
   const userInfo = useSelector((state) => state?.updatingProfile?.profile);
@@ -16,10 +18,14 @@ function ProfileMidumContainer() {
 
   useEffect(() => {
     dispatch(__getProfile(id));
-  }, [id, dispatch]);
+  }, [userInfo]);
 
   const followBtn = () => {
     dispatch(__userFollow(id));
+  };
+
+  const onPageClick = () => {
+    dispatch(pageswitch(!pageState));
   };
 
   return (
@@ -27,17 +33,11 @@ function ProfileMidumContainer() {
       <ProfileTopFollow>
         <ProfileTopFollower>
           <span>팔로워</span>
-          <span>
-            {userInfo?.followers ? userInfo?.followers : getUserInfo?.followers}
-          </span>
+          <span>{getUserInfo?.followers}</span>
         </ProfileTopFollower>
         <ProfileTopFollowing>
           <span>팔로잉</span>
-          <span>
-            {userInfo?.followings
-              ? userInfo?.followings
-              : getUserInfo?.followings}
-          </span>
+          <span>{getUserInfo?.followings}</span>
         </ProfileTopFollowing>
       </ProfileTopFollow>
       <ProfileButtonBox>
@@ -53,15 +53,15 @@ function ProfileMidumContainer() {
             <span>자기소개</span>
           </ProfileBottomTitle>
           <ProfileBottomBox>
-            <p>
-              {userInfo?.introduction
-                ? userInfo?.introduction
-                : getUserInfo?.introduction}
-            </p>
+            <p>{getUserInfo?.introduction}</p>
           </ProfileBottomBox>
         </div>
       </ProfileBottom>
-      <ProfileBottomButton></ProfileBottomButton>
+      <ProfileBottomButton>
+        <Button onClick={onPageClick} lgBtn>
+          수정
+        </Button>
+      </ProfileBottomButton>
     </>
   );
 }
@@ -69,6 +69,7 @@ function ProfileMidumContainer() {
 export default ProfileMidumContainer;
 
 const ProfileTopFollow = styled.div`
+  //border: 1px solid black;
   width: 450px;
   height: 86px;
   margin-top: 20px;
@@ -79,6 +80,7 @@ const ProfileTopFollow = styled.div`
 `;
 
 const ProfileTopFollower = styled.div`
+  //border-right: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,6 +96,7 @@ const ProfileTopFollowing = styled.div`
 `;
 
 const ProfileBottom = styled.div`
+  // border: 1px solid black;
   margin-top: 50px;
 `;
 
@@ -115,6 +118,7 @@ const ProfileBottomBox = styled.div`
 `;
 
 const ProfileBottomButton = styled.div`
+  //border: 1px solid blue;
   padding: 20px;
   width: 100%;
   height: 180px;
@@ -124,6 +128,7 @@ const ProfileBottomButton = styled.div`
 `;
 
 const ProfileButtonBox = styled.div`
+  //border: 1px solid black;
   display: flex;
   justify-content: center;
   margin-top: 35px;
