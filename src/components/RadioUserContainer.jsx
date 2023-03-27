@@ -1,65 +1,37 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-function RadioUserContainer(props) {
+function RadioUserContainer({ props }) {
     const navigate = useNavigate();
 
     return (
         <>
-            <SearchUserContainer>
-                {props.user?.map((item) => {
-                    return (
-                        <SearchUserLayout
-                            onClick={() => {
-                                document.startViewTransition(() =>
-                                    navigate(`/profile/${item.membername}`)
-                                );
-                            }}
-                            key={item.id}
-                        >
-                            <RadioPreviewProfileImg backgroundImageUrl={item.profileImageUrl} />
-                            <SearchUserContentContainer>
-                                <SearchUserNicknameLayout>{item.nickname}</SearchUserNicknameLayout>
-                                <SearchUserContentLayout>
-                                    {' '}
-                                    <SearchUserMembernameLayout>
-                                        {item.membername}
-                                    </SearchUserMembernameLayout>
-                                    <SearchUserMembernameLayout>
-                                        <CenterLine />
-                                        팔로워 {item.followers}명
-                                    </SearchUserMembernameLayout>
-                                </SearchUserContentLayout>
+            <SearchUserLayout
+                onClick={() => {
+                    document.startViewTransition(() => navigate(`/profile/${props.membername}`));
+                }}
+                key={props.id}
+            >
+                <RadioPreviewProfileImg backgroundImageUrl={props.profileImageUrl} />
+                <SearchUserContentContainer>
+                    <SearchUserNicknameLayout>{props.nickname}</SearchUserNicknameLayout>
+                    <SearchUserContentLayout>
+                        {' '}
+                        <SearchUserMembernameLayout>{props.membername}</SearchUserMembernameLayout>
+                        <SearchUserMembernameLayout>
+                            <CenterLine />
+                            팔로워 {props.followers}명
+                        </SearchUserMembernameLayout>
+                    </SearchUserContentLayout>
 
-                                <SearchUserDescLayout>{item.introduction}</SearchUserDescLayout>
-                            </SearchUserContentContainer>
-                        </SearchUserLayout>
-                    );
-                })}
-            </SearchUserContainer>
+                    <SearchUserDescLayout>{props.introduction}</SearchUserDescLayout>
+                </SearchUserContentContainer>
+            </SearchUserLayout>
         </>
     );
 }
 
 export default RadioUserContainer;
-
-const SearchUserContainer = styled.div`
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    grid-gap: 20px;
-    padding: 20px 25px 0px 25px;
-    z-index: -1;
-    overflow: auto;
-
-    ::-webkit-scrollbar {
-        width: 0.1em;
-        height: 0.1em;
-    }
-`;
 
 const SearchUserLayout = styled(Link)`
     display: flex;
