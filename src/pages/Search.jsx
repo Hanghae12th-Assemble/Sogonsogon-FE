@@ -79,10 +79,16 @@ function Search() {
                     />
                     {sort ? (
                         <>
-                            {user?.data.length === 0 ? (
+                            {user?.data?.length === 0 ? (
                                 <div>검색 결과가 없습니다. </div>
                             ) : (
-                                <RadioUserContainer user={user?.data} />
+                                <>
+                                    <SearchUserContainer>
+                                        {user?.data.map((props, index) => {
+                                            return <RadioUserContainer props={props} key={index} />;
+                                        })}
+                                    </SearchUserContainer>
+                                </>
                             )}
                         </>
                     ) : (
@@ -137,4 +143,22 @@ const SearchInput = styled.input`
         13px center / contain no-repeat rgb(249, 249, 250);
     border: none;
     outline: none;
+`;
+
+const SearchUserContainer = styled.div`
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    grid-gap: 20px;
+    padding: 20px 25px 0px 25px;
+    z-index: -1;
+    overflow: auto;
+
+    ::-webkit-scrollbar {
+        width: 0.1em;
+        height: 0.1em;
+    }
 `;
