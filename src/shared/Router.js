@@ -10,8 +10,10 @@ import ListenRadio from "../pages/ListenRadio";
 import Emaillogin from "../pages/Emaillogin";
 import Notfound from "../pages/Notfound";
 import Search from "../pages/Search";
+import KakkaoRedirect from "../pages/KakkaoRedirect";
 import { routers } from "../constants/router";
 import RadioPreview from "../pages/RadioPreview";
+import NaverRedirect from "../pages/NaverRedirect";
 
 function Router() {
   return (
@@ -28,6 +30,8 @@ function Router() {
         <Route path={`/${routers.SEARCH}`} element={<Search />} />
         <Route path={`/${routers.TAG}`} element={<Tag />} />
         <Route path={`/${routers.RADIOPREVIEW}`} element={<RadioPreview />} />
+        <Route path={`/${routers.KAKAORE}`} element={<KakkaoRedirect />} />
+        <Route path={`/${routers.NAVERRE}`} element={<NaverRedirect />} />
       </Routes>
     </BrowserRouter>
   );

@@ -10,7 +10,6 @@ import { getLocalStorage } from "../util/localStorage";
 
 function ProfileMidumContainer() {
   const dispatch = useDispatch();
-  const [pageState] = useState(false);
   const { id } = useParams();
   const info = JSON.parse(getLocalStorage("userInfo"));
   const userInfo = useSelector((state) => state?.updatingProfile?.profile);
@@ -22,10 +21,6 @@ function ProfileMidumContainer() {
 
   const followBtn = () => {
     dispatch(__userFollow(id));
-  };
-
-  const onPageClick = () => {
-    dispatch(pageswitch(!pageState));
   };
 
   return (
@@ -57,11 +52,7 @@ function ProfileMidumContainer() {
           </ProfileBottomBox>
         </div>
       </ProfileBottom>
-      <ProfileBottomButton>
-        <Button onClick={onPageClick} lgBtn>
-          수정
-        </Button>
-      </ProfileBottomButton>
+      <ProfileBottomButton></ProfileBottomButton>
     </>
   );
 }

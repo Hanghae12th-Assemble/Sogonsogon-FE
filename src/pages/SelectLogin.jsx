@@ -2,9 +2,17 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../elements/Button";
+import { KAKAO_AUTH_URL } from "../constants/social";
+import { NAVER_AUTH_URL } from "../constants/social";
 
 function Login() {
   const navigate = useNavigate();
+  const handleKakakoLogin = () => {
+    window.location.href = KAKAO_AUTH_URL;
+  };
+  const handleNaveroLogin = () => {
+    window.location.href = NAVER_AUTH_URL;
+  };
 
   return (
     <LoginBox>
@@ -23,10 +31,14 @@ function Login() {
         </LoginLogoBox>
         <LoginButtonBox>
           <LoginButtonDiv>
-            <Button KlgBtn>카카오 로그인</Button>
+            <Button onClick={handleKakakoLogin} KlgBtn>
+              카카오 로그인
+            </Button>
           </LoginButtonDiv>
           <LoginButtonDiv>
-            <Button NlgBtn>네이버 로그인</Button>
+            <Button onClick={handleNaveroLogin} NlgBtn>
+              네이버 로그인
+            </Button>
           </LoginButtonDiv>
           <LoginButtonDiv>
             <Button GlgBtn>구글로 로그인</Button>

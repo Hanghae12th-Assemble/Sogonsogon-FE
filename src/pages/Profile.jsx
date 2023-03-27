@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { MdOutlineModeEdit } from "react-icons/md";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
 //import { useForm } from "react-hook-form";
@@ -15,6 +16,7 @@ import { getLocalStorage } from "../util/localStorage";
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
+  const [pageState] = useState(false);
   const { id } = JSON.parse(getLocalStorage("userInfo"));
   const {
     register,
@@ -57,8 +59,12 @@ function Profile() {
   };
 
   const onPageClick = () => {
-    dispatch(pageswitch(!selectBtn));
+    dispatch(pageswitch(false));
     setPreview("");
+  };
+
+  const onPageModiClick = () => {
+    dispatch(pageswitch(!pageState));
   };
 
   return (
@@ -66,8 +72,9 @@ function Profile() {
       <ProfileNavbarfixed>
         <Navbar
           toNavigate={"/"}
-          iconleft={<AiOutlineArrowLeft size={20} />}
+          iconleft={<AiOutlineArrowLeft size={20} onClick={onPageClick} />}
           title={"프로필"}
+          iconright={<MdOutlineModeEdit onClick={onPageModiClick} size={20} />}
         />
       </ProfileNavbarfixed>
       <ProfileTop>
@@ -138,10 +145,7 @@ function Profile() {
             </ProfilePublicScopButton>
           </ProfileButtonSpanBox>
           <ProfileBottomButton>
-            <Button smBtn onClick={onPageClick}>
-              취소
-            </Button>
-            <Button smBtn>완료</Button>
+            <Button lgBtn>완료</Button>
           </ProfileBottomButton>
         </form>
       ) : (
