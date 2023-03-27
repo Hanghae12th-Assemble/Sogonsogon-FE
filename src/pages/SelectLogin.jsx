@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../elements/Button";
@@ -13,6 +13,10 @@ function Login() {
   const handleNaveroLogin = () => {
     window.location.href = NAVER_AUTH_URL;
   };
+
+  useEffect(() => {
+    alert("소셜 로그인 꼭! 전부 동의 해주세요. ");
+  }, []);
 
   return (
     <LoginBox>
@@ -122,4 +126,7 @@ const LoginBackSpan = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 0 1.875rem;
+  span {
+    cursor: pointer;
+  }
 `;

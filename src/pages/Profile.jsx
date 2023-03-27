@@ -89,12 +89,10 @@ function Profile() {
         </ProfileTopPhoto>
         <ProfileTopName>
           <ProfileTopnicknameMembername>
-            <ProfileTopMembername>
-              {getUserInfo?.membername}
-            </ProfileTopMembername>
+            <ProfileTopMembername>{getUserInfo?.nickname}</ProfileTopMembername>
           </ProfileTopnicknameMembername>
           <ProfileTopnicknameMembername>
-            <span>@{getUserInfo?.nickname}</span>
+            <span>@{getUserInfo?.membername}</span>
           </ProfileTopnicknameMembername>
         </ProfileTopName>
       </ProfileTop>

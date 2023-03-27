@@ -16,6 +16,7 @@ function KakkaoRedirect() {
     try {
       await axios.get(`api/member/login/kakao?code=${code}`);
 
+      alert("카카오 로그인 성공");
       navigate("/");
     } catch (e) {
       console.log(e);

@@ -41,11 +41,11 @@ function Createradio() {
   };
 
   const submitForm = (data) => {
-    console.log(data);
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("hashtag", data.hashtag);
     formData.append("introduction", data.introduction);
+    formData.append("categoryType", selectBtn.title);
     for (const keyValue of formImagin) {
       formData.append(keyValue[0], keyValue[1]);
     }
