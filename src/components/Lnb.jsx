@@ -17,11 +17,13 @@ function Lnb({ isOpen, handleItemClick }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchSse();
-        dispatch(__getAlarm());
-        return () => {
-            eventSource && eventSource.close();
-        };
+        if (token) {
+            fetchSse();
+            dispatch(__getAlarm());
+            return () => {
+                eventSource && eventSource.close();
+            };
+        }
     }, [isOpen]);
 
     useEffect(() => {
@@ -43,10 +45,9 @@ function Lnb({ isOpen, handleItemClick }) {
             );
 
             eventSource.onmessage = async function (event) {
-                const data = JSON.parse(event.data);
-                const message = data.message;
-                console.log(message);
-                setAlarm(true);
+                if (event.data !== `EventStream Created. [userId=${username.id}]`) {
+                    setAlarm(true);
+                }
             };
         } catch (error) {
             if (eventSource) eventSource.close();
@@ -90,6 +91,7 @@ function Lnb({ isOpen, handleItemClick }) {
                             {alarm && <LnbAlarmPoint />}
                         </LnbAlarmBtnContainer>
                         <LoginTrueFalseContainer
+                            login={token && username}
                             onClick={() => {
                                 document.startViewTransition(() =>
                                     navigate(`/profile/${username.userName}`)
@@ -178,7 +180,7 @@ const LnbMenuLayout = styled.div`
 `;
 
 const LoginTrueFalseContainer = styled.div`
-    margin: 50px 0px 0px 0px;
+    margin-top: ${({ login }) => (login ? '50px' : '140px')};
     width: 100%;
     height: 30px;
     padding: 0px 10px 0px 25px;

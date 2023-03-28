@@ -3,12 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { __getAlarm } from '../redux/module/getAlarm';
 import { __readAlarm } from '../redux/module/readAlarm';
 import Navbar from '../components/Navbar';
-import { AiOutlineArrowLeft, AiOutlineClose } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { AiOutlineArrowLeft, AiOutlineCheck, AiOutlineClose, AiOutlineSync } from 'react-icons/ai';
 import styled from 'styled-components';
 
 function MyAlarm() {
-    const navigate = useNavigate();
     const data = useSelector((state) => state.gettingAlarm);
     const readingAlarm = useSelector((state) => state.readingAlarm);
 
@@ -25,39 +23,45 @@ function MyAlarm() {
             <NavbarContainer>
                 <Navbar
                     toNavigate={'/'}
-                    iconleft={
-                        <AiOutlineArrowLeft
+                    iconleft={<AiOutlineArrowLeft size={20} />}
+                    title={'알림'}
+                    iconright={
+                        <AiOutlineSync
                             size={20}
-                            onClick={() => {
-                                document.startViewTransition(() => navigate('/'));
-                            }}
+                            cursor={'pointer'}
+                            onClick={() => dispatch(__getAlarm())}
                         />
                     }
-                    title={'알림'}
-                    iconright={<AiOutlineClose size={20} />}
                 />
             </NavbarContainer>
             <MyAlarmContainer>
                 {data?.alarm?.data?.map((item) => {
                     return (
-                        <>
+                        <div key={item.notificationId}>
                             <MyAlarmLayout>
                                 {' '}
                                 <MyAlarmProfileImg />
                                 <MyAlarmDescContainer>
-                                    <div>{item.message}</div>
-                                    <div>{item.createdAt}</div>
+                                    <MyAlarmDescLayout>{item.message}</MyAlarmDescLayout>
+                                    <MyAlarmTimeLayout>{item.createdAt}</MyAlarmTimeLayout>
                                 </MyAlarmDescContainer>
                                 <MyAlarmBtnContainer>
-                                    {item.readStatus ? '읽음' : '안읽음'}{' '}
-                                    <button
-                                        onClick={() => notificationReadHandler(item.notificationId)}
-                                    >
-                                        읽음버튼
-                                    </button>
+                                    {item.readStatus ? (
+                                        <AiOutlineCheck size={25} color={'grey'} />
+                                    ) : (
+                                        <AiOutlineCheck
+                                            size={25}
+                                            color={'#ff9900'}
+                                            cursor={'pointer'}
+                                            onClick={() =>
+                                                notificationReadHandler(item.notificationId)
+                                            }
+                                        />
+                                    )}{' '}
+                                    <AiOutlineClose size={25} />
                                 </MyAlarmBtnContainer>
                             </MyAlarmLayout>
-                        </>
+                        </div>
                     );
                 })}
             </MyAlarmContainer>
@@ -91,7 +95,7 @@ const MyAlarmContainer = styled.div`
 `;
 
 const MyAlarmLayout = styled.div`
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -99,7 +103,6 @@ const MyAlarmLayout = styled.div`
 `;
 
 const MyAlarmProfileImg = styled.div`
-    border: 1px solid black;
     min-width: 70px;
     min-height: 70px;
     overflow: hidden;
@@ -124,9 +127,28 @@ const MyAlarmProfileImg = styled.div`
 `;
 
 const MyAlarmDescContainer = styled.div`
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 `;
 
 const MyAlarmBtnContainer = styled.div`
-    border: 1px solid red;
+    padding: 5px 5px;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+`;
+
+const MyAlarmDescLayout = styled.div`
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    line-height: 19px;
+    font-size: 16px;
+    font-weight: 500;
+`;
+const MyAlarmTimeLayout = styled.div`
+    color: #a7a49e;
 `;
