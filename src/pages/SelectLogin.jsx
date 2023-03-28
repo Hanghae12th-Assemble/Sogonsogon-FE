@@ -45,7 +45,14 @@ function Login() {
             </Button>
           </LoginButtonDiv>
           <LoginButtonDiv>
-            <Button GlgBtn>구글로 로그인</Button>
+            <Button
+              onClick={() => {
+                document.startViewTransition(() => navigate("/maillogin"));
+              }}
+              GlgBtn
+            >
+              이메일 로그인
+            </Button>
           </LoginButtonDiv>
           <LoginSpanDiv>
             <LoginSpanText>
