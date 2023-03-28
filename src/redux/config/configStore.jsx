@@ -15,6 +15,7 @@ import getProfile from '../module/getProfile';
 import getRadioCategory from '../module/getRadioCategory';
 import updateProfile from '../module/updateProfile';
 import getAlarm from '../module/getAlarm';
+import readAlarm from '../module/readAlarm';
 
 const sotre = configureStore({
     reducer: {
@@ -34,6 +35,7 @@ const sotre = configureStore({
         gettingRadioCategory: getRadioCategory.reducer,
         updatingProfile: updateProfile.reducer,
         gettingAlarm: getAlarm.reducer,
+        readingAlarm: readAlarm.reducer,
     },
 });
 

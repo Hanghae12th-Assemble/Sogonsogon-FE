@@ -1,28 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { AiOutlineRight } from 'react-icons/ai';
+import { AiOutlineBell, AiOutlineRight } from 'react-icons/ai';
 import { getCookie, removeCookie } from '../util/cookie';
 import { getLocalStorage, removeLocalStorage } from '../util/localStorage';
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { __getAlarm } from '../redux/module/getAlarm';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Lnb({ isOpen, handleItemClick }) {
     const token = getCookie('access-token');
     const username = JSON.parse(getLocalStorage('userInfo'));
     const navigate = useNavigate();
     const [alarm, setAlarm] = useState(false);
-    const data = useSelector((state) => console.log(state));
-    console.log(data);
+    const data = useSelector((state) => state.gettingAlarm);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         fetchSse();
-        __getAlarm();
+        dispatch(__getAlarm());
         return () => {
             eventSource && eventSource.close();
         };
-    }, []);
+    }, [isOpen]);
+
+    useEffect(() => {
+        const unreadAlarms = data?.alarm?.data?.some((item) => !item.readStatus);
+        setAlarm(unreadAlarms);
+    }, [data]);
 
     let eventSource;
     const fetchSse = async () => {
@@ -40,7 +45,7 @@ function Lnb({ isOpen, handleItemClick }) {
             eventSource.onmessage = async function (event) {
                 const data = JSON.parse(event.data);
                 const message = data.message;
-                alert(message);
+                console.log(message);
                 setAlarm(true);
             };
         } catch (error) {
@@ -66,19 +71,24 @@ function Lnb({ isOpen, handleItemClick }) {
         removeLocalStorage('userInfo');
         document.startViewTransition(() => navigate('/selectlogin'));
     };
-    const AlarmButtonHandler = () => {
-        setAlarm(false);
-    };
 
     return (
         <>
             <LnbLayout isOpen={isOpen}>
                 {token && username ? (
                     <>
-                        <div>
-                            <button onClick={AlarmButtonHandler}>알람</button>
-                            {alarm && <div>새로운 알람</div>}
-                        </div>
+                        <LnbAlarmBtnContainer>
+                            <AiOutlineBell
+                                onClick={() => {
+                                    document.startViewTransition(() =>
+                                        navigate(`/alarm/${username.userName}`)
+                                    );
+                                }}
+                                size={28}
+                                cursor={'pointer'}
+                            />
+                            {alarm && <LnbAlarmPoint />}
+                        </LnbAlarmBtnContainer>
                         <LoginTrueFalseContainer
                             onClick={() => {
                                 document.startViewTransition(() =>
@@ -135,6 +145,21 @@ const LnbLayout = styled.div`
     margin-top: 40px;
 `;
 
+const LnbAlarmBtnContainer = styled.div`
+    width: fit-content;
+    height: fit-content;
+    margin: 60px 0px 0px 25px;
+`;
+const LnbAlarmPoint = styled.div`
+    position: absolute;
+    top: 60px;
+    left: 45px;
+    width: 7px;
+    height: 7px;
+    border-radius: 100%;
+    background-color: #ff9900;
+`;
+
 const LnbMenuLayout = styled.div`
     height: 300px;
     padding: 25px;
@@ -153,7 +178,7 @@ const LnbMenuLayout = styled.div`
 `;
 
 const LoginTrueFalseContainer = styled.div`
-    margin: 120px 0px 0px 0px;
+    margin: 50px 0px 0px 0px;
     width: 100%;
     height: 30px;
     padding: 0px 10px 0px 25px;
