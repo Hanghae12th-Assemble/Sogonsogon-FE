@@ -1,14 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { AiOutlineRight } from 'react-icons/ai';
 import { getCookie, removeCookie } from '../util/cookie';
 import { getLocalStorage, removeLocalStorage } from '../util/localStorage';
+import { EventSourcePolyfill } from 'event-source-polyfill';
+import { __getAlarm } from '../redux/module/getAlarm';
+import { useSelector } from 'react-redux';
 
 function Lnb({ isOpen, handleItemClick }) {
     const token = getCookie('access-token');
     const username = JSON.parse(getLocalStorage('userInfo'));
     const navigate = useNavigate();
+    const [alarm, setAlarm] = useState(false);
+    const data = useSelector((state) => console.log(state));
+    console.log(data);
+
+    useEffect(() => {
+        fetchSse();
+        __getAlarm();
+        return () => {
+            eventSource && eventSource.close();
+        };
+    }, []);
+
+    let eventSource;
+    const fetchSse = async () => {
+        try {
+            //EventSource생성.
+            eventSource = new EventSourcePolyfill(
+                `${process.env.REACT_APP_BASE_URL}api/notificaiton/`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            eventSource.onmessage = async function (event) {
+                const data = JSON.parse(event.data);
+                const message = data.message;
+                alert(message);
+                setAlarm(true);
+            };
+        } catch (error) {
+            if (eventSource) eventSource.close();
+        }
+    };
 
     const [items, setItems] = useState([
         { id: 1, name: '홈', link: '/' },
@@ -28,12 +66,19 @@ function Lnb({ isOpen, handleItemClick }) {
         removeLocalStorage('userInfo');
         document.startViewTransition(() => navigate('/selectlogin'));
     };
+    const AlarmButtonHandler = () => {
+        setAlarm(false);
+    };
 
     return (
         <>
             <LnbLayout isOpen={isOpen}>
                 {token && username ? (
                     <>
+                        <div>
+                            <button onClick={AlarmButtonHandler}>알람</button>
+                            {alarm && <div>새로운 알람</div>}
+                        </div>
                         <LoginTrueFalseContainer
                             onClick={() => {
                                 document.startViewTransition(() =>
