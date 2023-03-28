@@ -3,7 +3,6 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { MdOutlineModeEdit } from "react-icons/md";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
-//import { useForm } from "react-hook-form";
 import Button from "../elements/Button";
 import ProfileMidumContainer from "../components/ProfileMidumContainer";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,12 +11,15 @@ import { pageswitch } from "../redux/module/reduxState/profileModifyButton";
 import Input from "../elements/Input";
 import { useForm } from "react-hook-form";
 import { getLocalStorage } from "../util/localStorage";
+import { useNavigate } from "react-router";
+import isLogin from "../util/checkCookie";
 
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
+  const navigate = useNavigate();
   const [preview, setPreview] = useState("");
   const [pageState] = useState(false);
-  const { id } = JSON.parse(getLocalStorage("userInfo"));
+  const user = JSON.parse(getLocalStorage("userInfo"));
   const {
     register,
     handleSubmit,
@@ -27,6 +29,13 @@ function Profile() {
   const dispatch = useDispatch();
   const selectBtn = useSelector((state) => state.profileButn);
   const getUserInfo = useSelector((state) => state?.gettingProfile?.profile);
+
+  useEffect(() => {
+    if (isLogin() === false) {
+      alert("로그인 먼저 해주세요!");
+      navigate("/selectlogin");
+    }
+  }, []);
 
   const onChangeimge = (e) => {
     const img = e.target.files[0];
@@ -53,7 +62,7 @@ function Profile() {
       formData.append(keyValue[0], keyValue[1]);
     }
 
-    dispatch(__updateProfile({ userId: id, profileInfo: formData }));
+    dispatch(__updateProfile({ userId: user.id, profileInfo: formData }));
     dispatch(pageswitch(!selectBtn));
     reset();
   };

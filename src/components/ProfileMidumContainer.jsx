@@ -36,7 +36,7 @@ function ProfileMidumContainer() {
         </ProfileTopFollowing>
       </ProfileTopFollow>
       <ProfileButtonBox>
-        {id === info.userName ? null : (
+        {id === info?.userName ? null : (
           <Button lgBtn onClick={followBtn}>
             팔로우하기
           </Button>
