@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function Navbar({ iconleft, title, iconright, toNavigate, toClose }) {
+function Navbar({ iconleft, title, iconright, toNavigate, toClose, icon }) {
   const navigate = useNavigate();
 
   return (
@@ -14,7 +14,10 @@ function Navbar({ iconleft, title, iconright, toNavigate, toClose }) {
       >
         {iconleft}
       </NavbarCursor>
-      {title}
+      <NavbarLogoTittle>
+        {icon}
+        {title}
+      </NavbarLogoTittle>
       <NavbarCursor
         onClick={() => {
           document.startViewTransition(() => navigate(toClose));
@@ -40,4 +43,13 @@ const NavbarBox = styled.div`
 
 const NavbarCursor = styled.div`
   cursor: pointer;
+`;
+
+const NavbarLogoTittle = styled.div`
+  //border: 1px solid black;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100px;
+  font-weight: bolder;
+  font-size: 20px;
 `;

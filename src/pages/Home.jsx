@@ -106,5 +106,6 @@ export const StRadioContainer = styled.div`
 `;
 
 const HomeLogo = styled(Logo)`
-  width: 150px;
+  border: 1px solid black;
+  width: 100px;
 `;

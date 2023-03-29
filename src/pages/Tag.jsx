@@ -20,6 +20,10 @@ import Button from "../elements/Button";
 import styled from "styled-components";
 import { NavbarContainer } from "../pages/Home";
 import RadioCountContainer from "../components/RadioCountContainer";
+import { ReactComponent as Music } from "../asset/icon/music.svg";
+import { ReactComponent as Daily } from "../asset/icon/daily.svg";
+import { ReactComponent as Book } from "../asset/icon/book.svg";
+import { ReactComponent as Asmr } from "../asset/icon/asmr.svg";
 
 function Tag() {
   let { id } = useParams();
@@ -46,6 +50,37 @@ function Tag() {
     }
   }, [inView]);
 
+  const renderIcon = () => {
+    switch (id) {
+      case "음악":
+        return (
+          <IconStyle>
+            <Music />
+          </IconStyle>
+        );
+      case "일상":
+        return (
+          <IconStyle>
+            <Daily />
+          </IconStyle>
+        );
+      case "도서":
+        return (
+          <IconStyle>
+            <Book />
+          </IconStyle>
+        );
+      case "ASMR":
+        return (
+          <IconStyle>
+            <Asmr />
+          </IconStyle>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <Lnb isOpen={isLnbOpen} handleItemClick={toggleLnb} />
@@ -53,6 +88,7 @@ function Tag() {
         <Navbar
           iconleft={<AiOutlineMenu size={30} onClick={toggleLnb} />}
           title={id}
+          icon={renderIcon()}
           iconright={<AiOutlineSearch size={30} />}
           toClose={"/search"}
         />
@@ -101,4 +137,10 @@ const StRadioContainer = styled.div`
   padding: 0px 20px;
   z-index: -1;
   overflow: auto;
+`;
+
+const IconStyle = styled.div`
+  svg {
+    width: 20px;
+  }
 `;
