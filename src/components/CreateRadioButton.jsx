@@ -4,6 +4,11 @@ import { handleSelectedButtonClick } from "../util/handleButton";
 import Button from "../elements/Button";
 import { useDispatch } from "react-redux";
 import { butn } from "../redux/module/reduxState/createRadioButton";
+import { ReactComponent as Home } from "../asset/icon/home.svg";
+import { ReactComponent as Music } from "../asset/icon/music.svg";
+import { ReactComponent as Daily } from "../asset/icon/daily.svg";
+import { ReactComponent as Book } from "../asset/icon/book.svg";
+import { ReactComponent as Asmr } from "../asset/icon/asmr.svg";
 
 function CreateRadioButton() {
   const [selected, setSelected] = useState({
@@ -39,6 +44,21 @@ function CreateRadioButton() {
     );
   };
 
+  const icons = [
+    <StyledIcon>
+      <Music />
+    </StyledIcon>,
+    <StyledIcon>
+      <Daily />
+    </StyledIcon>,
+    <StyledIcon>
+      <Book />
+    </StyledIcon>,
+    <StyledIcon>
+      <Asmr />
+    </StyledIcon>,
+  ];
+
   return (
     <>
       <CrRadioButtonSpanBox>
@@ -54,7 +74,10 @@ function CreateRadioButton() {
                 }
                 CrRadioBtn
               >
-                {text}
+                <CrRadioBtn>
+                  {icons[i]}
+                  {text}
+                </CrRadioBtn>
               </CrRadioButton>
             );
           })}
@@ -104,8 +127,21 @@ const CrRadioButton = styled(Button)`
   color: ${(props) => (props.isSelected ? "white" : "black")};
 `;
 
+const CrRadioBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const CrRadioScpeButton = styled(Button)`
   margin-right: 10px;
   background-color: ${(props) => (props.isSelecte ? "#262626" : "#f1f2f6")};
   color: ${(props) => (props.isSelecte ? "white" : "black")};
+`;
+
+const StyledIcon = styled.div`
+  svg {
+    width: 20px;
+    margin-right: 10px;
+  }
 `;

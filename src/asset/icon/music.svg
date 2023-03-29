@@ -22,7 +22,7 @@
       }
     </style>
   </defs>
-  <rect class="cls-2" width="20" height="20"/>
+  <rect class="cls-2" />
   <g>
     <circle class="cls-4" cx="10" cy="10" r="10"/>
     <path class="cls-1" d="m2.813,5.771c1.126-1.982,3.037-3.495,5.382-4.061"/>

@@ -15,7 +15,7 @@
       }
     </style>
   </defs>
-  <rect class="cls-1" width="20" height="20"/>
+  <rect class="cls-1" />
   <g>
     <circle class="cls-2" cx="5.043" cy="6.176" r="3.747"/>
     <path class="cls-2" d="m5.437,10.757h0c3.001,0,5.437,2.436,5.437,5.437v3.806H0v-3.806C0,13.193,2.436,10.757,5.437,10.757Z"/>
