@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Button from "../elements/Button";
 import { KAKAO_AUTH_URL } from "../constants/social";
 import { NAVER_AUTH_URL } from "../constants/social";
+import { ReactComponent as Logosymbol } from "../asset/logo/logosymbol.svg";
 
 function Login() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function Login() {
           </span>
         </LoginBackSpan>
         <LoginLogoBox>
-          <span>로고</span>
+          <LoginLogo />
         </LoginLogoBox>
         <LoginButtonBox>
           <LoginButtonDiv>
@@ -136,4 +137,8 @@ const LoginBackSpan = styled.div`
   span {
     cursor: pointer;
   }
+`;
+
+const LoginLogo = styled(Logosymbol)`
+  width: 300px;
 `;

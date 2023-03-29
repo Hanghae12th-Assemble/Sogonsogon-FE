@@ -14,9 +14,7 @@ function Navbar({ iconleft, title, iconright, toNavigate, toClose }) {
       >
         {iconleft}
       </NavbarCursor>
-      <div>
-        <span>{title}</span>
-      </div>
+      {title}
       <NavbarCursor
         onClick={() => {
           document.startViewTransition(() => navigate(toClose));
