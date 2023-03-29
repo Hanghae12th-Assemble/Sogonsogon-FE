@@ -142,8 +142,8 @@ function Lnb({ isOpen, handleItemClick }) {
         <LnbMenuLayout>
           {items.map((item, i) => (
             <div key={item.id}>
+              {icons[i]}
               <div onClick={() => categoryMenuBtnHandler(item.link)}>
-                {icons[i]}
                 {item.name}
               </div>
             </div>

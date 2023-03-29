@@ -2,6 +2,7 @@ import React from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { ReactComponent as Person } from '../asset/icon/person.svg';
 
 function RadioContainer({ props }) {
     const navigate = useNavigate();
@@ -16,8 +17,9 @@ function RadioContainer({ props }) {
                     style={{ backgroundImage: `url(${props?.backgroundImageUrl})` }}
                 >
                     <ViewerCounterContainer>
-                        <AiOutlineUser size={20} />
-                        <ViewerCouterLayout>{props?.enterCnt}명</ViewerCouterLayout>
+                        <StPersonSVg />
+                        {/* <AiOutlineUser size={20} /> */}
+                        <ViewerCouterLayout>{props?.enterCnt}</ViewerCouterLayout>
                     </ViewerCounterContainer>
                 </RadioImgContainer>
                 <RadioContentLayout>
@@ -72,8 +74,8 @@ const RadioLayout = styled.div`
 `;
 
 const ViewerCounterContainer = styled.div`
-    background-color: #6d6d6d;
-    width: 80px;
+    background-color: #332d28;
+    width: 50px;
     height: 28px;
     color: white;
     margin: 0px 13px 10px 0px; //  위,오른쪽,아래,왼쪽
@@ -84,7 +86,7 @@ const ViewerCounterContainer = styled.div`
 `;
 
 const ViewerCouterLayout = styled.div`
-    min-width: 45px;
+    min-width: 20px;
     height: 28px;
     display: flex;
     align-items: center;
@@ -121,4 +123,8 @@ const RadionContentMiniLayout = styled.div`
     width: 150px;
     min-height: 50px;
     /* border: 1px solid black; */
+`;
+
+const StPersonSVg = styled(Person)`
+    width: 16px;
 `;
