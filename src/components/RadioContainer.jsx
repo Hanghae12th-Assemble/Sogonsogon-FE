@@ -1,5 +1,4 @@
 import React from 'react';
-import { AiOutlineUser } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Person } from '../asset/icon/person.svg';
@@ -18,7 +17,6 @@ function RadioContainer({ props }) {
                 >
                     <ViewerCounterContainer>
                         <StPersonSVg />
-                        {/* <AiOutlineUser size={20} /> */}
                         <ViewerCouterLayout>{props?.enterCnt}</ViewerCouterLayout>
                     </ViewerCounterContainer>
                 </RadioImgContainer>

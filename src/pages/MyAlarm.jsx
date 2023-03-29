@@ -9,7 +9,6 @@ import styled from 'styled-components';
 function MyAlarm() {
     const data = useSelector((state) => state.gettingAlarm);
     const readingAlarm = useSelector((state) => state.readingAlarm);
-
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(__getAlarm());
@@ -42,7 +41,9 @@ function MyAlarm() {
                                 {' '}
                                 <MyAlarmProfileImg />
                                 <MyAlarmDescContainer>
-                                    <MyAlarmDescLayout>{item.message}</MyAlarmDescLayout>
+                                    <MyAlarmDescLayout>
+                                        <p>{item.message}</p>
+                                    </MyAlarmDescLayout>
                                     <MyAlarmTimeLayout>{item.createdAt}</MyAlarmTimeLayout>
                                 </MyAlarmDescContainer>
                                 <MyAlarmBtnContainer>
@@ -142,6 +143,7 @@ const MyAlarmBtnContainer = styled.div`
 `;
 
 const MyAlarmDescLayout = styled.div`
+    /* border: 1px solid black; */
     min-height: 55px;
     display: flex;
     align-items: center;

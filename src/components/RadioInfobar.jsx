@@ -2,6 +2,7 @@ import React from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { ReactComponent as Person } from '../asset/icon/person.svg';
 
 function RadioInfobar({ props }) {
     const navigate = useNavigate();
@@ -14,11 +15,13 @@ function RadioInfobar({ props }) {
                         <span>05:30</span>
                     </RaidoPreviewTopInfoLayout>
 
-                    <RaidoPreviewTopInfoLayout>7</RaidoPreviewTopInfoLayout>
+                    <RaidoPreviewTopInfoLayout>
+                        <StPersonSVg />7
+                    </RaidoPreviewTopInfoLayout>
                 </RaidoPreviewTopLayout>
                 <RadioPreviwPgCloseBtn>
                     <AiFillCloseCircle
-                        color={'#262524'}
+                        color={'#ff601c'}
                         cursor={'pointer'}
                         size={35}
                         onClick={() => {
@@ -81,4 +84,9 @@ const RaidoPreviewTopInfoLayout = styled.div`
 const RadioPreviwPgCloseBtn = styled.div`
     margin-right: 20px;
     z-index: 1;
+`;
+
+const StPersonSVg = styled(Person)`
+    width: 17px;
+    margin-right: 7px;
 `;

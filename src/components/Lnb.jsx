@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { AiOutlineBell, AiOutlineRight } from 'react-icons/ai';
+import { AiOutlineRight } from 'react-icons/ai';
 import { getCookie, removeCookie } from '../util/cookie';
 import { getLocalStorage, removeLocalStorage } from '../util/localStorage';
 import { EventSourcePolyfill } from 'event-source-polyfill';
@@ -95,29 +95,16 @@ function Lnb({ isOpen, handleItemClick }) {
                                             );
                                         }}
                                     />
-                                    {/* <AiOutlineBell
-                                        onClick={() => {
-                                            document.startViewTransition(() =>
-                                                navigate(`/alarm/${username.userName}`)
-                                            );
-                                        }}
-                                        size={26}
-                                        cursor={'pointer'}
-                                    /> */}
                                 </LnbAlarmBtnContainer>
                             </>
                         ) : (
                             <LnbAlarmBtnContainer>
-                                <Notifications />
-                                <AiOutlineBell
+                                <LnbNotifications
                                     onClick={() => {
                                         document.startViewTransition(() =>
                                             navigate(`/alarm/${username.userName}`)
                                         );
                                     }}
-                                    size={26}
-                                    cursor={'pointer'}
-                                    color={'#77756f'}
                                 />
                             </LnbAlarmBtnContainer>
                         )}
@@ -149,7 +136,7 @@ function Lnb({ isOpen, handleItemClick }) {
                     </>
                 )}
                 <LnbMenuLayout>
-                    {items.map((item, i) => (
+                    {items.map((item) => (
                         <div key={item.id}>
                             <div onClick={() => categoryMenuBtnHandler(item.link)}>
                                 <span>{item.icon}</span>
@@ -188,7 +175,14 @@ const LnbAlarmBtnContainer = styled.div`
     margin: 60px 0px 0px 25px;
 `;
 const LnbNotificationsOn = styled(NotificationsOn)`
-    width: 25px;
+    width: 28px;
+    cursor: pointer;
+`;
+
+const LnbNotifications = styled(Notifications)`
+    width: 28px;
+    cursor: pointer;
+    color: #77756f;
 `;
 
 const LnbMenuLayout = styled.div`
