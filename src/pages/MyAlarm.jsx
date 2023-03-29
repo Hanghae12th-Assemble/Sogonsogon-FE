@@ -23,11 +23,11 @@ function MyAlarm() {
             <NavbarContainer>
                 <Navbar
                     toNavigate={'/'}
-                    iconleft={<AiOutlineArrowLeft size={20} />}
+                    iconleft={<AiOutlineArrowLeft size={25} />}
                     title={'알림'}
                     iconright={
                         <AiOutlineSync
-                            size={20}
+                            size={25}
                             cursor={'pointer'}
                             onClick={() => dispatch(__getAlarm())}
                         />

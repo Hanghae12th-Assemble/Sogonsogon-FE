@@ -56,7 +56,7 @@ function Search() {
             <SearchbarBox>
                 <AiOutlineArrowLeft
                     cursor={'pointer'}
-                    size={20}
+                    size={25}
                     onClick={() => {
                         document.startViewTransition(() => navigate('/'));
                     }}
@@ -133,7 +133,7 @@ const SearchbarBox = styled.div`
 `;
 
 const SearchInput = styled.input`
-    width: 400px;
+    width: 350px;
     height: 35px;
     padding-left: 55px;
     border-radius: 15px;
