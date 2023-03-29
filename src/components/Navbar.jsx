@@ -48,8 +48,9 @@ const NavbarCursor = styled.div`
 const NavbarLogoTittle = styled.div`
   //border: 1px solid black;
   display: flex;
-  justify-content: space-evenly;
-  width: 100px;
+  width: 150px;
+  align-items: center;
+  justify-content: center;
   font-weight: bolder;
-  font-size: 20px;
+  font-size: 25px;
 `;

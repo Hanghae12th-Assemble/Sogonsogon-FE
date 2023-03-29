@@ -141,6 +141,7 @@ const StRadioContainer = styled.div`
 
 const IconStyle = styled.div`
   svg {
-    width: 20px;
+    width: 25px;
+    margin-right: 10px;
   }
 `;
