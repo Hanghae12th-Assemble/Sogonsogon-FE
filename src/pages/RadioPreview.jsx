@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import RadioInfobar from '../components/RadioInfobar';
+import isLogin from '../util/checkCookie';
 
 function RadioPreview() {
     const { id } = useParams();
@@ -18,6 +19,16 @@ function RadioPreview() {
             return item;
         }
     });
+
+    const RadionEntranceHandler = () => {
+        if (isLogin()) {
+            document.startViewTransition(() => navigate(`/listen/${id}`));
+        } else {
+            alert('로그인이 필요한 서비스입니다.');
+            navigate(-1);
+        }
+    };
+
     return (
         <>
             {foundRadio && (
@@ -48,13 +59,7 @@ function RadioPreview() {
                                     <div>{foundRadio[0]?.introduction}</div>
                                 </LayoutContainer>
                             </RadioPreviewContentContainer>
-                            <JoinRadioBtn
-                                onClick={() => {
-                                    document.startViewTransition(() => navigate(`/listen/${id}`));
-                                }}
-                            >
-                                입장하기
-                            </JoinRadioBtn>
+                            <JoinRadioBtn onClick={RadionEntranceHandler}>입장하기</JoinRadioBtn>
                         </RadioPreviewBottomLayout>
                     </RadioPreviewBottomContainer>
                 </>

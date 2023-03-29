@@ -135,12 +135,12 @@ const SearchbarBox = styled.div`
 const SearchInput = styled.input`
     width: 400px;
     height: 35px;
-    padding-left: 50px;
+    padding-left: 55px;
     border-radius: 15px;
     margin-left: 20px;
     font-size: 16px;
     background: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png')
-        13px center / contain no-repeat rgb(249, 249, 250);
+        12px center / contain no-repeat #f9f9fa;
     border: none;
     outline: none;
 `;
