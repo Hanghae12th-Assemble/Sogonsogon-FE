@@ -4,7 +4,6 @@ import { handleSelectedButtonClick } from "../util/handleButton";
 import Button from "../elements/Button";
 import { useDispatch } from "react-redux";
 import { butn } from "../redux/module/reduxState/createRadioButton";
-import { ReactComponent as Home } from "../asset/icon/home.svg";
 import { ReactComponent as Music } from "../asset/icon/music.svg";
 import { ReactComponent as Daily } from "../asset/icon/daily.svg";
 import { ReactComponent as Book } from "../asset/icon/book.svg";
