@@ -8,9 +8,12 @@ export default class Axios {
       baseURL: url,
     });
 
-    this.axiosInstance.interceptors.response.use(
-      (response) => {
-        const token = response.headers.authorization;
+    this.axiosInstance.interceptors.response.use((response) => {
+      const token = response.headers.authorization;
+
+      if (token) {
+        const [, parseToken] = token.split(" ");
+        setCookie(QUERY.COOKIE.COOKIE_NAME, parseToken);
 
         if (response.data.data) {
           localStorage.setItem(
@@ -22,26 +25,9 @@ export default class Axios {
             })
           );
         }
-
-        if (token) {
-          const [, parseToken] = token.split(" ");
-          setCookie(QUERY.COOKIE.COOKIE_NAME, parseToken);
-        }
-
-        return response;
-      },
-
-      (error) => {
-        const errorMessage = error.response.data.errorMessage;
-        if (errorMessage === "Token Error") {
-          console.log(error);
-        } else {
-          alert(errorMessage);
-        }
-
-        return Promise.reject(error);
       }
-    );
+      return response;
+    });
   }
 
   getAuthHeader() {
@@ -69,7 +55,7 @@ export default class Axios {
     return this.axiosInstance.patch(`${path}/${payload}`, option);
   }
 
-  async put(path, payload, option) {
-    return this.axiosInstance.put(path, payload, option);
+  async put(path, payload) {
+    return this.axiosInstance.put(path, payload, this.getAuthHeader());
   }
 }

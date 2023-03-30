@@ -8,13 +8,15 @@ export const __login = createAsyncThunk(
   async (logininfo, thunkAPI) => {
     return await axios
       .post("api/member/login", logininfo)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((response) => alert(response && "로그인 되었습니다."))
+      .catch((error) =>
+        alert(error && "아이디 비밀번호가 없거나, 존재 하지 않는 계정입니다.")
+      );
   }
 );
 
 const initialState = {
-  user: null,
+  login: null,
   isLoading: false,
   error: null,
 };
@@ -30,7 +32,7 @@ const login = createSlice({
     });
     builder.addCase(__login.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.user = action.payload;
+      state.login = action.payload;
       state.error = null;
     });
     builder.addCase(__login.rejected, (state, action) => {

@@ -8,13 +8,15 @@ export const __siginup = createAsyncThunk(
   async (siginupInfo, thunkAPI) => {
     return await axios
       .post("api/member/signup", siginupInfo)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((response) => alert(response && "회원가입에 성공하였습니다."))
+      .catch((error) =>
+        alert(error && "중복되는 아이디 또는 이메일이 존재합니다.")
+      );
   }
 );
 
 const initialState = {
-  user: null,
+  signup: null,
   isLoading: false,
   error: null,
 };
@@ -30,7 +32,7 @@ const signup = createSlice({
     });
     builder.addCase(__siginup.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.user = action.payload;
+      state.signup = action.payload;
       state.error = null;
     });
     builder.addCase(__siginup.rejected, (state, action) => {
