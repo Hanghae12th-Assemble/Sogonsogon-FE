@@ -24,8 +24,9 @@ function ListenRadio() {
                 <LSRadioProfileContainer>
                     <LsProfileLayout>
                         {' '}
-                        <LSRadioTopTitlePhoto></LSRadioTopTitlePhoto>
+                        <LSRadioTopTitlePhoto />
                         <span>{foundRadio[0]?.nickname}</span>
+                        <p>· DJ</p>
                     </LsProfileLayout>
                     <LSRadioTopTitle>
                         <span>{foundRadio[0]?.title}</span>
@@ -114,15 +115,22 @@ const LSRadioProfileContainer = styled.div`
 `;
 
 const LsProfileLayout = styled.div`
-    /* border: 1px solid black; */
     padding: 25px 25px 10px 25px;
     display: flex;
     flex-direction: row;
+    font-weight: 500;
     span {
         font-size: 20px;
         margin-left: 15px;
         display: flex;
         align-items: center;
+    }
+    p {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+        color: #ff9900;
     }
 `;
 

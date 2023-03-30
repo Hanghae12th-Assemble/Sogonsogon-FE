@@ -2,21 +2,27 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAlarm } from '../redux/module/getAlarm';
 import { __readAlarm } from '../redux/module/readAlarm';
+import { __removeAlarm } from '../redux/module/removeAlarm';
 import Navbar from '../components/Navbar';
 import { AiOutlineArrowLeft, AiOutlineCheck, AiOutlineClose, AiOutlineSync } from 'react-icons/ai';
 import styled from 'styled-components';
 
 function MyAlarm() {
-    const data = useSelector((state) => state.gettingAlarm);
-    const readingAlarm = useSelector((state) => state.readingAlarm);
+    const { gettingAlarm, readingAlarm, removingAlarm } = useSelector((state) => state);
+
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(__getAlarm());
-    }, [readingAlarm]);
+    }, [readingAlarm, removingAlarm]);
 
     const notificationReadHandler = (notificationID) => {
         dispatch(__readAlarm(notificationID));
     };
+
+    const removeAlarmHandler = (notificationID) => {
+        dispatch(__removeAlarm(notificationID));
+    };
+
     return (
         <>
             <NavbarContainer>
@@ -34,12 +40,14 @@ function MyAlarm() {
                 />
             </NavbarContainer>
             <MyAlarmContainer>
-                {data?.alarm?.data?.map((item) => {
+                {gettingAlarm?.alarm?.data?.map((item) => {
                     return (
                         <div key={item.notificationId}>
                             <MyAlarmLayout>
                                 {' '}
-                                <MyAlarmProfileImg />
+                                <MyAlarmProfileImg
+                                    backgroundImageUrl={item.senderProfileImageUrl}
+                                />
                                 <MyAlarmDescContainer>
                                     <MyAlarmDescLayout>
                                         <p>{item.message}</p>
@@ -59,7 +67,11 @@ function MyAlarm() {
                                             }
                                         />
                                     )}{' '}
-                                    <AiOutlineClose size={25} />
+                                    <AiOutlineClose
+                                        cursor={'pointer'}
+                                        onClick={() => removeAlarmHandler(item.notificationId)}
+                                        size={25}
+                                    />
                                 </MyAlarmBtnContainer>
                             </MyAlarmLayout>
                         </div>
