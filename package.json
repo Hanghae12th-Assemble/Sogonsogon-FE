@@ -11,6 +11,7 @@
     "dotenv": "^16.0.3",
     "event-source-polyfill": "^1.0.31",
     "js-cookie": "^3.0.1",
+    "net": "^1.0.2",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
@@ -22,6 +23,8 @@
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
+    "sockjs-client": "^1.6.1",
+    "stompjs": "^2.3.3",
     "styled-components": "^5.3.8",
     "web-vitals": "^2.1.4"
   },
