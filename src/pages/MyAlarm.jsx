@@ -94,7 +94,6 @@ function MyAlarm() {
                     );
                 })}
             </MyAlarmContainer>
-            ;
         </>
     );
 }
@@ -106,14 +105,13 @@ const NavbarContainer = styled.div`
 `;
 
 const MyAlarmContainer = styled.div`
+    border: 1px solid #f0efed;
     position: relative;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    grid-gap: 20px;
-    padding: 20px 25px 0px 25px;
     z-index: -1;
     overflow: auto;
 
@@ -124,11 +122,12 @@ const MyAlarmContainer = styled.div`
 `;
 
 const MyAlarmLayout = styled.div`
-    /* border: 1px solid black; */
+    border: 1px solid black;
     display: flex;
     flex-direction: row;
     align-items: center;
     min-height: 100px;
+    padding: 10px 0px 10px 30px;
 `;
 
 const MyAlarmProfileImg = styled.div`
