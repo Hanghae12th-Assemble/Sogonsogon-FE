@@ -68,7 +68,7 @@ function Createradio() {
         <CreateRadioButton />
         <form onSubmit={handleSubmit(submitForm)}>
           <CrRadioButtonSpanBox>
-            <span>방송 제목*</span>
+            <span>방송 재목*</span>
             <CrRadioPublicScopButton>
               <Input
                 register={register}
