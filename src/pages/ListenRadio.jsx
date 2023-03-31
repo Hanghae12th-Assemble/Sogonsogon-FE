@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -12,15 +12,18 @@ stompClient.debug = () => {};
 
 function ListenRadio() {
   const { id } = useParams();
-  const [contents, setContents] = React.useState([]);
-  const [username, setUsername] = React.useState("");
-  const [message, setMessage] = React.useState("");
+  const [contents, setContents] = useState([]);
+  const [username, setUsername] = useState("");
+  const [message, setMessage] = useState("");
+  const user = JSON.parse(localStorage.getItem("userInfo"));
 
   const { gettingRadio } = useSelector((state) => state);
-  const userdata = useSelector((state) => state?.enteringRadio?.radio);
 
   useEffect(() => {
-    setUsername(userdata?.data?.nickname);
+    setUsername(user.userName);
+    return () => {
+      stompClient.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -32,9 +35,9 @@ function ListenRadio() {
     });
   }, [contents]);
 
-  const handleEnter = (content) => {
+  const handleEnter = (username, content) => {
     const newMessage = { username, content };
-    stompClient.send(`/pub/${id}`, {}, JSON.stringify(newMessage));
+    stompClient.send(`/${id}`, {}, JSON.stringify(newMessage));
     setMessage("");
   };
 
@@ -74,8 +77,12 @@ function ListenRadio() {
       <LSRadioChattingBox>
         <LsBottomContainer>
           <LsInputContainer>
-            <input placeholder="대화를 나눠보세요" />
-            <button>전송</button>
+            <input
+              placeholder="대화를 나눠보세요"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <button onClick={() => handleEnter(username, message)}>전송</button>
           </LsInputContainer>
         </LsBottomContainer>
       </LSRadioChattingBox>
