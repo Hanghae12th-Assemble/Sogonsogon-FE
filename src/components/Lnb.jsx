@@ -117,7 +117,7 @@ function Lnb({ isOpen, handleItemClick }) {
                                 );
                             }}
                         >
-                            <p>{username.userName}님</p>
+                            <p>{username.nickName}님</p>
                             <AiOutlineRight size={20} />
                         </LoginTrueFalseContainer>
                         <LoginHiLayout>안녕하세요!</LoginHiLayout>
