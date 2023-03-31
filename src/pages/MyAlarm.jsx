@@ -15,12 +15,25 @@ function MyAlarm() {
         dispatch(__getAlarm());
     }, [readingAlarm, removingAlarm]);
 
-    const notificationReadHandler = (notificationID) => {
-        dispatch(__readAlarm(notificationID));
+    useEffect(() => {
+        markAllAlarmsAsRead();
+    }, []);
+    async function markAllAlarmsAsRead() {
+        const alarms = await dispatch(__getAlarm());
+        const unreadAlarms = alarms?.payload?.data.filter((alarm) => !alarm.readstatus);
+        if (unreadAlarms.length > 0) {
+            unreadAlarms.forEach((alarm) => {
+                dispatch(__readAlarm(alarm.notificationId));
+            });
+        }
+    }
+
+    const notificationReadHandler = (notificationId) => {
+        dispatch(__readAlarm(notificationId));
     };
 
-    const removeAlarmHandler = (notificationID) => {
-        dispatch(__removeAlarm(notificationID));
+    const removeAlarmHandler = (notificationId) => {
+        dispatch(__removeAlarm(notificationId));
     };
 
     return (
@@ -34,7 +47,10 @@ function MyAlarm() {
                         <AiOutlineSync
                             size={25}
                             cursor={'pointer'}
-                            onClick={() => dispatch(__getAlarm())}
+                            onClick={() => {
+                                dispatch(__getAlarm());
+                                markAllAlarmsAsRead();
+                            }}
                         />
                     }
                 />
