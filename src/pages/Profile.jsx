@@ -11,13 +11,14 @@ import { pageswitch } from "../redux/module/reduxState/profileModifyButton";
 import Input from "../elements/Input";
 import { useForm } from "react-hook-form";
 import { getLocalStorage } from "../util/localStorage";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import isLogin from "../util/checkCookie";
 
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const navigate = useNavigate();
   const [preview, setPreview] = useState("");
+  const { id } = useParams();
   const [pageState] = useState(false);
   const user = JSON.parse(getLocalStorage("userInfo"));
   const {
@@ -83,7 +84,11 @@ function Profile() {
           toNavigate={"/"}
           iconleft={<AiOutlineArrowLeft size={20} onClick={onPageClick} />}
           title={"프로필"}
-          iconright={<MdOutlineModeEdit onClick={onPageModiClick} size={20} />}
+          iconright={
+            id === user.userName ? (
+              <MdOutlineModeEdit onClick={onPageModiClick} size={20} />
+            ) : null
+          }
         />
       </ProfileNavbarfixed>
       <ProfileTop>
