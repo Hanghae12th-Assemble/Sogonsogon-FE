@@ -1,39 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getAlarm } from '../redux/module/getAlarm';
 import { __readAlarm } from '../redux/module/readAlarm';
 import { __removeAlarm } from '../redux/module/removeAlarm';
 import Navbar from '../components/Navbar';
-import { AiOutlineArrowLeft, AiOutlineCheck, AiOutlineClose, AiOutlineSync } from 'react-icons/ai';
+import {
+    AiOutlineArrowLeft,
+    AiOutlineBorder,
+    AiFillCheckSquare,
+    AiOutlineSync,
+} from 'react-icons/ai';
 import styled from 'styled-components';
 
 function MyAlarm() {
     const { gettingAlarm, readingAlarm, removingAlarm } = useSelector((state) => state);
+    const [selectedAlarms, setSelectedAlarms] = useState([]);
 
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(__getAlarm());
     }, [readingAlarm, removingAlarm]);
 
-    useEffect(() => {
-        markAllAlarmsAsRead();
-    }, []);
-    async function markAllAlarmsAsRead() {
-        const alarms = await dispatch(__getAlarm());
-        const unreadAlarms = alarms?.payload?.data.filter((alarm) => !alarm.readstatus);
+    const unReadAlarmHandler = () => {
+        const unreadAlarms = gettingAlarm?.alarm?.data?.filter((alarm) => !alarm.readstatus);
         if (unreadAlarms.length > 0) {
             unreadAlarms.forEach((alarm) => {
                 dispatch(__readAlarm(alarm.notificationId));
             });
         }
-    }
-
-    const notificationReadHandler = (notificationId) => {
-        dispatch(__readAlarm(notificationId));
     };
 
-    const removeAlarmHandler = (notificationId) => {
-        dispatch(__removeAlarm(notificationId));
+    const toggleAlarmSelection = (notificationId) => {
+        const index = selectedAlarms.indexOf(notificationId);
+        if (index !== -1) {
+            const updatedSelections = [...selectedAlarms];
+            updatedSelections.splice(index, 1);
+            setSelectedAlarms(updatedSelections);
+        } else {
+            setSelectedAlarms([...selectedAlarms, notificationId]);
+        }
+    };
+
+    const removeSelectedAlarms = () => {
+        selectedAlarms.forEach((notificationId) => {
+            dispatch(__removeAlarm(notificationId));
+        });
+        setSelectedAlarms([]);
     };
 
     return (
@@ -41,7 +53,7 @@ function MyAlarm() {
             <NavbarContainer>
                 <Navbar
                     toNavigate={'/'}
-                    iconleft={<AiOutlineArrowLeft size={25} />}
+                    iconleft={<AiOutlineArrowLeft size={25} onClick={unReadAlarmHandler} />}
                     title={'알림'}
                     iconright={
                         <AiOutlineSync
@@ -49,7 +61,7 @@ function MyAlarm() {
                             cursor={'pointer'}
                             onClick={() => {
                                 dispatch(__getAlarm());
-                                markAllAlarmsAsRead();
+                                unReadAlarmHandler();
                             }}
                         />
                     }
@@ -57,10 +69,37 @@ function MyAlarm() {
             </NavbarContainer>
             <MyAlarmContainer>
                 {gettingAlarm?.alarm?.data?.map((item) => {
+                    const isSelected = selectedAlarms.includes(item.notificationId);
                     return (
                         <div key={item.notificationId}>
-                            <MyAlarmLayout>
-                                {' '}
+                            <MyAlarmLayout isRead={item.readStatus}>
+                                <MyAlarmBtnContainer>
+                                    {isSelected ? (
+                                        <AiFillCheckSquare
+                                            color="#ff9900"
+                                            cursor={'pointer'}
+                                            onClick={() =>
+                                                toggleAlarmSelection(item.notificationId)
+                                            }
+                                            size={25}
+                                            style={{
+                                                marginLeft: '10px',
+                                            }}
+                                        />
+                                    ) : (
+                                        <AiOutlineBorder
+                                            color="#ffe0b3"
+                                            cursor={'pointer'}
+                                            style={{
+                                                marginLeft: '10px',
+                                            }}
+                                            size={25}
+                                            onClick={() =>
+                                                toggleAlarmSelection(item.notificationId)
+                                            }
+                                        />
+                                    )}
+                                </MyAlarmBtnContainer>
                                 <MyAlarmProfileImg
                                     backgroundImageUrl={item.senderProfileImageUrl}
                                 />
@@ -70,30 +109,16 @@ function MyAlarm() {
                                     </MyAlarmDescLayout>
                                     <MyAlarmTimeLayout>{item.createdAt}</MyAlarmTimeLayout>
                                 </MyAlarmDescContainer>
-                                <MyAlarmBtnContainer>
-                                    {item.readStatus ? (
-                                        <AiOutlineCheck size={25} color={'grey'} />
-                                    ) : (
-                                        <AiOutlineCheck
-                                            size={25}
-                                            color={'#ff9900'}
-                                            cursor={'pointer'}
-                                            onClick={() =>
-                                                notificationReadHandler(item.notificationId)
-                                            }
-                                        />
-                                    )}{' '}
-                                    <AiOutlineClose
-                                        cursor={'pointer'}
-                                        onClick={() => removeAlarmHandler(item.notificationId)}
-                                        size={25}
-                                    />
-                                </MyAlarmBtnContainer>
                             </MyAlarmLayout>
                         </div>
                     );
                 })}
             </MyAlarmContainer>
+            {selectedAlarms.length > 0 && (
+                <SelectedAlarmContainer>
+                    <SelectedBtn onClick={removeSelectedAlarms}>선택한 알람 삭제</SelectedBtn>
+                </SelectedAlarmContainer>
+            )}
         </>
     );
 }
@@ -105,7 +130,6 @@ const NavbarContainer = styled.div`
 `;
 
 const MyAlarmContainer = styled.div`
-    border: 1px solid #f0efed;
     position: relative;
     width: 100%;
     height: 100%;
@@ -122,22 +146,25 @@ const MyAlarmContainer = styled.div`
 `;
 
 const MyAlarmLayout = styled.div`
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    background-color: ${({ isRead }) => (isRead ? 'none' : '#fffaf1')};
+    border-bottom: 1px solid #f0efed;
     display: flex;
     flex-direction: row;
     align-items: center;
     min-height: 100px;
-    padding: 10px 0px 10px 30px;
+    padding: 10px 10px 10px 0px;
 `;
 
 const MyAlarmProfileImg = styled.div`
+    /* border: 1px solid black; */
     min-width: 70px;
     min-height: 70px;
     overflow: hidden;
     position: relative;
     background-color: #393b3a6e;
     border-radius: 100%;
-    margin: 0px 20px 0px 20px;
+    margin: 0px 20px 0px 10px;
     opacity: 0.9;
     background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
     background-repeat: no-repeat;
@@ -170,7 +197,6 @@ const MyAlarmBtnContainer = styled.div`
 `;
 
 const MyAlarmDescLayout = styled.div`
-    /* border: 1px solid black; */
     min-height: 55px;
     display: flex;
     align-items: center;
@@ -180,4 +206,18 @@ const MyAlarmDescLayout = styled.div`
 `;
 const MyAlarmTimeLayout = styled.div`
     color: #a7a49e;
+`;
+
+const SelectedAlarmContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+`;
+
+const SelectedBtn = styled.button`
+    width: 100%;
+    height: 80px;
+    border: none;
+    background-color: #ff9900;
+    color: white;
 `;
