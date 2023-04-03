@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Button from "../elements/Button";
 import Input from "../elements/Input";
-import { __createRadio } from "../redux/module/createRadio";
+import { __createAudio } from "../redux/module/createAudio";
 import CreateRadioButton from "../components/CreateRadioButton";
 
 function Createradio() {
@@ -50,7 +50,7 @@ function Createradio() {
       formData.append(keyValue[0], keyValue[1]);
     }
 
-    dispatch(__createRadio(formData));
+    dispatch(__createAudio(formData));
     reset();
   };
 
