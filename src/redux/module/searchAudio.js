@@ -3,8 +3,8 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __searchRadio = createAsyncThunk(
-  "searchRadio",
+export const __searchAudio = createAsyncThunk(
+  "searchAudio",
   async (searchInfo, thunkAPI) => {
     return await axios
       .get(`api/radios/find?title=${searchInfo}`)
@@ -21,25 +21,25 @@ const initialState = {
   error: null,
 };
 
-const searchRadio = createSlice({
-  name: "searchRadio",
+const searchAudio = createSlice({
+  name: "searchAudio",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__searchRadio.pending, (state) => {
+    builder.addCase(__searchAudio.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__searchRadio.fulfilled, (state, action) => {
+    builder.addCase(__searchAudio.fulfilled, (state, action) => {
       state.isLoading = false;
       state.live = action.payload;
       state.error = null;
     });
-    builder.addCase(__searchRadio.rejected, (state, action) => {
+    builder.addCase(__searchAudio.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default searchRadio;
+export default searchAudio;
