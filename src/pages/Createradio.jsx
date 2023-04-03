@@ -43,7 +43,7 @@ function Createradio() {
   const submitForm = (data) => {
     const formData = new FormData();
     formData.append("title", data.title);
-    formData.append("hashtag", data.hashtag);
+    // formData.append("hashtag", data.hashtag);
     formData.append("introduction", data.introduction);
     formData.append("categoryType", selectBtn.title);
     for (const keyValue of formImagin) {
@@ -77,21 +77,6 @@ function Createradio() {
                 placeholder={"방송제목을 입력해주세요."}
                 validation={{
                   required: "방송 제목을 입력해주세요.",
-                }}
-                errors={errors}
-              />
-            </CrRadioPublicScopButton>
-          </CrRadioButtonSpanBox>
-          <CrRadioButtonSpanBox>
-            <span>해시태그*</span>
-            <CrRadioPublicScopButton>
-              <Input
-                register={register}
-                type={"text"}
-                name={"hashtag"}
-                placeholder={"해시태그를 입력해주세요."}
-                validation={{
-                  required: "해시태그를 입력해주세요.",
                 }}
                 errors={errors}
               />

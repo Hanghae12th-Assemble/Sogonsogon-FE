@@ -3,47 +3,11 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import RadioInfobar from "../components/RadioInfobar";
-import SockJS from "sockjs-client";
-import Stomp from "stompjs";
-
-let sockJS = new SockJS("http://3.37.146.173:8080/webSocket");
-let stompClient = Stomp.over(sockJS);
-stompClient.debug = () => {};
 
 function ListenRadio() {
   const { id } = useParams();
-  const [contents, setContents] = useState([]);
-  const [username, setUsername] = useState("");
-  const [message, setMessage] = useState("");
-  const user = JSON.parse(localStorage.getItem("userInfo"));
 
   const { gettingRadio } = useSelector((state) => state);
-
-  useEffect(() => {
-    setUsername(user.userName);
-    return () => {
-      stompClient.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    stompClient.connect({}, () => {
-      stompClient.subscribe(`/chat/${id}`, (data) => {
-        const newMessage = JSON.parse(data.body);
-        addMessage(newMessage);
-      });
-    });
-  }, [contents]);
-
-  const handleEnter = (username, content) => {
-    const newMessage = { username, content };
-    stompClient.send(`/${id}`, {}, JSON.stringify(newMessage));
-    setMessage("");
-  };
-
-  const addMessage = (message) => {
-    setContents((prev) => [...prev, message]);
-  };
 
   const getRadioData = gettingRadio?.radio?.map((item) =>
     item.data.result.map((i) => i)
@@ -52,11 +16,13 @@ function ListenRadio() {
   const radioData = getRadioData?.map((item, i) =>
     item.find((i) => i.id === Number(id))
   );
+
   const foundRadio = radioData.filter((item) => {
     if (item !== undefined) {
       return item;
     }
   });
+
   return (
     <LSRadio>
       <LSRadioTopBox backgroundImageUrl={foundRadio[0]?.backgroundImageUrl}>
@@ -77,12 +43,8 @@ function ListenRadio() {
       <LSRadioChattingBox>
         <LsBottomContainer>
           <LsInputContainer>
-            <input
-              placeholder="대화를 나눠보세요"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
-            <button onClick={() => handleEnter(username, message)}>전송</button>
+            <input placeholder="대화를 나눠보세요" />
+            <button>전송</button>
           </LsInputContainer>
         </LsBottomContainer>
       </LSRadioChattingBox>

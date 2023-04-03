@@ -52,5 +52,5 @@ const NavbarLogoTittle = styled.div`
   align-items: center;
   justify-content: center;
   font-weight: bolder;
-  font-size: 25px;
+  font-size: 20px;
 `;
