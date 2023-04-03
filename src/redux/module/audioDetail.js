@@ -3,8 +3,8 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __enterAudio = createAsyncThunk(
-  "enterAudio ",
+export const __audioDetail = createAsyncThunk(
+  "audioDetail ",
   async (radioId, thunkAPI) => {
     return await axios
       .post(`/api/radios/enter/${radioId}`, {})
@@ -19,25 +19,25 @@ const initialState = {
   error: null,
 };
 
-const enterAudio = createSlice({
-  name: "enterAudio ",
+const audioDetail = createSlice({
+  name: "audioDetail ",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__enterAudio.pending, (state) => {
+    builder.addCase(__audioDetail.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__enterAudio.fulfilled, (state, action) => {
+    builder.addCase(__audioDetail.fulfilled, (state, action) => {
       state.isLoading = false;
       state.audio = action.payload;
       state.error = null;
     });
-    builder.addCase(__enterAudio.rejected, (state, action) => {
+    builder.addCase(__audioDetail.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default enterAudio;
+export default audioDetail;

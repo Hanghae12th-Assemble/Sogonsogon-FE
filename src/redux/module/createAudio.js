@@ -5,12 +5,12 @@ const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
 export const __createAudio = createAsyncThunk(
   "createAudio",
-  async (radioInfo, thunkAPI) => {
+  async (audioInfo, thunkAPI) => {
     return await axios
-      .post(`api/radios`, radioInfo)
-      .then((response) => alert(response && "라디오 생성에 성공하였습니다."))
+      .post(`api/audioclip/uploaded`, audioInfo)
+      .then((response) => alert(response && "오디오 생성에 성공하였습니다."))
       .catch((error) =>
-        alert(error && "라디오 이름이 중복되거나 로그인 상태가 아닙니다.")
+        alert(error && "오디오 이름이 중복되거나 로그인 상태가 아닙니다.")
       );
   }
 );
