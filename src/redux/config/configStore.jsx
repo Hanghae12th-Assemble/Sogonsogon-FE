@@ -17,7 +17,7 @@ import updateProfile from "../module/updateProfile";
 import getAlarm from "../module/getAlarm";
 import readAlarm from "../module/readAlarm";
 import removeAlarm from "../module/removeAlarm";
-import enterRadio from "../module/enterRadio";
+import enterAudio from "../module/enterAudio";
 
 const sotre = configureStore({
   reducer: {
@@ -39,7 +39,7 @@ const sotre = configureStore({
     gettingAlarm: getAlarm.reducer,
     readingAlarm: readAlarm.reducer,
     removingAlarm: removeAlarm.reducer,
-    enteringRadio: enterRadio.reducer,
+    enteringAudio: enterAudio.reducer,
   },
 });
 
