@@ -22,8 +22,6 @@ function Lnb({ isOpen, handleItemClick }) {
     const [alarm, setAlarm] = useState(false);
     const data = useSelector((state) => state.gettingAlarm);
     const dispatch = useDispatch();
-    console.log(alarm);
-    console.log('data', data);
 
     useEffect(() => {
         if (token) {
@@ -33,11 +31,10 @@ function Lnb({ isOpen, handleItemClick }) {
                 eventSource && eventSource.close();
             };
         }
-    }, [isOpen]);
+    }, [isOpen, alarm]);
 
     useEffect(() => {
         const unreadAlarms = data?.alarm?.data?.some((item) => !item.readStatus);
-        console.log('unread', unreadAlarms);
         setAlarm(unreadAlarms);
     }, [data]);
 
@@ -71,6 +68,7 @@ function Lnb({ isOpen, handleItemClick }) {
                 }
             };
         } catch (error) {
+            console.log(error);
             if (eventSource) eventSource.close();
         }
     };

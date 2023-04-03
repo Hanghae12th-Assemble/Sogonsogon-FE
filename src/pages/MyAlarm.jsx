@@ -22,7 +22,9 @@ function MyAlarm() {
     }, [readingAlarm, removingAlarm]);
 
     const unReadAlarmHandler = () => {
-        const unreadAlarms = gettingAlarm?.alarm?.data?.filter((alarm) => !alarm.readstatus);
+        const unreadAlarms = gettingAlarm?.alarm?.data?.filter(
+            (alarm) => alarm.readStatus !== true
+        );
         if (unreadAlarms.length > 0) {
             unreadAlarms.forEach((alarm) => {
                 dispatch(__readAlarm(alarm.notificationId));
