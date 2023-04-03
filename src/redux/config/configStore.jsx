@@ -10,7 +10,7 @@ import searchRadio from "../module/searchRadio";
 import searchUser from "../module/searchUser";
 import getFollowing from "../module/following";
 import getFollower from "../module/follower";
-import removeRadio from "../module/removeRadio";
+import removeAudio from "../module/removeAudio";
 import getProfile from "../module/getProfile";
 import getAudioCategory from "../module/getAudioCategory";
 import updateProfile from "../module/updateProfile";
@@ -32,7 +32,7 @@ const sotre = configureStore({
     searchingUser: searchUser.reducer,
     gettingFollowing: getFollowing.reducer,
     gettingFollower: getFollower.reducer,
-    removingRadio: removeRadio.reducer,
+    removingAudio: removeAudio.reducer,
     gettingProfile: getProfile.reducer,
     gettingAudioCategory: getAudioCategory.reducer,
     updatingProfile: updateProfile.reducer,
