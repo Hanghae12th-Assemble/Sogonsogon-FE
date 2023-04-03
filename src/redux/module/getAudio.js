@@ -36,7 +36,7 @@ const getAudio = createSlice({
     });
     builder.addCase(__getAudio.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.radio = [...state.radio].concat(action.payload);
+      state.audio = [...state.audio].concat(action.payload);
       state.error = null;
     });
     builder.addCase(__getAudio.rejected, (state, action) => {

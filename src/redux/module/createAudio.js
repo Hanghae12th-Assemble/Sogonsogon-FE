@@ -8,10 +8,8 @@ export const __createAudio = createAsyncThunk(
   async (audioInfo, thunkAPI) => {
     return await axios
       .post(`api/audioclip/uploaded`, audioInfo)
-      .then((response) => alert(response && "오디오 생성에 성공하였습니다."))
-      .catch((error) =>
-        alert(error && "오디오 이름이 중복되거나 로그인 상태가 아닙니다.")
-      );
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   }
 );
 

@@ -11,6 +11,7 @@ import CreateRadioButton from "../components/CreateRadioButton";
 
 function Createradio() {
   const [formImagin, setFormformImagin] = useState(new FormData());
+  const [mediaFile, setMediaFile] = useState(null);
   const [preview, setPreview] = useState("");
   const dispatch = useDispatch();
 
@@ -21,12 +22,16 @@ function Createradio() {
     reset,
   } = useForm();
 
+  const onFileChange = (e) => {
+    setMediaFile(e.target.files[0]);
+  };
+
   const selectBtn = useSelector((state) => state.radioButn[0]);
 
   const onChangeimge = (e) => {
     const img = e.target.files[0];
     const formImg = new FormData();
-    formImg.append("backgroundImageUrl", img);
+    formImg.append("audioclipImage", img);
     const reader = new FileReader();
     setFormformImagin(formImg);
     reader.onloadend = () => {
@@ -43,9 +48,8 @@ function Createradio() {
   const submitForm = (data) => {
     const formData = new FormData();
     formData.append("title", data.title);
-    // formData.append("hashtag", data.hashtag);
-    formData.append("introduction", data.introduction);
-    formData.append("categoryType", selectBtn.title);
+    formData.append("contents", data.introduction);
+    formData.append("audioclip", mediaFile);
     for (const keyValue of formImagin) {
       formData.append(keyValue[0], keyValue[1]);
     }
@@ -106,7 +110,8 @@ function Createradio() {
                 onChange={onChangeimge}
               />
             </CrRadioPublicScopButton>
-            <CrPreviewDiv>
+            <input type="file" onChange={onFileChange} accept=".mp4,.mp3" />
+            {/* <CrPreviewDiv>
               {preview ? (
                 <div>
                   <CrRadioImg src={preview} alt="Preview" />
@@ -116,7 +121,7 @@ function Createradio() {
                   <span>이미지를 업로드 해주세요.</span>
                 </CrPreviewDivSpan>
               )}
-            </CrPreviewDiv>
+            </CrPreviewDiv> */}
           </CrRadioButtonSpanBox>
           <CrRadioButtonNext>
             <Button lgBtn>만들기</Button>
