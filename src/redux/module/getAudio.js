@@ -3,8 +3,8 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __getRadio = createAsyncThunk(
-  "getRadio",
+export const __getAudio = createAsyncThunk(
+  "getAudio",
   async (page, thunkAPI) => {
     return await axios
       .get(`api/radios/?page=${page}&size=10&sortBy=createdAt`)
@@ -19,8 +19,8 @@ const initialState = {
   error: null,
 };
 
-const getRadio = createSlice({
-  name: "getRadio",
+const getAudio = createSlice({
+  name: "getAudio",
   initialState,
   reducers: {
     initInfinitiScroll: (state, action) => {
@@ -30,21 +30,21 @@ const getRadio = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(__getRadio.pending, (state) => {
+    builder.addCase(__getAudio.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__getRadio.fulfilled, (state, action) => {
+    builder.addCase(__getAudio.fulfilled, (state, action) => {
       state.isLoading = false;
       state.radio = [...state.radio].concat(action.payload);
       state.error = null;
     });
-    builder.addCase(__getRadio.rejected, (state, action) => {
+    builder.addCase(__getAudio.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export const { initInfinitiScroll } = getRadio.actions;
-export default getRadio;
+export const { initInfinitiScroll } = getAudio.actions;
+export default getAudio;
