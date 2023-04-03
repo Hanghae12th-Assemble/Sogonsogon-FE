@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  __getCategoryRadio,
+  __getCategoryAdudio,
   initInfinitiScroll,
-} from "../redux/module/getRadioCategory";
+} from "../redux/module/getAudioCategory";
 import { useDispatch, useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 import RadioContainer from "../components/RadioContainer";
@@ -31,7 +31,7 @@ function Tag() {
   const radioContainerRef = useRef();
   const [ref, inView] = useInView();
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.gettingRadioCategory);
+  const data = useSelector((state) => state.gettingAudioCategory);
   const [isLnbOpen, setIsLnbOpen] = useState(false);
   const scrollPos = useScroll(radioContainerRef);
   const navigate = useNavigate();
@@ -40,13 +40,13 @@ function Tag() {
   useEffect(() => {
     page.current = 1;
     dispatch(initInfinitiScroll());
-    dispatch(__getCategoryRadio({ categoryType: id, page: page.current }));
+    dispatch(__getCategoryAdudio({ categoryType: id, page: page.current }));
   }, [id]);
 
   useEffect(() => {
     if (inView) {
       page.current += 1;
-      dispatch(__getCategoryRadio({ categoryType: id, page: page.current }));
+      dispatch(__getCategoryAdudio({ categoryType: id, page: page.current }));
     }
   }, [inView]);
 

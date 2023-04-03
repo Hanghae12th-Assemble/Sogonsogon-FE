@@ -12,7 +12,7 @@ import getFollowing from "../module/following";
 import getFollower from "../module/follower";
 import removeRadio from "../module/removeRadio";
 import getProfile from "../module/getProfile";
-import getRadioCategory from "../module/getRadioCategory";
+import getAudioCategory from "../module/getAudioCategory";
 import updateProfile from "../module/updateProfile";
 import getAlarm from "../module/getAlarm";
 import readAlarm from "../module/readAlarm";
@@ -34,7 +34,7 @@ const sotre = configureStore({
     gettingFollower: getFollower.reducer,
     removingRadio: removeRadio.reducer,
     gettingProfile: getProfile.reducer,
-    gettingRadioCategory: getRadioCategory.reducer,
+    gettingAudioCategory: getAudioCategory.reducer,
     updatingProfile: updateProfile.reducer,
     gettingAlarm: getAlarm.reducer,
     readingAlarm: readAlarm.reducer,

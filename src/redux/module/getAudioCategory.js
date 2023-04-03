@@ -3,8 +3,8 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __getCategoryRadio = createAsyncThunk(
-  "getProfile",
+export const __getCategoryAdudio = createAsyncThunk(
+  "getCategoryAdudio",
   async ({ categoryType, page }, thunkAPI) => {
     return await axios
       .get(`api/radios/${categoryType}?page=${page}&size=8&sortBy=createdAt`)
@@ -16,13 +16,13 @@ export const __getCategoryRadio = createAsyncThunk(
 );
 
 const initialState = {
-  radio: [],
+  audio: [],
   isLoading: false,
   error: null,
 };
 
-const getProfile = createSlice({
-  name: "getProfile",
+const getCategoryAdudio = createSlice({
+  name: "getCategoryAdudio",
   initialState,
   reducers: {
     initInfinitiScroll: (state, action) => {
@@ -32,21 +32,21 @@ const getProfile = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(__getCategoryRadio.pending, (state) => {
+    builder.addCase(__getCategoryAdudio.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__getCategoryRadio.fulfilled, (state, action) => {
+    builder.addCase(__getCategoryAdudio.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.radio = [...state.radio].concat(action.payload);
+      state.audio = [...state.audio].concat(action.payload);
       state.error = null;
     });
-    builder.addCase(__getCategoryRadio.rejected, (state, action) => {
+    builder.addCase(__getCategoryAdudio.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export const { initInfinitiScroll } = getProfile.actions;
-export default getProfile;
+export const { initInfinitiScroll } = getCategoryAdudio.actions;
+export default getCategoryAdudio;
