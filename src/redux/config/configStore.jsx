@@ -19,6 +19,10 @@ import readAlarm from "../module/readAlarm";
 import removeAlarm from "../module/removeAlarm";
 import audioDetail from "../module/audioDetail";
 import updateAudio from "../module/updateAudio";
+import createAudioComment from "../module/createAudioComment";
+import updateAudioComment from "../module/updateAudioComment";
+import getAudioComment from "../module/getAudioComment";
+import removeAudioComment from "../module/removeAudioComment";
 
 const sotre = configureStore({
   reducer: {
@@ -42,6 +46,10 @@ const sotre = configureStore({
     removingAlarm: removeAlarm.reducer,
     audioDetails: audioDetail.reducer,
     updatingAudio: updateAudio.reducer,
+    creatingAudioComment: createAudioComment.reducer,
+    updatingAudioComment: updateAudioComment.reducer,
+    gettingAudioComment: getAudioComment.reducer,
+    removingAudioComment: removeAudioComment.reducer,
   },
 });
 
