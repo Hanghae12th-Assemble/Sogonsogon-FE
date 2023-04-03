@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import RadioInfobar from "../components/RadioInfobar";
 import isLogin from "../util/checkCookie";
-import { __enterAudio } from "../redux/module/enterAudio";
+import { __audioDetail } from "../redux/module/audioDetail";
 
 function RadioPreview() {
   const { id } = useParams();
@@ -27,7 +27,7 @@ function RadioPreview() {
   });
 
   const RadionEntranceHandler = () => {
-    dispatch(__enterAudio(id));
+    dispatch(__audioDetail(id));
     if (isLogin()) {
       document.startViewTransition(() => navigate(`/listen/${id}`));
     } else {

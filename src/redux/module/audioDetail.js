@@ -5,9 +5,9 @@ const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
 export const __audioDetail = createAsyncThunk(
   "audioDetail ",
-  async (radioId, thunkAPI) => {
+  async (audioId, thunkAPI) => {
     return await axios
-      .post(`/api/radios/enter/${radioId}`, {})
+      .get(`api/audioclip/${audioId}`, {})
       .then((response) => thunkAPI.fulfillWithValue(response.data))
       .catch((error) => console.log(error));
   }

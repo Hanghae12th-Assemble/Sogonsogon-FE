@@ -14,7 +14,7 @@ export const __getAudio = createAsyncThunk(
 );
 
 const initialState = {
-  radio: [],
+  audio: [],
   isLoading: false,
   error: null,
 };
@@ -26,7 +26,7 @@ const getAudio = createSlice({
     initInfinitiScroll: (state, action) => {
       state.isLoading = false;
       state.error = false;
-      state.radio = [];
+      state.audio = [];
     },
   },
   extraReducers: (builder) => {
