@@ -3,8 +3,8 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __removeRadio = createAsyncThunk(
-  "removeRadio",
+export const __removeAudio = createAsyncThunk(
+  "removeAudio",
   async (radioNumber, thunkAPI) => {
     return await axios
       .delete(`api/radios/${radioNumber}`)
@@ -16,30 +16,30 @@ export const __removeRadio = createAsyncThunk(
 );
 
 const initialState = {
-  radio: null,
+  audio: null,
   isLoading: false,
   error: null,
 };
 
-const removeRadio = createSlice({
-  name: "removeRadio",
+const removeAudio = createSlice({
+  name: "removeAudio",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__removeRadio.pending, (state) => {
+    builder.addCase(__removeAudio.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__removeRadio.fulfilled, (state, action) => {
+    builder.addCase(__removeAudio.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.radio = action.payload;
+      state.audio = action.payload;
       state.error = null;
     });
-    builder.addCase(__removeRadio.rejected, (state, action) => {
+    builder.addCase(__removeAudio.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default removeRadio;
+export default removeAudio;
