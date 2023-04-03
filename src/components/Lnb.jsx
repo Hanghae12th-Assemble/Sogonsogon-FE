@@ -22,6 +22,8 @@ function Lnb({ isOpen, handleItemClick }) {
     const [alarm, setAlarm] = useState(false);
     const data = useSelector((state) => state.gettingAlarm);
     const dispatch = useDispatch();
+    console.log(alarm);
+    console.log('data', data);
 
     useEffect(() => {
         if (token) {
@@ -35,6 +37,7 @@ function Lnb({ isOpen, handleItemClick }) {
 
     useEffect(() => {
         const unreadAlarms = data?.alarm?.data?.some((item) => !item.readStatus);
+        console.log('unread', unreadAlarms);
         setAlarm(unreadAlarms);
     }, [data]);
 
@@ -53,7 +56,18 @@ function Lnb({ isOpen, handleItemClick }) {
 
             eventSource.onmessage = async function (event) {
                 if (event.data !== `EventStream Created. [userId=${username.id}]`) {
+                    const data = JSON.parse(event.data);
+                    const message = data.message;
+                    const notificationTitle = '새로운 알림이 있습니다!';
+                    const notificationOptions = {
+                        body: message,
+                    };
                     setAlarm(true);
+                    const notification = new Notification(notificationTitle, notificationOptions);
+                    notification.onclick = function (event) {
+                        event.preventDefault();
+                        document.startViewTransition(() => navigate(`/alarm/${username.userName}`));
+                    };
                 }
             };
         } catch (error) {
