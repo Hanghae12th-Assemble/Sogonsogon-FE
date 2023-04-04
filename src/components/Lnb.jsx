@@ -26,7 +26,9 @@ function Lnb({ isOpen, handleItemClick }) {
     useEffect(() => {
         if (token) {
             fetchSse();
-            dispatch(__getAlarm());
+            if (isOpen === true) {
+                dispatch(__getAlarm());
+            }
             return () => {
                 eventSource && eventSource.close();
             };
@@ -68,7 +70,6 @@ function Lnb({ isOpen, handleItemClick }) {
                 }
             };
         } catch (error) {
-            console.log(error);
             if (eventSource) eventSource.close();
         }
     };
