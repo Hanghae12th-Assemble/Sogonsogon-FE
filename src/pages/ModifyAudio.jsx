@@ -6,7 +6,7 @@ import { __createAudio } from "../redux/module/createAudio";
 import CreateRadioButton from "../components/CreateRadioButton";
 import CreateRadioInputs from "../components/CreateRadioInputs";
 
-function CreateAudio() {
+function ModifyAudio() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
 
@@ -16,7 +16,7 @@ function CreateAudio() {
         <Navbar
           toNavigate={"/"}
           iconleft={<AiOutlineArrowLeft size={20} />}
-          title={"앨범 만들기"}
+          title={"앨범 수정하기"}
         />
         <CreateRadioButton />
         <CreateRadioInputs
@@ -30,7 +30,7 @@ function CreateAudio() {
   );
 }
 
-export default CreateAudio;
+export default ModifyAudio;
 
 const CrRadioContainer = styled.div`
   //border: 1px solid red;

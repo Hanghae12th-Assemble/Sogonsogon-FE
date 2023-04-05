@@ -6,11 +6,13 @@ import Button from "../elements/Button";
 import { useSelector } from "react-redux";
 import { __createAudio } from "../redux/module/createAudio";
 
-function CreateRadioInputs({
+function CreateClipInputs({
   setFormformImagin,
   setPreview,
   preview,
   formImagin,
+  setSelectedFile,
+  selectedFile,
 }) {
   const {
     handleSubmit,
@@ -18,8 +20,6 @@ function CreateRadioInputs({
     formState: { errors },
     reset,
   } = useForm();
-
-  const btninfo = useSelector((state) => state.radioButn[0]);
 
   const onChangeimge = (e) => {
     const img = e.target.files[0];
@@ -38,11 +38,15 @@ function CreateRadioInputs({
     }
   };
 
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
   const submitForm = (data) => {
     const formData = new FormData();
-    formData.append("title", btninfo.title);
     formData.append("name", data.title);
     formData.append("contents", data.introduction);
+    formData.append("audiofile", selectedFile);
     for (const keyValue of formImagin) {
       formData.append(keyValue[0], keyValue[1]);
     }
@@ -61,9 +65,9 @@ function CreateRadioInputs({
               register={register}
               type={"text"}
               name={"title"}
-              placeholder={"앨범 제목을 입력해주세요."}
+              placeholder={"클립 제목을 입력해주세요."}
               validation={{
-                required: "앨범 제목을 입력해주세요.",
+                required: "클립 제목을 입력해주세요.",
               }}
               errors={errors}
             />
@@ -76,18 +80,26 @@ function CreateRadioInputs({
               register={register}
               type={"text"}
               name={"introduction"}
-              placeholder={"앨범 정보를 입력해주세요."}
+              placeholder={"클립 정보를 입력해주세요."}
               validation={{
-                required: "앨범 정보를 입력해주세요.",
+                required: "클립 정보를 입력해주세요.",
               }}
               errors={errors}
             />
           </CrRadioPublicScopButton>
         </CrRadioButtonSpanBox>
         <CrRadioButtonSpanBox>
-          <span>이미지</span>
+          <span>대표 이미지</span>
           <CrRadioPublicScopButton>
             <CrFileInput type="file" accept="image/*" onChange={onChangeimge} />
+          </CrRadioPublicScopButton>
+          <span>오디오 업로드</span>
+          <CrRadioPublicScopButton>
+            <CrFileInput
+              type="file"
+              accept=".mp3, .mp4"
+              onChange={handleFileChange}
+            />
           </CrRadioPublicScopButton>
           <CrPreviewDiv>
             {preview ? (
@@ -109,7 +121,7 @@ function CreateRadioInputs({
   );
 }
 
-export default CreateRadioInputs;
+export default CreateClipInputs;
 
 const CrRadioButtonSpanBox = styled.div`
   margin-top: 40px;
