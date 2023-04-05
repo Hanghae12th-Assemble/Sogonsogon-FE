@@ -8,7 +8,7 @@ export const routers = Object.freeze({
   TAG: "tag/:id",
   SEARCH: "search",
   AUDIODETAIL: "audio/:id",
-  KAKAORE: "/login/oauth2/code/kakao",
+  KAKAORE: "/login/oauth2/kakao",
   NAVERRE: "/login/oauth2/code/naver",
   MYALARM: "alarm/:id",
 });

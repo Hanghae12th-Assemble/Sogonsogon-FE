@@ -6,10 +6,10 @@ const axios = new Axios(process.env.REACT_APP_BASE_URL);
 export const __getAudio = createAsyncThunk(
   "getAudio",
   async (page, thunkAPI) => {
-    return await axios
-      .get(`api/radios/?page=${page}&size=10&sortBy=createdAt`)
-      .then((response) => thunkAPI.fulfillWithValue(response?.data))
-      .catch((error) => alert(error && "다시 라디오를 조회해주세요."));
+    // return await axios
+    //   .get(`api/radios/?page=${page}&size=10&sortBy=createdAt`)
+    //   .then((response) => thunkAPI.fulfillWithValue(response?.data))
+    //   .catch((error) => console.log(error));
   }
 );
 

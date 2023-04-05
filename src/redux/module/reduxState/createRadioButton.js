@@ -7,8 +7,8 @@ const buttonInfo = createSlice({
   initialState,
   reducers: {
     butn: (state, action) => {
-      const { title, scope } = action.payload;
-      state[0] = { title, scope };
+      const title = action.payload;
+      state[0] = title;
     },
   },
 });

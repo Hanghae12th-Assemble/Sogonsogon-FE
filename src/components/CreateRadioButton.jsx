@@ -10,33 +10,18 @@ import { ReactComponent as Book } from "../asset/icon/book.svg";
 import { ReactComponent as Asmr } from "../asset/icon/asmr.svg";
 
 function CreateRadioButton() {
-  const [selected, setSelected] = useState({
-    selectedButton: null,
-    selectedScopButton: null,
-  });
-  const [buttonVlaue, setButtonVlaue] = useState({
-    title: "",
-    scop: "",
-  });
+  const [selected, setSelected] = useState("");
+  const [buttonVlaue, setButtonVlaue] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(butn({ title: buttonVlaue.title, scope: buttonVlaue.scop }));
+    dispatch(butn({ title: buttonVlaue.title }));
   }, [buttonVlaue]);
 
   const handleButtonClick = (button) => {
     handleSelectedButtonClick(
       "selectedButton",
       "title",
-      button,
-      setSelected,
-      setButtonVlaue
-    );
-  };
-  const handleScopeButtonClick = (button) => {
-    handleSelectedButtonClick(
-      "selectedScopButton",
-      "scop",
       button,
       setSelected,
       setButtonVlaue
@@ -61,7 +46,7 @@ function CreateRadioButton() {
   return (
     <>
       <CrRadioButtonSpanBox>
-        <span>방송 주제*</span>
+        <span>앨범 주제*</span>
         <CrRadioPublicScopButton>
           {["음악", "일상", "도서", "ASMR"].map((text, i) => {
             return (
@@ -78,28 +63,6 @@ function CreateRadioButton() {
                   {text}
                 </CrRadioBtn>
               </CrRadioButton>
-            );
-          })}
-        </CrRadioPublicScopButton>
-      </CrRadioButtonSpanBox>
-      <CrRadioButtonSpanBox>
-        <span>공개범위*</span>
-        <CrRadioPublicScopButton>
-          {["전체 공개", "구독자만"].map((text, i) => {
-            return (
-              <CrRadioScpeButton
-                key={i}
-                CrRadioBtn
-                isSelecte={selected.selectedScopButton === `button${i}`}
-                onClick={() =>
-                  handleScopeButtonClick({
-                    buttonNum: `button${i}`,
-                    value: text,
-                  })
-                }
-              >
-                {text}
-              </CrRadioScpeButton>
             );
           })}
         </CrRadioPublicScopButton>
@@ -130,12 +93,6 @@ const CrRadioBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const CrRadioScpeButton = styled(Button)`
-  margin-right: 10px;
-  background-color: ${(props) => (props.isSelecte ? "#262626" : "#f1f2f6")};
-  color: ${(props) => (props.isSelecte ? "white" : "black")};
 `;
 
 const StyledIcon = styled.div`
