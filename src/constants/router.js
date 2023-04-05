@@ -11,4 +11,5 @@ export const routers = Object.freeze({
     KAKAORE: '/login/oauth2/code/kakao',
     NAVERRE: '/login/oauth2/code/naver',
     MYALARM: 'alarm/:id',
+    MYALBUM: 'album/:id',
 });
