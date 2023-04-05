@@ -26,7 +26,9 @@ function Lnb({ isOpen, handleItemClick }) {
     useEffect(() => {
         if (token) {
             fetchSse();
-            dispatch(__getAlarm());
+            if (isOpen === true) {
+                dispatch(__getAlarm());
+            }
             return () => {
                 eventSource && eventSource.close();
             };
@@ -68,7 +70,6 @@ function Lnb({ isOpen, handleItemClick }) {
                 }
             };
         } catch (error) {
-            console.log(error);
             if (eventSource) eventSource.close();
         }
     };
@@ -158,7 +159,15 @@ function Lnb({ isOpen, handleItemClick }) {
                     ))}
                 </LnbMenuLayout>
                 {token && username && (
-                    <LogoutBtnLayout onClick={LogoutBtnHandler}>로그아웃</LogoutBtnLayout>
+                    <>
+                        <MyAlbumBtn>
+                            <div>
+                                <span><Asmr /></span>
+                                내 앨범
+                            </div>
+                        </MyAlbumBtn>
+                        <LogoutBtnLayout onClick={LogoutBtnHandler}>로그아웃</LogoutBtnLayout>
+                    </>
                 )}
             </LnbLayout>
             <LnbBlackBackGround isOpen={isOpen} onClick={handleItemClick} />
@@ -198,7 +207,7 @@ const LnbNotifications = styled(Notifications)`
 `;
 
 const LnbMenuLayout = styled.div`
-    height: 300px;
+    height: 260px;
     padding: 25px;
     margin-top: 80px;
 
@@ -270,3 +279,24 @@ const LnbBlackBackGround = styled.div`
     top: 0;
     bottom: 0;
 `;
+
+const MyAlbumBtn = styled.div`
+    padding: 0px 0px 0px 25px;
+    margin-top: 20px;
+    div {
+        cursor: pointer;
+        width: fit-content;
+        height: fit-content;
+        display: block;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: flex-start;
+        color: #333;
+    }
+    span {
+        width: 20px;
+        margin-right: 10px;
+    }
+`

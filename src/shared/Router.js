@@ -12,9 +12,10 @@ import Notfound from "../pages/Notfound";
 import Search from "../pages/Search";
 import KakkaoRedirect from "../pages/KakkaoRedirect";
 import { routers } from "../constants/router";
+import AudioPreview from "../pages/AudioPreview";
 import NaverRedirect from "../pages/NaverRedirect";
 import MyAlarm from "../pages/MyAlarm";
-import AudioDtail from "../pages/AudioDetail";
+import MyAlbum from "../pages/MyAlbum";
 
 function Router() {
   return (
@@ -22,18 +23,19 @@ function Router() {
       <Routes>
         <Route path="/*" element={<Notfound />} />
         <Route path="/" element={<Home />} />
-        <Route path={`/${routers.CREATEAUDIO}`} element={<CreateAudio />} />
+        <Route path={`/${routers.CREATERADIO}`} element={<CreateAudio />} />
         <Route path={`/${routers.SELECTLOGIN}`} element={<Selectlogin />} />
         <Route path={`/${routers.SIGNUP}`} element={<Signup />} />
         <Route path={`/${routers.LISTENRADIO}`} element={<ListenAudio />} />
         <Route path={`/${routers.EMAILLOGIN}`} element={<Emaillogin />} />
         <Route path={`/${routers.PROFILE}`} element={<Profile />} />
         <Route path={`/${routers.SEARCH}`} element={<Search />} />
-        <Route path={`/${routers.AUDIODETAIL}`} element={<AudioDtail />} />
         <Route path={`/${routers.TAG}`} element={<Tag />} />
+        <Route path={`/${routers.RADIOPREVIEW}`} element={<AudioPreview />} />
         <Route path={`/${routers.KAKAORE}`} element={<KakkaoRedirect />} />
         <Route path={`/${routers.NAVERRE}`} element={<NaverRedirect />} />
         <Route path={`/${routers.MYALARM}`} element={<MyAlarm />} />
+        <Route path={`/${routers.MYALBUM}`} element={<MyAlbum />} />
       </Routes>
     </BrowserRouter>
   );

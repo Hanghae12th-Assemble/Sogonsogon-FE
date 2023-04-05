@@ -15,18 +15,24 @@ import styled from 'styled-components';
 function MyAlarm() {
     const { gettingAlarm, readingAlarm, removingAlarm } = useSelector((state) => state);
     const [selectedAlarms, setSelectedAlarms] = useState([]);
-
+    const [unreadAlarm, setUnReadAlarm] = useState(0);
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(__getAlarm());
     }, [readingAlarm, removingAlarm]);
 
-    const unReadAlarmHandler = () => {
+    const unReadAlarmCheck = () => {
         const unreadAlarms = gettingAlarm?.alarm?.data?.filter(
             (alarm) => alarm.readStatus !== true
         );
-        if (unreadAlarms.length > 0) {
-            unreadAlarms.forEach((alarm) => {
+        return unreadAlarms;
+    };
+
+    const unReadAlarmHandler = () => {
+        const unreadAlarms = unReadAlarmCheck();
+        if (unreadAlarms?.length > 0) {
+            unreadAlarms?.forEach((alarm) => {
                 dispatch(__readAlarm(alarm.notificationId));
             });
         }
@@ -52,74 +58,88 @@ function MyAlarm() {
 
     return (
         <>
-            <NavbarContainer>
-                <Navbar
-                    toNavigate={'/'}
-                    iconleft={<AiOutlineArrowLeft size={25} onClick={unReadAlarmHandler} />}
-                    title={'알림'}
-                    iconright={
-                        <AiOutlineSync
-                            size={25}
-                            cursor={'pointer'}
-                            onClick={() => {
-                                dispatch(__getAlarm());
-                                unReadAlarmHandler();
-                            }}
-                        />
-                    }
-                />
-            </NavbarContainer>
-            <MyAlarmContainer>
-                {gettingAlarm?.alarm?.data?.map((item) => {
-                    const isSelected = selectedAlarms.includes(item.notificationId);
-                    return (
-                        <div key={item.notificationId}>
-                            <MyAlarmLayout isRead={item.readStatus}>
-                                <MyAlarmBtnContainer>
-                                    {isSelected ? (
-                                        <AiFillCheckSquare
-                                            color="#ff9900"
-                                            cursor={'pointer'}
-                                            onClick={() =>
-                                                toggleAlarmSelection(item.notificationId)
-                                            }
-                                            size={25}
-                                            style={{
-                                                marginLeft: '10px',
-                                            }}
-                                        />
-                                    ) : (
-                                        <AiOutlineBorder
-                                            color="#ffe0b3"
-                                            cursor={'pointer'}
-                                            style={{
-                                                marginLeft: '10px',
-                                            }}
-                                            size={25}
-                                            onClick={() =>
-                                                toggleAlarmSelection(item.notificationId)
-                                            }
-                                        />
-                                    )}
-                                </MyAlarmBtnContainer>
-                                <MyAlarmProfileImg
-                                    backgroundImageUrl={item.senderProfileImageUrl}
+            {gettingAlarm && (
+                <>
+                    <NavbarContainer>
+                        <Navbar
+                            toNavigate={'/'}
+                            iconleft={<AiOutlineArrowLeft size={25} onClick={unReadAlarmHandler} />}
+                            title={'알림'}
+                            iconright={
+                                <AiOutlineSync
+                                    size={25}
+                                    cursor={'pointer'}
+                                    onClick={() => {
+                                        dispatch(__getAlarm());
+                                        unReadAlarmHandler();
+                                    }}
                                 />
-                                <MyAlarmDescContainer>
-                                    <MyAlarmDescLayout>
-                                        <p>{item.message}</p>
-                                    </MyAlarmDescLayout>
-                                    <MyAlarmTimeLayout>{item.createdAt}</MyAlarmTimeLayout>
-                                </MyAlarmDescContainer>
-                            </MyAlarmLayout>
+                            }
+                        />
+                    </NavbarContainer>
+                    <MyAlarmEditContainer>
+                        <div>
+                            {unreadAlarm
+                                ? `${unreadAlarm}개의 안 읽은 알림이 있습니다.`
+                                : '0개의 안 읽은 알림이 있습니다.'}
                         </div>
-                    );
-                })}
-            </MyAlarmContainer>
-            {selectedAlarms.length > 0 && (
-                <SelectedAlarmContainer>
-                    <SelectedBtn onClick={removeSelectedAlarms}>선택한 알람 삭제</SelectedBtn>
-                </SelectedAlarmContainer>
+                        <div>편집</div>
+                    </MyAlarmEditContainer>
+                    <MyAlarmContainer>
+                        {gettingAlarm?.alarm?.data?.map((item) => {
+                            const isSelected = selectedAlarms.includes(item.notificationId);
+                            return (
+                                <div key={item.notificationId}>
+                                    <MyAlarmLayout isRead={item.readStatus}>
+                                        <MyAlarmBtnContainer>
+                                            {isSelected ? (
+                                                <AiFillCheckSquare
+                                                    color="#ff9900"
+                                                    cursor={'pointer'}
+                                                    onClick={() =>
+                                                        toggleAlarmSelection(item.notificationId)
+                                                    }
+                                                    size={25}
+                                                    style={{
+                                                        marginLeft: '10px',
+                                                    }}
+                                                />
+                                            ) : (
+                                                <AiOutlineBorder
+                                                    color="#ffe0b3"
+                                                    cursor={'pointer'}
+                                                    style={{
+                                                        marginLeft: '10px',
+                                                    }}
+                                                    size={25}
+                                                    onClick={() =>
+                                                        toggleAlarmSelection(item.notificationId)
+                                                    }
+                                                />
+                                            )}
+                                        </MyAlarmBtnContainer>
+                                        <MyAlarmProfileImg
+                                            backgroundImageUrl={item.senderProfileImageUrl}
+                                        />
+                                        <MyAlarmDescContainer>
+                                            <MyAlarmDescLayout>
+                                                <p>{item.message}</p>
+                                            </MyAlarmDescLayout>
+                                            <MyAlarmTimeLayout>{item.createdAt}</MyAlarmTimeLayout>
+                                        </MyAlarmDescContainer>
+                                    </MyAlarmLayout>
+                                </div>
+                            );
+                        })}
+                    </MyAlarmContainer>
+                    {selectedAlarms.length > 0 && (
+                        <SelectedAlarmContainer>
+                            <SelectedBtn onClick={removeSelectedAlarms}>
+                                선택한 알람 삭제
+                            </SelectedBtn>
+                        </SelectedAlarmContainer>
+                    )}
+                </>
             )}
         </>
     );
@@ -222,4 +242,15 @@ const SelectedBtn = styled.button`
     border: none;
     background-color: #ff9900;
     color: white;
+`;
+
+const MyAlarmEditContainer = styled.div`
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 50px;
+    border-bottom: 1px solid #f0efed;
+    padding: 0px 30px;
 `;

@@ -1,5 +1,5 @@
 export const routers = Object.freeze({
-  CREATEAUDIO: "createaudio",
+  CREATERADIO: "createradio",
   SELECTLOGIN: "selectlogin",
   EMAILLOGIN: "maillogin",
   SIGNUP: "signup",
@@ -7,8 +7,9 @@ export const routers = Object.freeze({
   LISTENRADIO: "listen/:id",
   TAG: "tag/:id",
   SEARCH: "search",
-  AUDIODETAIL: "audio/:id",
-  KAKAORE: "/login/oauth2/kakao",
+  RADIOPREVIEW: "radiopreview/:id",
+  KAKAORE: "/login/oauth2/code/kakao",
   NAVERRE: "/login/oauth2/code/naver",
   MYALARM: "alarm/:id",
+  MYALBUM: "album/:id",
 });
