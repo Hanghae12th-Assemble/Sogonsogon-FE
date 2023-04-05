@@ -42,10 +42,8 @@ export default SelectBtnContainer
 
 
 const SelectBtnLayout = styled.div`
-    padding: 5px 5px;
-    /* border: 1px solid red; */
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 10px;
 `;
 

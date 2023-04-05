@@ -115,7 +115,6 @@ const MyAlarmContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    z-index: -1;
     overflow: auto;
 
     ::-webkit-scrollbar {
@@ -127,7 +126,7 @@ const MyAlarmContainer = styled.div`
 const MyAlarmLayout = styled.div`
     /* border: 1px solid black; */
     background-color: ${({ isRead }) => (isRead ? 'none' : '#fffaf1')};
-    border-bottom: 1px solid #f0efed;
+    border-top: 1px solid #f0efed;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -144,7 +143,6 @@ const MyAlarmProfileImg = styled.div`
     background-color: #393b3a6e;
     border-radius: 100%;
     margin: 0px 20px 0px 10px;
-    opacity: 0.9;
     background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
     background-repeat: no-repeat;
     background-size: cover;

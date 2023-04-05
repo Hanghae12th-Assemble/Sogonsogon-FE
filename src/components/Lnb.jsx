@@ -14,6 +14,7 @@ import { ReactComponent as Book } from '../asset/icon/book.svg';
 import { ReactComponent as Asmr } from '../asset/icon/asmr.svg';
 import { ReactComponent as Notifications } from '../asset/icon/notifications.svg';
 import { ReactComponent as NotificationsOn } from '../asset/icon/notifications_on.svg';
+import { ReactComponent as Person } from '../asset/icon/person.svg';
 
 function Lnb({ isOpen, handleItemClick }) {
     const token = getCookie('access-token');
@@ -162,7 +163,7 @@ function Lnb({ isOpen, handleItemClick }) {
                     <>
                         <MyAlbumBtn>
                             <div>
-                                <span><Asmr /></span>
+                                <span><Person /></span>
                                 내 앨범
                             </div>
                         </MyAlbumBtn>
