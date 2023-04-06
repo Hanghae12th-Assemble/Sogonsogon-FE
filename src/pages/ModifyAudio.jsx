@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { __createAudio } from "../redux/module/createAudio";
+import { __createClip } from "../redux/module/createClip";
 import CreateRadioButton from "../components/CreateRadioButton";
 import CreateRadioInputs from "../components/CreateRadioInputs";
 

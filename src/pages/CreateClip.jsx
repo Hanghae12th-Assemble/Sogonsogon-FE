@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { __createAudio } from "../redux/module/createAudio";
 import CreateClips from "../components/CreateClip";
 
 function CreateClip() {

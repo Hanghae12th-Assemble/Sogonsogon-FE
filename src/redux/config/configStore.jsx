@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import signupRadio from "../module/signup";
 import loginRadio from "../module/login";
 import userFollow from "../module/userFollow";
-import createAudio from "../module/createAudio";
+import createClip from "../module/createClip";
 import getAudio from "../module/getAudio";
 import radioInfo from "../module/reduxState/createRadioButton";
 import profileInfo from "../module/reduxState/profileModifyButton";
@@ -35,7 +35,7 @@ const sotre = configureStore({
     signup: signupRadio.reducer,
     login: loginRadio.reducer,
     userFollowing: userFollow.reducer,
-    creatingAudio: createAudio.reducer,
+    creatingClip: createClip.reducer,
     gettingAudio: getAudio.reducer,
     radioButn: radioInfo.reducer,
     profileButn: profileInfo.reducer,

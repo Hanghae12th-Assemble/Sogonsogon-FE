@@ -4,7 +4,7 @@ import Input from "../elements/Input";
 import styled from "styled-components";
 import Button from "../elements/Button";
 import { useSelector } from "react-redux";
-import { __createAudio } from "../redux/module/createAudio";
+import { __createClip } from "../redux/module/createClip";
 
 function CreateRadioInputs({
   setFormformImagin,
