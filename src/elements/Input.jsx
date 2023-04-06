@@ -45,6 +45,15 @@ const InputBox = styled.input`
       border-radius: 10px;
       padding: 10px;
     `}
+
+  ${(props) =>
+    props.commentInput &&
+    css`
+      width: 350px;
+      height: 50px;
+      border-radius: 10px;
+      padding: 10px;
+    `}
 `;
 
 const InputMessage = styled.div`

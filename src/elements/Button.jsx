@@ -36,6 +36,16 @@ const BtnStyle = styled.button`
     `}
 
     ${(props) =>
+    props.smCommentBtn &&
+    css`
+      width: 5rem;
+      height: 3rem;
+      margin-left: 10px;
+      background-color: #ff9900;
+    `}
+
+
+    ${(props) =>
     props.GlgBtn &&
     css`
       width: 25rem;

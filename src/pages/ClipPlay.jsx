@@ -13,7 +13,7 @@ import ClipPlayComment from "../components/ClipPlayComment";
 
 function ClipPlay() {
   const [playing, setPlaying] = useState(false);
-  const [comment, setComment] = useState(true);
+  const [comment, setComment] = useState(false);
   const [played, setPlayed] = useState(0);
   const [duration, setDuration] = useState(0);
   const [url, setUrl] = useState("");
@@ -65,6 +65,7 @@ function ClipPlay() {
         alt="Background"
       />
       <TransparentLayer />
+
       <ClipplayContent>
         <Navbar
           toNavigate={"/"}
@@ -76,6 +77,7 @@ function ClipPlay() {
           <ClipplayTitle>
             <h1>이토록 평범한 미래</h1>
           </ClipplayTitle>
+          {comment ? <ClipPlayComment /> : null}
           <ClipplayAuthorLike>
             <ClipplayAuthorProfile>
               <div>
@@ -138,7 +140,6 @@ function ClipPlay() {
           </div>
         </ClipplayPlayIcon>
         <ClipplayComment>
-          {comment ? <ClipPlayComment /> : null}
           <div>
             <BiComment size={20} />
           </div>
@@ -280,10 +281,11 @@ const ClipplayForward = styled(BsFastForward)`
 `;
 
 const ClipplayComment = styled.div`
-  //border: 1px solid black;
-  margin-top: 130px;
+  //border: 1px solid red;
+  margin-top: 135px;
   display: flex;
   justify-content: center;
+  padding-bottom: 13px;
   span {
     margin-left: 10px;
   }
