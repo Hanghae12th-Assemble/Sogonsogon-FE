@@ -8,7 +8,7 @@ function MyContentEditContainer({ editClicked, contentType, selectedContent, set
                 {!editClicked ? (
                     <>
                         <EditContainerLeftLayout>
-                            <StFrontSubstance>{frontSubstance}</StFrontSubstance>
+                            <StFrontSubstance frontSubstance={frontSubstance}>{frontSubstance}</StFrontSubstance>
                             <StContentCount frontSubstance={frontSubstance}>{contentType?.length}</StContentCount>
                             <p>{substance}</p>
                         </EditContainerLeftLayout>
@@ -50,7 +50,7 @@ const MyEditContainer = styled.div`
     width: 100%;
     min-height: 60px;
     /* border-bottom: 1px solid #f0efed; */
-    padding: 0px 30px 0px 35px;
+    padding: 0px 30px 0px 30px;
    
 `;
 
@@ -76,10 +76,13 @@ const StFrontSubstance = styled.div`
     margin-right: 5px;
     color: black;
     font-weight: 600;
+    font-size : ${({ frontSubstance }) => (frontSubstance === "클립" ? "20px" : "16px")};
 `
 
 const StContentCount = styled.span`
-    font-size: 17px;
+    display: flex;
+    align-items: center;
+    font-size : ${({ frontSubstance }) => (frontSubstance === "클립" ? "20px" : "16px")};
     color : ${({ frontSubstance }) => (frontSubstance ? '#ff9900' : 'black')};
 `
 

@@ -42,9 +42,10 @@ export default SelectBtnContainer
 
 
 const SelectBtnLayout = styled.div`
+     /* border: 1px solid red; */
+     width: fit-content;
     display: flex;
     align-items: center;
-    gap: 10px;
 `;
 
 const StCheckSvg = styled(Check)`

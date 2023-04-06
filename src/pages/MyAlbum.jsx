@@ -105,8 +105,8 @@ const MyAlbumDescContainer = styled.div`
 `
 
 const MyAlbumImg = styled.div`
-    width: 75px;
-    height: 75px;
+    min-width: 75px;
+    max-height: 75px;
     overflow: hidden;
     position: relative;
     background-color: #393b3a6e;
@@ -128,7 +128,7 @@ const MyAlbumImg = styled.div`
 `
 
 const MyAlbumDescLayout = styled.div`
-    min-height: 80px;
+    min-height: 75px;
     /* border: 1px solid black; */
     display: flex;
     flex-direction: column;
