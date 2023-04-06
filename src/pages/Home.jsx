@@ -74,15 +74,6 @@ function Home() {
           <AiOutlineArrowUp size={20} />
         </Button>
       )}
-
-      <Button
-        AddRadioBtn
-        onClick={() => {
-          document.startViewTransition(() => navigate("/createaudio"));
-        }}
-      >
-        <AiOutlinePlus size={20} />
-      </Button>
     </>
   );
 }

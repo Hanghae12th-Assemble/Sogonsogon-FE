@@ -7,7 +7,6 @@ export const routers = Object.freeze({
   EMAILLOGIN: "maillogin",
   SIGNUP: "signup",
   PROFILE: "profile/:id",
-  CLIPPLAY: "clipplay/:id",
   TAG: "tag/:id",
   SEARCH: "search",
   KAKAORE: "/login/oauth2/code/kakao",
@@ -15,4 +14,5 @@ export const routers = Object.freeze({
   MYALARM: "alarm/:id",
   MYALBUM: "album/:id",
   ALLVIEWAUDIOCLIP: "allclips/:id",
+  ALBUMDETAIL: "albumdetail/:id",
 });

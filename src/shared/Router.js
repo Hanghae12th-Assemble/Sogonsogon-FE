@@ -18,7 +18,9 @@ import MyAlarm from "../pages/MyAlarm";
 import MyAlbum from "../pages/MyAlbum";
 import ModifyClip from "../pages/ModifyClip";
 import AllViewAudioClip from "../pages/AllViewAudioClip";
+import AlbumDetail from "../pages/AlbumDetail";
 import ClipPlay from "../pages/ClipPlay";
+
 function Router() {
   return (
     <BrowserRouter>
@@ -44,6 +46,7 @@ function Router() {
           path={`/${routers.ALLVIEWAUDIOCLIP}`}
           element={<AllViewAudioClip />}
         />
+        <Route path={`/${routers.ALBUMDETAIL}`} element={<AlbumDetail />} />
       </Routes>
     </BrowserRouter>
   );

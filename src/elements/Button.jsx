@@ -104,14 +104,14 @@ const BtnStyle = styled.button`
       color: white;
       border-radius: 100%;
       border: none;
-      bottom: 60px;
-      left: 410px;
+      bottom: 0px;
+      right: 0px;
       z-index: 900;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px 0px;
+      box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 5px 0px;
     `}
 
         ${(props) =>
