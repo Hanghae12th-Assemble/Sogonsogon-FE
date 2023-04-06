@@ -3,8 +3,8 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __removeAudio = createAsyncThunk(
-  "removeAudio",
+export const __removeClip = createAsyncThunk(
+  "removeClip",
   async (audioId, thunkAPI) => {
     return await axios
       .delete(`api/audioclip/deleted/${audioId}`)
@@ -16,30 +16,30 @@ export const __removeAudio = createAsyncThunk(
 );
 
 const initialState = {
-  audio: null,
+  clip: null,
   isLoading: false,
   error: null,
 };
 
-const removeAudio = createSlice({
-  name: "removeAudio",
+const removeClip = createSlice({
+  name: "removeClip",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__removeAudio.pending, (state) => {
+    builder.addCase(__removeClip.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__removeAudio.fulfilled, (state, action) => {
+    builder.addCase(__removeClip.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.audio = action.payload;
+      state.clip = action.payload;
       state.error = null;
     });
-    builder.addCase(__removeAudio.rejected, (state, action) => {
+    builder.addCase(__removeClip.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default removeAudio;
+export default removeClip;

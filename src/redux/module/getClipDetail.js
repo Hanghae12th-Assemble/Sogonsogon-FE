@@ -30,7 +30,7 @@ const getClipDetail = createSlice({
     });
     builder.addCase(__getClipDetail.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.audio = action.payload;
+      state.clip = action.payload;
       state.error = null;
     });
     builder.addCase(__getClipDetail.rejected, (state, action) => {

@@ -10,7 +10,7 @@ import searchAudio from "../module/searchAudio";
 import searchUser from "../module/searchUser";
 import getFollowing from "../module/following";
 import getFollower from "../module/follower";
-import removeAudio from "../module/removeAudio";
+import removeClip from "../module/removeClip";
 import getProfile from "../module/getProfile";
 import updateProfile from "../module/updateProfile";
 import getAlarm from "../module/getAlarm";
@@ -43,7 +43,7 @@ const sotre = configureStore({
     searchingUser: searchUser.reducer,
     gettingFollowing: getFollowing.reducer,
     gettingFollower: getFollower.reducer,
-    removingAudio: removeAudio.reducer,
+    removingClip: removeClip.reducer,
     gettingProfile: getProfile.reducer,
     updatingProfile: updateProfile.reducer,
     gettingAlarm: getAlarm.reducer,

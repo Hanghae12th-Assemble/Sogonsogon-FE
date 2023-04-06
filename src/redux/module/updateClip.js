@@ -32,7 +32,7 @@ const updateClip = createSlice({
     });
     builder.addCase(__updateClip.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.audio = action.payload;
+      state.clip = action.payload;
       state.error = null;
     });
     builder.addCase(__updateClip.rejected, (state, action) => {
