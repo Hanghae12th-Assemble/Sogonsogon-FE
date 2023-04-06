@@ -3,8 +3,8 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __updateAudio = createAsyncThunk(
-  "updateAudio",
+export const __updateClip = createAsyncThunk(
+  "updateClip",
   async ({ audioId, audioInfo }, thunkAPI) => {
     return await axios
       .put(`api/audioclip/updated/${audioId}`, audioInfo)
@@ -16,30 +16,30 @@ export const __updateAudio = createAsyncThunk(
 );
 
 const initialState = {
-  audio: null,
+  clip: null,
   isLoading: false,
   error: null,
 };
 
-const updateAudio = createSlice({
-  name: "updateAudio",
+const updateClip = createSlice({
+  name: "updateClip",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__updateAudio.pending, (state) => {
+    builder.addCase(__updateClip.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__updateAudio.fulfilled, (state, action) => {
+    builder.addCase(__updateClip.fulfilled, (state, action) => {
       state.isLoading = false;
       state.audio = action.payload;
       state.error = null;
     });
-    builder.addCase(__updateAudio.rejected, (state, action) => {
+    builder.addCase(__updateClip.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default updateAudio;
+export default updateClip;

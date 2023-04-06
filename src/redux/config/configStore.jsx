@@ -17,7 +17,7 @@ import getAlarm from "../module/getAlarm";
 import readAlarm from "../module/readAlarm";
 import removeAlarm from "../module/removeAlarm";
 import getClipDetail from "../module/getClipDetail";
-import updateAudio from "../module/updateAudio";
+import updateClip from "../module/updateClip";
 import createAudioComment from "../module/createAudioComment";
 import updateAudioComment from "../module/updateAudioComment";
 import getAudioComment from "../module/getAudioComment";
@@ -50,7 +50,7 @@ const sotre = configureStore({
     readingAlarm: readAlarm.reducer,
     removingAlarm: removeAlarm.reducer,
     gettingClipDetail: getClipDetail.reducer,
-    updatingAudio: updateAudio.reducer,
+    updatingClip: updateClip.reducer,
     creatingAudioComment: createAudioComment.reducer,
     updatingAudioComment: updateAudioComment.reducer,
     gettingAudioComment: getAudioComment.reducer,
