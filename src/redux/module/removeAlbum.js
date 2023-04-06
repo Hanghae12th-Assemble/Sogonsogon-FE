@@ -3,41 +3,41 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __createAudio = createAsyncThunk(
-  "createAudio",
-  async (audioInfo, thunkAPI) => {
+export const __removeAlbum = createAsyncThunk(
+  "removeAlbum",
+  async (albumId, thunkAPI) => {
     return await axios
-      .post(`api/audioclip/uploaded`, audioInfo)
+      .delete(`api/audioAlbum/delete/${albumId}`)
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
   }
 );
 
 const initialState = {
-  audio: null,
+  album: null,
   isLoading: false,
   error: null,
 };
 
-const createAudio = createSlice({
-  name: "createAudio",
+const removeAlbum = createSlice({
+  name: "removeAlbum",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__createAudio.pending, (state) => {
+    builder.addCase(__removeAlbum.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__createAudio.fulfilled, (state, action) => {
+    builder.addCase(__removeAlbum.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.audio = action.payload;
+      state.album = action.payload;
       state.error = null;
     });
-    builder.addCase(__createAudio.rejected, (state, action) => {
+    builder.addCase(__removeAlbum.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default createAudio;
+export default removeAlbum;

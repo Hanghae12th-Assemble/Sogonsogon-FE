@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  __getCategoryAdudio,
-  initInfinitiScroll,
-} from "../redux/module/getAudioCategory";
 import { useDispatch, useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 import RadioContainer from "../components/RadioContainer";
@@ -37,18 +33,6 @@ function Tag() {
   const navigate = useNavigate();
 
   const toggleLnb = () => setIsLnbOpen((prev) => !prev);
-  useEffect(() => {
-    page.current = 1;
-    dispatch(initInfinitiScroll());
-    dispatch(__getCategoryAdudio({ categoryType: id, page: page.current }));
-  }, [id]);
-
-  useEffect(() => {
-    if (inView) {
-      page.current += 1;
-      dispatch(__getCategoryAdudio({ categoryType: id, page: page.current }));
-    }
-  }, [inView]);
 
   const renderIcon = () => {
     switch (id) {

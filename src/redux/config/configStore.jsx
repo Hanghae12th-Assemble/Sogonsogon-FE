@@ -12,7 +12,6 @@ import getFollowing from "../module/following";
 import getFollower from "../module/follower";
 import removeAudio from "../module/removeAudio";
 import getProfile from "../module/getProfile";
-import getAudioCategory from "../module/getAudioCategory";
 import updateProfile from "../module/updateProfile";
 import getAlarm from "../module/getAlarm";
 import readAlarm from "../module/readAlarm";
@@ -23,6 +22,13 @@ import createAudioComment from "../module/createAudioComment";
 import updateAudioComment from "../module/updateAudioComment";
 import getAudioComment from "../module/getAudioComment";
 import removeAudioComment from "../module/removeAudioComment";
+import createAlbum from "../module/createAlbum";
+import updateAlbum from "../module/updateAlbum";
+import likeAlbum from "../module/likeAlbum";
+import getAlbum from "../module/getAlbum";
+import getAlbumCategory from "../module/getAlbumCategory";
+import getAlbumDetail from "../module/getAlbumDetail";
+import removeAlbum from "../module/removeAlbum";
 
 const sotre = configureStore({
   reducer: {
@@ -39,7 +45,6 @@ const sotre = configureStore({
     gettingFollower: getFollower.reducer,
     removingAudio: removeAudio.reducer,
     gettingProfile: getProfile.reducer,
-    gettingAudioCategory: getAudioCategory.reducer,
     updatingProfile: updateProfile.reducer,
     gettingAlarm: getAlarm.reducer,
     readingAlarm: readAlarm.reducer,
@@ -50,6 +55,13 @@ const sotre = configureStore({
     updatingAudioComment: updateAudioComment.reducer,
     gettingAudioComment: getAudioComment.reducer,
     removingAudioComment: removeAudioComment.reducer,
+    creatingAlbum: createAlbum.reducer,
+    updatingAlbum: updateAlbum.reducer,
+    likingAlbum: likeAlbum.reducer,
+    gettingAlbum: getAlbum.reducer,
+    gettingAlbumCategory: getAlbumCategory.reducer,
+    gettingAlbumDetail: getAlbumDetail.reducer,
+    removingAlbum: removeAlbum.reducer,
   },
 });
 
