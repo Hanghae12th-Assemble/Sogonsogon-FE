@@ -3,8 +3,8 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __audioDetail = createAsyncThunk(
-  "audioDetail ",
+export const __getClipDetail = createAsyncThunk(
+  "getClipDetail ",
   async (audioId, thunkAPI) => {
     return await axios
       .get(`api/audioclip/${audioId}`, {})
@@ -14,30 +14,30 @@ export const __audioDetail = createAsyncThunk(
 );
 
 const initialState = {
-  audio: null,
+  clip: null,
   isLoading: false,
   error: null,
 };
 
-const audioDetail = createSlice({
-  name: "audioDetail ",
+const getClipDetail = createSlice({
+  name: "getClipDetail ",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__audioDetail.pending, (state) => {
+    builder.addCase(__getClipDetail.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__audioDetail.fulfilled, (state, action) => {
+    builder.addCase(__getClipDetail.fulfilled, (state, action) => {
       state.isLoading = false;
       state.audio = action.payload;
       state.error = null;
     });
-    builder.addCase(__audioDetail.rejected, (state, action) => {
+    builder.addCase(__getClipDetail.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default audioDetail;
+export default getClipDetail;
