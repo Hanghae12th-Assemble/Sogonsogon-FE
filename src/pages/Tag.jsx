@@ -96,15 +96,6 @@ function Tag() {
           <AiOutlineArrowUp size={15} />
         </Button>
       )}
-
-      <Button
-        AddRadioBtn
-        onClick={() => {
-          document.startViewTransition(() => navigate("/createradio"));
-        }}
-      >
-        <AiOutlinePlus size={20} />
-      </Button>
     </>
   );
 }

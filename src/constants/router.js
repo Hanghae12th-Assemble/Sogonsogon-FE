@@ -14,4 +14,5 @@ export const routers = Object.freeze({
     MYALARM: 'alarm/:id',
     MYALBUM: 'album/:id',
     ALLVIEWAUDIOCLIP: 'allclips/:id',
+    ALBUMDETAIL: 'albumdetail/:id',
 });

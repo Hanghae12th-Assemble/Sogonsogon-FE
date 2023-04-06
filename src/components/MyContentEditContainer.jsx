@@ -87,7 +87,7 @@ const StContentCount = styled.span`
 `
 
 const StContentSlectedCount = styled.div`
-display: flex;  
+    display: flex;  
     flex-direction: row;
     font-weight: 600;
 `
