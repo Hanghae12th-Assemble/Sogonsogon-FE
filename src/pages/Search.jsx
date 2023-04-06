@@ -84,7 +84,7 @@ function Search() {
               ) : (
                 <>
                   <SearchUserContainer>
-                    {user?.data.map((props, index) => {
+                    {user?.data?.map((props, index) => {
                       return <RadioUserContainer props={props} key={index} />;
                     })}
                   </SearchUserContainer>
@@ -94,12 +94,12 @@ function Search() {
           ) : (
             <>
               {" "}
-              {live?.data.length === 0 ? (
+              {live?.data?.length === 0 ? (
                 <div>검색 결과가 없습니다.</div>
               ) : (
                 <>
                   <StRadioContainer>
-                    {live?.data.map((props, index) => {
+                    {live?.data?.map((props, index) => {
                       return <RadioContainer props={props} key={index} />;
                     })}
                   </StRadioContainer>

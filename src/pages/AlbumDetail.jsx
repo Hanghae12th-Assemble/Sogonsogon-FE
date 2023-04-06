@@ -13,7 +13,7 @@ function AlbumDetail() {
     const [state, setState] = useState({
         editClicked: false,
         selectedContent: [],
-        expanded: false,
+        expanded: true,
     });
 
     const { editClicked, selectedContent, expanded } = state;
@@ -29,7 +29,9 @@ function AlbumDetail() {
                     toNavigate={-1}
                     iconleft={<AiOutlineArrowLeft size={25} />}
                     title={""}
-                    iconright={<StEditSvg />}
+                    iconright={<StEditSvg onClick={() => {
+                        document.startViewTransition(() => navigate(`/modifyaudio`));
+                    }} />}
                 />
             </NavbarContainer>
             <AlbumDetailPgContainer>
@@ -37,7 +39,9 @@ function AlbumDetail() {
                     <AlbumDetailPgImg />
                     <AlbumDetailPgDescLayout>
                         <AlbumDetailPgTitleLayout>좋은 음악을 같이 들어요.</AlbumDetailPgTitleLayout>
-                        <AlbumDetailPgNameLayout> <p>고은</p>  <AiOutlineRight /> </AlbumDetailPgNameLayout>
+                        <AlbumDetailPgNameLayout onClick={() => {
+                            document.startViewTransition(() => navigate(`/profile/1`));
+                        }}> <p>고은</p>  <AiOutlineRight /> </AlbumDetailPgNameLayout>
                         <AlbumDetailPgDateLayout>2023.04.04</AlbumDetailPgDateLayout>
                         <AlbumDetailPgHeartContianer>
                             <AiOutlineHeart size={18} color={"77756f"} />
@@ -71,7 +75,9 @@ function AlbumDetail() {
                         <ClipInfoLeftSubstance>클립</ClipInfoLeftSubstance>
                         <StContentCount>15</StContentCount>
                     </ClipInfoLeftLayout>
-                    <StAllViewLayout>모두보기</StAllViewLayout>
+                    <StAllViewLayout onClick={() => {
+                        document.startViewTransition(() => navigate(`/allclips/1`));
+                    }}>모두보기</StAllViewLayout>
                 </AlbumDetailPgClipInfo>
                 <ClipList
                     editClicked={editClicked}
@@ -145,6 +151,7 @@ const AlbumDetailPgTitleLayout = styled.div`
     font-weight: bold;
 `
 const AlbumDetailPgNameLayout = styled.div`
+    cursor: pointer;
     width: fit-content ;
     display: flex;
     align-items: center;

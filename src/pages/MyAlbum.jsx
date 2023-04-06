@@ -9,8 +9,10 @@ import { AiOutlineHeart } from 'react-icons/ai'
 import { ReactComponent as Music } from '../asset/icon/music.svg';
 import SelectBtnContainer from '../components/SelectBtnContainer'
 import SelectedContentRemoveBtn from '../components/SelectedContentRemoveBtn';
+import { useNavigate } from 'react-router-dom'
 
 function MyAlbum() {
+    const navigate = useNavigate()
     const [isLnbOpen, setIsLnbOpen] = useState(false);
     const toggleLnb = () => setIsLnbOpen((prev) => !prev);
     const [state, setState] = useState({
@@ -29,7 +31,7 @@ function MyAlbum() {
                     iconleft={<AiOutlineMenu size={30} onClick={toggleLnb} />}
                     title={"내 앨범"}
                     iconright={<AiOutlinePlus size={30} />}
-                    toClose={"/search"}
+                    toClose={"/createaudio"}
                 />
             </NavbarContainer>
             <MyContentEditContainer
@@ -41,7 +43,9 @@ function MyAlbum() {
             />
             <MyAlbumContainer>
                 <MyAlbumLayout>
-                    <MyAlbumDescContainer>
+                    <MyAlbumDescContainer onClick={() => {
+                        document.startViewTransition(() => navigate(`/albumdetail/1`));
+                    }}>
                         <SelectBtnContainer
                             editClicked={editClicked}
                             state={state}
@@ -101,6 +105,7 @@ const MyAlbumLayout = styled.div`
 const MyAlbumDescContainer = styled.div`
     display: flex;
     flex-direction: row;
+    cursor: pointer;
 
 `
 

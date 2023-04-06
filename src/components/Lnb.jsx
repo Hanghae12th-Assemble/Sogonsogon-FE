@@ -161,7 +161,10 @@ function Lnb({ isOpen, handleItemClick }) {
                 </LnbMenuLayout>
                 {token && username && (
                     <>
-                        <MyAlbumBtn>
+                        <MyAlbumBtn onClick={() => {
+                            document.startViewTransition(() => navigate(`/album/${username.userName}`));
+                            handleItemClick();
+                        }}>
                             <div>
                                 <span><Person /></span>
                                 내 앨범
