@@ -6,8 +6,10 @@ import { useState } from 'react';
 import { ReactComponent as Latest } from '../asset/icon/latestlist.svg';
 import ClipList from '../components/ClipList';
 import SelectedContentRemoveBtn from "../components/SelectedContentRemoveBtn"
+import { useNavigate } from 'react-router-dom';
 
 function AllViewAudioClip() {
+    const navigate = useNavigate()
     const [state, setState] = useState({
         editClicked: false,
         selectedContent: [],
@@ -25,13 +27,20 @@ function AllViewAudioClip() {
                         size={25}
                         cursor={'pointer'}
                         color="#283035"
+                        onClick={() => {
+                            document.startViewTransition(() => navigate(-1));
+                        }}
                     />
                     <p>좋은 음악을 같이 들어요.</p>
                 </AllClipsNavBarLeftLayout>
                 <AiOutlinePlus
                     size={25}
                     cursor={'pointer'}
-                    color='#ff9900' />
+                    color='#ff9900'
+                    onClick={() => {
+                        document.startViewTransition(() => navigate("/createclip"));
+                    }}
+                />
             </AllClipsNavBarBox>
             <MyContentEditContainer
                 editClicked={editClicked}

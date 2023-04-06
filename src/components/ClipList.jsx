@@ -3,9 +3,20 @@ import styled from 'styled-components'
 import SelectBtnContainer from '../components/SelectBtnContainer';
 import { ReactComponent as PlayBtn } from '../asset/icon/play_arrow.svg';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 
 function ClipList({ editClicked, state, setState, selectedContent, contentId }) {
+    const navigate = useNavigate()
+
+    const handleClick = () => {
+        if (editClicked === true) {
+            document.startViewTransition(() => navigate(`/modifyclip/1`));
+        } else {
+            document.startViewTransition(() => navigate(`/clipplay/1`));
+        }
+    };
+
     return (
         <>
             <AllClipsLayout>
@@ -31,7 +42,7 @@ function ClipList({ editClicked, state, setState, selectedContent, contentId }) 
 
                     }
                     <AudioCilpImg />
-                    <AllClicpsDescLayout>
+                    <AllClicpsDescLayout onClick={handleClick}>
                         <AllClicpsTitleLayout>오늘은 비가 오네요. 비오는 날 어울리는 노래 들려드려요.</AllClicpsTitleLayout>
                         <AllClicpsHeartContianer>
                             <div>오늘</div>
@@ -98,6 +109,7 @@ const AllClicpsDescContainer = styled.div`
 `
 
 const AllClicpsDescLayout = styled.div`
+    cursor: pointer;
     min-height: 80px;
     display: flex;
     flex-direction: column;
