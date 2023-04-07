@@ -3,13 +3,11 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import CreateClipInput from "../components/CreateClipInput";
-import { useParams } from "react-router-dom";
 
 function CreateClip() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
-  const { id } = useParams();
 
   return (
     <CrRadioContainer>

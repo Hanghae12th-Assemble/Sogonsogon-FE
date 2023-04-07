@@ -10,7 +10,7 @@ export const routers = Object.freeze({
   PROFILE: "profile/:id",
   TAG: "tag/:id",
   SEARCH: "search",
-  KAKAORE: "/login/oauth2/code/kakao",
+  KAKAORE: "/login/oauth2/kakao",
   NAVERRE: "/login/oauth2/code/naver",
   MYALARM: "alarm/:id",
   MYALBUM: "album/:id",

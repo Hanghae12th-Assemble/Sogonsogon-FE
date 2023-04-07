@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import Input from "../elements/Input";
 import styled from "styled-components";
 import Button from "../elements/Button";
-import { useSelector } from "react-redux";
-import { __createClip } from "../redux/module/createClip";
+import { __createCip } from "../redux/module/createClip";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function CreateClipInputs({
   setFormformImagin,
@@ -20,6 +21,9 @@ function CreateClipInputs({
     formState: { errors },
     reset,
   } = useForm();
+
+  const { id } = useParams();
+  const dispatch = useDispatch();
 
   const onChangeimge = (e) => {
     const img = e.target.files[0];
@@ -44,14 +48,14 @@ function CreateClipInputs({
 
   const submitForm = (data) => {
     const formData = new FormData();
-    formData.append("name", data.title);
+    formData.append("title", data.title);
     formData.append("contents", data.introduction);
-    formData.append("audiofile", selectedFile);
+    formData.append("audioclip", selectedFile);
     for (const keyValue of formImagin) {
       formData.append(keyValue[0], keyValue[1]);
     }
-    for (const keval of formData) console.log(keval);
-    //dispatch(__createAudio(formData));
+
+    dispatch(__createCip({ clipInfo: formData, audioablumId: id }));
     reset();
   };
 
@@ -89,10 +93,6 @@ function CreateClipInputs({
           </CrRadioPublicScopButton>
         </CrRadioButtonSpanBox>
         <CrRadioButtonSpanBox>
-          <span>대표 이미지</span>
-          <CrRadioPublicScopButton>
-            <CrFileInput type="file" accept="image/*" onChange={onChangeimge} />
-          </CrRadioPublicScopButton>
           <span>오디오 업로드</span>
           <CrRadioPublicScopButton>
             <CrFileInput
@@ -100,6 +100,10 @@ function CreateClipInputs({
               accept=".mp3, .mp4"
               onChange={handleFileChange}
             />
+          </CrRadioPublicScopButton>
+          <span>대표 이미지</span>
+          <CrRadioPublicScopButton>
+            <CrFileInput type="file" accept="image/*" onChange={onChangeimge} />
           </CrRadioPublicScopButton>
           <CrPreviewDiv>
             {preview ? (
