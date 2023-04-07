@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import Input from "../elements/Input";
 import styled from "styled-components";
 import Button from "../elements/Button";
-import { useSelector } from "react-redux";
-import { __createClip } from "../redux/module/createClip";
+import { useDispatch, useSelector } from "react-redux";
+import { __createAlbum } from "../redux/module/createAlbum";
 
 function CreateRadioInputs({
   setFormformImagin,
@@ -19,12 +19,13 @@ function CreateRadioInputs({
     reset,
   } = useForm();
 
+  const dispatch = useDispatch();
   const btninfo = useSelector((state) => state.radioButn[0]);
 
   const onChangeimge = (e) => {
     const img = e.target.files[0];
     const formImg = new FormData();
-    formImg.append("audioclipImage", img);
+    formImg.append("backgroundImageUrl", img);
     const reader = new FileReader();
     setFormformImagin(formImg);
     reader.onloadend = () => {
@@ -40,14 +41,14 @@ function CreateRadioInputs({
 
   const submitForm = (data) => {
     const formData = new FormData();
-    formData.append("title", btninfo.title);
-    formData.append("name", data.title);
-    formData.append("contents", data.introduction);
+    formData.append("categoryType", btninfo.title);
+    formData.append("title ", data.title);
+    formData.append("instruction", data.introduction);
     for (const keyValue of formImagin) {
       formData.append(keyValue[0], keyValue[1]);
     }
-    for (const keval of formData) console.log(keval);
-    //dispatch(__createAudio(formData));
+
+    dispatch(__createAlbum(formData));
     reset();
   };
 
