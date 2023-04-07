@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import CreateClips from "../components/CreateClip";
+import CreateClipInput from "../components/CreateClipInput";
 import { useParams } from "react-router-dom";
 
 function CreateClip() {
@@ -20,7 +20,7 @@ function CreateClip() {
           title={"클립 만들기"}
         />
 
-        <CreateClips
+        <CreateClipInput
           setFormformImagin={setFormformImagin}
           setPreview={setPreview}
           preview={preview}

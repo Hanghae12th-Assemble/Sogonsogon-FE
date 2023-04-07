@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { __createClip } from "../redux/module/createClip";
-import CreateClips from "../components/CreateClip";
+import CreateClipInput from "../components/CreateClipInput";
 
 function ModifyClip() {
   const [formImagin, setFormformImagin] = useState(new FormData());
@@ -19,7 +19,7 @@ function ModifyClip() {
           title={"클립 수정하기"}
         />
 
-        <CreateClips
+        <CreateClipInput
           setFormformImagin={setFormformImagin}
           setPreview={setPreview}
           preview={preview}
