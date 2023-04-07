@@ -43,9 +43,7 @@ function MyAlbum() {
             />
             <MyAlbumContainer>
                 <MyAlbumLayout>
-                    <MyAlbumDescContainer onClick={() => {
-                        document.startViewTransition(() => navigate(`/albumdetail/1`));
-                    }}>
+                    <MyAlbumDescContainer >
                         <SelectBtnContainer
                             editClicked={editClicked}
                             state={state}
@@ -54,7 +52,9 @@ function MyAlbum() {
                         // contentId={item.notificationId}
                         />
                         <MyAlbumImg />
-                        <MyAlbumDescLayout>
+                        <MyAlbumDescLayout onClick={() => {
+                            document.startViewTransition(() => navigate(`/albumdetail/1`));
+                        }}>
                             <MyAlbumTitleLayout>좋은 음악을 같이 들어요.</MyAlbumTitleLayout>
                             <MyAlbumDateLayout>2023.12.23</MyAlbumDateLayout>
                             <MyAlbumHeartContianer>
