@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
-import CreateAudio from "../pages/CreateAlbum";
+import CreateAlbum from "../pages/CreateAlbum";
 import CreateClip from "../pages/CreateClip";
-import ModifyAudio from "../pages/ModifyAudio";
+import ModifyAlbum from "../pages/ModifyAlbum";
 import Profile from "../pages/Profile";
 import Tag from "../pages/Tag";
 import Selectlogin from "../pages/SelectLogin";
@@ -27,9 +27,9 @@ function Router() {
       <Routes>
         <Route path="/*" element={<Notfound />} />
         <Route path="/" element={<Home />} />
-        <Route path={`/${routers.CREATERADIO}`} element={<CreateAudio />} />
+        <Route path={`/${routers.CREATERADIO}`} element={<CreateAlbum />} />
         <Route path={`/${routers.CREATECLIP}`} element={<CreateClip />} />
-        <Route path={`/${routers.MODIRADIO}`} element={<ModifyAudio />} />
+        <Route path={`/${routers.MODIRADIO}`} element={<ModifyAlbum />} />
         <Route path={`/${routers.MODICLIP}`} element={<ModifyClip />} />
         <Route path={`/${routers.SELECTLOGIN}`} element={<Selectlogin />} />
         <Route path={`/${routers.SIGNUP}`} element={<Signup />} />
