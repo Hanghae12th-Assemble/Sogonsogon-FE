@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { __createClip } from "../redux/module/createClip";
-import CreateRadioButton from "../components/CreateRadioButton";
-import CreateRadioInputs from "../components/CreateRadioInputs";
+import CreateAudioButton from "../components/CreateAudioButton";
+import CreateAudioInputs from "../components/CreateAudioInputs";
 
 function ModifyAudio() {
   const [formImagin, setFormformImagin] = useState(new FormData());
@@ -18,8 +18,8 @@ function ModifyAudio() {
           iconleft={<AiOutlineArrowLeft size={20} />}
           title={"앨범 수정하기"}
         />
-        <CreateRadioButton />
-        <CreateRadioInputs
+        <CreateAudioButton />
+        <CreateAudioInputs
           setFormformImagin={setFormformImagin}
           setPreview={setPreview}
           preview={preview}
