@@ -83,7 +83,7 @@ function AlbumDetail() {
             <Button
               AddRadioBtn
               onClick={() => {
-                document.startViewTransition(() => navigate("/createclip"));
+                document.startViewTransition(() => navigate("/createclip/5"));
               }}
             >
               <AiOutlinePlus size={20} />
