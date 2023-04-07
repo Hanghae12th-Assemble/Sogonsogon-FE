@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 function RadioCountContainer({ props }) {
-    const radioCount = props?.radio[0]?.data?.metadata?.radioCount;
+    const albumCount = props?.album[0]?.data?.metadata?.audioAlbumCount;
     return (
         <>
             {' '}
             <RadioCountLayout>
                 {' '}
                 <div>
-                    총 <p>{radioCount}개</p>의
+                    총 <p>{albumCount}개</p>의
                 </div>{' '}
                 <div>라이브가 있어요</div>
             </RadioCountLayout>

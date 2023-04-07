@@ -11,29 +11,25 @@ function RadioContainer({ props }) {
             <RadioLayout key={props?.id}>
                 <RadioImgContainer
                     onClick={() => {
-                        document.startViewTransition(() => navigate(`/radiopreview/${props.id}`));
+                        document.startViewTransition(() => navigate(`/albumdetail/${props.id}`));
                     }}
                     style={{ backgroundImage: `url(${props?.backgroundImageUrl})` }}
                 >
-                    <ViewerCounterContainer>
-                        <StPersonSVg />
-                        <ViewerCouterLayout>{props?.enterCnt}</ViewerCouterLayout>
-                    </ViewerCounterContainer>
                 </RadioImgContainer>
                 <RadioContentLayout>
                     <RadionContentMiniLayout>
-                        <RadioTitleLayout to={`/radiopreview/${props?.id}`}>
+                        <RadioTitleLayout to={`/albumdetail/${props?.id}`}>
                             {props?.title}
                         </RadioTitleLayout>
 
                         <RadioNameLayout
                             onClick={() => {
                                 document.startViewTransition(() =>
-                                    navigate(`/profile/${props?.membername}`)
+                                    navigate(`/profile/${props?.memberName}`)
                                 );
                             }}
                         >
-                            {props?.nickname}
+                            {props?.meberNickname}
                         </RadioNameLayout>
                     </RadionContentMiniLayout>
                 </RadioContentLayout>

@@ -1,27 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from "../components/Navbar";
 import { AiOutlineArrowLeft, AiOutlineDown, AiOutlineHeart, AiOutlinePlus, AiOutlineRight, AiOutlineUp } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { NavbarContainer } from './Home';
 import styled from 'styled-components';
 import { ReactComponent as Edit } from "../asset/icon/edit.svg";
 import Button from '../elements/Button';
 import ClipList from '../components/ClipList';
+import { useDispatch, useSelector } from 'react-redux';
+import { __getAlbumDetail } from '../redux/module/getAlbumDetail';
 
 function AlbumDetail() {
+    const { id } = useParams()
+    const dipatch = useDispatch()
     const navigate = useNavigate()
+    const data = useSelector((state) => state.gettingAlbumDetail)
+    const formattedDate = data?.album?.data?.createdAt.substr(0, 10);
+    console.log(data)
     const [state, setState] = useState({
         editClicked: false,
         selectedContent: [],
         expanded: true,
     });
 
+    useEffect(() => {
+        dipatch(__getAlbumDetail(id))
+    }, [])
+
     const { editClicked, selectedContent, expanded } = state;
 
     const handleClick = () => {
         setState({ ...state, expanded: !expanded });
     };
-    const content = "매일 밤 10시, 고은과 함께 음악을 들어요!듣고싶은 음악이 있다면, 인스타그램으로 디엠 보내주세요~ 자세한 내용은 아래 내용을 펼쳐보세요 자세한 내용은 아래 내용을 펼쳐보세요자세한 내용은 아래 내용을 펼쳐보세요."
+
     return (
         <>
             <NavbarContainer>
@@ -36,13 +47,13 @@ function AlbumDetail() {
             </NavbarContainer>
             <AlbumDetailPgContainer>
                 <AlbumDetailPgDescContainer>
-                    <AlbumDetailPgImg />
+                    <AlbumDetailPgImg backgroundImageUrl={data?.album?.data?.backgroundImageUrl} />
                     <AlbumDetailPgDescLayout>
-                        <AlbumDetailPgTitleLayout>좋은 음악을 같이 들어요.</AlbumDetailPgTitleLayout>
+                        <AlbumDetailPgTitleLayout>{data?.album?.data?.title}</AlbumDetailPgTitleLayout>
                         <AlbumDetailPgNameLayout onClick={() => {
-                            document.startViewTransition(() => navigate(`/profile/1`));
-                        }}> <p>고은</p>  <AiOutlineRight /> </AlbumDetailPgNameLayout>
-                        <AlbumDetailPgDateLayout>2023.04.04</AlbumDetailPgDateLayout>
+                            document.startViewTransition(() => navigate(`/profile/${data?.album?.data?.memberName}`));
+                        }}> <p>{data?.album?.data?.meberNickname}</p>  <AiOutlineRight /> </AlbumDetailPgNameLayout>
+                        <AlbumDetailPgDateLayout>{formattedDate}</AlbumDetailPgDateLayout>
                         <AlbumDetailPgHeartContianer>
                             <AiOutlineHeart size={18} color={"77756f"} />
                             <div>106</div>
@@ -53,8 +64,8 @@ function AlbumDetail() {
                     </AlbumDetailPgDescLayout>
                     <AlbumDetailPgIntroContainer expanded={expanded}>
                         <p>앨범 소개</p>
-                        <span>{content}</span>
-                        {content.length > 3 && (
+                        <span>{data?.album?.data?.instruction}</span>
+                        {data?.album?.data?.instruction?.length > 3 && (
                             <ExpandButtonContainer onClick={handleClick}>
                                 {expanded ? (
                                     <>
