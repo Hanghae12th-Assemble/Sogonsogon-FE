@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
-import CreateAudio from "../pages/CreateAudio";
+import CreateAudio from "../pages/CreateAlbum";
 import CreateClip from "../pages/CreateClip";
 import ModifyAudio from "../pages/ModifyAudio";
 import Profile from "../pages/Profile";

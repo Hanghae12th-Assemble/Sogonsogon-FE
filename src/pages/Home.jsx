@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { __getAudio } from "../redux/module/getAudio";
 import Navbar from "../components/Navbar";
 import {
   AiOutlinePlus,
@@ -15,7 +14,6 @@ import styled from "styled-components";
 import Button from "../elements/Button";
 import useScroll from "../hooks/useScroll";
 import { useInView } from "react-intersection-observer";
-import { initInfinitiScroll } from "../redux/module/getAudio";
 import RadioCountContainer from "../components/RadioCountContainer";
 import { ReactComponent as Logo } from "../asset/logo/logo.svg";
 
@@ -31,14 +29,11 @@ function Home() {
 
   useEffect(() => {
     page.current = 1;
-    dispatch(initInfinitiScroll());
-    dispatch(__getAudio(page.current));
   }, [page]);
 
   useEffect(() => {
     if (inView) {
       page.current += 1;
-      dispatch(__getAudio(page.current));
     }
   }, [inView]);
 
