@@ -5,9 +5,9 @@ const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
 export const __createCip = createAsyncThunk(
   "createCip",
-  async (audioInfo, thunkAPI) => {
+  async ({ clipInfo, audioablumId }, thunkAPI) => {
     return await axios
-      .post(`api/audioclip/uploaded`, audioInfo)
+      .post(`api/audioclip/uploaded/${audioablumId}`, clipInfo)
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
   }
