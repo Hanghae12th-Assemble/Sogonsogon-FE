@@ -28,6 +28,7 @@ import getAlbum from "../module/getAlbum";
 import getAlbumCategory from "../module/getAlbumCategory";
 import getAlbumDetail from "../module/getAlbumDetail";
 import removeAlbum from "../module/removeAlbum";
+import getClips from "../module/geClips";
 
 const sotre = configureStore({
   reducer: {
@@ -60,6 +61,7 @@ const sotre = configureStore({
     gettingAlbumCategory: getAlbumCategory.reducer,
     gettingAlbumDetail: getAlbumDetail.reducer,
     removingAlbum: removeAlbum.reducer,
+    gettingClips: getClips.reducer,
   },
 });
 

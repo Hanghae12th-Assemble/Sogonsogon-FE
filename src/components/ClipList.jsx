@@ -6,14 +6,13 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
 
-function ClipList({ editClicked, state, setState, selectedContent, contentId }) {
+function ClipList({ editClicked, state, setState, selectedContent, data }) {
     const navigate = useNavigate()
-
-    const handleClick = () => {
+    const handleClick = (id) => {
         if (editClicked === true) {
-            document.startViewTransition(() => navigate(`/modifyclip/1`));
+            document.startViewTransition(() => navigate(`/modifyclip/${id}`));
         } else {
-            document.startViewTransition(() => navigate(`/clipplay/1`));
+            document.startViewTransition(() => navigate(`/clipplay/${id}`));
         }
     };
 
@@ -29,7 +28,7 @@ function ClipList({ editClicked, state, setState, selectedContent, contentId }) 
                         state={state}
                         setState={setState}
                         selectedContent={selectedContent}
-                    // contentId={contentId}
+                        contentId={data?.id}
                     />
                     {!editClicked && (
                         <><AllCilpsMiniBox />
@@ -41,14 +40,14 @@ function ClipList({ editClicked, state, setState, selectedContent, contentId }) 
                     )
 
                     }
-                    <AudioCilpImg />
-                    <AllClicpsDescLayout onClick={handleClick}>
-                        <AllClicpsTitleLayout>오늘은 비가 오네요. 비오는 날 어울리는 노래 들려드려요.</AllClicpsTitleLayout>
+                    <AudioCilpImg backgroundImageUrl={data?.audioclipImageUrl} />
+                    <AllClicpsDescLayout onClick={() => handleClick(data?.id)}>
+                        <AllClicpsTitleLayout>{data?.title}</AllClicpsTitleLayout>
                         <AllClicpsHeartContianer>
                             <div>오늘</div>
                             <div>58분</div>
-                            <AiOutlineHeart size={18} color={"77756f"} />
-                            <div>106</div>
+                            <AiOutlineHeart size={18} color={"77756f"} style={{ marginRight: "5px" }} />
+                            <div>{data?.isLikeCount}</div>
                             <StPlayBtnSvg />
                             <div>33 </div>
                         </AllClicpsHeartContianer>

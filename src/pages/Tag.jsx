@@ -7,7 +7,6 @@ import Navbar from "../components/Navbar";
 import {
   AiOutlineArrowUp,
   AiOutlineMenu,
-  AiOutlinePlus,
   AiOutlineSearch,
 } from "react-icons/ai";
 import Lnb from "../components/Lnb";
@@ -20,6 +19,7 @@ import { ReactComponent as Music } from "../asset/icon/music.svg";
 import { ReactComponent as Daily } from "../asset/icon/daily.svg";
 import { ReactComponent as Book } from "../asset/icon/book.svg";
 import { ReactComponent as Asmr } from "../asset/icon/asmr.svg";
+import { __getAlbumCategory, initInfinitiScroll } from "../redux/module/getAlbumCategory";
 
 function Tag() {
   let { id } = useParams();
@@ -27,10 +27,25 @@ function Tag() {
   const radioContainerRef = useRef();
   const [ref, inView] = useInView();
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.gettingAudioCategory);
+  const data = useSelector((state) => state.gettingAlbumCategory);
+  console.log(data)
   const [isLnbOpen, setIsLnbOpen] = useState(false);
   const scrollPos = useScroll(radioContainerRef);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    page.current = 1;
+    dispatch(initInfinitiScroll());
+    dispatch(__getAlbumCategory({ page: page.current, categoryType: id }));
+  }, [id, page]);
+
+  useEffect(() => {
+    if (inView) {
+      page.current += 1;
+      dispatch(__getAlbumCategory({ page: page.current, categoryType: id }));
+    }
+  }, [inView]);
+
 
   const toggleLnb = () => setIsLnbOpen((prev) => !prev);
 
@@ -79,7 +94,7 @@ function Tag() {
       </NavbarContainer>
       <RadioCountContainer props={data} />
       <StRadioContainer ref={radioContainerRef}>
-        {data?.radio.map((item, index) => {
+        {data?.album.map((item, index) => {
           return item?.data?.result?.map((props, index) => {
             return <RadioContainer props={props} key={index} />;
           });

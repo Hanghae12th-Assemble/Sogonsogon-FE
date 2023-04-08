@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components';
 import { AiOutlineArrowLeft, AiOutlinePlus } from 'react-icons/ai';
 import MyContentEditContainer from '../components/MyContentEditContainer';
@@ -6,18 +6,40 @@ import { useState } from 'react';
 import { ReactComponent as Latest } from '../asset/icon/latestlist.svg';
 import ClipList from '../components/ClipList';
 import SelectedContentRemoveBtn from "../components/SelectedContentRemoveBtn"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { __getClips, initInfinitiScroll } from '../redux/module/geClips';
+import { useInView } from 'react-intersection-observer';
 
 function AllViewAudioClip() {
+    const { id } = useParams()
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const data = useSelector((state) => state.gettingClips);
+    const page = useRef(1);
+    const [ref, inView] = useInView();
     const [state, setState] = useState({
         editClicked: false,
         selectedContent: [],
     });
 
+    useEffect(() => {
+        page.current = 1;
+        dispatch(initInfinitiScroll());
+        dispatch(__getClips({ id, page: page.current }));
+    }, []);
+
+    useEffect(() => {
+        if (inView) {
+            page.current += 1;
+            dispatch(__getClips({ id, page: page.current }));
+        }
+    }, [inView]);
+
     const { editClicked, selectedContent } = state;
 
-    const totalClipCount = [1, 2, 3, 4, 5, 6]
+    const totalClipCount = data?.clip[0]?.data?.metadata?.audioClipCount
 
     return (
         <>
@@ -51,12 +73,19 @@ function AllViewAudioClip() {
             />
             <AllClipsListBtnContainer><StLatestSvg />최신순</AllClipsListBtnContainer>
             <AllClipsContainer>
-                <ClipList
-                    editClicked={editClicked}
-                    selectedContent={selectedContent}
-                    state={state}
-                    setState={setState}
-                />
+                {data?.clip?.map((item) => {
+                    return item?.data?.result?.map((props, index) => {
+                        return <ClipList
+                            key={index}
+                            data={props}
+                            editClicked={editClicked}
+                            selectedContent={selectedContent}
+                            state={state}
+                            setState={setState}
+                        />
+                    })
+                })}
+                <div ref={ref}></div>
             </AllClipsContainer>
             <SelectedContentRemoveBtn
                 state={state}

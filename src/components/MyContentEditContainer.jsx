@@ -9,7 +9,7 @@ function MyContentEditContainer({ editClicked, contentType, selectedContent, set
                     <>
                         <EditContainerLeftLayout>
                             <StFrontSubstance frontSubstance={frontSubstance}>{frontSubstance}</StFrontSubstance>
-                            <StContentCount frontSubstance={frontSubstance}>{contentType?.length}</StContentCount>
+                            <StContentCount frontSubstance={frontSubstance}>{contentType}</StContentCount>
                             <p>{substance}</p>
                         </EditContainerLeftLayout>
 
