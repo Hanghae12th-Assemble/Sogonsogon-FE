@@ -125,6 +125,7 @@ const MyAlarmContainer = styled.div`
 
 const MyAlarmLayout = styled.div`
     /* border: 1px solid black; */
+    width:500px;
     background-color: ${({ isRead }) => (isRead ? 'none' : '#fffaf1')};
     border-top: 1px solid #f0efed;
     display: flex;
