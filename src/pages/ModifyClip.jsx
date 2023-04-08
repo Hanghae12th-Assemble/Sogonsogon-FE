@@ -26,6 +26,7 @@ function ModifyClip() {
           formImagin={formImagin}
           selectedFile={selectedFile}
           setSelectedFile={setSelectedFile}
+          formcheck={"modify"}
         />
       </CrRadioContainerBox>
     </CrRadioContainer>

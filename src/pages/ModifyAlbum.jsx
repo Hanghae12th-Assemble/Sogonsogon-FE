@@ -24,6 +24,7 @@ function ModifyAudio() {
           setPreview={setPreview}
           preview={preview}
           formImagin={formImagin}
+          formcheck={"modify"}
         />
       </CrRadioContainerBox>
     </CrRadioContainer>

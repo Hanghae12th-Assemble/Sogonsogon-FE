@@ -25,6 +25,7 @@ function CreateClip() {
           formImagin={formImagin}
           selectedFile={selectedFile}
           setSelectedFile={setSelectedFile}
+          formcheck={"create"}
         />
       </CrRadioContainerBox>
     </CrRadioContainer>

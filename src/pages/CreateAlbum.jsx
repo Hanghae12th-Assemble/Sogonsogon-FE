@@ -24,6 +24,7 @@ function CreateAudio() {
           setPreview={setPreview}
           preview={preview}
           formImagin={formImagin}
+          formcheck={"create"}
         />
       </CrRadioContainerBox>
     </CrRadioContainer>

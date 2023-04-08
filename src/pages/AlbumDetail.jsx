@@ -23,7 +23,6 @@ function AlbumDetail() {
   const navigate = useNavigate();
   const data = useSelector((state) => state.gettingAlbumDetail);
   const formattedDate = data?.album?.data?.createdAt.substr(0, 10);
-  console.log(data);
   const [state, setState] = useState({
     editClicked: false,
     selectedContent: [],
@@ -47,13 +46,8 @@ function AlbumDetail() {
           toNavigate={-1}
           iconleft={<AiOutlineArrowLeft size={25} />}
           title={""}
-          iconright={
-            <StEditSvg
-              onClick={() => {
-                document.startViewTransition(() => navigate(`/modifyaudio`));
-              }}
-            />
-          }
+          iconright={<StEditSvg />}
+          toClose={`/modifyaudio/${id}`}
         />
       </NavbarContainer>
       <AlbumDetailPgContainer>

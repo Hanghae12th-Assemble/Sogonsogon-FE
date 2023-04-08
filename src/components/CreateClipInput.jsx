@@ -14,6 +14,7 @@ function CreateClipInputs({
   formImagin,
   setSelectedFile,
   selectedFile,
+  formcheck,
 }) {
   const {
     handleSubmit,

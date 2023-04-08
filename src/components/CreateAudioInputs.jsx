@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../elements/Input";
 import styled from "styled-components";
@@ -11,6 +11,7 @@ function CreateRadioInputs({
   setPreview,
   preview,
   formImagin,
+  formcheck,
 }) {
   const {
     handleSubmit,
@@ -19,8 +20,15 @@ function CreateRadioInputs({
     reset,
   } = useForm();
 
+  console.log(formcheck);
+
   const dispatch = useDispatch();
   const btninfo = useSelector((state) => state.radioButn[0]);
+  const [form, setForm] = useState("");
+
+  useEffect(() => {
+    setForm(formcheck);
+  }, []);
 
   const onChangeimge = (e) => {
     const img = e.target.files[0];
@@ -48,7 +56,7 @@ function CreateRadioInputs({
       formData.append(keyValue[0], keyValue[1]);
     }
 
-    dispatch(__createAlbum(formData));
+    // dispatch(__createAlbum(formData));
     reset();
   };
 
