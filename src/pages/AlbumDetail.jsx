@@ -17,6 +17,7 @@ import ClipList from "../components/ClipList";
 import { useDispatch, useSelector } from "react-redux";
 import { __getAlbumDetail } from "../redux/module/getAlbumDetail";
 
+
 function AlbumDetail() {
   const { id } = useParams();
   const dipatch = useDispatch();
@@ -83,7 +84,7 @@ function AlbumDetail() {
             <Button
               AddRadioBtn
               onClick={() => {
-                document.startViewTransition(() => navigate("/createclip/5"));
+                document.startViewTransition(() => navigate(`/createclip/${data?.album?.data?.id}`));
               }}
             >
               <AiOutlinePlus size={20} />
@@ -115,18 +116,23 @@ function AlbumDetail() {
           </ClipInfoLeftLayout>
           <StAllViewLayout
             onClick={() => {
-              document.startViewTransition(() => navigate(`/allclips/1`));
+              document.startViewTransition(() => navigate(`/allclips/${id}`));
             }}
           >
             모두보기
           </StAllViewLayout>
         </AlbumDetailPgClipInfo>
-        <ClipList
-          editClicked={editClicked}
-          selectedContent={selectedContent}
-          state={state}
-          setState={setState}
-        />
+        {data?.album?.data?.audioClips?.map((item, index) => {
+          return <ClipList
+            key={index}
+            data={item}
+            editClicked={editClicked}
+            selectedContent={selectedContent}
+            state={state}
+            setState={setState}
+          />
+        })}
+
       </AlbumDetailPgContainer>
     </>
   );
@@ -139,6 +145,7 @@ const StEditSvg = styled(Edit)`
 `;
 
 const AlbumDetailPgContainer = styled.div`
+   
   width: 100%;
   height: 100%;
   display: flex;
@@ -153,9 +160,10 @@ const AlbumDetailPgContainer = styled.div`
 `;
 
 const AlbumDetailPgDescContainer = styled.div`
-  /* border: 1px solid black; */
+ /* border: 1px solid black; */
+  
   width: 100%;
-  min-height: 520px;
+  min-height: ${(props) => (props.expanded ? "520px" : "auto")};
   padding: 15px 35px 0px 35px;
 `;
 const AlbumDetailPgImg = styled.div`
@@ -221,6 +229,7 @@ const AlbumDetailPgHeartContianer = styled.div`
 `;
 
 const AlbumDetailPgIntroContainer = styled.div`
+
   width: 100%;
   min-height: 130px;
   margin-top: 20px;
