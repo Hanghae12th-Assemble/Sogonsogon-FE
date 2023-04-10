@@ -15,7 +15,7 @@ function MyAlarm() {
     (state) => state
   );
 
-  //   console.log(gettingAlarm.alarm);
+  console.log(gettingAlarm.alarm);
 
   //   console.log(readingAlarm.alarm);
 
@@ -33,17 +33,17 @@ function MyAlarm() {
     dispatch(__getAlarm());
   }, [readingAlarm, removingAlarm]);
 
-  const unReadAlarm = gettingAlarm?.alarm?.data?.filter(
-    (alarm) => alarm.readStatus !== true
-  );
+  // const unReadAlarm = gettingAlarm?.alarm?.filter(
+  //   (alarm) => alarm.readStatus !== true
+  // );
 
-  const unReadAlarmHandler = () => {
-    if (unReadAlarm?.length > 0) {
-      unReadAlarm?.forEach((alarm) => {
-        dispatch(__readAlarm(alarm.notificationId));
-      });
-    }
-  };
+  // const unReadAlarmHandler = () => {
+  //   if (unReadAlarm?.length > 0) {
+  //     unReadAlarm?.forEach((alarm) => {
+  //       dispatch(__readAlarm(alarm.notificationId));
+  //     });
+  //   }
+  // };
   return (
     <>
       {gettingAlarm && (
@@ -51,9 +51,9 @@ function MyAlarm() {
           <NavbarContainer>
             <Navbar
               toNavigate={"/"}
-              iconleft={
-                <AiOutlineArrowLeft size={25} onClick={unReadAlarmHandler} />
-              }
+              // iconleft={
+              //   <AiOutlineArrowLeft size={25} onClick={unReadAlarmHandler} />
+              // }
               title={"알림"}
               iconright={
                 <AiOutlineSync
@@ -61,7 +61,7 @@ function MyAlarm() {
                   cursor={"pointer"}
                   onClick={() => {
                     dispatch(__getAlarm());
-                    unReadAlarmHandler();
+                    // unReadAlarmHandler();
                   }}
                 />
               }
@@ -69,14 +69,14 @@ function MyAlarm() {
           </NavbarContainer>
           <MyContentEditContainer
             editClicked={editClicked}
-            contentType={unReadAlarm}
+            // contentType={unReadAlarm}
             selectedContent={selectedContent}
             substance={"개의 안 읽은 알람이 있습니다."}
             state={state}
             setState={setState}
           />
           <MyAlarmContainer>
-            {gettingAlarm?.alarm?.data?.map((item, index) => {
+            {gettingAlarm?.alarm?.map((item, index) => {
               return (
                 <AlarmList
                   key={item.notificationId}
