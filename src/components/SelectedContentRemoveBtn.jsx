@@ -2,13 +2,13 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-function SelectedContentRemoveBtn({ state, setState, selectedContent, __removeContent }) {
+function SelectedContentRemoveBtn({ setState, selectedContent, __removeContent }) {
     const dispatch = useDispatch();
     const removeSelectedContent = () => {
         selectedContent.forEach((contentId) => {
             dispatch(__removeContent(contentId));
         });
-        setState({ ...state, selectedContent: [] });
+        setState({ editClicked: false, selectedContent: [] });
     };
 
     return (

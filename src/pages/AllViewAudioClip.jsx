@@ -11,12 +11,13 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getClips, initInfinitiScroll } from '../redux/module/geClips';
 import { useInView } from 'react-intersection-observer';
+import { __removeClip } from '../redux/module/removeClip';
 
 function AllViewAudioClip() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const data = useSelector((state) => state.gettingClips);
+    const { gettingClips, removingClip } = useSelector((state) => state);
     const page = useRef(1);
     const [ref, inView] = useInView();
     const [state, setState] = useState({
@@ -28,7 +29,7 @@ function AllViewAudioClip() {
         page.current = 1;
         dispatch(initInfinitiScroll());
         dispatch(__getClips({ id, page: page.current }));
-    }, []);
+    }, [removingClip]);
 
     useEffect(() => {
         if (inView) {
@@ -38,8 +39,8 @@ function AllViewAudioClip() {
     }, [inView]);
 
     const { editClicked, selectedContent } = state;
-
-    const totalClipCount = data?.clip[0]?.data?.metadata?.audioClipCount
+    console.log(editClicked)
+    const totalClipCount = gettingClips?.clip[0]?.data?.metadata?.audioClipCount
 
     return (
         <>
@@ -69,11 +70,12 @@ function AllViewAudioClip() {
                 contentType={totalClipCount}
                 selectedContent={selectedContent}
                 frontSubstance={"클립"}
-                setEditClicked={(value) => setState({ ...state, editClicked: value })}
+                state={state}
+                setState={setState}
             />
             <AllClipsListBtnContainer><StLatestSvg />최신순</AllClipsListBtnContainer>
             <AllClipsContainer>
-                {data?.clip?.map((item) => {
+                {gettingClips?.clip?.map((item) => {
                     return item?.data?.result?.map((props, index) => {
                         return <ClipList
                             key={index}
@@ -91,7 +93,7 @@ function AllViewAudioClip() {
                 state={state}
                 setState={setState}
                 selectedContent={selectedContent}
-            // __removeContent={__removeAlarm}
+                __removeContent={__removeClip}
             />
 
         </>

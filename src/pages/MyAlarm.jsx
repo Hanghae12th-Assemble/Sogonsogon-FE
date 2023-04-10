@@ -1,115 +1,116 @@
-// import React, { useEffect, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { __getAlarm } from '../redux/module/getAlarm';
-// import { __readAlarm } from '../redux/module/readAlarm';
-// import { __removeAlarm } from '../redux/module/removeAlarm';
-// import Navbar from '../components/Navbar';
-// import { AiOutlineArrowLeft, AiOutlineSync } from 'react-icons/ai';
-// import styled from 'styled-components';
-// import MyContentEditContainer from '../components/MyContentEditContainer';
-// import SelectedContentRemoveBtn from '../components/SelectedContentRemoveBtn';
-// import AlarmList from '../components/AlarmList';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { __getAlarm } from '../redux/module/getAlarm';
+import { __readAlarm } from '../redux/module/readAlarm';
+import { __removeAlarm } from '../redux/module/removeAlarm';
+import Navbar from '../components/Navbar';
+import { AiOutlineArrowLeft, AiOutlineSync } from 'react-icons/ai';
+import styled from 'styled-components';
+import MyContentEditContainer from '../components/MyContentEditContainer';
+import SelectedContentRemoveBtn from '../components/SelectedContentRemoveBtn';
+import AlarmList from '../components/AlarmList';
 
 
 
-// function MyAlarm() {
-//     const { gettingAlarm, readingAlarm, removingAlarm } = useSelector((state) => state);
-//     const dispatch = useDispatch();
-//     const [state, setState] = useState({
-//         editClicked: false,
-//         selectedContent: [],
-//     });
+function MyAlarm() {
+    const { gettingAlarm, readingAlarm, removingAlarm } = useSelector((state) => state);
+    console.log(gettingAlarm)
+    const dispatch = useDispatch();
+    const [state, setState] = useState({
+        editClicked: false,
+        selectedContent: [],
+    });
 
-//     const { editClicked, selectedContent } = state;
+    const { editClicked, selectedContent } = state;
 
-//     useEffect(() => {
-//         dispatch(__getAlarm());
-//     }, [readingAlarm, removingAlarm]);
+    useEffect(() => {
+        dispatch(__getAlarm());
+    }, [readingAlarm, removingAlarm]);
 
-//     const unReadAlarm = gettingAlarm?.alarm?.data?.filter((alarm) => alarm.readStatus !== true);
+    const unReadAlarm = gettingAlarm?.alarm?.data?.filter((alarm) => alarm.readStatus !== true);
 
-//     const unReadAlarmHandler = () => {
-//         if (unReadAlarm?.length > 0) {
-//             unReadAlarm?.forEach((alarm) => {
-//                 dispatch(__readAlarm(alarm.notificationId));
-//             });
-//         }
-//     };
-//     return (
-//         <>
-//             {gettingAlarm && (
-//                 <>
-//                     <NavbarContainer>
-//                         <Navbar
-//                             toNavigate={'/'}
-//                             iconleft={<AiOutlineArrowLeft size={25} onClick={unReadAlarmHandler} />}
-//                             title={'알림'}
-//                             iconright={
-//                                 <AiOutlineSync
-//                                     size={25}
-//                                     cursor={'pointer'}
-//                                     onClick={() => {
-//                                         dispatch(__getAlarm());
-//                                         unReadAlarmHandler();
-//                                     }}
-//                                 />
-//                             }
-//                         />
-//                     </NavbarContainer>
-//                     <MyContentEditContainer
-//                         editClicked={editClicked}
-//                         contentType={unReadAlarm}
-//                         selectedContent={selectedContent}
-//                         substance={"개의 안 읽은 알람이 있습니다."}
-//                         setEditClicked={(value) => setState({ ...state, editClicked: value })}
-//                     />
-//                     <MyAlarmContainer>
-//                         {gettingAlarm?.alarm?.data?.map((item, index) => {
-//                             console.log(item)
-//                             return (
-//                                 <AlarmList
-//                                     key={item.notificationId}
-//                                     data={item}
-//                                     state={state}
-//                                     setState={setState}
-//                                     editClicked={editClicked}
-//                                     selectedContent={selectedContent}
-//                                 />
-//                             );
-//                         })}
-//                     </MyAlarmContainer>
-//                     <SelectedContentRemoveBtn
-//                         state={state}
-//                         setState={setState}
-//                         selectedContent={selectedContent}
-//                         __removeContent={__removeAlarm}
-//                     />
-//                 </>
-//             )}
-//         </>
-//     );
-// }
+    const unReadAlarmHandler = () => {
+        if (unReadAlarm?.length > 0) {
+            unReadAlarm?.forEach((alarm) => {
+                dispatch(__readAlarm(alarm.notificationId));
+            });
+        }
+    };
+    return (
+        <>
+            {gettingAlarm && (
+                <>
+                    <NavbarContainer>
+                        <Navbar
+                            toNavigate={'/'}
+                            iconleft={<AiOutlineArrowLeft size={25} onClick={unReadAlarmHandler} />}
+                            title={'알림'}
+                            iconright={
+                                <AiOutlineSync
+                                    size={25}
+                                    cursor={'pointer'}
+                                    onClick={() => {
+                                        dispatch(__getAlarm());
+                                        unReadAlarmHandler();
+                                    }}
+                                />
+                            }
+                        />
+                    </NavbarContainer>
+                    <MyContentEditContainer
+                        editClicked={editClicked}
+                        contentType={unReadAlarm}
+                        selectedContent={selectedContent}
+                        substance={"개의 안 읽은 알람이 있습니다."}
+                        state={state}
+                        setState={setState}
+                    />
+                    <MyAlarmContainer>
+                        {gettingAlarm?.alarm?.data?.map((item, index) => {
+                            return (
+                                <AlarmList
+                                    key={item.notificationId}
+                                    data={item}
+                                    state={state}
+                                    setState={setState}
+                                    editClicked={editClicked}
+                                    selectedContent={selectedContent}
+                                />
+                            );
+                        })}
+                    </MyAlarmContainer>
+                    <SelectedContentRemoveBtn
+                        state={state}
+                        setState={setState}
+                        selectedContent={selectedContent}
+                        __removeContent={__removeAlarm}
+                    />
+                </>
+            )}
+        </>
+    );
+}
 
-// export default MyAlarm;
+export default MyAlarm;
 
-// const NavbarContainer = styled.div`
-//     padding: 0px 20px;
-// `;
+const NavbarContainer = styled.div`
+    padding: 0px 20px;
+`;
 
-// const MyAlarmContainer = styled.div`
-//     position: relative;
-//     width: 100%;
-//     height: 100%;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: flex-start;
-//     overflow: auto;
+const MyAlarmContainer = styled.div`
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: auto;
 
-//     ::-webkit-scrollbar {
-//         width: 0.1em;
-//         height: 0.1em;
-//     }
-// `;
+    ::-webkit-scrollbar {
+        width: 0.1em;
+        height: 0.1em;
+    }
+`;
 
 
 
