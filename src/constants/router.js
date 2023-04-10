@@ -2,7 +2,7 @@ export const routers = Object.freeze({
   CREATERADIO: "createaudio",
   CREATECLIP: "createclip/:id",
   MODIRADIO: "/modifyaudio/:id",
-  MODICLIP: "modifyclip",
+  MODICLIP: "modifyclip/:id",
   CLIPPLAY: "clipplay/:id",
   SELECTLOGIN: "selectlogin",
   EMAILLOGIN: "maillogin",

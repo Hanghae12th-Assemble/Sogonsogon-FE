@@ -5,13 +5,14 @@ const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
 export const __updateClip = createAsyncThunk(
   "updateClip",
-  async ({ audioId, audioInfo }, thunkAPI) => {
-    return await axios
-      .put(`api/audioclip/updated/${audioId}`, audioInfo)
-      .then((response) => alert(response && "오디오 생성에 성공하였습니다."))
-      .catch((error) =>
-        alert(error && "오디오 이름이 중복되거나 로그인 상태가 아닙니다.")
-      );
+  async ({ audioablumId, clipInfo }, thunkAPI) => {
+    console.log(audioablumId, clipInfo);
+    // return await axios
+    //   .put(`api/audioclip/updated/${audioablumId}`, clipInfo)
+    //   .then((response) => alert(response && "오디오 생성에 성공하였습니다."))
+    //   .catch((error) =>
+    //     alert(error && "오디오 이름이 중복되거나 로그인 상태가 아닙니다.")
+    //   );
   }
 );
 

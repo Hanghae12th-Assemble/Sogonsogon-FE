@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../elements/Input";
 import styled from "styled-components";
 import Button from "../elements/Button";
 import { __createCip } from "../redux/module/createClip";
+import { __updateClip } from "../redux/module/updateClip";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -25,6 +26,11 @@ function CreateClipInputs({
 
   const { id } = useParams();
   const dispatch = useDispatch();
+  const [formState, setFormState] = useState("");
+
+  useEffect(() => {
+    setFormState(formcheck);
+  }, []);
 
   const onChangeimge = (e) => {
     const img = e.target.files[0];
@@ -56,7 +62,12 @@ function CreateClipInputs({
       formData.append(keyValue[0], keyValue[1]);
     }
 
-    dispatch(__createCip({ clipInfo: formData, audioablumId: id }));
+    if (formState === "create") {
+      dispatch(__createCip({ clipInfo: formData, audioablumId: id }));
+    } else {
+      dispatch(__updateClip({ clipInfo: formData, audioablumId: id }));
+    }
+
     reset();
   };
 
@@ -119,7 +130,10 @@ function CreateClipInputs({
           </CrPreviewDiv>
         </CrRadioButtonSpanBox>
         <CrRadioButtonNext>
-          <Button lgBtn>만들기</Button>
+          <Button lgBtn>
+            {" "}
+            {formState === "create" ? "만들기" : "수정하기"}
+          </Button>
         </CrRadioButtonNext>
       </form>
     </>

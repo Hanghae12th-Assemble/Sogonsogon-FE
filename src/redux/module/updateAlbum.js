@@ -5,9 +5,9 @@ const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
 export const __updateAlbum = createAsyncThunk(
   "updateAlbum",
-  async ({ albumId, audioInfo }, thunkAPI) => {
+  async ({ albumId, albumInfo }, thunkAPI) => {
     return await axios
-      .post(`api/audioAlbum/update/${albumId}`, audioInfo)
+      .post(`api/audioAlbum/update/${albumId}`, albumInfo)
       .then((response) => alert(response && "앨범 수정에 성공하였습니다."))
       .catch((error) =>
         alert(error && "앨범 이름이 중복되거나 로그인 상태가 아닙니다.")

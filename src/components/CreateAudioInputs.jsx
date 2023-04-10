@@ -5,6 +5,8 @@ import styled from "styled-components";
 import Button from "../elements/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { __createAlbum } from "../redux/module/createAlbum";
+import { __updateAlbum } from "../redux/module/updateAlbum";
+import { useParams } from "react-router-dom";
 
 function CreateRadioInputs({
   setFormformImagin,
@@ -20,14 +22,13 @@ function CreateRadioInputs({
     reset,
   } = useForm();
 
-  console.log(formcheck);
-
   const dispatch = useDispatch();
+  const { id } = useParams();
   const btninfo = useSelector((state) => state.radioButn[0]);
-  const [form, setForm] = useState("");
+  const [formState, setFormState] = useState("");
 
   useEffect(() => {
-    setForm(formcheck);
+    setFormState(formcheck);
   }, []);
 
   const onChangeimge = (e) => {
@@ -56,7 +57,12 @@ function CreateRadioInputs({
       formData.append(keyValue[0], keyValue[1]);
     }
 
-    // dispatch(__createAlbum(formData));
+    if (formState === "create") {
+      dispatch(__createAlbum(formData));
+    } else {
+      dispatch(__updateAlbum({ albumInfo: formData, albumId: id }));
+    }
+
     reset();
   };
 
@@ -111,7 +117,9 @@ function CreateRadioInputs({
           </CrPreviewDiv>
         </CrRadioButtonSpanBox>
         <CrRadioButtonNext>
-          <Button lgBtn>만들기</Button>
+          <Button lgBtn>
+            {formState === "create" ? "만들기" : "수정하기"}
+          </Button>
         </CrRadioButtonNext>
       </form>
     </>

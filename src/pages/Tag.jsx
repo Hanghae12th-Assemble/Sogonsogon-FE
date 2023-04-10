@@ -19,7 +19,10 @@ import { ReactComponent as Music } from "../asset/icon/music.svg";
 import { ReactComponent as Daily } from "../asset/icon/daily.svg";
 import { ReactComponent as Book } from "../asset/icon/book.svg";
 import { ReactComponent as Asmr } from "../asset/icon/asmr.svg";
-import { __getAlbumCategory, initInfinitiScroll } from "../redux/module/getAlbumCategory";
+import {
+  __getAlbumCategory,
+  initInfinitiScroll,
+} from "../redux/module/getAlbumCategory";
 
 function Tag() {
   let { id } = useParams();
@@ -28,7 +31,6 @@ function Tag() {
   const [ref, inView] = useInView();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.gettingAlbumCategory);
-  console.log(data)
   const [isLnbOpen, setIsLnbOpen] = useState(false);
   const scrollPos = useScroll(radioContainerRef);
   const navigate = useNavigate();
@@ -45,7 +47,6 @@ function Tag() {
       dispatch(__getAlbumCategory({ page: page.current, categoryType: id }));
     }
   }, [inView]);
-
 
   const toggleLnb = () => setIsLnbOpen((prev) => !prev);
 
