@@ -10,16 +10,23 @@ import { useRef } from "react";
 import ReactPlayer from "react-player";
 import formatTime from "../util/formatTime";
 import ClipPlayComment from "../components/ClipPlayComment";
+import { __getClipDetail } from "../redux/module/getClipDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { clickOut } from "../redux/module/reduxState/clickShutDown";
+import { useParams } from "react-router-dom";
 
 function ClipPlay() {
   const [playing, setPlaying] = useState(false);
   const [played, setPlayed] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [url, setUrl] = useState("");
+  const { id } = useParams();
   const selectBtn = useSelector((state) => state.clickingModal);
+  const clipdata = useSelector((state) => state?.gettingClipDetail?.clip);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(__getClipDetail(id));
+  }, []);
 
   const playerRef = useRef(null);
 
@@ -41,10 +48,6 @@ function ClipPlay() {
     setDuration(duration);
   };
 
-  // const handleFileChange = (e) => {
-  //   setUrl(URL.createObjectURL(e.target.files[0]));
-  // };
-
   const setCommentBox = () => {
     dispatch(clickOut(true));
   };
@@ -65,12 +68,7 @@ function ClipPlay() {
 
   return (
     <>
-      <BackgroundImage
-        src={
-          "https://cdn.pixabay.com/photo/2023/03/17/16/14/silhouette-7858977_960_720.jpg"
-        }
-        alt="Background"
-      />
+      <BackgroundImage src={clipdata?.audioclipImageUrl} alt="Background" />
       <TransparentLayer />
       <ClipplayContent>
         <Navbar
@@ -80,7 +78,7 @@ function ClipPlay() {
         />
         <div>
           <ClipplayTitle>
-            <h1>이토록 평범한 미래</h1>
+            <h1>{clipdata?.title}</h1>
           </ClipplayTitle>
           {selectBtn ? <ClipPlayComment /> : null}
           <ClipplayAuthorLike>
@@ -92,18 +90,18 @@ function ClipPlay() {
                   }
                 />
               </div>
-              <span>고은</span>
+              <span>{clipdata?.membernickname}</span>
             </ClipplayAuthorProfile>
             <ClipplayLikeCount>
               <AiOutlineHeart size={30} />
-              <span>32</span>
+              <span>{clipdata?.isLikeCount}</span>
             </ClipplayLikeCount>
           </ClipplayAuthorLike>
         </div>
         <ClipplayPlayBackImgDiv>
           <ReactPlayer
             ref={playerRef}
-            url={url}
+            url={clipdata?.audioclipUrl}
             playing={playing}
             onProgress={handleProgress}
             onDuration={handleDuration}
@@ -111,11 +109,7 @@ function ClipPlay() {
             height="0"
             controls={false}
           />
-          <ClipplayPlayBackImg
-            src={
-              "https://cdn.pixabay.com/photo/2023/03/17/16/14/silhouette-7858977_960_720.jpg"
-            }
-          />
+          <ClipplayPlayBackImg src={clipdata?.audioclipImageUrl} />
         </ClipplayPlayBackImgDiv>
         <ClipplayRangeInputTime>
           <div>
