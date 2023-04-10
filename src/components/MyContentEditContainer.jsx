@@ -12,7 +12,6 @@ function MyContentEditContainer({ editClicked, contentType, selectedContent, sub
                             <StContentCount frontSubstance={frontSubstance}>{contentType}</StContentCount>
                             <p>{substance}</p>
                         </EditContainerLeftLayout>
-
                         <MyEditLayout
                             onClick={() => {
                                 setState({ ...state, editClicked: true });
@@ -20,6 +19,7 @@ function MyContentEditContainer({ editClicked, contentType, selectedContent, sub
                         >
                             편집
                         </MyEditLayout>
+
                     </>
                 ) : (
                     <>
