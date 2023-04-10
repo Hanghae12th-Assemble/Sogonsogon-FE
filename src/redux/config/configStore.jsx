@@ -29,6 +29,7 @@ import getAlbumCategory from "../module/getAlbumCategory";
 import getAlbumDetail from "../module/getAlbumDetail";
 import removeAlbum from "../module/removeAlbum";
 import getClips from "../module/geClips";
+import clickModal from "../module/reduxState/clickShutDown";
 
 const sotre = configureStore({
   reducer: {
@@ -62,6 +63,7 @@ const sotre = configureStore({
     gettingAlbumDetail: getAlbumDetail.reducer,
     removingAlbum: removeAlbum.reducer,
     gettingClips: getClips.reducer,
+    clickingModal: clickModal.reducer,
   },
 });
 

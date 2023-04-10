@@ -10,13 +10,16 @@ import { useRef } from "react";
 import ReactPlayer from "react-player";
 import formatTime from "../util/formatTime";
 import ClipPlayComment from "../components/ClipPlayComment";
+import { useDispatch, useSelector } from "react-redux";
+import { clickOut } from "../redux/module/reduxState/clickShutDown";
 
 function ClipPlay() {
   const [playing, setPlaying] = useState(false);
-  const [comment, setComment] = useState(false);
   const [played, setPlayed] = useState(0);
   const [duration, setDuration] = useState(0);
   const [url, setUrl] = useState("");
+  const selectBtn = useSelector((state) => state.clickingModal);
+  const dispatch = useDispatch();
 
   const playerRef = useRef(null);
 
@@ -38,8 +41,12 @@ function ClipPlay() {
     setDuration(duration);
   };
 
-  const handleFileChange = (e) => {
-    setUrl(URL.createObjectURL(e.target.files[0]));
+  // const handleFileChange = (e) => {
+  //   setUrl(URL.createObjectURL(e.target.files[0]));
+  // };
+
+  const setCommentBox = () => {
+    dispatch(clickOut(true));
   };
 
   const handleRewind = () => {
@@ -65,7 +72,6 @@ function ClipPlay() {
         alt="Background"
       />
       <TransparentLayer />
-
       <ClipplayContent>
         <Navbar
           toNavigate={"/"}
@@ -73,11 +79,10 @@ function ClipPlay() {
           iconright={<FaPencilAlt size={20} />}
         />
         <div>
-          <input type="file" accept="audio/*" onChange={handleFileChange} />
           <ClipplayTitle>
             <h1>이토록 평범한 미래</h1>
           </ClipplayTitle>
-          {comment ? <ClipPlayComment /> : null}
+          {selectBtn ? <ClipPlayComment /> : null}
           <ClipplayAuthorLike>
             <ClipplayAuthorProfile>
               <div>
@@ -139,7 +144,7 @@ function ClipPlay() {
             <ClipplayForward size={50} />
           </div>
         </ClipplayPlayIcon>
-        <ClipplayComment>
+        <ClipplayComment onClick={setCommentBox}>
           <div>
             <BiComment size={20} />
           </div>
@@ -282,10 +287,11 @@ const ClipplayForward = styled(BsFastForward)`
 
 const ClipplayComment = styled.div`
   //border: 1px solid red;
+  cursor: pointer;
   margin-top: 135px;
   display: flex;
   justify-content: center;
-  padding-bottom: 13px;
+  padding-bottom: 35px;
   span {
     margin-left: 10px;
   }

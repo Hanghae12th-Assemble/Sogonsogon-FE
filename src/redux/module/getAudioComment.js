@@ -8,7 +8,7 @@ export const __getAudioComment = createAsyncThunk(
   async (audioId, thunkAPI) => {
     return await axios
       .get(`api/audioclip/comment/${audioId}`)
-      .then((response) => console.log(response))
+      .then((response) => thunkAPI.fulfillWithValue(response.data.data))
       .catch((error) => console.log(error));
   }
 );
