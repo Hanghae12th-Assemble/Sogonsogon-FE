@@ -8,6 +8,7 @@ import { __createAudioComment } from "../redux/module/createAudioComment";
 import { __getAudioComment } from "../redux/module/getAudioComment";
 import { clickOut } from "../redux/module/reduxState/clickShutDown";
 import { useParams } from "react-router-dom";
+import ClipCommentList from "./ClipCommentList";
 
 function ClipPlayComment() {
   const { register, handleSubmit, reset } = useForm();
@@ -60,23 +61,10 @@ function ClipPlayComment() {
         </div>
         {/* 댓글 박스 시작 */}
         <ClipPlayCommentOverflow>
-          <ClipplayCommentContainner>
-            <ClipplayCommentNameDateBox>
-              <h3>고은</h3>
-              <h4>노래가 좋아요</h4>
-              <span>2023.04.04 17:00</span>
-            </ClipplayCommentNameDateBox>
-            <ClipplayCommentBoxText>
-              <div>
-                <ClipplayPhoto
-                  src={
-                    "https://cdn.pixabay.com/photo/2023/03/28/17/04/woman-7883774_640.jpg"
-                  }
-                />
-              </div>
-              <p>오늘은 비가 오네요. 비오는 날 어울리는 노래 들려드려요.</p>
-            </ClipplayCommentBoxText>
-          </ClipplayCommentContainner>
+          {commentlist?.map((item, index) => {
+            return <ClipCommentList props={item} key={index} />
+          })}
+
         </ClipPlayCommentOverflow>
         {/* 댓글 박스 끝 */}
       </ClipplayCommentBox>
@@ -133,12 +121,6 @@ const ClipplayInputTitle = styled.div`
   margin: 20px 0px;
 `;
 
-const ClipplayCommentContainner = styled.div`
-  border: 1px solid red;
-  //border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding-bottom: 30px;
-  margin-top: 30px;
-`;
 
 const ClipplayInputForm = styled.form`
   //border: 1px solid black;
@@ -146,27 +128,3 @@ const ClipplayInputForm = styled.form`
   justify-content: center;
 `;
 
-const ClipplayCommentNameDateBox = styled.div`
-  //border: 1px solid black;
-  margin-bottom: 15px;
-  span {
-    color: #77756f;
-  }
-`;
-
-const ClipplayCommentBoxText = styled.div`
-  //border: 1px solid black;
-  display: flex;
-  align-items: center;
-  font-size: 15px;
-  p {
-    color: #77756f;
-  }
-`;
-
-const ClipplayPhoto = styled.img`
-  width: 70px;
-  height: 70px;
-  border-radius: 10px;
-  margin-right: 10px;
-`;
