@@ -33,7 +33,6 @@ function Tag() {
   const data = useSelector((state) => state.gettingAlbumCategory);
   const [isLnbOpen, setIsLnbOpen] = useState(false);
   const scrollPos = useScroll(radioContainerRef);
-  const navigate = useNavigate();
 
   useEffect(() => {
     page.current = 1;
@@ -126,7 +125,6 @@ const StRadioContainer = styled.div`
   grid-template-columns: repeat(2, 2fr);
   flex-direction: row;
   padding: 0px 20px;
-  z-index: -1;
   overflow: auto;
 `;
 

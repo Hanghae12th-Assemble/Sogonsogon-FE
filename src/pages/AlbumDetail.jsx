@@ -117,6 +117,7 @@ function AlbumDetail() {
           </StAllViewLayout>
         </AlbumDetailPgClipInfo>
         {data?.album?.data?.audioClips?.map((item, index) => {
+          console.log(item)
           return <ClipList
             key={index}
             data={item}

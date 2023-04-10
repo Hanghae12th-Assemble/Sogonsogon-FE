@@ -32,7 +32,7 @@ function Home() {
     page.current = 1;
     dispatch(initInfinitiScroll());
     dispatch(__getAlbum(page.current));
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     if (inView) {
