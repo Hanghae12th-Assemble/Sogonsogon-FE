@@ -15,12 +15,6 @@ function MyAlarm() {
     (state) => state
   );
 
-  console.log(gettingAlarm.alarm);
-
-  //   console.log(readingAlarm.alarm);
-
-  //   console.log(removingAlarm.alarm);
-
   const dispatch = useDispatch();
   const [state, setState] = useState({
     editClicked: false,
@@ -33,17 +27,16 @@ function MyAlarm() {
     dispatch(__getAlarm());
   }, [readingAlarm, removingAlarm]);
 
-  // const unReadAlarm = gettingAlarm?.alarm?.filter(
-  //   (alarm) => alarm.readStatus !== true
-  // );
-
-  // const unReadAlarmHandler = () => {
-  //   if (unReadAlarm?.length > 0) {
-  //     unReadAlarm?.forEach((alarm) => {
-  //       dispatch(__readAlarm(alarm.notificationId));
-  //     });
-  //   }
-  // };
+  const unReadAlarm = gettingAlarm?.alarm?.filter(
+    (alarm) => alarm.readStatus !== true
+  );
+  const unReadAlarmHandler = () => {
+    if (unReadAlarm?.length > 0) {
+      unReadAlarm?.forEach((alarm) => {
+        dispatch(__readAlarm(alarm.notificationId));
+      });
+    }
+  };
   return (
     <>
       {gettingAlarm && (
@@ -51,9 +44,9 @@ function MyAlarm() {
           <NavbarContainer>
             <Navbar
               toNavigate={"/"}
-              // iconleft={
-              //   <AiOutlineArrowLeft size={25} onClick={unReadAlarmHandler} />
-              // }
+              iconleft={
+                <AiOutlineArrowLeft size={25} onClick={unReadAlarmHandler} />
+              }
               title={"알림"}
               iconright={
                 <AiOutlineSync
@@ -61,7 +54,7 @@ function MyAlarm() {
                   cursor={"pointer"}
                   onClick={() => {
                     dispatch(__getAlarm());
-                    // unReadAlarmHandler();
+                    unReadAlarmHandler();
                   }}
                 />
               }
@@ -69,7 +62,7 @@ function MyAlarm() {
           </NavbarContainer>
           <MyContentEditContainer
             editClicked={editClicked}
-            // contentType={unReadAlarm}
+            contentType={unReadAlarm?.length}
             selectedContent={selectedContent}
             substance={"개의 안 읽은 알람이 있습니다."}
             state={state}
