@@ -39,7 +39,8 @@ function MyAlbum() {
                 contentType={totalAlbumCount}
                 selectedContent={selectedContent}
                 frontSubstance={"전체 앨범"}
-                setEditClicked={(value) => setState({ ...state, editClicked: value })}
+                state={state}
+                setState={setState}
             />
             <MyAlbumContainer>
                 <MyAlbumLayout>

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
-function MyContentEditContainer({ editClicked, contentType, selectedContent, setEditClicked, substance, frontSubstance }) {
+function MyContentEditContainer({ editClicked, contentType, selectedContent, substance, frontSubstance, state, setState }) {
     return (
         <>
             <MyEditContainer>
@@ -15,7 +15,7 @@ function MyContentEditContainer({ editClicked, contentType, selectedContent, set
 
                         <MyEditLayout
                             onClick={() => {
-                                setEditClicked(true);
+                                setState({ ...state, editClicked: true });
                             }}
                         >
                             편집
@@ -28,7 +28,7 @@ function MyContentEditContainer({ editClicked, contentType, selectedContent, set
                         </StContentSlectedCount>
                         <MyDoneLayout
                             onClick={() => {
-                                setEditClicked(false);
+                                setState({ editClicked: false, selectedContent: [] });
                             }}
                         >
                             완료
