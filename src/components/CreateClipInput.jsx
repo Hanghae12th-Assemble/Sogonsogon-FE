@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Button from "../elements/Button";
 import { __createCip } from "../redux/module/createClip";
 import { __updateClip } from "../redux/module/updateClip";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 function CreateClipInputs({
@@ -27,6 +27,7 @@ function CreateClipInputs({
   const { id } = useParams();
   const dispatch = useDispatch();
   const [formState, setFormState] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     setFormState(formcheck);
@@ -53,7 +54,7 @@ function CreateClipInputs({
     setSelectedFile(e.target.files[0]);
   };
 
-  const submitForm = (data) => {
+  const submitForm = async (data) => {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("contents", data.introduction);
@@ -62,10 +63,18 @@ function CreateClipInputs({
       formData.append(keyValue[0], keyValue[1]);
     }
 
-    if (formState === "create") {
-      dispatch(__createCip({ clipInfo: formData, audioablumId: id }));
+    const action =
+      formState === "create"
+        ? await dispatch(__createCip({ clipInfo: formData, audioablumId: id }))
+        : await dispatch(
+            __updateClip({ clipInfo: formData, audioablumId: id })
+          );
+
+    if (action.payload && action.payload >= 200 && action.payload < 300) {
+      console.log(action.payload);
+      navigate("/");
     } else {
-      dispatch(__updateClip({ clipInfo: formData, audioablumId: id }));
+      alert("본인 클립이 아니거나 중복된 클립입니다.");
     }
 
     reset();

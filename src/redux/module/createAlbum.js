@@ -8,8 +8,8 @@ export const __createAlbum = createAsyncThunk(
   async (albumInfo, thunkAPI) => {
     return await axios
       .post(`api/audioAlbum/upload`, albumInfo)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((response) => response.data.statusCode)
+      .catch((error) => thunkAPI.rejectWithValue(error.response));
   }
 );
 

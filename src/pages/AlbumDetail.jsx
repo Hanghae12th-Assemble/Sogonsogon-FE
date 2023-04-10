@@ -17,7 +17,6 @@ import ClipList from "../components/ClipList";
 import { useDispatch, useSelector } from "react-redux";
 import { __getAlbumDetail } from "../redux/module/getAlbumDetail";
 
-
 function AlbumDetail() {
   const { id } = useParams();
   const dipatch = useDispatch();
@@ -78,7 +77,9 @@ function AlbumDetail() {
             <Button
               AddRadioBtn
               onClick={() => {
-                document.startViewTransition(() => navigate(`/createclip/${data?.album?.data?.id}`));
+                document.startViewTransition(() =>
+                  navigate(`/createclip/${data?.album?.data?.id}`)
+                );
               }}
             >
               <AiOutlinePlus size={20} />
@@ -117,17 +118,17 @@ function AlbumDetail() {
           </StAllViewLayout>
         </AlbumDetailPgClipInfo>
         {data?.album?.data?.audioClips?.map((item, index) => {
-          console.log(item)
-          return <ClipList
-            key={index}
-            data={item}
-            editClicked={editClicked}
-            selectedContent={selectedContent}
-            state={state}
-            setState={setState}
-          />
+          return (
+            <ClipList
+              key={index}
+              data={item}
+              editClicked={editClicked}
+              selectedContent={selectedContent}
+              state={state}
+              setState={setState}
+            />
+          );
         })}
-
       </AlbumDetailPgContainer>
     </>
   );
@@ -140,7 +141,6 @@ const StEditSvg = styled(Edit)`
 `;
 
 const AlbumDetailPgContainer = styled.div`
-   
   width: 100%;
   height: 100%;
   display: flex;
@@ -155,8 +155,8 @@ const AlbumDetailPgContainer = styled.div`
 `;
 
 const AlbumDetailPgDescContainer = styled.div`
- /* border: 1px solid black; */
-  
+  /* border: 1px solid black; */
+
   width: 100%;
   min-height: ${(props) => (props.expanded ? "520px" : "auto")};
   padding: 15px 35px 0px 35px;
@@ -224,7 +224,6 @@ const AlbumDetailPgHeartContianer = styled.div`
 `;
 
 const AlbumDetailPgIntroContainer = styled.div`
-
   width: 100%;
   min-height: 130px;
   margin-top: 20px;

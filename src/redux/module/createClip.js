@@ -8,8 +8,8 @@ export const __createCip = createAsyncThunk(
   async ({ clipInfo, audioablumId }, thunkAPI) => {
     return await axios
       .post(`api/audioclip/uploaded/${audioablumId}`, clipInfo)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .then((response) => response.data.statusCode)
+      .catch((error) => thunkAPI.rejectWithValue(error.message));
   }
 );
 

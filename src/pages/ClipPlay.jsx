@@ -13,7 +13,7 @@ import ClipPlayComment from "../components/ClipPlayComment";
 
 function ClipPlay() {
   const [playing, setPlaying] = useState(false);
-  const [comment, setComment] = useState(false);
+  const [comment, setComment] = useState(true);
   const [played, setPlayed] = useState(0);
   const [duration, setDuration] = useState(0);
   const [url, setUrl] = useState("");

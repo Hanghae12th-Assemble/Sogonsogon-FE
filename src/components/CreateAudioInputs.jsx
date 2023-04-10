@@ -6,7 +6,8 @@ import Button from "../elements/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { __createAlbum } from "../redux/module/createAlbum";
 import { __updateAlbum } from "../redux/module/updateAlbum";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 function CreateRadioInputs({
   setFormformImagin,
@@ -26,6 +27,7 @@ function CreateRadioInputs({
   const { id } = useParams();
   const btninfo = useSelector((state) => state.radioButn[0]);
   const [formState, setFormState] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     setFormState(formcheck);
@@ -48,7 +50,7 @@ function CreateRadioInputs({
     }
   };
 
-  const submitForm = (data) => {
+  const submitForm = async (data) => {
     const formData = new FormData();
     formData.append("categoryType", btninfo.title);
     formData.append("title ", data.title);
@@ -57,10 +59,15 @@ function CreateRadioInputs({
       formData.append(keyValue[0], keyValue[1]);
     }
 
-    if (formState === "create") {
-      dispatch(__createAlbum(formData));
+    const action =
+      formState === "create"
+        ? await dispatch(__createAlbum(formData))
+        : await dispatch(__updateAlbum({ albumInfo: formData, albumId: id }));
+
+    if (action.payload && action.payload >= 200 && action.payload < 300) {
+      navigate("/");
     } else {
-      dispatch(__updateAlbum({ albumInfo: formData, albumId: id }));
+      alert("본인 엘범이 아니거나 중복된 앨범입니다.");
     }
 
     reset();
