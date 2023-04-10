@@ -39,9 +39,7 @@ function AllViewAudioClip() {
     }, [inView]);
 
     const { editClicked, selectedContent } = state;
-    console.log(editClicked)
     const totalClipCount = gettingClips?.clip[0]?.data?.metadata?.audioClipCount
-
     return (
         <>
             <AllClipsNavBarBox>
@@ -60,10 +58,12 @@ function AllViewAudioClip() {
                     size={25}
                     cursor={'pointer'}
                     color='#ff9900'
-                    onClick={() => {
-                        document.startViewTransition(() => navigate("/createclip"));
-                    }}
+                    onClick={() =>
+                        (document.startViewTransition(() => navigate("/createclip")))
+                    }
                 />
+
+
             </AllClipsNavBarBox>
             <MyContentEditContainer
                 editClicked={editClicked}

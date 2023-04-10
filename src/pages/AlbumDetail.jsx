@@ -46,7 +46,7 @@ function AlbumDetail() {
           toNavigate={-1}
           iconleft={<AiOutlineArrowLeft size={25} />}
           title={""}
-          iconright={<StEditSvg />}
+          iconright={data?.album?.data?.mine === true ? <StEditSvg /> : null}
           toClose={`/modifyaudio/${id}`}
         />
       </NavbarContainer>
@@ -74,16 +74,19 @@ function AlbumDetail() {
               <AiOutlineHeart size={18} color={"77756f"} />
               <div>106</div>
             </AlbumDetailPgHeartContianer>
-            <Button
-              AddRadioBtn
-              onClick={() => {
-                document.startViewTransition(() =>
-                  navigate(`/createclip/${data?.album?.data?.id}`)
-                );
-              }}
-            >
-              <AiOutlinePlus size={20} />
-            </Button>
+            {data?.album?.data?.mine === true ?
+              (<Button
+                AddRadioBtn
+                onClick={() => {
+                  document.startViewTransition(() =>
+                    navigate(`/createclip/${data?.album?.data?.id}`)
+                  );
+                }}
+              >
+                <AiOutlinePlus size={20} />
+              </Button>)
+              : null}
+
           </AlbumDetailPgDescLayout>
           <AlbumDetailPgIntroContainer expanded={expanded}>
             <p>앨범 소개</p>

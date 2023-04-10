@@ -14,7 +14,6 @@ function MyAlarm() {
   const { gettingAlarm, readingAlarm, removingAlarm } = useSelector(
     (state) => state
   );
-
   const dispatch = useDispatch();
   const [state, setState] = useState({
     editClicked: false,
