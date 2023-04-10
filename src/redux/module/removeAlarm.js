@@ -6,7 +6,7 @@ const axios = new Axios(process.env.REACT_APP_BASE_URL);
 export const __removeAlarm = createAsyncThunk('removeAlarm', async (notificationId, thunkAPI) => {
     return await axios
         .delete(`api/notificaiton/${notificationId}`)
-        .then((response) => response.data.data)
+        .then((response) => thunkAPI.fulfillWithValue(response?.data?.data))
         .catch((error) => alert(error && '이미 삭제된 알람입니다.'));
 });
 
