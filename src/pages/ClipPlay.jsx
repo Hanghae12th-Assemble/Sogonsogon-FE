@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import { AiOutlineClose, AiOutlineHeart } from "react-icons/ai";
-import { FaPencilAlt, FaPlay, FaStop } from "react-icons/fa";
+import { FaPlay, FaStop } from "react-icons/fa";
 import { BsFastForward, BsRewind } from "react-icons/bs";
 import { BiComment } from "react-icons/bi";
 import { useState } from "react";
@@ -71,11 +71,7 @@ function ClipPlay() {
       <BackgroundImage src={clipdata?.audioclipImageUrl} alt="Background" />
       <TransparentLayer />
       <ClipplayContent>
-        <Navbar
-          toNavigate={"/"}
-          iconleft={<AiOutlineClose size={25} />}
-          iconright={<FaPencilAlt size={20} />}
-        />
+        <Navbar toNavigate={"/"} iconleft={<AiOutlineClose size={25} />} />
         <div>
           <ClipplayTitle>
             <h1>{clipdata?.title}</h1>

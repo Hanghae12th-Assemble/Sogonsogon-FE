@@ -26,7 +26,12 @@ function ClipPlayComment() {
   }, [commentPost]);
 
   const submitForm = (data) => {
-    dispatch(__createAudioComment({ audioId: id, commentInfo: data.comment }));
+    dispatch(
+      __createAudioComment({
+        audioId: id,
+        commentInfo: { content: data.content },
+      })
+    );
     reset();
   };
 
@@ -49,7 +54,7 @@ function ClipPlayComment() {
                 commentInput
                 register={register}
                 type={"text"}
-                name={"comment"}
+                name={"content"}
                 placeholder={"댓글을 입력해주세요."}
                 validation={{
                   required: "댓글을 입력해주세요.",
@@ -62,9 +67,8 @@ function ClipPlayComment() {
         {/* 댓글 박스 시작 */}
         <ClipPlayCommentOverflow>
           {commentlist?.map((item, index) => {
-            return <ClipCommentList props={item} key={index} />
+            return <ClipCommentList props={item} key={index} />;
           })}
-
         </ClipPlayCommentOverflow>
         {/* 댓글 박스 끝 */}
       </ClipplayCommentBox>
@@ -121,10 +125,8 @@ const ClipplayInputTitle = styled.div`
   margin: 20px 0px;
 `;
 
-
 const ClipplayInputForm = styled.form`
   //border: 1px solid black;
   display: flex;
   justify-content: center;
 `;
-
