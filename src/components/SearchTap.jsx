@@ -35,6 +35,7 @@ function SearchTap({ searchInfo, sort, setIsSearch, setSort }) {
       >
         <SortLiveBtnContainer>
           앨범
+
         </SortLiveBtnContainer>
       </Button>
     </SortBtnContainer>
