@@ -7,8 +7,6 @@ import radioInfo from "../module/reduxState/createRadioButton";
 import profileInfo from "../module/reduxState/profileModifyButton";
 import searchAudio from "../module/searchAudio";
 import searchUser from "../module/searchUser";
-import getFollowing from "../module/following";
-import getFollower from "../module/follower";
 import removeClip from "../module/removeClip";
 import getProfile from "../module/getProfile";
 import updateProfile from "../module/updateProfile";
@@ -31,6 +29,7 @@ import removeAlbum from "../module/removeAlbum";
 import getClips from "../module/geClips";
 import clickModal from "../module/reduxState/clickShutDown";
 import getMyAlbum from "../module/getMyAlbum";
+import getFollow from "../module/getFollow";
 
 const sotre = configureStore({
   reducer: {
@@ -42,8 +41,6 @@ const sotre = configureStore({
     profileButn: profileInfo.reducer,
     searchingAudio: searchAudio.reducer,
     searchingUser: searchUser.reducer,
-    gettingFollowing: getFollowing.reducer,
-    gettingFollower: getFollower.reducer,
     removingClip: removeClip.reducer,
     gettingProfile: getProfile.reducer,
     updatingProfile: updateProfile.reducer,
@@ -67,6 +64,7 @@ const sotre = configureStore({
     clickingModal: clickModal.reducer,
     gettingMyAlbum: getMyAlbum.reducer,
     removingMyAlbum: removeAlbum.reducer,
+    gettingFollow: getFollow.reducer,
   },
 });
 
