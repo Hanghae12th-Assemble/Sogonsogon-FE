@@ -24,7 +24,8 @@ function AlbumDetail() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { gettingAlbumDetail, likingAlbum } = useSelector((state) => state);
-  const formattedDate = gettingAlbumDetail?.album?.data?.result?.createdAt?.substr(0, 10);
+  const formattedDate =
+    gettingAlbumDetail?.album?.data?.result?.createdAt?.substr(0, 10);
   const [state, setState] = useState({
     editClicked: false,
     selectedContent: [],
@@ -48,28 +49,20 @@ function AlbumDetail() {
           toNavigate={-1}
           iconleft={<AiOutlineArrowLeft size={25} />}
           title={""}
-<<<<<<< HEAD
           iconright={
-            gettingAlbumDetail?.album?.data?.mine === true ? (
+            gettingAlbumDetail?.album?.data?.result?.mine === true ? (
               <StEditSvg />
             ) : null
           }
-=======
-          iconright={gettingAlbumDetail?.album?.data?.result?.mine === true ? <StEditSvg /> : null}
->>>>>>> origin/taehyeok
           toClose={`/modifyaudio/${id}`}
         />
       </NavbarContainer>
       <AlbumDetailPgContainer>
         <AlbumDetailPgDescContainer>
           <AlbumDetailPgImg
-<<<<<<< HEAD
             backgroundImageUrl={
-              gettingAlbumDetail?.album?.data?.backgroundImageUrl
+              gettingAlbumDetail?.album?.data?.result?.backgroundImageUrl
             }
-=======
-            backgroundImageUrl={gettingAlbumDetail?.album?.data?.result?.backgroundImageUrl}
->>>>>>> origin/taehyeok
           />
           <AlbumDetailPgDescLayout>
             <AlbumDetailPgTitleLayout>
@@ -78,24 +71,21 @@ function AlbumDetail() {
             <AlbumDetailPgNameLayout
               onClick={() => {
                 document.startViewTransition(() =>
-<<<<<<< HEAD
                   navigate(
-                    `/profile/${gettingAlbumDetail?.album?.data?.memberName}`
+                    `/profile/${gettingAlbumDetail?.album?.data?.result?.memberName}`
                   )
-=======
-                  navigate(`/profile/${gettingAlbumDetail?.album?.data?.result?.memberName}`)
->>>>>>> origin/taehyeok
                 );
               }}
             >
               {" "}
-<<<<<<< HEAD
-              <p>{gettingAlbumDetail?.album?.data?.meberNickname}</p>{" "}
+              <p>
+                {gettingAlbumDetail?.album?.data?.result?.meberNickname}
+              </p>{" "}
               <AiOutlineRight />{" "}
             </AlbumDetailPgNameLayout>
             <AlbumDetailPgDateLayout>{formattedDate}</AlbumDetailPgDateLayout>
             <AlbumDetailPgHeartContianer>
-              {gettingAlbumDetail?.album?.data?.likeCheck === true ? (
+              {gettingAlbumDetail?.album?.data?.result?.likeCheck === true ? (
                 <AiFillHeart
                   size={20}
                   color={"ff9900"}
@@ -116,30 +106,14 @@ function AlbumDetail() {
               )}
               <div>106</div>
             </AlbumDetailPgHeartContianer>
-            {gettingAlbumDetail?.album?.data?.mine === true ? (
+            {gettingAlbumDetail?.album?.data?.result?.mine === true ? (
               <Button
                 AddRadioBtn
                 onClick={() => {
                   document.startViewTransition(() =>
                     navigate(
-                      `/createclip/${gettingAlbumDetail?.album?.data?.id}`
+                      `/createclip/${gettingAlbumDetail?.album?.data?.result?.id}`
                     )
-=======
-              <p>{gettingAlbumDetail?.album?.data?.result?.meberNickname}</p> <AiOutlineRight />{" "}
-            </AlbumDetailPgNameLayout>
-            <AlbumDetailPgDateLayout>{formattedDate}</AlbumDetailPgDateLayout>
-            <AlbumDetailPgHeartContianer>
-              {gettingAlbumDetail?.album?.data?.result?.likeCheck === true ? (<AiFillHeart size={20} color={"ff9900"} cursor={"pointer"} onClick={() => { dispatch(__likeAlbum(id)) }} />)
-                : (< AiOutlineHeart size={20} color={"77756f"} cursor={"pointer"} onClick={() => { dispatch(__likeAlbum(id)) }} />)}
-              <div>106</div>
-            </AlbumDetailPgHeartContianer>
-            {gettingAlbumDetail?.album?.data?.result?.mine === true ?
-              (<Button
-                AddRadioBtn
-                onClick={() => {
-                  document.startViewTransition(() =>
-                    navigate(`/createclip/${gettingAlbumDetail?.album?.data?.result?.id}`)
->>>>>>> origin/taehyeok
                   );
                 }}
               >
@@ -150,7 +124,8 @@ function AlbumDetail() {
           <AlbumDetailPgIntroContainer expanded={expanded}>
             <p>앨범 소개</p>
             <span>{gettingAlbumDetail?.album?.data?.result?.instruction}</span>
-            {gettingAlbumDetail?.album?.data?.result?.instruction?.length > 3 && (
+            {gettingAlbumDetail?.album?.data?.result?.instruction?.length >
+              3 && (
               <ExpandButtonContainer onClick={handleClick}>
                 {expanded ? (
                   <>
@@ -179,18 +154,20 @@ function AlbumDetail() {
             모두보기
           </StAllViewLayout>
         </AlbumDetailPgClipInfo>
-        {gettingAlbumDetail?.album?.data?.result?.audioClips?.map((item, index) => {
-          return (
-            <ClipList
-              key={index}
-              data={item}
-              editClicked={editClicked}
-              selectedContent={selectedContent}
-              state={state}
-              setState={setState}
-            />
-          );
-        })}
+        {gettingAlbumDetail?.album?.data?.result?.audioClips?.map(
+          (item, index) => {
+            return (
+              <ClipList
+                key={index}
+                data={item}
+                editClicked={editClicked}
+                selectedContent={selectedContent}
+                state={state}
+                setState={setState}
+              />
+            );
+          }
+        )}
       </AlbumDetailPgContainer>
     </>
   );
