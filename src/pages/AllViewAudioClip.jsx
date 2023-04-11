@@ -12,12 +12,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { __getClips, initInfinitiScroll } from '../redux/module/geClips';
 import { useInView } from 'react-intersection-observer';
 import { __removeClip } from '../redux/module/removeClip';
+import { getLocalStorage } from '../util/localStorage';
 
 function AllViewAudioClip() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const user = JSON.parse(getLocalStorage("userInfo"));
+    console.log(user)
     const { gettingClips, removingClip } = useSelector((state) => state);
+    console.log(gettingClips)
     const page = useRef(1);
     const [ref, inView] = useInView();
     const [state, setState] = useState({
@@ -40,6 +44,8 @@ function AllViewAudioClip() {
 
     const { editClicked, selectedContent } = state;
     const totalClipCount = gettingClips?.clip[0]?.data?.metadata?.audioClipCount
+    const clipWriter = gettingClips?.clip[0]?.data?.result[0]?.membername
+    console.log(clipWriter)
     return (
         <>
             <AllClipsNavBarBox>
