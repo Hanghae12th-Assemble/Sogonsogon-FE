@@ -29,10 +29,9 @@ function AlarmList({ state, setState, editClicked, selectedContent, data }) {
 export default AlarmList;
 
 const MyAlarmLayout = styled.div`
-  /* border: 1px solid black; */
   width: 500px;
   background-color: ${({ isRead }) => (isRead ? "none" : "#fffaf1")};
-  border-top: 1px solid #f0efed;
+  border-bottom: 1px solid #f0efed;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -41,7 +40,6 @@ const MyAlarmLayout = styled.div`
 `;
 
 const MyAlarmProfileImg = styled.div`
-  /* border: 1px solid black; */
   min-width: 70px;
   min-height: 70px;
   overflow: hidden;
@@ -53,9 +51,6 @@ const MyAlarmProfileImg = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  align-items: flex-end;
-  display: flex;
-  flex-direction: row-reverse;
   transition: all 0.5s ease-in-out 0s;
   :hover {
     transform: scale(1);
@@ -65,7 +60,6 @@ const MyAlarmProfileImg = styled.div`
 `;
 
 const MyAlarmDescContainer = styled.div`
-  /* border: 1px solid blue; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;

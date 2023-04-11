@@ -75,7 +75,6 @@ const AllClipsLayout = styled.div`
 const AudioCilpImg = styled.div`
     min-width: 75px;
     max-height: 75px;
-    overflow: hidden;
     position: relative;
     background-color: #393b3a6e;
     border-radius: 10px;
@@ -84,9 +83,6 @@ const AudioCilpImg = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    align-items: flex-end;
-    display: flex;
-    flex-direction: row-reverse;
     transition: all 0.5s ease-in-out 0s;
     :hover {
         transform: scale(1);
