@@ -76,15 +76,11 @@ function ClipPlay() {
           <ClipplayTitle>
             <h1>{clipdata?.title}</h1>
           </ClipplayTitle>
-          {selectBtn ? <ClipPlayComment /> : null}
+          {selectBtn ? <ClipPlayComment selectBtn={selectBtn} /> : null}
           <ClipplayAuthorLike>
             <ClipplayAuthorProfile>
               <div>
-                <ClipplayAuthorPhoto
-                  src={
-                    "https://cdn.pixabay.com/photo/2023/03/28/17/04/woman-7883774_640.jpg"
-                  }
-                />
+                <ClipplayAuthorPhoto src={clipdata?.memberprofileImageUrl} />
               </div>
               <span>{clipdata?.membernickname}</span>
             </ClipplayAuthorProfile>

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import styled, { keyframes, css } from "styled-components";
 import Input from "../elements/Input";
 import Button from "../elements/Button";
 import { useForm } from "react-hook-form";
@@ -13,14 +13,14 @@ import ClipCommentList from "./ClipCommentList";
 function ClipPlayComment() {
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
+  const [isVisible] = useState(true);
   const { id } = useParams();
   const commentlist = useSelector((state) => state.gettingAudioComment.comment);
   const commentPost = useSelector((state) => state.creatingAudioComment);
 
-  const clickModalOut = () => {
+  const clickModalOut = (e) => {
     dispatch(clickOut(false));
   };
-
   useEffect(() => {
     dispatch(__getAudioComment(id));
   }, [commentPost]);
@@ -38,7 +38,7 @@ function ClipPlayComment() {
   return (
     <>
       <CommentBoxLayer onClick={clickModalOut} />
-      <ClipplayCommentBox>
+      <ClipplayCommentBox isVisible={isVisible}>
         <ClipplayCommentTitle>
           <span>댓글 </span>
           <ClipplayCommentCount>3</ClipplayCommentCount>
@@ -87,6 +87,15 @@ const CommentBoxLayer = styled.div`
   position: absolute;
 `;
 
+const slideUp = keyframes`
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
 const ClipplayCommentBox = styled.div`
   //border: 1px solid red;
   height: 600px;
@@ -98,6 +107,12 @@ const ClipplayCommentBox = styled.div`
   background-color: white;
   color: black;
   padding: 0 30px;
+  transform: translateY(${({ isVisible }) => (isVisible ? "0" : "100%")});
+  ${({ isVisible }) =>
+    isVisible &&
+    css`
+      animation: ${slideUp} 0.3s ease-in-out forwards;
+    `};
 `;
 
 const ClipPlayCommentOverflow = styled.div`
