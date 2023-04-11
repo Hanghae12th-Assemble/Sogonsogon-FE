@@ -11,7 +11,7 @@ function RadioCountContainer({ props }) {
                 <div>
                     총 <p>{albumCount}개</p>의
                 </div>{' '}
-                <div>라이브가 있어요</div>
+                <div>앨범이 있어요</div>
             </RadioCountLayout>
         </>
     );
