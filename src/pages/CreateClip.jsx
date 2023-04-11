@@ -13,7 +13,7 @@ function CreateClip() {
     <CrRadioContainer>
       <CrRadioContainerBox>
         <Navbar
-          toNavigate={"/"}
+          toNavigate={-1}
           iconleft={<AiOutlineArrowLeft size={20} />}
           title={"클립 만들기"}
         />

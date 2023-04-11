@@ -18,6 +18,7 @@ import ClipList from "../components/ClipList";
 import { useDispatch, useSelector } from "react-redux";
 import { __getAlbumDetail } from "../redux/module/getAlbumDetail";
 import { __likeAlbum } from "../redux/module/likeAlbum";
+import { useThrottledCallback } from "../hooks/useThrottledCallback";
 
 function AlbumDetail() {
   const { id } = useParams();
@@ -41,6 +42,14 @@ function AlbumDetail() {
   const handleClick = () => {
     setState({ ...state, expanded: !expanded });
   };
+
+  const albumLike = useThrottledCallback(
+    () => {
+      dispatch(__likeAlbum(id));
+    },
+    1000,
+    [dispatch, id]
+  );
 
   return (
     <>
@@ -90,18 +99,14 @@ function AlbumDetail() {
                   size={20}
                   color={"ff9900"}
                   cursor={"pointer"}
-                  onClick={() => {
-                    dispatch(__likeAlbum(id));
-                  }}
+                  onClick={albumLike}
                 />
               ) : (
                 <AiOutlineHeart
                   size={20}
                   color={"77756f"}
                   cursor={"pointer"}
-                  onClick={() => {
-                    dispatch(__likeAlbum(id));
-                  }}
+                  onClick={albumLike}
                 />
               )}
               <div>106</div>
@@ -144,7 +149,9 @@ function AlbumDetail() {
         <AlbumDetailPgClipInfo>
           <ClipInfoLeftLayout>
             <ClipInfoLeftSubstance>클립</ClipInfoLeftSubstance>
-            <StContentCount>{gettingAlbumDetail?.album?.data?.metadata?.audioClipCount}</StContentCount>
+            <StContentCount>
+              {gettingAlbumDetail?.album?.data?.metadata?.audioClipCount}
+            </StContentCount>
           </ClipInfoLeftLayout>
           <StAllViewLayout
             onClick={() => {

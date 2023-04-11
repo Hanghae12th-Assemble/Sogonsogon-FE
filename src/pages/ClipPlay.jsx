@@ -71,7 +71,7 @@ function ClipPlay() {
       <BackgroundImage src={clipdata?.audioclipImageUrl} alt="Background" />
       <TransparentLayer />
       <ClipplayContent>
-        <Navbar toNavigate={"/"} iconleft={<AiOutlineClose size={25} />} />
+        <Navbar toNavigate={-1} iconleft={<AiOutlineClose size={25} />} />
         <div>
           <ClipplayTitle>
             <h1>{clipdata?.title}</h1>

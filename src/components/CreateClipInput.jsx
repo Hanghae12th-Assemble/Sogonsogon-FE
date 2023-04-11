@@ -84,7 +84,7 @@ function CreateClipInputs({
     <>
       <form onSubmit={handleSubmit(submitForm)}>
         <CrRadioButtonSpanBox>
-          <span>앨범 이름*</span>
+          <span>클립 이름*</span>
           <CrRadioPublicScopButton>
             <Input
               register={register}
@@ -99,7 +99,7 @@ function CreateClipInputs({
           </CrRadioPublicScopButton>
         </CrRadioButtonSpanBox>
         <CrRadioButtonSpanBox>
-          <span>앨범 소개</span>
+          <span>클립 소개</span>
           <CrRadioPublicScopButton>
             <Input
               register={register}

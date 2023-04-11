@@ -81,7 +81,7 @@ function Profile() {
     <ProfileContainer>
       <ProfileNavbarfixed>
         <Navbar
-          toNavigate={"/"}
+          toNavigate={-1}
           iconleft={<AiOutlineArrowLeft size={20} onClick={onPageClick} />}
           title={"프로필"}
           iconright={

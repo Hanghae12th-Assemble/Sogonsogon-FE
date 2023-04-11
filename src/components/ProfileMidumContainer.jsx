@@ -7,6 +7,7 @@ import { __getProfile } from "../redux/module/getProfile";
 import { __getFollow } from "../redux/module/getFollow";
 import { useParams } from "react-router-dom";
 import { getLocalStorage } from "../util/localStorage";
+import { useThrottledCallback } from "../hooks/useThrottledCallback";
 
 function ProfileMidumContainer() {
   const dispatch = useDispatch();
@@ -24,9 +25,13 @@ function ProfileMidumContainer() {
     dispatch(__getFollow(id));
   }, [userInfo, userFollow]);
 
-  const followBtn = () => {
-    dispatch(__userFollow(id));
-  };
+  const followBtn = useThrottledCallback(
+    () => {
+      dispatch(__userFollow(id));
+    },
+    1000,
+    [dispatch, id]
+  );
 
   return (
     <>

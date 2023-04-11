@@ -14,7 +14,7 @@ function ModifyAudio() {
     <CrRadioContainer>
       <CrRadioContainerBox>
         <Navbar
-          toNavigate={"/"}
+          toNavigate={-1}
           iconleft={<AiOutlineArrowLeft size={20} />}
           title={"앨범 수정하기"}
         />
