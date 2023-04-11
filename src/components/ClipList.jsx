@@ -1,20 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import SelectBtnContainer from '../components/SelectBtnContainer';
-import { ReactComponent as PlayBtn } from '../asset/icon/play_arrow.svg';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { ReactComponent as Edit } from "../asset/icon/edit.svg";
 
 
 function ClipList({ editClicked, state, setState, selectedContent, data }) {
     const navigate = useNavigate()
-    const handleClick = (id) => {
-        if (editClicked === true) {
-            document.startViewTransition(() => navigate(`/modifyclip/${id}`));
-        } else {
-            document.startViewTransition(() => navigate(`/clipplay/${id}`));
-        }
-    };
+    const dateTime = data?.createdAt?.replace("T", " ").slice(0, 16);
 
     return (
         <>
@@ -30,29 +24,31 @@ function ClipList({ editClicked, state, setState, selectedContent, data }) {
                         selectedContent={selectedContent}
                         contentId={data?.id}
                     />
-                    {!editClicked && (
+                    {!editClicked ? (
                         <><AllCilpsMiniBox />
                             <AllClipsDotted />
                             <AllClipsDottedLine />
                             <AllClipsDotted2 />
 
                         </>
-                    )
+                    ) : <StEditSvg onClick={() => {
+                        document.startViewTransition(() => navigate(`/modifyclip/${data?.id}`))
+                    }} />
 
                     }
                     <AudioCilpImg backgroundImageUrl={data?.audioclipImageUrl} />
-                    <AllClicpsDescLayout onClick={() => handleClick(data?.id)}>
+                    <AllClicpsDescLayout onClick={() => {
+                        document.startViewTransition(() => navigate(`/clipplay/${data?.id}`));
+                    }}>
                         <AllClicpsTitleLayout>{data?.title}</AllClicpsTitleLayout>
                         <AllClicpsHeartContianer>
-                            <div>오늘</div>
-                            <div>58분</div>
-                            <AiOutlineHeart size={18} color={"77756f"} style={{ marginRight: "5px" }} />
+                            <div>{dateTime}</div>
+                            <AiOutlineHeart size={16} color={"77756f"} style={{ marginRight: "5px" }} />
                             <div>{data?.isLikeCount}</div>
-                            <StPlayBtnSvg />
-                            <div>33 </div>
                         </AllClicpsHeartContianer>
                     </AllClicpsDescLayout>
                 </AllClicpsDescContainer>
+
             </AllClipsLayout>
 
         </>
@@ -92,6 +88,7 @@ const AudioCilpImg = styled.div`
 `
 
 const AllClipsInfoContainer = styled.div`
+
     display: flex;
     flex-direction: row;
     margin: 0px 0px 5px 55px;
@@ -103,7 +100,7 @@ const AllClicpsDescContainer = styled.div`
     padding: 0px 0px 0px 5px;
 `
 
-const AllClicpsDescLayout = styled.div`
+const AllClicpsDescLayout = styled.div` 
     cursor: pointer;
     min-height: 80px;
     display: flex;
@@ -160,11 +157,6 @@ const AllClipsDotted2 = styled.div`
 const AllCilpsMiniBox = styled.div`
     min-width: 35px;
 `
-const StPlayBtnSvg = styled(PlayBtn)`
-    width: 23px;
-    height: 23px;
-    color: #77756f;
-`
 const AllClipsEpisodeLayout = styled.div`
     width: fit-content;
     height: fit-content;
@@ -176,3 +168,11 @@ const AllClipsEpisodeLayout = styled.div`
     color: #ff9900;
     background-color: #fff5e3;
 `
+const StEditSvg = styled(Edit)`
+  width: 28px;
+  position: absolute;
+  right: 25px;
+  top: 52px;
+  cursor: pointer;
+  stroke: #ff9900;
+`;
