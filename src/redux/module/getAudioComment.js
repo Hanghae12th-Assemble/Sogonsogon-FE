@@ -5,16 +5,18 @@ const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
 export const __getAudioComment = createAsyncThunk(
   "updateAudioComment",
-  async (audioId, thunkAPI) => {
+  async ({ audioId, page }, thunkAPI) => {
     return await axios
-      .get(`api/audioclip/comment/${audioId}`)
-      .then((response) => thunkAPI.fulfillWithValue(response.data.data))
+      .get(
+        `api/audioclip/comment/${audioId}?page=${page}&size=10&sortBy=createdAt`
+      )
+      .then((response) => thunkAPI.fulfillWithValue(response?.data?.data))
       .catch((error) => error.message);
   }
 );
 
 const initialState = {
-  comment: null,
+  comment: [],
   isLoading: false,
   error: null,
 };
@@ -22,7 +24,13 @@ const initialState = {
 const getAudioComment = createSlice({
   name: "getAudioComment",
   initialState,
-  reducers: {},
+  reducers: {
+    initInfinitiScroll: (state, action) => {
+      state.isLoading = false;
+      state.error = false;
+      state.comment = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(__getAudioComment.pending, (state) => {
       state.isLoading = true;
@@ -30,7 +38,7 @@ const getAudioComment = createSlice({
     });
     builder.addCase(__getAudioComment.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.comment = action.payload;
+      state.comment = [...state.comment].concat(action.payload);
       state.error = null;
     });
     builder.addCase(__getAudioComment.rejected, (state, action) => {
@@ -40,4 +48,5 @@ const getAudioComment = createSlice({
   },
 });
 
+export const { initInfinitiScroll } = getAudioComment.actions;
 export default getAudioComment;

@@ -30,7 +30,7 @@ import getAlbumDetail from "../module/getAlbumDetail";
 import removeAlbum from "../module/removeAlbum";
 import getClips from "../module/geClips";
 import clickModal from "../module/reduxState/clickShutDown";
-import getMyAlbum from "../module/getMyAlbum"
+import getMyAlbum from "../module/getMyAlbum";
 
 const sotre = configureStore({
   reducer: {

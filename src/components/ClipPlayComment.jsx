@@ -1,29 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import Input from "../elements/Input";
 import Button from "../elements/Button";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { __createAudioComment } from "../redux/module/createAudioComment";
-import { __getAudioComment } from "../redux/module/getAudioComment";
+import {
+  __getAudioComment,
+  initInfinitiScroll,
+} from "../redux/module/getAudioComment";
 import { clickOut } from "../redux/module/reduxState/clickShutDown";
 import { useParams } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 import ClipCommentList from "./ClipCommentList";
 
 function ClipPlayComment() {
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
   const [isVisible] = useState(true);
+  const page = useRef(1);
+  const [ref, inView] = useInView();
   const { id } = useParams();
-  const commentlist = useSelector((state) => state.gettingAudioComment.comment);
+  const commentlist = useSelector((state) => state?.gettingAudioComment);
   const commentPost = useSelector((state) => state.creatingAudioComment);
 
   const clickModalOut = (e) => {
     dispatch(clickOut(false));
   };
+
   useEffect(() => {
-    dispatch(__getAudioComment(id));
+    page.current = 1;
+    dispatch(initInfinitiScroll());
+    dispatch(__getAudioComment({ audioId: id, page: page.current }));
   }, [commentPost]);
+
+  useEffect(() => {
+    if (inView) {
+      page.current += 1;
+      dispatch(__getAudioComment({ audioId: id, page: page.current }));
+    }
+  }, [inView]);
 
   const submitForm = (data) => {
     dispatch(
@@ -41,12 +57,14 @@ function ClipPlayComment() {
       <ClipplayCommentBox isVisible={isVisible}>
         <ClipplayCommentTitle>
           <span>댓글 </span>
-          <ClipplayCommentCount>3</ClipplayCommentCount>
+          <ClipplayCommentCount>
+            {commentlist?.comment[0]?.metadata?.audioClipCount}
+          </ClipplayCommentCount>
         </ClipplayCommentTitle>
         <div>
           <ClipplayInputTitle>
             <span>전체 댓글</span>
-            <span> 3</span>
+            <span>{commentlist?.comment[0]?.metadata?.audioClipCount}</span>
           </ClipplayInputTitle>
           <div>
             <ClipplayInputForm onSubmit={handleSubmit(submitForm)}>
@@ -66,9 +84,12 @@ function ClipPlayComment() {
         </div>
         {/* 댓글 박스 시작 */}
         <ClipPlayCommentOverflow>
-          {commentlist?.map((item, index) => {
-            return <ClipCommentList props={item} key={index} />;
+          {commentlist?.comment?.map((item, index) => {
+            return item?.result?.map((item, index) => {
+              return <ClipCommentList props={item} key={index} />;
+            });
           })}
+          <div ref={ref}></div>
         </ClipPlayCommentOverflow>
         {/* 댓글 박스 끝 */}
       </ClipplayCommentBox>
