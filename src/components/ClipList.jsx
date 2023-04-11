@@ -20,7 +20,7 @@ function ClipList({ editClicked, state, setState, selectedContent, data }) {
         <>
             <AllClipsLayout>
                 <AllClipsInfoContainer>
-                    <AllClipsEpisodeLayout>6회차</AllClipsEpisodeLayout>
+                    <AllClipsEpisodeLayout>{data?.order}회차</AllClipsEpisodeLayout>
                 </AllClipsInfoContainer>
                 <AllClicpsDescContainer>
                     <SelectBtnContainer

@@ -18,6 +18,7 @@ function AllViewAudioClip() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { gettingClips, removingClip } = useSelector((state) => state);
+    console.log(gettingClips)
     const page = useRef(1);
     const [ref, inView] = useInView();
     const [state, setState] = useState({
