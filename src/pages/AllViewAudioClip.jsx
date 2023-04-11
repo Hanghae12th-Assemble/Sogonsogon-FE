@@ -59,11 +59,9 @@ function AllViewAudioClip() {
                     cursor={'pointer'}
                     color='#ff9900'
                     onClick={() =>
-                        (document.startViewTransition(() => navigate("/createclip")))
+                        (document.startViewTransition(() => navigate(`/createclip/${id}`)))
                     }
                 />
-
-
             </AllClipsNavBarBox>
             <MyContentEditContainer
                 editClicked={editClicked}
