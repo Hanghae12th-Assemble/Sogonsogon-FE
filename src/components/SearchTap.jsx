@@ -34,8 +34,7 @@ function SearchTap({ searchInfo, sort, setIsSearch, setSort }) {
         onClick={() => search("live")}
       >
         <SortLiveBtnContainer>
-          라이브
-          <SortLiveMark sort={sort}>Live</SortLiveMark>
+          앨범
         </SortLiveBtnContainer>
       </Button>
     </SortBtnContainer>
