@@ -9,7 +9,7 @@ export const __getAlarm = createAsyncThunk(
     return await axios
       .get("api/notificaiton/AllNotifications")
       .then((response) => thunkAPI.fulfillWithValue(response?.data?.data))
-      .catch((error) => console.log(error));
+      .catch((error) => error.message);
   }
 );
 

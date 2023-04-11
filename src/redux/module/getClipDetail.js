@@ -9,7 +9,7 @@ export const __getClipDetail = createAsyncThunk(
     return await axios
       .get(`api/audioclip/${audioId}`)
       .then((response) => thunkAPI.fulfillWithValue(response?.data?.data))
-      .catch((error) => console.log(error));
+      .catch((error) => error.message);
   }
 );
 

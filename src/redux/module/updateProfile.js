@@ -9,7 +9,7 @@ export const __updateProfile = createAsyncThunk(
     return await axios
       .put(`api/member/update/${userId}`, profileInfo)
       .then((response) => thunkAPI.fulfillWithValue(response?.data?.data))
-      .catch((error) => console.log(error));
+      .catch((error) => error.message);
   }
 );
 

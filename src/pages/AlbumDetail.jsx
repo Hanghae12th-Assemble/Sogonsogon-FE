@@ -24,7 +24,10 @@ function AlbumDetail() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { gettingAlbumDetail, likingAlbum } = useSelector((state) => state);
-  const formattedDate = gettingAlbumDetail?.album?.data?.createdAt.substr(0, 10);
+  const formattedDate = gettingAlbumDetail?.album?.data?.createdAt.substr(
+    0,
+    10
+  );
   const [state, setState] = useState({
     editClicked: false,
     selectedContent: [],
@@ -48,14 +51,20 @@ function AlbumDetail() {
           toNavigate={-1}
           iconleft={<AiOutlineArrowLeft size={25} />}
           title={""}
-          iconright={gettingAlbumDetail?.album?.data?.mine === true ? <StEditSvg /> : null}
+          iconright={
+            gettingAlbumDetail?.album?.data?.mine === true ? (
+              <StEditSvg />
+            ) : null
+          }
           toClose={`/modifyaudio/${id}`}
         />
       </NavbarContainer>
       <AlbumDetailPgContainer>
         <AlbumDetailPgDescContainer>
           <AlbumDetailPgImg
-            backgroundImageUrl={gettingAlbumDetail?.album?.data?.backgroundImageUrl}
+            backgroundImageUrl={
+              gettingAlbumDetail?.album?.data?.backgroundImageUrl
+            }
           />
           <AlbumDetailPgDescLayout>
             <AlbumDetailPgTitleLayout>
@@ -64,32 +73,53 @@ function AlbumDetail() {
             <AlbumDetailPgNameLayout
               onClick={() => {
                 document.startViewTransition(() =>
-                  navigate(`/profile/${gettingAlbumDetail?.album?.data?.memberName}`)
+                  navigate(
+                    `/profile/${gettingAlbumDetail?.album?.data?.memberName}`
+                  )
                 );
               }}
             >
               {" "}
-              <p>{gettingAlbumDetail?.album?.data?.meberNickname}</p> <AiOutlineRight />{" "}
+              <p>{gettingAlbumDetail?.album?.data?.meberNickname}</p>{" "}
+              <AiOutlineRight />{" "}
             </AlbumDetailPgNameLayout>
             <AlbumDetailPgDateLayout>{formattedDate}</AlbumDetailPgDateLayout>
             <AlbumDetailPgHeartContianer>
-              {gettingAlbumDetail?.album?.data?.likeCheck === true ? (<AiFillHeart size={20} color={"ff9900"} cursor={"pointer"} onClick={() => { dispatch(__likeAlbum(id)) }} />)
-                : (< AiOutlineHeart size={20} color={"77756f"} cursor={"pointer"} onClick={() => { dispatch(__likeAlbum(id)) }} />)}
+              {gettingAlbumDetail?.album?.data?.likeCheck === true ? (
+                <AiFillHeart
+                  size={20}
+                  color={"ff9900"}
+                  cursor={"pointer"}
+                  onClick={() => {
+                    dispatch(__likeAlbum(id));
+                  }}
+                />
+              ) : (
+                <AiOutlineHeart
+                  size={20}
+                  color={"77756f"}
+                  cursor={"pointer"}
+                  onClick={() => {
+                    dispatch(__likeAlbum(id));
+                  }}
+                />
+              )}
               <div>106</div>
             </AlbumDetailPgHeartContianer>
-            {gettingAlbumDetail?.album?.data?.mine === true ?
-              (<Button
+            {gettingAlbumDetail?.album?.data?.mine === true ? (
+              <Button
                 AddRadioBtn
                 onClick={() => {
                   document.startViewTransition(() =>
-                    navigate(`/createclip/${gettingAlbumDetail?.album?.data?.id}`)
+                    navigate(
+                      `/createclip/${gettingAlbumDetail?.album?.data?.id}`
+                    )
                   );
                 }}
               >
                 <AiOutlinePlus size={20} />
-              </Button>)
-              : null}
-
+              </Button>
+            ) : null}
           </AlbumDetailPgDescLayout>
           <AlbumDetailPgIntroContainer expanded={expanded}>
             <p>앨범 소개</p>

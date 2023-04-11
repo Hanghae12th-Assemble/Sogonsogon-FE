@@ -9,7 +9,7 @@ export const __removeAlbum = createAsyncThunk(
     return await axios
       .delete(`api/audioAlbum/delete/${albumId}`)
       .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+      .catch((error) => error.message);
   }
 );
 
