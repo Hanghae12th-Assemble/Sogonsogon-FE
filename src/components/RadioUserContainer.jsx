@@ -53,9 +53,6 @@ const RadioPreviewProfileImg = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    align-items: flex-end;
-    display: flex;
-    flex-direction: row-reverse;
     transition: all 0.5s ease-in-out 0s;
     :hover {
         transform: scale(1);

@@ -17,6 +17,7 @@ function MyAlbum() {
     const toggleLnb = () => setIsLnbOpen((prev) => !prev);
     const dispatch = useDispatch()
     const { gettingMyAlbum, removingMyAlbum } = useSelector((state) => state);
+    console.log(gettingMyAlbum)
     const page = useRef(1);
     const [ref, inView] = useInView();
     const [state, setState] = useState({
@@ -39,7 +40,6 @@ function MyAlbum() {
 
     const { editClicked, selectedContent } = state;
     const totalAlbumCount = gettingMyAlbum?.album[0]?.data?.metadata?.audioAlbumCount
-
 
     return (
         <>

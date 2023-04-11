@@ -49,7 +49,7 @@ const SortBtnContainer = styled.div`
   min-height: 50px;
   display: flex;
   align-items: center;
-  padding-left: 32px;
+  padding-left: 25px;
   margin-top: 10px;
 `;
 

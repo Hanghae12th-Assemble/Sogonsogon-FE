@@ -61,7 +61,7 @@ function AlbumList({ editClicked, state, setState, selectedContent, data }) {
                             <MyAlbumDateLayout>{dateTime}</MyAlbumDateLayout>
                             <MyAlbumHeartContianer>
                                 <AiOutlineHeart size={18} color={"77756f"} />
-                                <div>106</div>
+                                <div>{data?.likesCount}</div>
                             </MyAlbumHeartContianer>
                         </MyAlbumDescLayout>
                     </MyAlbumOnclickdiv>

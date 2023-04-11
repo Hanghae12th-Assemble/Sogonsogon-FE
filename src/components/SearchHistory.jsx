@@ -72,17 +72,15 @@ const SearchHistoryContainer = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 5px 25px 0px 25px;
-    /* border: 1px solid black; */
 `;
 
 const SearchHistoryHeader = styled.div`
-    /* border: 1px solid black; */
     background-color: #f9f9fa;
     width: 100%;
     min-height: 50px;
     display: flex;
     align-items: center;
-    padding: 10px 0px 0px 43px;
+    padding: 10px 0px 0px 33px;
     margin-top: 10px;
     font-size: 20px;
     color: #000;
@@ -99,8 +97,7 @@ const SearchHistoryHeader = styled.div`
 `;
 
 const SearchHistoryLayout = styled.div`
-    /* border: 1px solid black; */
-    padding: 0px 20px 0px 20px;
+    padding: 0px 20px 0px 10px;
     width: 100%;
     min-height: 40px;
     background-color: #f9f9fa;
@@ -108,9 +105,7 @@ const SearchHistoryLayout = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     margin-bottom: 10px;
-    /* box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; */
     align-items: center;
-
     justify-content: space-between;
 `;
 

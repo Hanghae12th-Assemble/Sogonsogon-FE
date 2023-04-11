@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as Person } from '../asset/icon/person.svg';
 
 function RadioContainer({ props }) {
     const navigate = useNavigate();
@@ -67,26 +66,6 @@ const RadioLayout = styled.div`
     margin: 10px auto;
 `;
 
-const ViewerCounterContainer = styled.div`
-    background-color: #332d28;
-    width: 50px;
-    height: 28px;
-    color: white;
-    margin: 0px 13px 10px 0px; //  위,오른쪽,아래,왼쪽
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
-const ViewerCouterLayout = styled.div`
-    min-width: 20px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
 const RadioContentLayout = styled.div`
     width: 100%;
     display: flex;
@@ -117,8 +96,4 @@ const RadionContentMiniLayout = styled.div`
     width: 150px;
     min-height: 50px;
     /* border: 1px solid black; */
-`;
-
-const StPersonSVg = styled(Person)`
-    width: 16px;
 `;
