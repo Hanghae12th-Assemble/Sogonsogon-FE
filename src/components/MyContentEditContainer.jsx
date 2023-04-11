@@ -49,7 +49,7 @@ const MyEditContainer = styled.div`
     align-items: center;
     width: 100%;
     min-height: 60px;
-    /* border-bottom: 1px solid #f0efed; */
+    border-bottom: 1px solid #f0efed;
     padding: 0px 30px 0px 30px;
    
 `;

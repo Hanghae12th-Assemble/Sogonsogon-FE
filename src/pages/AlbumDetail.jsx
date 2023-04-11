@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import {
+  AiFillHeart,
   AiOutlineArrowLeft,
   AiOutlineDown,
   AiOutlineHeart,
@@ -16,13 +17,14 @@ import Button from "../elements/Button";
 import ClipList from "../components/ClipList";
 import { useDispatch, useSelector } from "react-redux";
 import { __getAlbumDetail } from "../redux/module/getAlbumDetail";
+import { __likeAlbum } from "../redux/module/likeAlbum";
 
 function AlbumDetail() {
   const { id } = useParams();
-  const dipatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const data = useSelector((state) => state.gettingAlbumDetail);
-  const formattedDate = data?.album?.data?.createdAt.substr(0, 10);
+  const { gettingAlbumDetail, likingAlbum } = useSelector((state) => state);
+  const formattedDate = gettingAlbumDetail?.album?.data?.createdAt.substr(0, 10);
   const [state, setState] = useState({
     editClicked: false,
     selectedContent: [],
@@ -30,8 +32,8 @@ function AlbumDetail() {
   });
 
   useEffect(() => {
-    dipatch(__getAlbumDetail(id));
-  }, []);
+    dispatch(__getAlbumDetail(id));
+  }, [likingAlbum]);
 
   const { editClicked, selectedContent, expanded } = state;
 
@@ -46,40 +48,41 @@ function AlbumDetail() {
           toNavigate={-1}
           iconleft={<AiOutlineArrowLeft size={25} />}
           title={""}
-          iconright={data?.album?.data?.mine === true ? <StEditSvg /> : null}
+          iconright={gettingAlbumDetail?.album?.data?.mine === true ? <StEditSvg /> : null}
           toClose={`/modifyaudio/${id}`}
         />
       </NavbarContainer>
       <AlbumDetailPgContainer>
         <AlbumDetailPgDescContainer>
           <AlbumDetailPgImg
-            backgroundImageUrl={data?.album?.data?.backgroundImageUrl}
+            backgroundImageUrl={gettingAlbumDetail?.album?.data?.backgroundImageUrl}
           />
           <AlbumDetailPgDescLayout>
             <AlbumDetailPgTitleLayout>
-              {data?.album?.data?.title}
+              {gettingAlbumDetail?.album?.data?.title}
             </AlbumDetailPgTitleLayout>
             <AlbumDetailPgNameLayout
               onClick={() => {
                 document.startViewTransition(() =>
-                  navigate(`/profile/${data?.album?.data?.memberName}`)
+                  navigate(`/profile/${gettingAlbumDetail?.album?.data?.memberName}`)
                 );
               }}
             >
               {" "}
-              <p>{data?.album?.data?.meberNickname}</p> <AiOutlineRight />{" "}
+              <p>{gettingAlbumDetail?.album?.data?.meberNickname}</p> <AiOutlineRight />{" "}
             </AlbumDetailPgNameLayout>
             <AlbumDetailPgDateLayout>{formattedDate}</AlbumDetailPgDateLayout>
             <AlbumDetailPgHeartContianer>
-              <AiOutlineHeart size={18} color={"77756f"} />
+              {gettingAlbumDetail?.album?.data?.likeCheck === true ? (<AiFillHeart size={20} color={"ff9900"} cursor={"pointer"} onClick={() => { dispatch(__likeAlbum(id)) }} />)
+                : (< AiOutlineHeart size={20} color={"77756f"} cursor={"pointer"} onClick={() => { dispatch(__likeAlbum(id)) }} />)}
               <div>106</div>
             </AlbumDetailPgHeartContianer>
-            {data?.album?.data?.mine === true ?
+            {gettingAlbumDetail?.album?.data?.mine === true ?
               (<Button
                 AddRadioBtn
                 onClick={() => {
                   document.startViewTransition(() =>
-                    navigate(`/createclip/${data?.album?.data?.id}`)
+                    navigate(`/createclip/${gettingAlbumDetail?.album?.data?.id}`)
                   );
                 }}
               >
@@ -90,8 +93,8 @@ function AlbumDetail() {
           </AlbumDetailPgDescLayout>
           <AlbumDetailPgIntroContainer expanded={expanded}>
             <p>앨범 소개</p>
-            <span>{data?.album?.data?.instruction}</span>
-            {data?.album?.data?.instruction?.length > 3 && (
+            <span>{gettingAlbumDetail?.album?.data?.instruction}</span>
+            {gettingAlbumDetail?.album?.data?.instruction?.length > 3 && (
               <ExpandButtonContainer onClick={handleClick}>
                 {expanded ? (
                   <>
@@ -120,7 +123,7 @@ function AlbumDetail() {
             모두보기
           </StAllViewLayout>
         </AlbumDetailPgClipInfo>
-        {data?.album?.data?.audioClips?.map((item, index) => {
+        {gettingAlbumDetail?.album?.data?.audioClips?.map((item, index) => {
           return (
             <ClipList
               key={index}
@@ -167,7 +170,6 @@ const AlbumDetailPgDescContainer = styled.div`
 const AlbumDetailPgImg = styled.div`
   width: 210px;
   height: 210px;
-  overflow: hidden;
   background-color: #393b3a6e;
   border-radius: 10px;
   margin: auto;
@@ -175,9 +177,6 @@ const AlbumDetailPgImg = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  align-items: flex-end;
-  display: flex;
-  flex-direction: row-reverse;
   transition: all 0.5s ease-in-out 0s;
   :hover {
     transform: scale(1);
