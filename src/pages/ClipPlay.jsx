@@ -14,22 +14,18 @@ import { __getClipDetail } from "../redux/module/getClipDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { clickOut } from "../redux/module/reduxState/clickShutDown";
 import { useParams } from "react-router-dom";
-import { __getAudioComment } from "../redux/module/getAudioComment";
 
 function ClipPlay() {
   const [playing, setPlaying] = useState(false);
   const [played, setPlayed] = useState(0);
   const [duration, setDuration] = useState(0);
   const { id } = useParams();
-  const page = useRef(1);
   const selectBtn = useSelector((state) => state.clickingModal);
   const clipdata = useSelector((state) => state?.gettingClipDetail?.clip);
-  const commentlist = useSelector((state) => state?.gettingAudioComment);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(__getClipDetail(id));
-    dispatch(__getAudioComment({ audioId: id, page: page.current }));
   }, []);
 
   const playerRef = useRef(null);
@@ -139,9 +135,7 @@ function ClipPlay() {
             <BiComment size={20} />
           </div>
           <span>댓글</span>
-          <ClipplayCommentCount>
-            {commentlist?.comment[0]?.metadata?.audioClipCount}
-          </ClipplayCommentCount>
+          <ClipplayCommentCount>3</ClipplayCommentCount>
         </ClipplayComment>
       </ClipplayContent>
     </>
