@@ -80,7 +80,7 @@ function Search() {
           {sort ? (
             <>
               {user?.data?.length === 0 ? (
-                <div>검색 결과가 없습니다. </div>
+                <h3>검색 결과가 없습니다.</h3>
               ) : (
                 <>
                   <SearchUserContainer>
