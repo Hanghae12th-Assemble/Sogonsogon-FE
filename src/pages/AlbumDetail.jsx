@@ -109,7 +109,7 @@ function AlbumDetail() {
                   onClick={albumLike}
                 />
               )}
-              <div>106</div>
+              <div>{gettingAlbumDetail?.album?.data?.result?.likesCount}</div>
             </AlbumDetailPgHeartContianer>
             {gettingAlbumDetail?.album?.data?.result?.mine === true ? (
               <Button
@@ -131,19 +131,19 @@ function AlbumDetail() {
             <span>{gettingAlbumDetail?.album?.data?.result?.instruction}</span>
             {gettingAlbumDetail?.album?.data?.result?.instruction?.length >
               3 && (
-              <ExpandButtonContainer onClick={handleClick}>
-                {expanded ? (
-                  <>
-                    <div>펼쳐보기</div> <AiOutlineDown />
-                  </>
-                ) : (
-                  <>
-                    <div>접기</div>
-                    <AiOutlineUp />
-                  </>
-                )}
-              </ExpandButtonContainer>
-            )}
+                <ExpandButtonContainer onClick={handleClick}>
+                  {expanded ? (
+                    <>
+                      <div>펼쳐보기</div> <AiOutlineDown />
+                    </>
+                  ) : (
+                    <>
+                      <div>접기</div>
+                      <AiOutlineUp />
+                    </>
+                  )}
+                </ExpandButtonContainer>
+              )}
           </AlbumDetailPgIntroContainer>
         </AlbumDetailPgDescContainer>
         <AlbumDetailPgClipInfo>
