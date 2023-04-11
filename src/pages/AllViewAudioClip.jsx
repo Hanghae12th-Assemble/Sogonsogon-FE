@@ -18,6 +18,7 @@ function AllViewAudioClip() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { gettingClips, removingClip } = useSelector((state) => state);
+    console.log(gettingClips)
     const page = useRef(1);
     const [ref, inView] = useInView();
     const [state, setState] = useState({
@@ -52,7 +53,7 @@ function AllViewAudioClip() {
                             document.startViewTransition(() => navigate(-1));
                         }}
                     />
-                    <p>좋은 음악을 같이 들어요.</p>
+                    <p>{gettingClips?.clip[0]?.data?.result[0]?.aublumTitle}</p>
                 </AllClipsNavBarLeftLayout>
                 <AiOutlinePlus
                     size={25}

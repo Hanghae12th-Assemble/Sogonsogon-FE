@@ -80,7 +80,7 @@ const SearchHistoryHeader = styled.div`
     min-height: 50px;
     display: flex;
     align-items: center;
-    padding: 10px 0px 0px 43px;
+    padding: 10px 0px 0px 33px;
     margin-top: 10px;
     font-size: 20px;
     color: #000;
@@ -97,7 +97,7 @@ const SearchHistoryHeader = styled.div`
 `;
 
 const SearchHistoryLayout = styled.div`
-    padding: 0px 20px 0px 20px;
+    padding: 0px 20px 0px 10px;
     width: 100%;
     min-height: 40px;
     background-color: #f9f9fa;
