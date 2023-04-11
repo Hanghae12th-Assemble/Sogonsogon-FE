@@ -30,6 +30,7 @@ import getAlbumDetail from "../module/getAlbumDetail";
 import removeAlbum from "../module/removeAlbum";
 import getClips from "../module/geClips";
 import clickModal from "../module/reduxState/clickShutDown";
+import getMyAlbum from "../module/getMyAlbum"
 
 const sotre = configureStore({
   reducer: {
@@ -64,6 +65,8 @@ const sotre = configureStore({
     removingAlbum: removeAlbum.reducer,
     gettingClips: getClips.reducer,
     clickingModal: clickModal.reducer,
+    gettingMyAlbum: getMyAlbum.reducer,
+    removingMyAlbum: removeAlbum.reducer,
   },
 });
 
