@@ -144,7 +144,7 @@ function AlbumDetail() {
         <AlbumDetailPgClipInfo>
           <ClipInfoLeftLayout>
             <ClipInfoLeftSubstance>클립</ClipInfoLeftSubstance>
-            <StContentCount>15</StContentCount>
+            <StContentCount>{gettingAlbumDetail?.album?.data?.metadata?.audioClipCount}</StContentCount>
           </ClipInfoLeftLayout>
           <StAllViewLayout
             onClick={() => {
