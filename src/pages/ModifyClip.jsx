@@ -5,12 +5,17 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { __createClip } from "../redux/module/createClip";
 import CreateClipInput from "../components/CreateClipInput";
 import { useSelector } from "react-redux";
+import Loading from "../components/Loading";
 
 function ModifyClip() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
-  const modifyClip = useSelector((state) => state?.creatingClip);
+  const modifyClip = useSelector((state) => state?.updatingClip);
+
+  if (modifyClip?.isLoading) {
+    return <Loading />;
+  }
 
   return (
     <CrRadioContainer>
