@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components';
 import { AiOutlineArrowLeft, AiOutlinePlus } from 'react-icons/ai';
-import MyContentEditContainer from '../components/MyContentEditContainer';
 import { useState } from 'react';
-import { ReactComponent as Latest } from '../asset/icon/latestlist.svg';
+import { ReactComponent as Order } from '../asset/icon/order.svg';
+import { ReactComponent as LatestList } from '../asset/icon/latest.svg';
 import ClipList from '../components/ClipList';
 import SelectedContentRemoveBtn from "../components/SelectedContentRemoveBtn"
 import { useNavigate, useParams } from 'react-router-dom';
@@ -23,23 +23,32 @@ function AllViewAudioClip() {
     const [state, setState] = useState({
         editClicked: false,
         selectedContent: [],
+        sortBy: "createdAt",
     });
-
+    const { editClicked, selectedContent, sortBy } = state;
     useEffect(() => {
         page.current = 1;
         dispatch(initInfinitiScroll());
-        dispatch(__getClips({ id, page: page.current }));
-    }, [removingClip]);
+        dispatch(__getClips({ id, page: page.current, sortBy }));
+    }, [sortBy, removingClip?.clip]);
 
     useEffect(() => {
         if (inView) {
             page.current += 1;
-            dispatch(__getClips({ id, page: page.current }));
+            dispatch(__getClips({ id, page: page.current, sortBy }));
         }
-    }, [inView]);
+    }, [sortBy, inView]);
 
-    const { editClicked, selectedContent } = state;
+    const sortByLikesCoutHandler = () => {
+        setState({ ...state, sortBy: "likesCount" });
+    }
+    const sortByCreatedAtHandler = () => {
+        setState({ ...state, sortBy: "createdAt" });
+    }
+
     const totalClipCount = gettingClips?.clip[0]?.data?.metadata?.audioClipCount
+    // const clipWriter = gettingClips?.clip[0]?.data.isMine
+
     return (
         <>
             <AllClipsNavBarBox>
@@ -52,8 +61,9 @@ function AllViewAudioClip() {
                             document.startViewTransition(() => navigate(-1));
                         }}
                     />
-                    <p>{gettingClips?.clip[0]?.data?.result[0]?.aublumTitle}</p>
+                    {/* <p>{albumTitle}</p> */}
                 </AllClipsNavBarLeftLayout>
+                {/* {clipWriter === user?.userName && */}
                 <AiOutlinePlus
                     size={25}
                     cursor={'pointer'}
@@ -63,15 +73,42 @@ function AllViewAudioClip() {
                     }
                 />
             </AllClipsNavBarBox>
-            <MyContentEditContainer
-                editClicked={editClicked}
-                contentType={totalClipCount}
-                selectedContent={selectedContent}
-                frontSubstance={"클립"}
-                state={state}
-                setState={setState}
-            />
-            <AllClipsListBtnContainer><StLatestSvg />최신순</AllClipsListBtnContainer>
+            <MyEditContainer>
+                {!editClicked ? (
+                    <>
+                        <EditContainerLeftLayout>
+                            <StFrontSubstance >클립</StFrontSubstance>
+                            <StContentCount >{totalClipCount}</StContentCount>
+                        </EditContainerLeftLayout>
+                        {/* {clipWriter === user?.userName && */}
+                        <MyEditLayout
+                            onClick={() => {
+                                setState({ ...state, editClicked: true });
+                            }}
+                        >
+                            편집
+                        </MyEditLayout>
+                    </>
+                ) : (
+                    <>
+                        <StContentSlectedCount>
+                            <p>{selectedContent?.length}</p>개 선택
+                        </StContentSlectedCount>
+                        <MyDoneLayout
+                            onClick={() => {
+                                setState({ editClicked: false, selectedContent: [] });
+                            }}
+                        >
+                            완료
+                        </MyDoneLayout>
+                    </>
+                )}
+            </MyEditContainer>
+            <StSortBtnSvg>
+                {sortBy === "likesCount" ? <LatestList onClick={sortByCreatedAtHandler} /> :
+                    <Order onClick={sortByLikesCoutHandler} />}
+
+            </StSortBtnSvg>
             <AllClipsContainer>
                 {gettingClips?.clip?.map((item) => {
                     return item?.data?.result?.map((props, index) => {
@@ -122,31 +159,69 @@ const AllClipsNavBarLeftLayout = styled.div`
 `
 
 const AllClipsContainer = styled.div`
+   /* border: 1px solid black; */
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    padding: 10px 0px 0px 0px;
     overflow: auto;
     ::-webkit-scrollbar {
         width: 0.1em;
         height: 0.1em;
     }
 `
-
-const StLatestSvg = styled(Latest)`
-    width: 20px;
-    height: 20px;
+const StSortBtnSvg = styled.div`
+    cursor: pointer;
+     width: 100px;
+    margin: 5px 0px 0px 30px;
 `
-const AllClipsListBtnContainer = styled.div`
+
+const MyEditContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 60px;
+    border-bottom: 1px solid #f0efed;
+    padding: 0px 30px 0px 30px;
+   
+`;
+
+const EditContainerLeftLayout = styled.div`
+    display: flex;  
+    flex-direction: row;
+    p {
+        color: #a5a29c;
+    }
+`
+
+const MyEditLayout = styled.div`
+    color: #a7a49e;
+    cursor: pointer;
+`;
+
+const MyDoneLayout = styled(MyEditLayout)`
+    color: #ff9900;
+`
+
+const StFrontSubstance = styled.div`
+    margin-right: 5px;
+    color: black;
+    font-weight: 600;
+    font-size: 20px;
+`
+
+const StContentCount = styled.span`
     display: flex;
     align-items: center;
-    width: fit-content;
-    height: fit-content;
-    background-color:#ff9900;
-    color: white;
-    border-radius: 3px;
-    padding: 6px 12px;
-    margin: 5px 0px 20px 30px;
-    cursor: pointer;
+    font-size: 20px;
+    color: #ff9900;
+`
+
+const StContentSlectedCount = styled.div`
+    display: flex;  
+    flex-direction: row;
+    font-weight: 600;
 `
