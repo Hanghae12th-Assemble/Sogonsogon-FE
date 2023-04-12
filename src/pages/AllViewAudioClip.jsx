@@ -19,6 +19,7 @@ function AllViewAudioClip() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { gettingClips, removingClip } = useSelector((state) => state);
+    console.log(gettingClips)
     const page = useRef(1);
     const [ref, inView] = useInView();
     const [state, setState] = useState({
@@ -63,7 +64,7 @@ function AllViewAudioClip() {
                             document.startViewTransition(() => navigate(-1));
                         }}
                     />
-                    <p>{gettingClips?.clip[0]?.data?.albumTitle}</p>
+                    <p>{gettingClips?.clip[0]?.data?.albumTitle ? gettingClips?.clip[0]?.data?.albumTitle : <span>생성된 클립이 없습니다</span>}</p>
                 </AllClipsNavBarLeftLayout>
                 {clipWriter === true &&
                     <AiOutlinePlus
@@ -154,6 +155,10 @@ const AllClipsNavBarBox = styled.div`
     font-size: 1.25rem;
     font-weight: bold;
     margin-left: 0.625rem;
+  }
+
+  span {
+    color: #ff9900;
   }
 `;
 
