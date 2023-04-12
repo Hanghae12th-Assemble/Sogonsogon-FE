@@ -50,11 +50,7 @@ function ClipList({ editClicked, state, setState, selectedContent, data }) {
             <AllClicpsTitleLayout>{data?.title}</AllClicpsTitleLayout>
             <AllClicpsHeartContianer>
               <div>{dateTime}</div>
-              <AiOutlineHeart
-                size={16}
-                color={"77756f"}
-                style={{ marginRight: "5px" }}
-              />
+              <StAiOutlineHeart size={16} />
               <div>{data?.isLikeCount}</div>
             </AllClicpsHeartContianer>
           </AllClicpsDescLayout>
@@ -187,3 +183,8 @@ const StEditSvg = styled(Edit)`
   cursor: pointer;
   stroke: #ff9900;
 `;
+
+const StAiOutlineHeart = styled(AiOutlineHeart)`
+  color: #77756f;
+  margin-right: 5px;
+`
