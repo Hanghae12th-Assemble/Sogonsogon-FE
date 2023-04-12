@@ -186,5 +186,5 @@ const StEditSvg = styled(Edit)`
 
 const StAiOutlineHeart = styled(AiOutlineHeart)`
   color: #77756f;
-  margin-right: 5px;
-`
+  margin-right: 0.3125rem;
+`;
