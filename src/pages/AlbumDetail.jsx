@@ -218,7 +218,7 @@ const AlbumDetailPgImg = styled.div`
   transition: all 0.5s ease-in-out 0s;
   :hover {
     transform: scale(1);
-    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0rem 0rem 0.3125rem 0.125rem rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease-in-out 0s;
   }
 `;
