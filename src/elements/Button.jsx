@@ -40,7 +40,7 @@ const BtnStyle = styled.button`
     css`
       width: 5rem;
       height: 3rem;
-      margin-left: 10px;
+      margin-left: 0.625rem;
       background-color: #ff9900;
     `}
 
@@ -88,40 +88,40 @@ const BtnStyle = styled.button`
     props.TopBtn &&
     css`
       position: absolute;
-      width: 45px;
-      height: 45px;
+      width: 2.8125rem;
+      height: 2.8125rem;
       background-color: #ffffff;
       color: black;
       border-radius: 100%;
       border: none;
-      bottom: 120px;
-      left: 410px;
+      bottom: 7.5rem;
+      left: 25.625rem;
       z-index: 900;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px 0px;
+      box-shadow: rgba(0, 0, 0, 0.5) 0rem 0.3125rem 0.9375rem 0rem;
     `}
 
         ${(props) =>
     props.AddRadioBtn &&
     css`
       position: absolute;
-      width: 45px;
-      height: 45px;
+      width: 2.8125rem;
+      height: 2.8125rem;
       background-color: #ff9900;
       color: white;
       border-radius: 100%;
       border: none;
-      bottom: 0px;
-      right: 0px;
+      bottom: 0rem;
+      right: 0rem;
       z-index: 900;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 5px 0px;
+      box-shadow: rgba(0, 0, 0, 0.5) 0rem 0.125rem 0.3125rem 0rem;
     `}
 
         ${(props) =>
@@ -130,11 +130,11 @@ const BtnStyle = styled.button`
       width: fit-content;
       height: fit-content;
       border: none;
-      font-size: 20px;
+      font-size: 1.25rem;
       background-color: white;
       color: rgb(153, 153, 153);
       cursor: pointer;
-      margin-right: 8px;
+      margin-right: 0.5rem;
       &.active {
         color: #000;
         font-weight: bold;

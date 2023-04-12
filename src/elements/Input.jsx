@@ -31,7 +31,7 @@ export default Input;
 
 const InputBox = styled.input`
   outline: none;
-  width: 460px;
+  width: 28.75rem;
   height: 3rem;
   border-radius: 0.625rem;
   border: none;
@@ -40,19 +40,19 @@ const InputBox = styled.input`
   ${(props) =>
     props.textarea &&
     css`
-      width: 460px;
-      height: 118px;
-      border-radius: 10px;
-      padding: 10px;
+      width: 28.75rem;
+      height: 7.375rem;
+      border-radius: 0.625rem;
+      padding: 0.625rem;
     `}
 
   ${(props) =>
     props.commentInput &&
     css`
-      width: 350px;
-      height: 50px;
-      border-radius: 10px;
-      padding: 10px;
+      width: 21.875rem;
+      height: 3.125rem;
+      border-radius: 0.625rem;
+      padding: 0.625rem;
     `}
 `;
 
