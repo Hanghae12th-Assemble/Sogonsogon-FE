@@ -94,14 +94,12 @@ function Emaillogin() {
 export default Emaillogin;
 
 const SignupContainer = styled.div`
-  //border: 1px solid black;
   height: 90%;
 `;
 
 const SignupNavbarBox = styled.div``;
 
 const SignupForm = styled.form`
-  //border: 1px solid red;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -109,17 +107,14 @@ const SignupForm = styled.form`
 `;
 
 const SignupInputDivBox = styled.div`
-  //border: 1px solid black;
   margin-top: 3.125rem;
 `;
 
 const SignupInputTitle = styled.div`
-  //border: 1px solid black;
   margin-bottom: 0.625rem;
 `;
 
 const SignupButton = styled.div`
-  //border: 1px solid black;
   height: 100%;
   display: flex;
   align-items: flex-end;

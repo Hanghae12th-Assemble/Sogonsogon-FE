@@ -82,7 +82,6 @@ function ClipPlayComment() {
             </ClipplayInputForm>
           </div>
         </div>
-        {/* 댓글 박스 시작 */}
         <ClipPlayCommentOverflow>
           {commentlist?.comment?.map((item, index) => {
             return item?.result?.map((item, index) => {
@@ -91,7 +90,6 @@ function ClipPlayComment() {
           })}
           <div ref={ref}></div>
         </ClipPlayCommentOverflow>
-        {/* 댓글 박스 끝 */}
       </ClipplayCommentBox>
     </>
   );
@@ -118,8 +116,7 @@ const slideUp = keyframes`
 `;
 
 const ClipplayCommentBox = styled.div`
-  //border: 1px solid red;
-  height: 600px;
+  height: 37.5rem;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -127,7 +124,7 @@ const ClipplayCommentBox = styled.div`
   z-index: 1;
   background-color: white;
   color: black;
-  padding: 0 30px;
+  padding: 0 1.875rem;
   transform: translateY(${({ isVisible }) => (isVisible ? "0" : "100%")});
   ${({ isVisible }) =>
     isVisible &&
@@ -137,32 +134,28 @@ const ClipplayCommentBox = styled.div`
 `;
 
 const ClipPlayCommentOverflow = styled.div`
-  //border: 1px solid red;
   height: 25.625rem;
   overflow-y: auto;
 `;
 
 const ClipplayCommentTitle = styled.div`
-  //border: 1px solid red;
   display: flex;
   justify-content: center;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: bolder;
-  margin-top: 50px;
+  margin-top: 3.125rem;
 `;
 
 const ClipplayCommentCount = styled.span`
   color: #ff9900;
-  margin-left: 10px;
+  margin-left: 0.625rem;
 `;
 
 const ClipplayInputTitle = styled.div`
-  //border: 1px solid black;
-  margin: 20px 0px;
+  margin: 1.25rem 0rem;
 `;
 
 const ClipplayInputForm = styled.form`
-  //border: 1px solid black;
   display: flex;
   justify-content: center;
 `;

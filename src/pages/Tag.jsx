@@ -118,19 +118,18 @@ function Tag() {
 export default Tag;
 
 const StRadioContainer = styled.div`
-  //border: 1px solid black;
   position: relative;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 2fr);
   flex-direction: row;
-  padding: 0px 20px;
+  padding: 0rem 1.25rem;
   overflow: auto;
 `;
 
 const IconStyle = styled.div`
   svg {
-    width: 25px;
-    margin-right: 10px;
+    width: 1.5625rem;
+    margin-right: 0.625rem;
   }
 `;

@@ -36,14 +36,12 @@ function ModifyClip() {
 export default ModifyClip;
 
 const CrRadioContainer = styled.div`
-  //border: 1px solid red;
   height: 100%;
-  padding: 0 20px;
+  padding: 0 1.25rem;
   overflow-y: auto;
 `;
 
 const CrRadioContainerBox = styled.div`
-  //border: 1px solid black;
   position: relative;
   z-index: 999;
 `;

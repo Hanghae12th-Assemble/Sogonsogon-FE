@@ -36,7 +36,6 @@ function NaverRedirect() {
       <h1>Loading...</h1>
     </div>
   );
-  return <div>NaverRedirect</div>;
 }
 
 export default NaverRedirect;

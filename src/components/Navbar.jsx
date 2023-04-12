@@ -32,11 +32,10 @@ function Navbar({ iconleft, title, iconright, toNavigate, toClose, icon }) {
 export default Navbar;
 
 const NavbarBox = styled.div`
-  /* border: 1px solid black; */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 10px;
+  padding: 0rem 0.625rem;
   min-height: 3.125rem;
   margin-top: 2.5rem;
 `;
@@ -46,11 +45,10 @@ const NavbarCursor = styled.div`
 `;
 
 const NavbarLogoTittle = styled.div`
-  //border: 1px solid black;
   display: flex;
-  width: 150px;
+  width: 9.375rem;
   align-items: center;
   justify-content: center;
   font-weight: bolder;
-  font-size: 20px;
+  font-size: 1.25rem;
 `;

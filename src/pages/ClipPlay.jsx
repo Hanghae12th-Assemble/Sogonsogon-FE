@@ -153,7 +153,7 @@ const BackgroundImage = styled.img`
 
 const TransparentLayer = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(1.875rem);
   width: 100%;
   height: 100%;
   top: 0;
@@ -161,7 +161,6 @@ const TransparentLayer = styled.div`
 `;
 
 const ClipplayContent = styled.div`
-  //border: 1px solid red;
   padding: 0 1.25rem;
   z-index: 2;
   color: white;
@@ -170,7 +169,6 @@ const ClipplayContent = styled.div`
 `;
 
 const ClipplayTitle = styled.div`
-  //border: 1px solid red;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,7 +185,7 @@ const ClipplayAuthorProfile = styled.div`
   display: flex;
   align-items: center;
   span {
-    font-size: 17px;
+    font-size: 1.0625rem;
   }
 `;
 
@@ -207,7 +205,6 @@ const ClipplayLikeCount = styled.div`
 `;
 
 const ClipplayPlayBackImgDiv = styled.div`
-  //border: 1px solid black;
   margin-top: 5rem;
   height: 15rem;
   display: flex;
@@ -221,7 +218,6 @@ const ClipplayPlayBackImg = styled.img`
 `;
 
 const ClipplayRangeInputTime = styled.div`
-  //border: 1px solid red;
   margin-top: 5rem;
 `;
 
@@ -237,7 +233,7 @@ const ClipplayInput = styled.input`
     height: 1rem;
     width: 1rem;
     border-radius: 50%;
-    margin-top: -7px;
+    margin-top: -0.4375rem;
   }
 
   &::-webkit-slider-runnable-track {
@@ -247,13 +243,11 @@ const ClipplayInput = styled.input`
 `;
 
 const ClipplayPlaytime = styled.div`
-  //border: 1px solid black;
   display: flex;
   justify-content: space-between;
 `;
 
 const ClipplayPlayIcon = styled.div`
-  //border: 1px solid black;
   margin-top: 4.375rem;
   display: flex;
   justify-content: space-evenly;
@@ -272,14 +266,13 @@ const ClipplayForward = styled(BsFastForward)`
 `;
 
 const ClipplayComment = styled.div`
-  //border: 1px solid red;
   cursor: pointer;
-  margin-top: 135px;
+  margin-top: 8.4375rem;
   display: flex;
   justify-content: center;
-  padding-bottom: 35px;
+  padding-bottom: 2.1875rem;
   span {
-    margin-left: 10px;
+    margin-left: 0.625rem;
   }
 `;
 

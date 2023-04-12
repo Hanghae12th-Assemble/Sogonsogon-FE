@@ -70,12 +70,12 @@ function ProfileMidumContainer() {
 export default ProfileMidumContainer;
 
 const ProfileTopFollow = styled.div`
-  width: 450px;
-  height: 86px;
-  margin-top: 20px;
+  width: 28.125rem;
+  height: 5.375rem;
+  margin-top: 1.25rem;
   display: flex;
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px 5px rgba(228, 220, 207, 0.4);
+  border-radius: 0.625rem;
+  box-shadow: 0.3125rem 0.3125rem 0.3125rem 0.3125rem rgba(228, 220, 207, 0.4);
   background-color: #f5f4f2;
 `;
 
@@ -87,7 +87,7 @@ const ProfileTopFollower = styled.div`
 `;
 
 const ProfileTopFollowing = styled.div`
-  border-left: 1px solid rgba(228, 220, 207, 0.8);
+  border-left: 0.0625rem solid rgba(228, 220, 207, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,15 +95,15 @@ const ProfileTopFollowing = styled.div`
 `;
 
 const ProfileBottom = styled.div`
-  margin-top: 50px;
+  margin-top: 3.125rem;
 `;
 
 const ProfileBottomTitle = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 `;
 
 const ProfileBottomBox = styled.div`
-  width: 460px;
+  width: 28.75rem;
   height: 3rem;
   border-radius: 0.625rem;
   border: none;
@@ -111,14 +111,14 @@ const ProfileBottomBox = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 10px;
-  margin-top: 20px;
+  padding: 0.625rem;
+  margin-top: 1.25rem;
 `;
 
 const ProfileBottomButton = styled.div`
-  padding: 20px;
+  padding: 1.25rem;
   width: 100%;
-  height: 180px;
+  height: 11.25rem;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -127,5 +127,5 @@ const ProfileBottomButton = styled.div`
 const ProfileButtonBox = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 35px;
+  margin-top: 2.1875rem;
 `;

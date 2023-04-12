@@ -191,91 +191,92 @@ export default Lnb;
 
 const LnbLayout = styled.div`
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
-  width: ${({ isOpen }) => (isOpen ? "350px" : "0px")};
+  width: ${({ isOpen }) => (isOpen ? "21.875rem" : "0rem")};
   position: absolute;
-  top: -40px;
+  top: -2.5rem;
   left: 0;
   height: 100%;
   transition: opacity 0.2s ease, width 0.3s ease-out;
   background-color: white;
   z-index: 999;
-  margin-top: 40px;
+  margin-top: 2.5rem;
 `;
 
 const LnbAlarmBtnContainer = styled.div`
   width: fit-content;
   height: fit-content;
-  margin: 60px 0px 0px 25px;
+  margin: 3.75rem 0rem 0rem 1.5625rem;
 `;
 const LnbNotificationsOn = styled(NotificationsOn)`
-  width: 28px;
+  width: 1.75rem;
   cursor: pointer;
 `;
 
 const LnbNotifications = styled(Notifications)`
-  width: 28px;
+  width: 1.75rem;
   cursor: pointer;
   color: #77756f;
 `;
 
 const LnbMenuLayout = styled.div`
-  height: 260px;
-  padding: 25px;
-  margin-top: 80px;
+  height: 16.25rem;
+  padding: 1.5625rem;
+  margin-top: 5rem;
 
   div {
     cursor: pointer;
     width: fit-content;
     height: fit-content;
     display: block;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
     display: flex;
     align-items: flex-start;
     color: #333;
   }
   span {
-    width: 20px;
-    margin-right: 10px;
+    width: 1.25rem;
+    margin-right: 0.625rem;
   }
 `;
 
 const LoginTrueFalseContainer = styled.div`
-  margin-top: ${({ login }) => (login ? "50px" : "140px")};
+  margin-top: ${({ login }) => (login ? "3.125rem" : "8.75rem")};
   width: 100%;
-  height: 30px;
-  padding: 0px 10px 0px 25px;
+  height: 1.875rem;
+  padding: 0rem 0.625rem 0rem 1.5625rem;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
   p {
-    font-size: 25px;
+    font-size: 1.5625rem;
     font-weight: 500;
-    text-decoration: underline 5px #ffc37c;
+    text-decoration: underline 0.3125rem #ffc37c;
   }
   div {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: bold;
   }
 `;
+
 const LoginHiLayout = styled.div`
   width: 100%;
-  height: 30px;
-  padding: 0px 0px 0px 25px;
+  height: 1.875rem;
+  padding: 0rem 0rem 0rem 1.5625rem;
   display: flex;
   align-items: center;
   color: grey;
-  font-size: 14px;
+  font-size: 0.875rem;
 `;
 
 const LogoutBtnLayout = styled.div`
-  margin: 120px 0px 0px 25px;
-  width: 54px;
-  height: 17px;
-  font-size: 13px;
+  margin: 7.5rem 0rem 0rem 1.5625rem;
+  width: 3.375rem;
+  height: 1.0625rem;
+  font-size: 0.8125rem;
   color: grey;
   cursor: pointer;
 `;
@@ -293,22 +294,22 @@ const LnbBlackBackGround = styled.div`
 `;
 
 const MyAlbumBtn = styled.div`
-  padding: 0px 0px 0px 25px;
-  margin-top: 20px;
+  padding: 0rem 0rem 0rem 1.5625rem;
+  margin-top: 1.25rem;
   div {
     cursor: pointer;
     width: fit-content;
     height: fit-content;
     display: block;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
     display: flex;
     align-items: flex-start;
     color: #333;
   }
   span {
-    width: 20px;
-    margin-right: 10px;
+    width: 1.25rem;
+    margin-right: 0.625rem;
   }
 `;

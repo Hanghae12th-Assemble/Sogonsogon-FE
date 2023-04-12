@@ -170,7 +170,7 @@ function Profile() {
 export default Profile;
 
 const ProfileContainer = styled.div`
-  padding: 0px 20px;
+  padding: 0rem 1.25rem;
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0.5em;
@@ -179,59 +179,55 @@ const ProfileContainer = styled.div`
 `;
 
 const ProfileNavbarfixed = styled.div`
-  //border: 1px solid black;
   background-color: white;
   position: fixed;
   width: 28.75rem; ;
 `;
 
 const ProfileTop = styled.div`
-  //border: 1px solid black;
-  height: 200px;
+  height: 12.5rem;
   display: flex;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 5rem;
 `;
 
 const ProfileTopPhoto = styled.div`
-  //border: 1px solid black;
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 7.5rem;
+  height: 7.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const ProfileImg = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 6.25rem;
+  height: 6.25rem;
   border-radius: 50%;
 `;
 
 const ProfileTopnicknameMembername = styled.div`
-  margin-bottom: 10px;
-  margin-left: 10px;
+  margin-bottom: 0.625rem;
+  margin-left: 0.625rem;
   position: relative;
-  bottom: 10px;
+  bottom: 0.625rem;
 `;
 
 const ProfileTopMembername = styled.span`
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: bolder;
 `;
 
 const ProfileTopName = styled.div`
-  //border: 1px solid red;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 `;
 
 const ProfileMidumInput = styled.div`
-  margin-bottom: 50px;
+  margin-bottom: 3.125rem;
 `;
 
 const ProfileMidumInputbox = styled.div`
-  width: 460px;
+  width: 28.75rem;
   height: 3rem;
   border-radius: 0.625rem;
   border: none;
@@ -239,46 +235,42 @@ const ProfileMidumInputbox = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 10px;
-  margin-top: 20px;
+  padding: 0.625rem;
+  margin-top: 1.25rem;
 `;
 
 const ProfileBottom = styled.div`
-  //border: 1px solid black;
-  margin-top: 50px;
+  margin-top: 3.125rem;
 `;
 
 const ProfileBottomTitle = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 `;
 
 const ProfileBottomButton = styled.div`
-  //border: 1px solid blue;
-  padding: 20px;
+  padding: 1.25rem;
   width: 100%;
-  height: 180px;
+  height: 11.25rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 `;
 
 const ProfileButtonSpanBox = styled.div`
-  //border: 1px solid black;
-  margin-top: 40px;
+  margin-top: 2.5rem;
 `;
 
 const ProfilePublicScopButton = styled.div`
-  margin-top: 10px;
-  //border: 1px solid black;
+  margin-top: 0.625rem;
 `;
 
 const ProfileFileInput = styled.input`
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem;
   ::file-selector-button {
-    width: 370px;
-    height: 48px;
+    width: 23.125rem;
+    height: 3rem;
     background: #f1f2f6;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     border: none;
     font-weight: bold;
     cursor: pointer;

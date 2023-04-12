@@ -25,32 +25,30 @@ function ClipCommentList({ props }) {
 export default ClipCommentList;
 
 const ClipplayCommentContainner = styled.div`
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding-bottom: 30px;
-  margin-top: 30px;
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 1.875rem;
+  margin-top: 1.875rem;
 `;
 
 const ClipplayCommentNameDateBox = styled.div`
-  //border: 1px solid black;
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem;
   span {
     color: #77756f;
   }
 `;
 
 const ClipplayCommentBoxText = styled.div`
-  //border: 1px solid black;
   display: flex;
   align-items: center;
-  font-size: 15px;
+  font-size: 0.9375rem;
   p {
     color: #77756f;
   }
 `;
 
 const ClipplayPhoto = styled.img`
-  width: 70px;
-  height: 70px;
-  border-radius: 10px;
-  margin-right: 10px;
+  width: 4.375rem;
+  height: 4.375rem;
+  border-radius: 0.625rem;
+  margin-right: 0.625rem;
 `;

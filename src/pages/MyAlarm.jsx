@@ -96,7 +96,7 @@ function MyAlarm() {
 export default MyAlarm;
 
 const NavbarContainer = styled.div`
-  padding: 0px 20px;
+  padding: 0rem 1.25rem;
 `;
 
 const MyAlarmContainer = styled.div`

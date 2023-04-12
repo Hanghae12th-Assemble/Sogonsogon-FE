@@ -83,18 +83,15 @@ function Login() {
 export default Login;
 
 const LoginBox = styled.div`
-  //border: 1px solid black;
   height: 100%;
 `;
 
 const LoginContainer = styled.div`
-  //border: 1px solid black;
   height: 100%;
   overflow: auto;
 `;
 
 const LoginLogoBox = styled.div`
-  //border: 1px solid black;
   width: 100%;
   height: 18.75rem;
   display: flex;
@@ -103,7 +100,6 @@ const LoginLogoBox = styled.div`
 `;
 
 const LoginButtonBox = styled.div`
-  //border: 1px solid red;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -112,24 +108,20 @@ const LoginButtonBox = styled.div`
 `;
 
 const LoginButtonDiv = styled.div`
-  //border: 1px solid red;
   margin-top: 1.25rem;
 `;
 
 const LoginSpanDiv = styled.div`
-  //border: 1px solid red;
   margin-top: 3.125rem;
   cursor: pointer;
 `;
 const LoginSpanText = styled.span`
-  //border: 1px solid red;
   display: flex;
   justify-content: space-between;
   width: 11.25rem;
 `;
 
 const LoginBackSpan = styled.div`
-  //border: 1px solid black;
   margin-top: 1.875rem;
   display: flex;
   justify-content: flex-end;
@@ -140,5 +132,5 @@ const LoginBackSpan = styled.div`
 `;
 
 const LoginLogo = styled(Logosymbol)`
-  width: 300px;
+  width: 18.75rem;
 `;

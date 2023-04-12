@@ -9,7 +9,6 @@ import {
 } from "react-icons/ai";
 import Lnb from "../components/Lnb";
 import RadioContainer from "../components/RadioContainer";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../elements/Button";
 import useScroll from "../hooks/useScroll";
@@ -26,7 +25,6 @@ function Home() {
   const radioContainerRef = useRef();
   const scrollPos = useScroll(radioContainerRef);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     page.current = 1;
@@ -80,21 +78,19 @@ function Home() {
 export default Home;
 
 export const NavbarContainer = styled.div`
-  padding: 0px 20px;
+  padding: 0rem 1.25rem;
 `;
 
 export const StRadioContainer = styled.div`
-  /* border: 1px solid black; */
   position: relative;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 2fr);
   flex-direction: row;
-  padding: 0px 20px;
+  padding: 0rem 1.25rem;
   overflow: auto;
 `;
 
 const HomeLogo = styled(Logo)`
-  //border: 1px solid black;
-  width: 130px;
+  width: 8.125rem;
 `;

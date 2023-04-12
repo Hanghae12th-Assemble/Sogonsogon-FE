@@ -29,24 +29,24 @@ function AlarmList({ state, setState, editClicked, selectedContent, data }) {
 export default AlarmList;
 
 const MyAlarmLayout = styled.div`
-  width: 500px;
+  width: 31.25rem;
   background-color: ${({ isRead }) => (isRead ? "none" : "#fffaf1")};
-  border-bottom: 1px solid #f0efed;
+  border-bottom: 0.0625rem solid #f0efed;
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-height: 100px;
-  padding: 10px 30px 10px 20px;
+  min-height: 6.25rem;
+  padding: 0.625rem 1.875rem 0.625rem 1.25rem;
 `;
 
 const MyAlarmProfileImg = styled.div`
-  min-width: 70px;
-  min-height: 70px;
+  min-width: 4.375rem;
+  min-height: 4.375rem;
   overflow: hidden;
   position: relative;
   background-color: #393b3a6e;
   border-radius: 100%;
-  margin: 0px 20px 0px 10px;
+  margin: 0rem 1.25rem 0rem 0.625rem;
   background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
   background-repeat: no-repeat;
   background-size: cover;
@@ -54,7 +54,7 @@ const MyAlarmProfileImg = styled.div`
   transition: all 0.5s ease-in-out 0s;
   :hover {
     transform: scale(1);
-    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0rem 0rem 0.3125rem 0.125rem rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease-in-out 0s;
   }
 `;
@@ -66,11 +66,11 @@ const MyAlarmDescContainer = styled.div`
 `;
 
 const MyAlarmDescLayout = styled.div`
-  min-height: 55px;
+  min-height: 3.4375rem;
   display: flex;
   align-items: center;
-  line-height: 19px;
-  font-size: 16px;
+  line-height: 1.1875rem;
+  font-size: 1rem;
   font-weight: 500;
 `;
 const MyAlarmTimeLayout = styled.div`

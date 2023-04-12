@@ -33,10 +33,7 @@ function SearchTap({ searchInfo, sort, setIsSearch, setSort }) {
         className={sort === false ? "active" : ""}
         onClick={() => search("live")}
       >
-        <SortLiveBtnContainer>
-          앨범
-
-        </SortLiveBtnContainer>
+        <SortLiveBtnContainer>앨범</SortLiveBtnContainer>
       </Button>
     </SortBtnContainer>
   );
@@ -46,28 +43,14 @@ export default SearchTap;
 
 const SortBtnContainer = styled.div`
   width: 100%;
-  min-height: 50px;
+  min-height: 3.125rem;
   display: flex;
   align-items: center;
-  padding-left: 25px;
-  margin-top: 10px;
+  padding-left: 1.5625rem;
+  margin-top: 0.625rem;
 `;
 
 const SortLiveBtnContainer = styled.div`
   display: flex;
   flex-direction: row;
-`;
-
-const SortLiveMark = styled.div`
-  margin-left: 5px;
-  width: 42px;
-  height: 24px;
-  font-size: 14px;
-  border-radius: 20px;
-  margin-right: 5px;
-  display: flex;
-  align-items: center;
-  color: ${({ sort }) => (sort ? "#999999" : "white")};
-  background-color: ${({ sort }) => (sort ? "#f4f4f4" : "#ff601c")};
-  justify-content: center;
 `;

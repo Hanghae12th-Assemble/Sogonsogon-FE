@@ -31,7 +31,7 @@ function Sginup() {
 
   return (
     <SignupContainer>
-      <SignupNavbarBox>
+      <div>
         <Navbar
           toNavigate={"/selectlogin"}
           iconleft={<AiOutlineArrowLeft size={20} />}
@@ -39,7 +39,7 @@ function Sginup() {
           iconright={<AiOutlineClose size={20} />}
           toClose={"/"}
         />
-      </SignupNavbarBox>
+      </div>
       <SignupForm onSubmit={handleSubmit(handleLogin)}>
         <SignupInputDivBox>
           <SignupInputTitle>
@@ -124,14 +124,10 @@ function Sginup() {
 export default Sginup;
 
 const SignupContainer = styled.div`
-  //border: 1px solid black;
   height: 90%;
 `;
 
-const SignupNavbarBox = styled.div``;
-
 const SignupForm = styled.form`
-  //border: 1px solid red;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -139,17 +135,14 @@ const SignupForm = styled.form`
 `;
 
 const SignupInputDivBox = styled.div`
-  //border: 1px solid black;
   margin-top: 3.125rem;
 `;
 
 const SignupInputTitle = styled.div`
-  //border: 1px solid black;
   margin-bottom: 0.625rem;
 `;
 
 const SignupButton = styled.div`
-  //border: 1px solid black;
   height: 100%;
   display: flex;
   align-items: flex-end;
