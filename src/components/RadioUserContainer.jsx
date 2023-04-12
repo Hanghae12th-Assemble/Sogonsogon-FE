@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import isLogin from "../util/checkCookie";
+
 function RadioUserContainer({ props }) {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLogin() === false) {
+      alert("로그인부터 해주세요.");
+      navigate("/selectlogin");
+    }
+  }, []);
 
   return (
     <>

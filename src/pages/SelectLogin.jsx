@@ -5,6 +5,7 @@ import Button from "../elements/Button";
 import { KAKAO_AUTH_URL } from "../constants/social";
 import { NAVER_AUTH_URL } from "../constants/social";
 import { ReactComponent as Logosymbol } from "../asset/logo/logosymbol.svg";
+import isLogin from "../util/checkCookie";
 
 function Login() {
   const navigate = useNavigate();
@@ -16,7 +17,10 @@ function Login() {
   };
 
   useEffect(() => {
-    alert("소셜 로그인 꼭! 전부 동의 해주세요. ");
+    if (isLogin() === true) {
+      alert("이미 로그인 하였습니다.");
+      navigate("/");
+    }
   }, []);
 
   return (

@@ -27,13 +27,6 @@ function Profile() {
   const getUserInfo = useSelector((state) => state?.gettingProfile?.profile);
   const modiSwitch = useSelector((state) => state?.profileButn);
 
-  useEffect(() => {
-    if (isLogin() === false) {
-      alert("로그인 먼저 해주세요!");
-      navigate("/selectlogin");
-    }
-  }, []);
-
   const onChangeimge = (e) => {
     const img = e.target.files[0];
     const formImg = new FormData();

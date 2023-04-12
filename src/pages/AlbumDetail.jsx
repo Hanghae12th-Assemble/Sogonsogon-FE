@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getAlbumDetail } from "../redux/module/getAlbumDetail";
 import { __likeAlbum } from "../redux/module/likeAlbum";
 import { useThrottledCallback } from "../hooks/useThrottledCallback";
+import isLogin from "../util/checkCookie";
 
 function AlbumDetail() {
   const { id } = useParams();
@@ -36,6 +37,13 @@ function AlbumDetail() {
   useEffect(() => {
     dispatch(__getAlbumDetail(id));
   }, [likingAlbum]);
+
+  useEffect(() => {
+    if (isLogin() === false) {
+      alert("로그인부터 해주세요.");
+      navigate("/selectlogin");
+    }
+  }, []);
 
   const { editClicked, selectedContent, expanded } = state;
 
@@ -131,19 +139,19 @@ function AlbumDetail() {
             <span>{gettingAlbumDetail?.album?.data?.result?.instruction}</span>
             {gettingAlbumDetail?.album?.data?.result?.instruction?.length >
               3 && (
-                <ExpandButtonContainer onClick={handleClick}>
-                  {expanded ? (
-                    <>
-                      <div>펼쳐보기</div> <AiOutlineDown />
-                    </>
-                  ) : (
-                    <>
-                      <div>접기</div>
-                      <AiOutlineUp />
-                    </>
-                  )}
-                </ExpandButtonContainer>
-              )}
+              <ExpandButtonContainer onClick={handleClick}>
+                {expanded ? (
+                  <>
+                    <div>펼쳐보기</div> <AiOutlineDown />
+                  </>
+                ) : (
+                  <>
+                    <div>접기</div>
+                    <AiOutlineUp />
+                  </>
+                )}
+              </ExpandButtonContainer>
+            )}
           </AlbumDetailPgIntroContainer>
         </AlbumDetailPgDescContainer>
         <AlbumDetailPgClipInfo>

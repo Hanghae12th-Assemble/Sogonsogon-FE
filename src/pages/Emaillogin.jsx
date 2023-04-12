@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 import { __login } from "../redux/module/login";
 import { useNavigate } from "react-router-dom";
+import isLogin from "../util/checkCookie";
 
 function Emaillogin() {
   const dispatch = useDispatch();
@@ -30,6 +31,13 @@ function Emaillogin() {
     navigate("/");
     reset();
   };
+
+  useEffect(() => {
+    if (isLogin() === true) {
+      alert("이미 로그인 하였습니다.");
+      navigate("/");
+    }
+  }, []);
 
   return (
     <SignupContainer>
