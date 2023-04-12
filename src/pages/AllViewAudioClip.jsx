@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 import { AiOutlineArrowLeft, AiOutlinePlus } from "react-icons/ai";
 import { useState } from "react";
-import { ReactComponent as Order } from "../asset/icon/order.svg";
 import { ReactComponent as LatestList } from "../asset/icon/latest.svg";
 import { ReactComponent as LikeList } from "../asset/icon/likelist.svg";
 import ClipList from "../components/ClipList";
@@ -19,7 +18,6 @@ function AllViewAudioClip() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { gettingClips, removingClip } = useSelector((state) => state);
-    console.log(gettingClips)
     const page = useRef(1);
     const [ref, inView] = useInView();
     const [state, setState] = useState({
