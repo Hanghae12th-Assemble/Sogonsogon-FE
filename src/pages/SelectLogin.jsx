@@ -59,14 +59,6 @@ function Login() {
             <LoginSpanText>
               <div
                 onClick={() => {
-                  document.startViewTransition(() => navigate("/"));
-                }}
-              >
-                통합 회원정보 찾기
-              </div>{" "}
-              /{" "}
-              <div
-                onClick={() => {
                   document.startViewTransition(() => navigate("/signup"));
                 }}
               >
@@ -117,7 +109,7 @@ const LoginSpanDiv = styled.div`
 `;
 const LoginSpanText = styled.span`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 11.25rem;
 `;
 
