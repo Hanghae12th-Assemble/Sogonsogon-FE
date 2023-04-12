@@ -23,7 +23,7 @@ function ClipPlay() {
   const { id } = useParams();
   const selectBtn = useSelector((state) => state.clickingModal);
   const clipdata = useSelector((state) => state?.gettingClipDetail?.clip);
-  const likeData = useSelector((state) => state.likingClip?.clip)
+  const likeData = useSelector((state) => state.likingClip?.clip);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(__getClipDetail(id));
@@ -69,7 +69,7 @@ function ClipPlay() {
 
   const albumClip = () => {
     dispatch(__likeClip(id));
-  }
+  };
 
   return (
     <>
@@ -90,12 +90,20 @@ function ClipPlay() {
               <span>{clipdata?.membernickname}</span>
             </ClipplayAuthorProfile>
             <ClipplayLikeCount>
-              {clipdata?.likeCheck === true ? <AiFillHeart
-                size={30}
-                color={"ff9900"}
-                cursor={"pointer"}
-                onClick={albumClip}
-              /> : <AiOutlineHeart size={30} cursor={"pointer"} onClick={albumClip} />}
+              {clipdata?.likeCheck === true ? (
+                <AiFillHeart
+                  size={30}
+                  color={"ff9900"}
+                  cursor={"pointer"}
+                  onClick={albumClip}
+                />
+              ) : (
+                <AiOutlineHeart
+                  size={30}
+                  cursor={"pointer"}
+                  onClick={albumClip}
+                />
+              )}
               <span>{clipdata?.isLikeCount}</span>
             </ClipplayLikeCount>
           </ClipplayAuthorLike>
@@ -145,7 +153,6 @@ function ClipPlay() {
             <BiComment size={20} />
           </div>
           <span>댓글</span>
-          <ClipplayCommentCount>3</ClipplayCommentCount>
         </ClipplayComment>
       </ClipplayContent>
     </>

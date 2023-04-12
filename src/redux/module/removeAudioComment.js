@@ -8,7 +8,7 @@ export const __removeAudioComment = createAsyncThunk(
   async (commentId, thunkAPI) => {
     return await axios
       .delete(`api/audioclip/comment/${commentId}`)
-      .then((response) => alert(response && "오디오가 삭제되었습니다."))
+      .then((response) => response.data)
       .catch((error) =>
         alert(error && "없는 오디오 이거나, 오디오 생성자가 아닙니다.")
       );
@@ -16,7 +16,7 @@ export const __removeAudioComment = createAsyncThunk(
 );
 
 const initialState = {
-  audio: null,
+  comment: null,
   isLoading: false,
   error: null,
 };
@@ -32,7 +32,7 @@ const removeAudioComment = createSlice({
     });
     builder.addCase(__removeAudioComment.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.audio = action.payload;
+      state.comment = action.payload;
       state.error = null;
     });
     builder.addCase(__removeAudioComment.rejected, (state, action) => {

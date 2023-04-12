@@ -13,26 +13,36 @@ import { clickOut } from "../redux/module/reduxState/clickShutDown";
 import { useParams } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import ClipCommentList from "./ClipCommentList";
+import { __updateAudioComment } from "../redux/module/updateAudioComment";
+import { clickModi } from "../redux/module/reduxState/clickModiComment";
 
 function ClipPlayComment() {
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
   const [isVisible] = useState(true);
+  const [commentId, setCommentId] = useState("");
   const page = useRef(1);
   const [ref, inView] = useInView();
   const { id } = useParams();
   const commentlist = useSelector((state) => state?.gettingAudioComment);
-  const commentPost = useSelector((state) => state.creatingAudioComment);
+  const commentPost = useSelector((state) => state?.creatingAudioComment);
+  const modiComment = useSelector((state) => state?.clickingModiComment);
+  const removeComment = useSelector((state) => state?.removingAudioComment);
 
-  const clickModalOut = (e) => {
+  const clickModalOut = () => {
     dispatch(clickOut(false));
+    dispatch(clickModi({ modi: !modiComment.modi, id }));
   };
+
+  useEffect(() => {
+    setCommentId(modiComment.id);
+  }, [modiComment]);
 
   useEffect(() => {
     page.current = 1;
     dispatch(initInfinitiScroll());
     dispatch(__getAudioComment({ audioId: id, page: page.current }));
-  }, [commentPost]);
+  }, [commentPost, modiComment, removeComment]);
 
   useEffect(() => {
     if (inView) {
@@ -41,13 +51,24 @@ function ClipPlayComment() {
     }
   }, [inView]);
 
-  const submitForm = (data) => {
-    dispatch(
-      __createAudioComment({
-        audioId: id,
-        commentInfo: { content: data.content },
-      })
-    );
+  const submitForm = async (data) => {
+    if (modiComment === false) {
+      dispatch(
+        __createAudioComment({
+          audioId: id,
+          commentInfo: { content: data.content },
+        })
+      );
+    } else {
+      await dispatch(
+        __updateAudioComment({
+          commentId: commentId,
+          commentInfo: { content: data.content },
+        })
+      );
+      dispatch(clickModi({ modi: !modiComment.modi, id }));
+    }
+
     reset();
   };
 
@@ -63,7 +84,7 @@ function ClipPlayComment() {
         </ClipplayCommentTitle>
         <div>
           <ClipplayInputTitle>
-            <span>전체 댓글</span>
+            <span>전체 댓글 </span>
             <span>{commentlist?.comment[0]?.metadata?.audioClipCount}</span>
           </ClipplayInputTitle>
           <div>
@@ -73,19 +94,32 @@ function ClipPlayComment() {
                 register={register}
                 type={"text"}
                 name={"content"}
-                placeholder={"댓글을 입력해주세요."}
+                placeholder={
+                  modiComment?.modi
+                    ? "수정할 댓글을 입력해주세요."
+                    : "댓글을 입력해주세요."
+                }
                 validation={{
                   required: "댓글을 입력해주세요.",
                 }}
               />
-              <Button smCommentBtn>등록</Button>
+              <Button smCommentBtn>
+                {modiComment?.modi ? "수정" : "등록"}
+              </Button>
             </ClipplayInputForm>
           </div>
         </div>
         <ClipPlayCommentOverflow>
           {commentlist?.comment?.map((item, index) => {
             return item?.result?.map((item, index) => {
-              return <ClipCommentList props={item} key={index} />;
+              return (
+                <ClipCommentList
+                  props={item}
+                  title={commentlist?.comment[0]?.AlbumTitle}
+                  id={item.id}
+                  key={index}
+                />
+              );
             });
           })}
           <div ref={ref}></div>
