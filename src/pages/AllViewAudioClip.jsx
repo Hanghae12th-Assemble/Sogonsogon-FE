@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 import { AiOutlineArrowLeft, AiOutlinePlus } from "react-icons/ai";
 import { useState } from "react";
-import { ReactComponent as Order } from "../asset/icon/order.svg";
 import { ReactComponent as LatestList } from "../asset/icon/latest.svg";
 import { ReactComponent as LikeList } from "../asset/icon/likelist.svg";
 import ClipList from "../components/ClipList";
@@ -63,7 +62,7 @@ function AllViewAudioClip() {
                             document.startViewTransition(() => navigate(-1));
                         }}
                     />
-                    <p>{gettingClips?.clip[0]?.data?.albumTitle}</p>
+                    <p>{gettingClips?.clip[0]?.data?.albumTitle ? gettingClips?.clip[0]?.data?.albumTitle : <span>생성된 클립이 없습니다</span>}</p>
                 </AllClipsNavBarLeftLayout>
                 {clipWriter === true &&
                     <AiOutlinePlus
@@ -154,6 +153,10 @@ const AllClipsNavBarBox = styled.div`
     font-size: 1.25rem;
     font-weight: bold;
     margin-left: 0.625rem;
+  }
+
+  span {
+    color: #ff9900;
   }
 `;
 
