@@ -30,6 +30,7 @@ import getClips from "../module/geClips";
 import clickModal from "../module/reduxState/clickShutDown";
 import getMyAlbum from "../module/getMyAlbum";
 import getFollow from "../module/getFollow";
+import likeClip from "../module/likeClip";
 
 const sotre = configureStore({
   reducer: {
@@ -65,6 +66,7 @@ const sotre = configureStore({
     gettingMyAlbum: getMyAlbum.reducer,
     removingMyAlbum: removeAlbum.reducer,
     gettingFollow: getFollow.reducer,
+    likingClip: likeClip.reducer,
   },
 });
 

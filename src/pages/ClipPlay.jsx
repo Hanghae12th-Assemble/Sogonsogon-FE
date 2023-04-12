@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
-import { AiOutlineClose, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaPlay, FaStop } from "react-icons/fa";
 import { BsFastForward, BsRewind } from "react-icons/bs";
 import { BiComment } from "react-icons/bi";
@@ -14,6 +14,7 @@ import { __getClipDetail } from "../redux/module/getClipDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { clickOut } from "../redux/module/reduxState/clickShutDown";
 import { useParams } from "react-router-dom";
+import { __likeClip } from "../redux/module/likeClip";
 
 function ClipPlay() {
   const [playing, setPlaying] = useState(false);
@@ -22,11 +23,11 @@ function ClipPlay() {
   const { id } = useParams();
   const selectBtn = useSelector((state) => state.clickingModal);
   const clipdata = useSelector((state) => state?.gettingClipDetail?.clip);
+  const likeData = useSelector((state) => state.likingClip?.clip)
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(__getClipDetail(id));
-  }, []);
+  }, [likeData]);
 
   const playerRef = useRef(null);
 
@@ -66,6 +67,10 @@ function ClipPlay() {
     playerRef.current.seekTo(newPlayed * duration);
   };
 
+  const albumClip = () => {
+    dispatch(__likeClip(id));
+  }
+
   return (
     <>
       <BackgroundImage src={clipdata?.audioclipImageUrl} alt="Background" />
@@ -85,7 +90,12 @@ function ClipPlay() {
               <span>{clipdata?.membernickname}</span>
             </ClipplayAuthorProfile>
             <ClipplayLikeCount>
-              <AiOutlineHeart size={30} />
+              {clipdata?.likeCheck === true ? <AiFillHeart
+                size={30}
+                color={"ff9900"}
+                cursor={"pointer"}
+                onClick={albumClip}
+              /> : <AiOutlineHeart size={30} cursor={"pointer"} onClick={albumClip} />}
               <span>{clipdata?.isLikeCount}</span>
             </ClipplayLikeCount>
           </ClipplayAuthorLike>

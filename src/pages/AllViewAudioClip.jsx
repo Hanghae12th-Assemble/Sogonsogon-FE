@@ -4,6 +4,7 @@ import { AiOutlineArrowLeft, AiOutlinePlus } from "react-icons/ai";
 import { useState } from "react";
 import { ReactComponent as Order } from "../asset/icon/order.svg";
 import { ReactComponent as LatestList } from "../asset/icon/latest.svg";
+import { ReactComponent as LikeList } from "../asset/icon/likelist.svg";
 import ClipList from "../components/ClipList";
 import SelectedContentRemoveBtn from "../components/SelectedContentRemoveBtn";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,7 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getClips, initInfinitiScroll } from "../redux/module/geClips";
 import { useInView } from "react-intersection-observer";
 import { __removeClip } from "../redux/module/removeClip";
-import { getLocalStorage } from "../util/localStorage";
 
 function AllViewAudioClip() {
     const { id } = useParams();
@@ -63,7 +63,7 @@ function AllViewAudioClip() {
                             document.startViewTransition(() => navigate(-1));
                         }}
                     />
-                    {/* <p>{albumTitle}</p> */}
+                    <p>{gettingClips?.clip[0]?.data?.albumTitle}</p>
                 </AllClipsNavBarLeftLayout>
                 {clipWriter === true &&
                     <AiOutlinePlus
@@ -107,10 +107,10 @@ function AllViewAudioClip() {
                 )}
             </MyEditContainer>
             <StSortBtnSvg>
-                {sortBy === "likesCount" ? (
-                    <LatestList onClick={sortByCreatedAtHandler} />
+                {sortBy === "createdAt" ? (
+                    <LatestList onClick={sortByLikesCoutHandler} />
                 ) : (
-                    <Order onClick={sortByLikesCoutHandler} />
+                    <LikeList onClick={sortByCreatedAtHandler} />
                 )}
             </StSortBtnSvg>
             <AllClipsContainer>
