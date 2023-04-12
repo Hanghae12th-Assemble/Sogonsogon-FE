@@ -13,7 +13,7 @@ function ClipList({ editClicked, state, setState, selectedContent, data }) {
     <>
       <AllClipsLayout>
         <AllClipsInfoContainer>
-          <AllClipsEpisodeLayout>{data?.order}회차</AllClipsEpisodeLayout>
+          <AllClipsEpisodeLayout>No.{data?.order}</AllClipsEpisodeLayout>
         </AllClipsInfoContainer>
         <AllClicpsDescContainer>
           <SelectBtnContainer

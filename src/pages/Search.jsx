@@ -12,6 +12,7 @@ import { addSearchHistory } from "../util/getUpdatedHistory";
 import SearchTap from "../components/SearchTap";
 import { StRadioContainer } from "../pages/Home";
 import { getLocalStorage } from "../util/localStorage";
+import { ReactComponent as NotResult } from "../asset/icon/notresult.svg";
 
 function Search() {
   const [isSearch, setIsSearch] = useState(false);
@@ -80,7 +81,13 @@ function Search() {
           {sort ? (
             <>
               {user?.data?.length === 0 ? (
-                <h3>검색 결과가 없습니다.</h3>
+                <>
+                  <NotResultContainer>
+                    <StNotResultSvg />
+                    <h3>검색 결과가 없습니다.</h3>
+                  </NotResultContainer>
+                </>
+
               ) : (
                 <>
                   <SearchUserContainer>
@@ -95,7 +102,12 @@ function Search() {
             <>
               {" "}
               {live?.data?.length === 0 ? (
-                <div>검색 결과가 없습니다.</div>
+                <>
+                  <NotResultContainer>
+                    <StNotResultSvg />
+                    <h3>검색 결과가 없습니다.</h3>
+                  </NotResultContainer>
+                </>
               ) : (
                 <>
                   <StRadioContainer>
@@ -164,3 +176,15 @@ const SearchUserContainer = styled.div`
     height: 0.1em;
   }
 `;
+
+const NotResultContainer = styled.div`
+  margin: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`
+
+const StNotResultSvg = styled(NotResult)`
+  width: 250px;
+`
