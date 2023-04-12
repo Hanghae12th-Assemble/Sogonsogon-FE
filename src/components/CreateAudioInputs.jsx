@@ -65,7 +65,7 @@ function CreateRadioInputs({
         : await dispatch(__updateAlbum({ albumInfo: formData, albumId: id }));
 
     if (action.payload && action.payload >= 200 && action.payload < 300) {
-      navigate("/");
+      navigate(-1);
     } else {
       alert("본인 엘범이 아니거나 중복된 앨범입니다.");
     }

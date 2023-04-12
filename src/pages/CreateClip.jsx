@@ -3,11 +3,18 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import CreateClipInput from "../components/CreateClipInput";
+import { useSelector } from "react-redux";
+import Loading from "../components/Loading";
 
 function CreateClip() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const createClip = useSelector((state) => state?.creatingClip);
+
+  if (createClip?.isLoading) {
+    return <Loading />;
+  }
 
   return (
     <CrRadioContainer>

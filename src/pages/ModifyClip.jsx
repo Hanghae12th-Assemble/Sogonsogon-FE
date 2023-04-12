@@ -4,11 +4,13 @@ import Navbar from "../components/Navbar";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { __createClip } from "../redux/module/createClip";
 import CreateClipInput from "../components/CreateClipInput";
+import { useSelector } from "react-redux";
 
 function ModifyClip() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const modifyClip = useSelector((state) => state?.creatingClip);
 
   return (
     <CrRadioContainer>

@@ -6,6 +6,7 @@ import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 import { useState } from "react";
 import Lnb from "../components/Lnb";
 import styled from "styled-components";
+import Loading from "../components/Loading";
 
 function Notfound() {
   const [isLnbOpen, setIsLnbOpen] = useState(false);

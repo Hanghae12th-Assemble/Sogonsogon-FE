@@ -71,8 +71,7 @@ function CreateClipInputs({
           );
 
     if (action.payload && action.payload >= 200 && action.payload < 300) {
-      console.log(action.payload);
-      navigate("/");
+      navigate(-1);
     } else {
       alert("본인 클립이 아니거나 중복된 클립입니다.");
     }

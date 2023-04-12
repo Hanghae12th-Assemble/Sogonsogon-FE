@@ -5,10 +5,17 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { __createClip } from "../redux/module/createClip";
 import CreateAudioButton from "../components/CreateAudioButton";
 import CreateAudioInputs from "../components/CreateAudioInputs";
+import { useSelector } from "react-redux";
+import Loading from "../components/Loading";
 
 function CreateAudio() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
+  const createAlbums = useSelector((state) => state?.creatingAlbum);
+
+  if (createAlbums?.isLoading) {
+    return <Loading />;
+  }
 
   return (
     <CrRadioContainer>
