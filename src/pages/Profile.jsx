@@ -21,15 +21,11 @@ function Profile() {
   const { id } = useParams();
   const [pageState] = useState(false);
   const user = JSON.parse(getLocalStorage("userInfo"));
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
   const selectBtn = useSelector((state) => state.profileButn);
   const getUserInfo = useSelector((state) => state?.gettingProfile?.profile);
+  const modiSwitch = useSelector((state) => state?.profileButn);
 
   useEffect(() => {
     if (isLogin() === false) {
@@ -85,7 +81,7 @@ function Profile() {
           iconleft={<AiOutlineArrowLeft size={20} onClick={onPageClick} />}
           title={"프로필"}
           iconright={
-            id === user.userName ? (
+            id === user.userName && !modiSwitch ? (
               <MdOutlineModeEdit onClick={onPageModiClick} size={20} />
             ) : null
           }
