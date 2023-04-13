@@ -248,7 +248,7 @@ const AlbumDetailPgDescContainer = styled.div`
 const AlbumDetailPgImg = styled.div`
   width: 13.125rem;
   height: 13.125rem;
-  background-color: #393b3a6e;
+  background-color: ${({ theme }) => theme.color.softBlack_col};
   border-radius: 0.625rem;
   margin: auto;
   background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
@@ -291,7 +291,7 @@ const AlbumDetailPgDateLayout = styled.div`
   width: fit-content;
   font-size: 0.9375rem;
   margin-bottom: 0.6875rem;
-  color: #77756f;
+  color: ${({ theme }) => theme.color.darkGray_col};
 `;
 const AlbumDetailPgHeartContianer = styled.div`
   display: flex;
@@ -301,7 +301,7 @@ const AlbumDetailPgHeartContianer = styled.div`
   div {
     margin-left: 0.3125rem;
     font-size: 0.9375rem;
-    color: #77756f;
+    color: ${({ theme }) => theme.color.darkGray_col};
   }
 `;
 
@@ -311,7 +311,7 @@ const AlbumDetailPgIntroContainer = styled.div`
   margin-top: 1.25rem;
   border-radius: 0.625rem;
   padding: 1.25rem;
-  background-color: #f8f7f6;
+  background-color: ${({ theme }) => theme.color.darkWhite_col};
   display: flex;
   flex-direction: column;
   & > span {
@@ -323,7 +323,7 @@ const AlbumDetailPgIntroContainer = styled.div`
     -webkit-box-orient: vertical;
     font-size: 1rem;
     line-height: 1.375rem;
-    color: #77756f;
+    color: ${({ theme }) => theme.color.darkGray_col};
   }
   p {
     font-size: 1.0625rem;
@@ -338,7 +338,7 @@ const ExpandButtonContainer = styled.div`
   width: fit-content;
   margin: 0.4375rem auto auto auto;
   background-color: transparent;
-  color: #77756f;
+  color: ${({ theme }) => theme.color.darkGray_col};
   cursor: pointer;
   div {
     margin-right: 0.4375rem;
@@ -362,7 +362,6 @@ const ClipInfoLeftLayout = styled.div`
 
 const ClipInfoLeftSubstance = styled.div`
   margin-right: 0.3125rem;
-  color: black;
   font-weight: 600;
   font-size: 1.25rem;
 `;
@@ -370,10 +369,10 @@ const StContentCount = styled.span`
   display: flex;
   align-items: center;
   font-size: 1.25rem;
-  color: #ff9900;
+  color: ${({ theme }) => theme.color.orange_col};
 `;
 const StAllViewLayout = styled.span`
-  color: #77756f;
+  color: ${({ theme }) => theme.color.darkGray_col};
   cursor: pointer;
 `;
 

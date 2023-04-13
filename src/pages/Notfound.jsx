@@ -65,7 +65,7 @@ const NotFoundTitle = styled.div`
 `;
 
 const NotFoundPtag = styled.div`
-  color: #999999;
+  color: ${({ theme }) => theme.color.darkGray_col};
   margin-top: 1.875rem;
   p {
     text-align: center;

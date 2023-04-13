@@ -153,7 +153,7 @@ const SearchInput = styled.input`
   margin-left: 1.25rem;
   font-size: 1rem;
   background: url("https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png")
-    0.75rem center / contain no-repeat #f9f9fa;
+    0.75rem center / contain no-repeat #f5f4f2;
   border: none;
   outline: none;
 `;

@@ -188,7 +188,7 @@ const TransparentLayer = styled.div`
 const ClipplayContent = styled.div`
   padding: 0 1.25rem;
   z-index: 2;
-  color: white;
+  color: ${({ theme }) => theme.color.white_col};
   width: 100%;
   position: absolute;
 `;
@@ -253,7 +253,7 @@ const ClipplayInput = styled.input`
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
-    background-color: #ff9900;
+    background-color: ${({ theme }) => theme.color.orange_col};
     cursor: pointer;
     height: 1rem;
     width: 1rem;
@@ -262,7 +262,7 @@ const ClipplayInput = styled.input`
   }
 
   &::-webkit-slider-runnable-track {
-    background-color: #ff9900;
+    background-color: ${({ theme }) => theme.color.orange_col};
     height: 0.125rem;
   }
 `;
@@ -302,5 +302,5 @@ const ClipplayComment = styled.div`
 `;
 
 const ClipplayCommentCount = styled.span`
-  color: #ff9900;
+  color: ${({ theme }) => theme.color.orange_col};
 `;
