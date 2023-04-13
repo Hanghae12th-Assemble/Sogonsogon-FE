@@ -20,12 +20,17 @@ import { __getAlbumDetail } from "../redux/module/getAlbumDetail";
 import { __likeAlbum } from "../redux/module/likeAlbum";
 import { useThrottledCallback } from "../hooks/useThrottledCallback";
 import isLogin from "../util/checkCookie";
+import { ReactComponent as Music } from "../asset/icon/music.svg";
+import { ReactComponent as Daily } from "../asset/icon/daily.svg";
+import { ReactComponent as Book } from "../asset/icon/book.svg";
+import { ReactComponent as Asmr } from "../asset/icon/asmr.svg";
 
 function AlbumDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { gettingAlbumDetail, likingAlbum } = useSelector((state) => state);
+  console.log(gettingAlbumDetail)
   const formattedDate =
     gettingAlbumDetail?.album?.data?.result?.createdAt?.substr(0, 10);
   const [state, setState] = useState({
@@ -59,6 +64,37 @@ function AlbumDetail() {
     [dispatch, id]
   );
 
+  const renderIcon = (categoryType) => {
+    switch (categoryType) {
+      case "음악":
+        return (
+          <StIconSvg>
+            <Music />
+          </StIconSvg>
+        );
+      case "일상":
+        return (
+          <StIconSvg>
+            <Daily />
+          </StIconSvg>
+        );
+      case "도서":
+        return (
+          <StIconSvg>
+            <Book />
+          </StIconSvg>
+        );
+      case "ASMR":
+        return (
+          <StIconSvg>
+            <Asmr />
+          </StIconSvg>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <NavbarContainer>
@@ -80,7 +116,9 @@ function AlbumDetail() {
             backgroundImageUrl={
               gettingAlbumDetail?.album?.data?.result?.backgroundImageUrl
             }
-          />
+          >
+            {renderIcon(gettingAlbumDetail?.album?.data?.result?.categoryType)}
+          </AlbumDetailPgImg >
           <AlbumDetailPgDescLayout>
             <AlbumDetailPgTitleLayout>
               {gettingAlbumDetail?.album?.data?.result?.title}
@@ -139,19 +177,19 @@ function AlbumDetail() {
             <span>{gettingAlbumDetail?.album?.data?.result?.instruction}</span>
             {gettingAlbumDetail?.album?.data?.result?.instruction?.length >
               3 && (
-              <ExpandButtonContainer onClick={handleClick}>
-                {expanded ? (
-                  <>
-                    <div>펼쳐보기</div> <AiOutlineDown />
-                  </>
-                ) : (
-                  <>
-                    <div>접기</div>
-                    <AiOutlineUp />
-                  </>
-                )}
-              </ExpandButtonContainer>
-            )}
+                <ExpandButtonContainer onClick={handleClick}>
+                  {expanded ? (
+                    <>
+                      <div>펼쳐보기</div> <AiOutlineDown />
+                    </>
+                  ) : (
+                    <>
+                      <div>접기</div>
+                      <AiOutlineUp />
+                    </>
+                  )}
+                </ExpandButtonContainer>
+              )}
           </AlbumDetailPgIntroContainer>
         </AlbumDetailPgDescContainer>
         <AlbumDetailPgClipInfo>
@@ -219,6 +257,9 @@ const AlbumDetailPgImg = styled.div`
   background-size: cover;
   background-position: center;
   transition: all 0.5s ease-in-out 0s;
+   align-items: flex-end;
+  display: flex;
+  flex-direction: row-reverse;
   :hover {
     transform: scale(1);
     box-shadow: 0rem 0rem 0.3125rem 0.125rem rgba(0, 0, 0, 0.3);
@@ -335,4 +376,9 @@ const StContentCount = styled.span`
 const StAllViewLayout = styled.span`
   color: #77756f;
   cursor: pointer;
+`;
+
+const StIconSvg = styled.div`
+  width: 1.875rem;
+  margin: .3125rem .625rem;
 `;

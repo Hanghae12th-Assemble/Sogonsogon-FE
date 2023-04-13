@@ -1,9 +1,45 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { ReactComponent as Music } from "../asset/icon/music.svg";
+import { ReactComponent as Daily } from "../asset/icon/daily.svg";
+import { ReactComponent as Book } from "../asset/icon/book.svg";
+import { ReactComponent as Asmr } from "../asset/icon/asmr.svg";
 
 function RadioContainer({ props }) {
+  console.log(props)
   const navigate = useNavigate();
+
+  const renderIcon = (categoryType) => {
+    switch (categoryType) {
+      case "음악":
+        return (
+          <StIconSvg>
+            <Music />
+          </StIconSvg>
+        );
+      case "일상":
+        return (
+          <StIconSvg>
+            <Daily />
+          </StIconSvg>
+        );
+      case "도서":
+        return (
+          <StIconSvg>
+            <Book />
+          </StIconSvg>
+        );
+      case "ASMR":
+        return (
+          <StIconSvg>
+            <Asmr />
+          </StIconSvg>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
@@ -15,7 +51,10 @@ function RadioContainer({ props }) {
             );
           }}
           style={{ backgroundImage: `url(${props?.backgroundImageUrl})` }}
-        ></RadioImgContainer>
+        >
+
+          {renderIcon(props?.categoryType)}
+        </RadioImgContainer>
         <RadioContentLayout>
           <RadionContentMiniLayout>
             <RadioTitleLayout to={`/albumdetail/${props?.id}`}>
@@ -94,4 +133,9 @@ const RadioNameLayout = styled.div`
 const RadionContentMiniLayout = styled.div`
   width: 9.375rem;
   min-height: 3.125rem;
+`;
+
+const StIconSvg = styled.div`
+  width: 1.5625rem;
+  margin: .3125rem .625rem;
 `;
