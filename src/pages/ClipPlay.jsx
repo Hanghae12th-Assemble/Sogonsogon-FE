@@ -33,7 +33,7 @@ function ClipPlay() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(__getClipDetail(id));
-  }, [likeData]);
+  }, [likeData, selectBtn]);
 
   const playerRef = useRef(null);
 
