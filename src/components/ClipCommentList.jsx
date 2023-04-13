@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { clickModi } from "../redux/module/reduxState/clickModiComment";
 import { __removeAudioComment } from "../redux/module/removeAudioComment";
+import { getLocalStorage } from "../util/localStorage";
 
 function ClipCommentList({ props, title, id }) {
   const dateTime = props?.createdAt?.replace("T", " ").slice(0, 16);
   const modiComment = useSelector((state) => state?.clickingModiComment);
   const dispatch = useDispatch();
-
+  const user = JSON.parse(getLocalStorage("userInfo"));
   const ModifyCommnet = (id) => {
     dispatch(clickModi({ modi: !modiComment.modi, id }));
   };
@@ -32,12 +33,17 @@ function ClipCommentList({ props, title, id }) {
           <p>{title}</p>
         </ClipplayCommentBoxText>
         <ClipplayCommentBoxBtn>
-          <ClipplayCommentModiRemove>
-            <span onClick={() => ModifyCommnet(id)}>수정</span>
-          </ClipplayCommentModiRemove>
-          <ClipplayCommentModiRemove>
-            <span onClick={() => removeComment(id)}>삭제</span>
-          </ClipplayCommentModiRemove>
+          {props?.membername === user?.userName &&
+            <>
+              <ClipplayCommentModiRemove>
+                <span onClick={() => ModifyCommnet(id)}>수정</span>
+              </ClipplayCommentModiRemove>
+              <ClipplayCommentModiRemove>
+                <span onClick={() => removeComment(id)}>삭제</span>
+              </ClipplayCommentModiRemove>
+            </>
+          }
+
         </ClipplayCommentBoxBtn>
       </ClipplayCommentContainner>
     </>
