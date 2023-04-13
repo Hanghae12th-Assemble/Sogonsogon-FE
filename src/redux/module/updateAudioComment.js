@@ -8,7 +8,7 @@ export const __updateAudioComment = createAsyncThunk(
   async ({ commentId, commentInfo }, thunkAPI) => {
     return await axios
       .put(`api/audioclip/comment/${commentId}`, commentInfo)
-      .then((response) => alert(response && "오디오 덧글수정 완료."))
+      .then((response) => response.data)
       .catch((error) => alert(error && "오디오 덧글 수정에 실패했습니다."));
   }
 );

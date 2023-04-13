@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { AiOutlineRight } from "react-icons/ai";
 import { getCookie, removeCookie } from "../util/cookie";
 import { getLocalStorage, removeLocalStorage } from "../util/localStorage";
@@ -189,18 +189,29 @@ function Lnb({ isOpen, handleItemClick }) {
 
 export default Lnb;
 
+const slideIn = keyframes`
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 350px;
+  }
+`;
+
+
 const LnbLayout = styled.div`
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
-  width: ${({ isOpen }) => (isOpen ? "21.875rem" : "0rem")};
   position: absolute;
   top: -2.5rem;
   left: 0;
   height: 100%;
-  transition: opacity 0.2s ease, width 0.3s ease-out;
   background-color: white;
   z-index: 999;
   margin-top: 2.5rem;
+  animation: ${({ isOpen }) => isOpen && css`${slideIn} 0.25s ease-in-out forwards`};
 `;
+
+
 
 const LnbAlarmBtnContainer = styled.div`
   width: fit-content;

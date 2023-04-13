@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clickOut } from "../redux/module/reduxState/clickShutDown";
 import { useParams } from "react-router-dom";
 import { __likeClip } from "../redux/module/likeClip";
+import { __getAudioComment } from "../redux/module/getAudioComment";
 
 function ClipPlay() {
   const [playing, setPlaying] = useState(false);
@@ -29,8 +30,8 @@ function ClipPlay() {
   const ClipDetail = useSelector(
     (state) => state?.gettingClipDetail?.clip?.totalCommentCount
   );
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(__getClipDetail(id));
   }, [likeData, selectBtn]);

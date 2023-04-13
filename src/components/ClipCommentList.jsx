@@ -1,8 +1,23 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { clickModi } from "../redux/module/reduxState/clickModiComment";
+import { __removeAudioComment } from "../redux/module/removeAudioComment";
+import { getLocalStorage } from "../util/localStorage";
 
-function ClipCommentList({ props }) {
+function ClipCommentList({ props, title, id }) {
   const dateTime = props?.createdAt?.replace("T", " ").slice(0, 16);
+  const modiComment = useSelector((state) => state?.clickingModiComment);
+  const dispatch = useDispatch();
+  const user = JSON.parse(getLocalStorage("userInfo"));
+  const ModifyCommnet = (id) => {
+    dispatch(clickModi({ modi: !modiComment.modi, id }));
+  };
+
+  const removeComment = (id) => {
+    dispatch(__removeAudioComment(id));
+  };
+
   return (
     <>
       <ClipplayCommentContainner>
@@ -15,8 +30,21 @@ function ClipCommentList({ props }) {
           <div>
             <ClipplayPhoto src={props?.memberImageUrl} />
           </div>
-          <p>{props?.content}</p>
+          <p>{title}</p>
         </ClipplayCommentBoxText>
+        <ClipplayCommentBoxBtn>
+          {props?.membername === user?.userName &&
+            <>
+              <ClipplayCommentModiRemove>
+                <span onClick={() => ModifyCommnet(id)}>수정</span>
+              </ClipplayCommentModiRemove>
+              <ClipplayCommentModiRemove>
+                <span onClick={() => removeComment(id)}>삭제</span>
+              </ClipplayCommentModiRemove>
+            </>
+          }
+
+        </ClipplayCommentBoxBtn>
       </ClipplayCommentContainner>
     </>
   );
@@ -51,4 +79,18 @@ const ClipplayPhoto = styled.img`
   height: 4.375rem;
   border-radius: 0.625rem;
   margin-right: 0.625rem;
+`;
+
+const ClipplayCommentBoxBtn = styled.div`
+  //border: 1px solid red;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px;
+`;
+
+const ClipplayCommentModiRemove = styled.div`
+  margin-left: 20px;
+  span {
+    cursor: pointer;
+  }
 `;
