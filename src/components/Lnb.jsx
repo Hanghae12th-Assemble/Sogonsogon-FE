@@ -4,7 +4,6 @@ import styled, { keyframes, css } from "styled-components";
 import { AiOutlineRight } from "react-icons/ai";
 import { getCookie, removeCookie } from "../util/cookie";
 import { getLocalStorage, removeLocalStorage } from "../util/localStorage";
-import { EventSourcePolyfill } from "event-source-polyfill";
 import { __getAlarm } from "../redux/module/getAlarm";
 import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as Home } from "../asset/icon/home.svg";
@@ -26,13 +25,9 @@ function Lnb({ isOpen, handleItemClick }) {
 
   useEffect(() => {
     if (token) {
-      // fetchSse();
       if (isOpen === true) {
         dispatch(__getAlarm());
       }
-      // return () => {
-      //     eventSource && eventSource.close();
-      // };
     }
   }, [isOpen, alarm]);
 
@@ -40,40 +35,6 @@ function Lnb({ isOpen, handleItemClick }) {
     const unreadAlarms = data?.alarm?.some((item) => !item.readStatus);
     setAlarm(unreadAlarms);
   }, [data]);
-
-  // let eventSource;
-  // const fetchSse = async () => {
-  //     try {
-  //         //EventSource생성.
-  //         eventSource = new EventSourcePolyfill(
-  //             `${process.env.REACT_APP_BASE_URL}api/notificaiton/`,
-  //             {
-  //                 headers: {
-  //                     Authorization: `Bearer ${token}`,
-  //                 },
-  //             }
-  //         );
-
-  //         eventSource.onmessage = async function (event) {
-  //             if (event.data !== `EventStream Created. [userId=${username.id}]`) {
-  //                 const data = JSON.parse(event.data);
-  //                 const message = data.message;
-  //                 const notificationTitle = '새로운 알림이 있습니다!';
-  //                 const notificationOptions = {
-  //                     body: message,
-  //                 };
-  //                 setAlarm(true);
-  //                 const notification = new Notification(notificationTitle, notificationOptions);
-  //                 notification.onclick = function (event) {
-  //                     event.preventDefault();
-  //                     document.startViewTransition(() => navigate(`/alarm/${username.userName}`));
-  //                 };
-  //             }
-  //         };
-  //     } catch (error) {
-  //         if (eventSource) eventSource.close();
-  //     }
-  // };
 
   const [items, setItems] = useState([
     { id: 1, icon: <Home />, name: "홈", link: "/" },
@@ -191,7 +152,7 @@ export default Lnb;
 
 const slideIn = keyframes`
   0% {
-    width: 0;
+    width:0px;
   }
   100% {
     width: 350px;

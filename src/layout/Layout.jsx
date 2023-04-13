@@ -1,9 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Logo } from '../asset/logo/logo.svg';
 import { ReactComponent as Symbol } from '../asset/logo/symbol.svg';
+import { EventSourcePolyfill } from 'event-source-polyfill';
+import { getCookie } from '../util/cookie';
 
 const Layout = ({ children }) => {
+    const token = getCookie("access-token");
+    const [alarm, setAlarm] = useState(false);
+
+    useEffect(() => {
+        if (token) {
+            fetchSse();
+            return () => {
+                eventSource && eventSource.close();
+            };
+        }
+    }, [alarm]);
+    let eventSource;
+    const fetchSse = async () => {
+        try {
+            //EventSource생성.
+            eventSource = new EventSourcePolyfill(
+                `${process.env.REACT_APP_BASE_URL}api/notificaiton/`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            eventSource.onmessage = async function (event) {
+                const checkJSON = event.data.split(" ")[0];
+                const data = checkJSON !== "EventStream" && JSON.parse(event.data);
+                const message = data.message;
+                const notificationTitle = '새로운 알림이 있습니다!';
+                const notificationOptions = {
+                    body: message,
+                };
+                setAlarm(true);
+                const notification = new Notification(notificationTitle, notificationOptions);
+                notification.onclick = function (event) {
+                    event.preventDefault();
+                };
+
+            };
+        } catch (error) {
+            if (eventSource) eventSource.close();
+        }
+    };
     return (
         <>
             <LayoutBox>
