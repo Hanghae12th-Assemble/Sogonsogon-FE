@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { __createAlbum } from "../redux/module/createAlbum";
 import { __updateAlbum } from "../redux/module/updateAlbum";
 import { useParams, useNavigate } from "react-router-dom";
-import { unwrapResult } from "@reduxjs/toolkit";
 
 function CreateRadioInputs({
   setFormformImagin,
@@ -67,6 +66,7 @@ function CreateRadioInputs({
     if (action.payload && action.payload >= 200 && action.payload < 300) {
       navigate(-1);
     } else {
+      console.log(action);
       alert("본인 엘범이 아니거나 중복된 앨범입니다.");
     }
 
@@ -109,7 +109,12 @@ function CreateRadioInputs({
         <CrRadioButtonSpanBox>
           <span>이미지 *</span>
           <CrRadioPublicScopButton>
-            <CrFileInput type="file" accept="image/*" onChange={onChangeimge} />
+            <CrFileInput
+              type="file"
+              accept="image/*"
+              required
+              onChange={onChangeimge}
+            />
           </CrRadioPublicScopButton>
           <CrPreviewDiv>
             {preview ? (

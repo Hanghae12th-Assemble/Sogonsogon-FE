@@ -30,7 +30,6 @@ function AlbumDetail() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { gettingAlbumDetail, likingAlbum } = useSelector((state) => state);
-  console.log(gettingAlbumDetail)
   const formattedDate =
     gettingAlbumDetail?.album?.data?.result?.createdAt?.substr(0, 10);
   const [state, setState] = useState({
@@ -118,7 +117,7 @@ function AlbumDetail() {
             }
           >
             {renderIcon(gettingAlbumDetail?.album?.data?.result?.categoryType)}
-          </AlbumDetailPgImg >
+          </AlbumDetailPgImg>
           <AlbumDetailPgDescLayout>
             <AlbumDetailPgTitleLayout>
               {gettingAlbumDetail?.album?.data?.result?.title}
@@ -177,19 +176,19 @@ function AlbumDetail() {
             <span>{gettingAlbumDetail?.album?.data?.result?.instruction}</span>
             {gettingAlbumDetail?.album?.data?.result?.instruction?.length >
               3 && (
-                <ExpandButtonContainer onClick={handleClick}>
-                  {expanded ? (
-                    <>
-                      <div>펼쳐보기</div> <AiOutlineDown />
-                    </>
-                  ) : (
-                    <>
-                      <div>접기</div>
-                      <AiOutlineUp />
-                    </>
-                  )}
-                </ExpandButtonContainer>
-              )}
+              <ExpandButtonContainer onClick={handleClick}>
+                {expanded ? (
+                  <>
+                    <div>펼쳐보기</div> <AiOutlineDown />
+                  </>
+                ) : (
+                  <>
+                    <div>접기</div>
+                    <AiOutlineUp />
+                  </>
+                )}
+              </ExpandButtonContainer>
+            )}
           </AlbumDetailPgIntroContainer>
         </AlbumDetailPgDescContainer>
         <AlbumDetailPgClipInfo>
@@ -257,7 +256,7 @@ const AlbumDetailPgImg = styled.div`
   background-size: cover;
   background-position: center;
   transition: all 0.5s ease-in-out 0s;
-   align-items: flex-end;
+  align-items: flex-end;
   display: flex;
   flex-direction: row-reverse;
   :hover {
@@ -380,5 +379,5 @@ const StAllViewLayout = styled.span`
 
 const StIconSvg = styled.div`
   width: 1.875rem;
-  margin: .3125rem .625rem;
+  margin: 0.3125rem 0.625rem;
 `;

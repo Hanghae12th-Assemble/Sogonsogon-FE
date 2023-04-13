@@ -7,7 +7,6 @@ import { ReactComponent as Book } from "../asset/icon/book.svg";
 import { ReactComponent as Asmr } from "../asset/icon/asmr.svg";
 
 function RadioContainer({ props }) {
-  console.log(props)
   const navigate = useNavigate();
 
   const renderIcon = (categoryType) => {
@@ -52,7 +51,6 @@ function RadioContainer({ props }) {
           }}
           style={{ backgroundImage: `url(${props?.backgroundImageUrl})` }}
         >
-
           {renderIcon(props?.categoryType)}
         </RadioImgContainer>
         <RadioContentLayout>
@@ -137,5 +135,5 @@ const RadionContentMiniLayout = styled.div`
 
 const StIconSvg = styled.div`
   width: 1.5625rem;
-  margin: .3125rem .625rem;
+  margin: 0.3125rem 0.625rem;
 `;

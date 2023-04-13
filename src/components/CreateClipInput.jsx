@@ -119,11 +119,17 @@ function CreateClipInputs({
               type="file"
               accept=".mp3, .mp4"
               onChange={handleFileChange}
+              required
             />
           </CrRadioPublicScopButton>
           <span>대표 이미지 *</span>
           <CrRadioPublicScopButton>
-            <CrFileInput type="file" accept="image/*" onChange={onChangeimge} />
+            <CrFileInput
+              type="file"
+              accept="image/*"
+              required
+              onChange={onChangeimge}
+            />
           </CrRadioPublicScopButton>
           <CrPreviewDiv>
             {preview ? (
