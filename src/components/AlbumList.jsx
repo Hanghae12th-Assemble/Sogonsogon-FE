@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import SelectBtnContainer from "./SelectBtnContainer";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as Music } from "../asset/icon/music.svg";
 import { ReactComponent as Daily } from "../asset/icon/daily.svg";
@@ -64,7 +64,7 @@ function AlbumList({ editClicked, state, setState, selectedContent, data }) {
               <MyAlbumTitleLayout>{data?.title}</MyAlbumTitleLayout>
               <MyAlbumDateLayout>{dateTime}</MyAlbumDateLayout>
               <MyAlbumHeartContianer>
-                <AiOutlineHeart size={18} color={"77756f"} />
+                {data?.likeCheck === true ? <StAiFillHeart size={18} /> : <StAiOutlineHeart size={18} />}
                 <div>{data?.likesCount}</div>
               </MyAlbumHeartContianer>
             </MyAlbumDescLayout>
@@ -146,4 +146,14 @@ const MyAlbumDateLayout = styled.div`
 `;
 const StIconSvg = styled.div`
   width: 1.875rem;
+`;
+
+const StAiOutlineHeart = styled(AiOutlineHeart)`
+  color: #77756f;
+  margin-right: 0.3125rem;
+`;
+
+const StAiFillHeart = styled(AiFillHeart)`
+  color: #ff9900;
+  margin-right: 0.3125rem;
 `;
