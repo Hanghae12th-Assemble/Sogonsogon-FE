@@ -9,6 +9,7 @@ const Input = ({
   validation,
   errors,
   asFor,
+  value,
   ...props
 }) => {
   return (
@@ -17,6 +18,7 @@ const Input = ({
         {...register(name, validation)}
         as={asFor}
         type={type}
+        defaultValue={value}
         {...props}
         placeholder={placeholder}
       />

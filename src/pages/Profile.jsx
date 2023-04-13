@@ -108,6 +108,7 @@ function Profile() {
                 <Input
                   register={register}
                   type={"text"}
+                  value={getUserInfo?.nickname}
                   name={"nickname"}
                   placeholder={"닉네임을 입력해주세요."}
                   validation={{
