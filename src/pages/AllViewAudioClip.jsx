@@ -14,130 +14,138 @@ import { useInView } from "react-intersection-observer";
 import { __removeClip } from "../redux/module/removeClip";
 
 function AllViewAudioClip() {
-    const { id } = useParams();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { gettingClips, removingClip } = useSelector((state) => state);
-    console.log(gettingClips)
-    const page = useRef(1);
-    const [ref, inView] = useInView();
-    const [state, setState] = useState({
-        editClicked: false,
-        selectedContent: [],
-    });
-    const [sortBy, setSortBy] = useState("createdAt")
-    const { editClicked, selectedContent } = state;
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { gettingClips, removingClip } = useSelector((state) => state);
+  console.log(gettingClips);
+  const page = useRef(1);
+  const [ref, inView] = useInView();
+  const [state, setState] = useState({
+    editClicked: false,
+    selectedContent: [],
+  });
+  const [sortBy, setSortBy] = useState("createdAt");
+  const { editClicked, selectedContent } = state;
 
-    useEffect(() => {
-        page.current = 1;
-        dispatch(initInfinitiScroll());
-        dispatch(__getClips({ id, page: page.current, sortBy }));
-    }, [sortBy, removingClip?.clip]);
+  useEffect(() => {
+    page.current = 1;
+    dispatch(initInfinitiScroll());
+    dispatch(__getClips({ id, page: page.current, sortBy }));
+  }, [sortBy, removingClip?.clip]);
 
-    useEffect(() => {
-        if (inView) {
-            page.current += 1;
-            dispatch(__getClips({ id, page: page.current, sortBy }));
-        }
-    }, [sortBy, inView]);
+  useEffect(() => {
+    if (inView) {
+      page.current += 1;
+      dispatch(__getClips({ id, page: page.current, sortBy }));
+    }
+  }, [sortBy, inView]);
 
-    const sortByLikesCoutHandler = () => {
-        setSortBy("likesCount");
-    };
-    const sortByCreatedAtHandler = () => {
-        setSortBy("createdAt");
-    };
+  const sortByLikesCoutHandler = () => {
+    setSortBy("likesCount");
+  };
+  const sortByCreatedAtHandler = () => {
+    setSortBy("createdAt");
+  };
 
-    const totalClipCount = gettingClips?.clip[0]?.data?.metadata?.audioClipCount;
-    const clipWriter = gettingClips?.clip[0]?.data?.isMine
+  const totalClipCount = gettingClips?.clip[0]?.data?.metadata?.audioClipCount;
+  const clipWriter = gettingClips?.clip[0]?.data?.isMine;
 
-    return (
-        <>
-            <AllClipsNavBarBox>
-                <AllClipsNavBarLeftLayout>
-                    <AiOutlineArrowLeft
-                        size={25}
-                        cursor={"pointer"}
-                        color="#283035"
-                        onClick={() => {
-                            document.startViewTransition(() => navigate(-1));
-                        }}
-                    />
-                    <p>{gettingClips?.clip[0]?.data?.albumTitle ? gettingClips?.clip[0]?.data?.albumTitle : <span>생성된 클립이 없습니다</span>}</p>
-                </AllClipsNavBarLeftLayout>
-                {clipWriter === true &&
-                    <AiOutlinePlus
-                        size={25}
-                        cursor={"pointer"}
-                        color="#ff9900"
-                        onClick={() =>
-                            document.startViewTransition(() => navigate(`/createclip/${id}`))
-                        }
-                    />}
-            </AllClipsNavBarBox>
-            <MyEditContainer>
-                {!editClicked ? (
-                    <>
-                        <EditContainerLeftLayout>
-                            <StFrontSubstance>클립</StFrontSubstance>
-                            <StContentCount>{totalClipCount}</StContentCount>
-                        </EditContainerLeftLayout>
-                        {clipWriter === true &&
-                            <MyEditLayout
-                                onClick={() => {
-                                    setState({ ...state, editClicked: true });
-                                }}
-                            >
-                                편집
-                            </MyEditLayout>}
-                    </>
-                ) : (
-                    <>
-                        <StContentSlectedCount>
-                            <p>{selectedContent?.length}</p>개 선택
-                        </StContentSlectedCount>
-                        <MyDoneLayout
-                            onClick={() => {
-                                setState({ editClicked: false, selectedContent: [] });
-                            }}
-                        >
-                            완료
-                        </MyDoneLayout>
-                    </>
-                )}
-            </MyEditContainer>
-            <StSortBtnSvg>
-                {sortBy === "createdAt" ? (
-                    <LatestList onClick={sortByLikesCoutHandler} />
-                ) : (
-                    <LikeList onClick={sortByCreatedAtHandler} />
-                )}
-            </StSortBtnSvg>
-            <AllClipsContainer>
-                {gettingClips?.clip?.map((item) => {
-                    return item?.data?.result?.map((props, index) => {
-                        return (
-                            <ClipList
-                                key={index}
-                                data={props}
-                                editClicked={editClicked}
-                                selectedContent={selectedContent}
-                                state={state}
-                                setState={setState}
-                            />
-                        );
-                    });
-                })}
-                <div ref={ref}></div>
-            </AllClipsContainer>
-            <SelectedContentRemoveBtn
+  return (
+    <>
+      <AllClipsNavBarBox>
+        <AllClipsNavBarLeftLayout>
+          <AiOutlineArrowLeft
+            size={25}
+            cursor={"pointer"}
+            color="#283035"
+            onClick={() => {
+              document.startViewTransition(() => navigate(-1));
+            }}
+          />
+          <p>
+            {gettingClips?.clip[0]?.data?.albumTitle ? (
+              gettingClips?.clip[0]?.data?.albumTitle
+            ) : (
+              <span>생성된 클립이 없습니다</span>
+            )}
+          </p>
+        </AllClipsNavBarLeftLayout>
+        {clipWriter === true && (
+          <AiOutlinePlus
+            size={25}
+            cursor={"pointer"}
+            color="#ff9900"
+            onClick={() =>
+              document.startViewTransition(() => navigate(`/createclip/${id}`))
+            }
+          />
+        )}
+      </AllClipsNavBarBox>
+      <MyEditContainer>
+        {!editClicked ? (
+          <>
+            <EditContainerLeftLayout>
+              <StFrontSubstance>클립</StFrontSubstance>
+              <StContentCount>{totalClipCount}</StContentCount>
+            </EditContainerLeftLayout>
+            {clipWriter === true && (
+              <MyEditLayout
+                onClick={() => {
+                  setState({ ...state, editClicked: true });
+                }}
+              >
+                편집
+              </MyEditLayout>
+            )}
+          </>
+        ) : (
+          <>
+            <StContentSlectedCount>
+              <p>{selectedContent?.length}</p>개 선택
+            </StContentSlectedCount>
+            <MyDoneLayout
+              onClick={() => {
+                setState({ editClicked: false, selectedContent: [] });
+              }}
+            >
+              완료
+            </MyDoneLayout>
+          </>
+        )}
+      </MyEditContainer>
+      <StSortBtnSvg>
+        {sortBy === "createdAt" ? (
+          <LatestList onClick={sortByLikesCoutHandler} />
+        ) : (
+          <LikeList onClick={sortByCreatedAtHandler} />
+        )}
+      </StSortBtnSvg>
+      <AllClipsContainer>
+        {gettingClips?.clip?.map((item) => {
+          return item?.data?.result?.map((props, index) => {
+            return (
+              <ClipList
+                key={index}
+                data={props}
+                editClicked={editClicked}
+                selectedContent={selectedContent}
                 state={state}
                 setState={setState}
-                selectedContent={selectedContent}
-                __removeContent={__removeClip}
-            />
-        </>
-    );
+              />
+            );
+          });
+        })}
+        <div ref={ref}></div>
+      </AllClipsContainer>
+      <SelectedContentRemoveBtn
+        state={state}
+        setState={setState}
+        selectedContent={selectedContent}
+        __removeContent={__removeClip}
+      />
+    </>
+  );
 }
 
 export default AllViewAudioClip;
@@ -175,10 +183,6 @@ const AllClipsContainer = styled.div`
   align-items: flex-start;
   padding: 0.625rem 0rem 0rem 0rem;
   overflow: auto;
-  ::-webkit-scrollbar {
-    width: 0.1em;
-    height: 0.1em;
-  }
 `;
 const StSortBtnSvg = styled.div`
   cursor: pointer;

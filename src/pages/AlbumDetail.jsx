@@ -139,19 +139,19 @@ function AlbumDetail() {
             <span>{gettingAlbumDetail?.album?.data?.result?.instruction}</span>
             {gettingAlbumDetail?.album?.data?.result?.instruction?.length >
               3 && (
-                <ExpandButtonContainer onClick={handleClick}>
-                  {expanded ? (
-                    <>
-                      <div>펼쳐보기</div> <AiOutlineDown />
-                    </>
-                  ) : (
-                    <>
-                      <div>접기</div>
-                      <AiOutlineUp />
-                    </>
-                  )}
-                </ExpandButtonContainer>
-              )}
+              <ExpandButtonContainer onClick={handleClick}>
+                {expanded ? (
+                  <>
+                    <div>펼쳐보기</div> <AiOutlineDown />
+                  </>
+                ) : (
+                  <>
+                    <div>접기</div>
+                    <AiOutlineUp />
+                  </>
+                )}
+              </ExpandButtonContainer>
+            )}
           </AlbumDetailPgIntroContainer>
         </AlbumDetailPgDescContainer>
         <AlbumDetailPgClipInfo>
@@ -201,11 +201,6 @@ const AlbumDetailPgContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   overflow: auto;
-
-  ::-webkit-scrollbar {
-    width: 0.1em;
-    height: 0.1em;
-  }
 `;
 
 const AlbumDetailPgDescContainer = styled.div`

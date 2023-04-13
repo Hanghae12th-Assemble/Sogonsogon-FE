@@ -70,7 +70,7 @@ function Profile() {
     <ProfileContainer>
       <ProfileNavbarfixed>
         <Navbar
-          toNavigate={-1}
+          toNavigate={"/"}
           iconleft={<AiOutlineArrowLeft size={20} onClick={onPageClick} />}
           title={"프로필"}
           iconright={
@@ -162,10 +162,6 @@ export default Profile;
 const ProfileContainer = styled.div`
   padding: 0rem 1.25rem;
   overflow: auto;
-  ::-webkit-scrollbar {
-    width: 0.5em;
-    height: 0.5em;
-  }
 `;
 
 const ProfileNavbarfixed = styled.div`

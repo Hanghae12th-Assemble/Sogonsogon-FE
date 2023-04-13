@@ -21,6 +21,15 @@ a {
     text-decoration:none;
 }
 
+&::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
 `;
 
 export default GlobalStyle;

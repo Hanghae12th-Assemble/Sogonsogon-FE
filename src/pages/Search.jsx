@@ -87,7 +87,6 @@ function Search() {
                     <h3>검색 결과가 없습니다.</h3>
                   </NotResultContainer>
                 </>
-
               ) : (
                 <>
                   <SearchUserContainer>
@@ -170,11 +169,6 @@ const SearchUserContainer = styled.div`
   padding: 1.25rem 1.5625rem 0rem 1.5625rem;
   z-index: -1;
   overflow: auto;
-
-  ::-webkit-scrollbar {
-    width: 0.1em;
-    height: 0.1em;
-  }
 `;
 
 const NotResultContainer = styled.div`
@@ -183,8 +177,8 @@ const NotResultContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-`
+`;
 
 const StNotResultSvg = styled(NotResult)`
   width: 250px;
-`
+`;

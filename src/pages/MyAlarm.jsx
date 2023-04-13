@@ -107,9 +107,4 @@ const MyAlarmContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   overflow: auto;
-
-  ::-webkit-scrollbar {
-    width: 0.1em;
-    height: 0.1em;
-  }
 `;
