@@ -26,6 +26,10 @@ function ClipPlay() {
     (state) => state?.gettingClipDetail?.clip?.result
   );
   const likeData = useSelector((state) => state.likingClip?.clip);
+  const ClipDetail = useSelector(
+    (state) => state?.gettingClipDetail?.clip?.totalCommentCount
+  );
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(__getClipDetail(id));
@@ -155,7 +159,7 @@ function ClipPlay() {
             <BiComment size={20} />
           </div>
           <span>댓글</span>
-          <ClipplayCommentCount>3</ClipplayCommentCount>
+          <ClipplayCommentCount>{ClipDetail}</ClipplayCommentCount>
         </ClipplayComment>
       </ClipplayContent>
     </>

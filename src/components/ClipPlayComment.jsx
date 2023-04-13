@@ -57,9 +57,6 @@ function ClipPlayComment() {
       <ClipplayCommentBox isVisible={isVisible}>
         <ClipplayCommentTitle>
           <span>댓글 </span>
-          <ClipplayCommentCount>
-            {commentlist?.comment[0]?.metadata?.audioClipCount}
-          </ClipplayCommentCount>
         </ClipplayCommentTitle>
         <div>
           <ClipplayInputTitle>
