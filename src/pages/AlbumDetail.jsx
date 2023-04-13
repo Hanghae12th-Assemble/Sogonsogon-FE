@@ -299,7 +299,7 @@ const AlbumDetailPgIntroContainer = styled.div`
 const ExpandButtonContainer = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1.0625rem;
+  font-size: 0.9375rem;
   width: fit-content;
   margin: 0.4375rem auto auto auto;
   background-color: transparent;
