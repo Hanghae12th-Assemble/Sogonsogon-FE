@@ -29,7 +29,7 @@ function RadioUserContainer({ props }) {
           <SearchUserContentLayout>
             {" "}
             <SearchUserMembernameLayout>
-              {props.membername}
+              @{props.membername}
             </SearchUserMembernameLayout>
             <SearchUserMembernameLayout>
               <CenterLine />
@@ -56,8 +56,6 @@ const SearchUserLayout = styled(Link)`
 const RadioPreviewProfileImg = styled.div`
   min-width: 4.375rem;
   min-height: 4.375rem;
-  overflow: hidden;
-  position: relative;
   background-color: #393b3a6e;
   border-radius: 100%;
   margin: 0rem 1.25rem 0rem 1.25rem;
@@ -94,6 +92,7 @@ const SearchUserContentLayout = styled.div`
 
 const SearchUserMembernameLayout = styled.div`
   width: fit-content;
+  font-weight: 600;
   min-height: 1.5625rem;
   font-size: 0.9375rem;
   display: flex;
@@ -110,7 +109,8 @@ const CenterLine = styled.div`
 
 const SearchUserDescLayout = styled.div`
   min-height: 1.5625rem;
-  font-size: 0.75rem;
+  font-size: .9375rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
   color: #1a1919b3;
