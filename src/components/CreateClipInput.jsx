@@ -67,8 +67,8 @@ function CreateClipInputs({
       formState === "create"
         ? await dispatch(__createCip({ clipInfo: formData, audioablumId: id }))
         : await dispatch(
-            __updateClip({ clipInfo: formData, audioablumId: id })
-          );
+          __updateClip({ clipInfo: formData, audioablumId: id })
+        );
 
     if (action.payload && action.payload >= 200 && action.payload < 300) {
       navigate(-1);
@@ -175,8 +175,8 @@ const CrFileInput = styled.input`
     font-weight: bold;
     cursor: pointer;
     &:hover {
-      background-color: #262626;
-      color: white;
+      background-color: ${({ theme }) => theme.color.softBlack_col};
+      color: ${({ theme }) => theme.color.white_col};
     }
   }
 `;

@@ -204,7 +204,7 @@ const LnbLayout = styled.div`
   top: -2.5rem;
   left: 0;
   height: 100%;
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.white_col};
   z-index: 999;
   margin-top: 2.5rem;
   animation: ${({ isOpen }) =>
@@ -227,7 +227,7 @@ const LnbNotificationsOn = styled(NotificationsOn)`
 const LnbNotifications = styled(Notifications)`
   width: 1.75rem;
   cursor: pointer;
-  color: #77756f;
+  color: ${({ theme }) => theme.color.darkGray_col};
 `;
 
 const LnbMenuLayout = styled.div`
@@ -245,7 +245,7 @@ const LnbMenuLayout = styled.div`
     margin-bottom: 0.625rem;
     display: flex;
     align-items: flex-start;
-    color: #333;
+    color: ${({ theme }) => theme.color.softBlack_col};
   }
   span {
     width: 1.25rem;
@@ -266,7 +266,7 @@ const LoginTrueFalseContainer = styled.div`
   p {
     font-size: 1.5625rem;
     font-weight: 500;
-    text-decoration: underline 0.3125rem #ffc37c;
+    text-decoration: underline 0.3125rem ${({ theme }) => theme.color.softOrange_col};
   }
   div {
     font-size: 1.25rem;
@@ -280,7 +280,7 @@ const LoginHiLayout = styled.div`
   padding: 0rem 0rem 0rem 1.5625rem;
   display: flex;
   align-items: center;
-  color: grey;
+  color: ${({ theme }) => theme.color.darkGray_col};
   font-size: 0.875rem;
 `;
 
@@ -289,7 +289,7 @@ const LogoutBtnLayout = styled.div`
   width: 3.375rem;
   height: 1.0625rem;
   font-size: 0.8125rem;
-  color: grey;
+  color: ${({ theme }) => theme.color.darkGray_col};
   cursor: pointer;
 `;
 
@@ -298,7 +298,7 @@ const LnbBlackBackGround = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.8);
   opacity: 0.7;
   z-index: 995;
   top: 0;
@@ -318,7 +318,7 @@ const MyAlbumBtn = styled.div`
     margin-bottom: 0.625rem;
     display: flex;
     align-items: flex-start;
-    color: #333;
+    color: ${({ theme }) => theme.color.softBlack_col};
   }
   span {
     width: 1.25rem;

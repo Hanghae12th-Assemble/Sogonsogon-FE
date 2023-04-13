@@ -153,8 +153,8 @@ const ClipplayCommentBox = styled.div`
   left: 0;
   right: 0;
   z-index: 1;
-  background-color: white;
-  color: black;
+  background-color: ${({ theme }) => theme.color.white_col};
+  color: ${({ theme }) => theme.color.softBlack_col};
   padding: 0 1.875rem;
   transform: translateY(${({ isVisible }) => (isVisible ? "0" : "100%")});
   ${({ isVisible }) =>
@@ -175,11 +175,6 @@ const ClipplayCommentTitle = styled.div`
   font-size: 1.25rem;
   font-weight: bolder;
   margin-top: 3.125rem;
-`;
-
-const ClipplayCommentCount = styled.span`
-  color: #ff9900;
-  margin-left: 0.625rem;
 `;
 
 const ClipplayInputTitle = styled.div`

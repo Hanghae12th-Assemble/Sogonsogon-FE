@@ -60,7 +60,7 @@ const ClipplayCommentContainner = styled.div`
 const ClipplayCommentNameDateBox = styled.div`
   margin-bottom: 0.9375rem;
   span {
-    color: #77756f;
+    color: ${({ theme }) => theme.color.darkGray_col};
   }
 `;
 
@@ -69,7 +69,7 @@ const ClipplayCommentBoxText = styled.div`
   align-items: center;
   font-size: 0.9375rem;
   p {
-    color: #77756f;
+    color: ${({ theme }) => theme.color.darkGray_col};
   }
 `;
 

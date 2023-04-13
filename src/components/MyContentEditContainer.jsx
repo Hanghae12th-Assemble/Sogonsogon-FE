@@ -59,7 +59,7 @@ const MyEditContainer = styled.div`
   align-items: center;
   width: 100%;
   min-height: 3.75rem;
-  border-bottom: 0.0625rem solid #f0efed;
+  border-bottom: 0.0625rem solid ${({ theme }) => theme.color.softGray_col};
   padding: 0rem 1.875rem 0rem 1.875rem;
 `;
 
@@ -67,23 +67,23 @@ const EditContainerLeftLayout = styled.div`
   display: flex;
   flex-direction: row;
   p {
-    color: #a5a29c;
+    color: ${({ theme }) => theme.color.darkGray_col};
   }
 `;
 
 const MyEditLayout = styled.div`
-  color: #a7a49e;
+  color:${({ theme }) => theme.color.darkGray_col};
   cursor: pointer;
 `;
 
 const MyDoneLayout = styled.div`
-  color: #ff9900;
+  color: ${({ theme }) => theme.color.orange_col};
   cursor: pointer;
 `;
 
 const StFrontSubstance = styled.div`
   margin-right: 0.3125rem;
-  color: black;
+  color: ${({ theme }) => theme.color.softBlack_col};
   font-weight: 600;
   font-size: ${({ frontSubstance }) =>
     frontSubstance === "클립" ? "1.25rem" : "1rem"};
@@ -94,7 +94,7 @@ const StContentCount = styled.span`
   align-items: center;
   font-size: ${({ frontSubstance }) =>
     frontSubstance === "클립" ? "1.25rem" : "1rem"};
-  color: ${({ frontSubstance }) => (frontSubstance ? "#ff9900" : "black")};
+  color: ${({ frontSubstance }) => (frontSubstance ? "#ff9900" : "#262524")};
 `;
 
 const StContentSlectedCount = styled.div`

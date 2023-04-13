@@ -31,7 +31,7 @@ export default AlarmList;
 const MyAlarmLayout = styled.div`
   width: 31.25rem;
   background-color: ${({ isRead }) => (isRead ? "none" : "#fffaf1")};
-  border-bottom: 0.0625rem solid #f0efed;
+  border-bottom: 0.0625rem solid ${({ theme }) => theme.color.softGray_col};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -44,7 +44,7 @@ const MyAlarmProfileImg = styled.div`
   min-height: 4.375rem;
   overflow: hidden;
   position: relative;
-  background-color: #393b3a6e;
+  background-color: ${({ theme }) => theme.color.softGray_col};
   border-radius: 100%;
   margin: 0rem 1.25rem 0rem 0.625rem;
   background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};

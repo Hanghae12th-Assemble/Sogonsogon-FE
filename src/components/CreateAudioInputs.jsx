@@ -153,14 +153,14 @@ const CrFileInput = styled.input`
   ::file-selector-button {
     width: 23.125rem;
     height: 3rem;
-    background: #f1f2f6;
+    background: ${({ theme }) => theme.color.darkWhite_col};
     border-radius: 0.625rem;
     border: none;
     font-weight: bold;
     cursor: pointer;
     &:hover {
       background-color: #262626;
-      color: white;
+      color: ${({ theme }) => theme.color.white_col};
     }
   }
 `;

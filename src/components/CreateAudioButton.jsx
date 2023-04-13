@@ -83,7 +83,7 @@ const CrRadioButtonSpanBox = styled.div`
 
 const CrRadioButton = styled(Button)`
   margin-right: 0.625rem;
-  background-color: ${(props) => (props.isSelected ? "#262626" : "#f1f2f6")};
+  background-color: ${(props) => (props.isSelected ? "#262626" : "#F0EFED")};
   color: ${(props) => (props.isSelected ? "white" : "black")};
 `;
 

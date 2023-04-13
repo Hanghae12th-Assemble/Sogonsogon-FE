@@ -76,7 +76,7 @@ const AudioCilpImg = styled.div`
   min-width: 4.6875rem;
   max-height: 4.6875rem;
   position: relative;
-  background-color: #393b3a6e;
+  background-color: ${({ theme }) => theme.color.darkGray_col};
   border-radius: 0.625rem;
   margin: 0rem 0.9375rem 0rem 0.9375rem;
   background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
@@ -126,7 +126,7 @@ const AllClicpsHeartContianer = styled.div`
   div {
     margin: 0rem 0.4375rem 0rem 0rem;
     font-size: 1.0625rem;
-    color: #77756f;
+    color: ${({ theme }) => theme.color.darkGray_col};
   }
 `;
 
@@ -136,7 +136,7 @@ const AllClipsDottedLine = styled.div`
   top: 1.25rem;
   width: 0.0625rem;
   height: 8.75rem;
-  border: 0.0625rem dotted #77756f;
+  border: 0.0625rem dotted ${({ theme }) => theme.color.darkGray_col};
 `;
 
 const AllClipsDotted = styled.div`
@@ -146,7 +146,7 @@ const AllClipsDotted = styled.div`
   width: 0.375rem;
   height: 0.375rem;
   border-radius: 100%;
-  background-color: #77756f;
+  background-color: ${({ theme }) => theme.color.darkGray_col};
 `;
 
 const AllClipsDotted2 = styled.div`
@@ -156,7 +156,7 @@ const AllClipsDotted2 = styled.div`
   width: 0.375rem;
   height: 0.375rem;
   border-radius: 100%;
-  background-color: #77756f;
+  background-color: ${({ theme }) => theme.color.darkGray_col};
 `;
 
 const AllCilpsMiniBox = styled.div`
@@ -171,8 +171,8 @@ const AllClipsEpisodeLayout = styled.div`
   display: flex;
   align-items: center;
   font-size: 0.8125rem;
-  color: #ff9900;
-  background-color: #fff5e3;
+  color: ${({ theme }) => theme.color.orange_col};
+  background-color: ${({ theme }) => theme.color.softOrange_col};
 `;
 
 const StEditSvg = styled(Edit)`
@@ -181,16 +181,16 @@ const StEditSvg = styled(Edit)`
   right: 1.5625rem;
   top: 3.25rem;
   cursor: pointer;
-  stroke: #ff9900;
+  stroke: ${({ theme }) => theme.color.orange_col};
 `;
 
 const StAiOutlineHeart = styled(AiOutlineHeart)`
-  color: #77756f;
+  color: ${({ theme }) => theme.color.darkGray_col};
   margin-right: 0.3125rem;
 `;
 
 const StAiFillHeart = styled(AiFillHeart)`
-  color: #ff9900;
+  color: ${({ theme }) => theme.color.orange_col};
   margin-right: 0.3125rem;
 `;
 
