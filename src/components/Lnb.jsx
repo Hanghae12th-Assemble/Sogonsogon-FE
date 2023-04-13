@@ -191,7 +191,7 @@ export default Lnb;
 
 const slideIn = keyframes`
   0% {
-    width: 0;
+    width: 10.625rem;
   }
   100% {
     width: 21.875rem;
@@ -266,7 +266,8 @@ const LoginTrueFalseContainer = styled.div`
   p {
     font-size: 1.5625rem;
     font-weight: 500;
-    text-decoration: underline 0.3125rem ${({ theme }) => theme.color.softOrange_col};
+    text-decoration: underline 0.3125rem
+      ${({ theme }) => theme.color.softOrange_col};
   }
   div {
     font-size: 1.25rem;
