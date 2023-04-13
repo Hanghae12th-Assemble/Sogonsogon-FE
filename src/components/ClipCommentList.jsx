@@ -33,7 +33,7 @@ function ClipCommentList({ props, title, id }) {
           <p>{title}</p>
         </ClipplayCommentBoxText>
         <ClipplayCommentBoxBtn>
-          {props?.membername === user?.userName &&
+          {props?.membername === user?.userName && (
             <>
               <ClipplayCommentModiRemove>
                 <span onClick={() => ModifyCommnet(id)}>수정</span>
@@ -42,8 +42,7 @@ function ClipCommentList({ props, title, id }) {
                 <span onClick={() => removeComment(id)}>삭제</span>
               </ClipplayCommentModiRemove>
             </>
-          }
-
+          )}
         </ClipplayCommentBoxBtn>
       </ClipplayCommentContainner>
     </>
@@ -82,14 +81,13 @@ const ClipplayPhoto = styled.img`
 `;
 
 const ClipplayCommentBoxBtn = styled.div`
-  //border: 1px solid red;
   display: flex;
   justify-content: flex-end;
-  padding: 0 20px;
+  padding: 0 1.25rem;
 `;
 
 const ClipplayCommentModiRemove = styled.div`
-  margin-left: 20px;
+  margin-left: 1.25rem;
   span {
     cursor: pointer;
   }

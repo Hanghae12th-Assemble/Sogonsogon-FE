@@ -172,7 +172,7 @@ const SearchUserContainer = styled.div`
 `;
 
 const NotResultContainer = styled.div`
-  margin: 40px;
+  margin: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -180,5 +180,5 @@ const NotResultContainer = styled.div`
 `;
 
 const StNotResultSvg = styled(NotResult)`
-  width: 250px;
+  width: 15.625rem;
 `;

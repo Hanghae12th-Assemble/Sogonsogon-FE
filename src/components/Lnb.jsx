@@ -194,10 +194,9 @@ const slideIn = keyframes`
     width: 0;
   }
   100% {
-    width: 350px;
+    width: 21.875rem;
   }
 `;
-
 
 const LnbLayout = styled.div`
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
@@ -208,10 +207,12 @@ const LnbLayout = styled.div`
   background-color: white;
   z-index: 999;
   margin-top: 2.5rem;
-  animation: ${({ isOpen }) => isOpen && css`${slideIn} 0.25s ease-in-out forwards`};
+  animation: ${({ isOpen }) =>
+    isOpen &&
+    css`
+      ${slideIn} 0.25s ease-in-out forwards
+    `};
 `;
-
-
 
 const LnbAlarmBtnContainer = styled.div`
   width: fit-content;

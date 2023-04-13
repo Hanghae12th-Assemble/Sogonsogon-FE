@@ -165,7 +165,7 @@ const ProfileContainer = styled.div`
 `;
 
 const ProfileNavbarfixed = styled.div`
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.white_col};
   position: fixed;
   width: 28.75rem; ;
 `;
@@ -254,14 +254,14 @@ const ProfileFileInput = styled.input`
   ::file-selector-button {
     width: 23.125rem;
     height: 3rem;
-    background: #f1f2f6;
+    background: ${({ theme }) => theme.color.gray_col};
     border-radius: 0.625rem;
     border: none;
     font-weight: bold;
     cursor: pointer;
     &:hover {
-      background-color: #262626;
-      color: white;
+      background-color: ${({ theme }) => theme.color.softBlack_col};
+      color: ${({ theme }) => theme.color.white_col};
     }
   }
 `;
