@@ -79,7 +79,7 @@ function AlbumList({ editClicked, state, setState, selectedContent, data }) {
 export default AlbumList;
 
 const MyAlbumLayout = styled.div`
-  border-bottom: 0.0625rem solid #f0efed;
+  border-bottom: 0.0625rem solid ${({ theme }) => theme.color.softGray_col};
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -102,7 +102,7 @@ const MyAlbumImg = styled.div`
   min-width: 4.6875rem;
   max-height: 4.6875rem;
   position: relative;
-  background-color: #393b3a6e;
+  background-color: ${({ theme }) => theme.color.softGray_col};
   border-radius: 0.625rem;
   margin: 0rem 1.25rem 0rem 0.625rem;
   background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
@@ -132,7 +132,7 @@ const MyAlbumHeartContianer = styled.div`
   div {
     margin-left: 0.3125rem;
     font-size: 0.9375rem;
-    color: #77756f;
+    color: ${({ theme }) => theme.color.darkGray_col};
   }
 `;
 const MyAlbumTitleLayout = styled.div`
@@ -141,7 +141,7 @@ const MyAlbumTitleLayout = styled.div`
 `;
 const MyAlbumDateLayout = styled.div`
   font-size: 0.875rem;
-  color: #77756f;
+  color: ${({ theme }) => theme.color.darkGray_col};
   margin: 0.5rem 0rem 0.625rem 0rem;
 `;
 const StIconSvg = styled.div`
@@ -149,11 +149,11 @@ const StIconSvg = styled.div`
 `;
 
 const StAiOutlineHeart = styled(AiOutlineHeart)`
-  color: #77756f;
+  color: ${({ theme }) => theme.color.darkGray_col};
   margin-right: 0.3125rem;
 `;
 
 const StAiFillHeart = styled(AiFillHeart)`
-  color: #ff9900;
+  color: ${({ theme }) => theme.color.orange_col};
   margin-right: 0.3125rem;
 `;

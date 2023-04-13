@@ -31,6 +31,6 @@ const RadioCountLayout = styled.div`
   }
   p {
     margin-left: 0.4375rem;
-    color: #f98c01;
+    color: ${({ theme }) => theme.color.orange_col};
   }
 `;

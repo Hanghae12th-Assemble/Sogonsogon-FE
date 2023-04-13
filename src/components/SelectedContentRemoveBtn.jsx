@@ -48,7 +48,7 @@ const SelectedBtn = styled.button`
   height: 5rem;
   font-size: 1.125rem;
   border: none;
-  background-color: #ff9900;
-  color: white;
+  background-color:  ${({ theme }) => theme.color.orange_col};
+  color: ${({ theme }) => theme.color.white_col};
   cursor: pointer;
 `;
