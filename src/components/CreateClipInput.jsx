@@ -98,7 +98,7 @@ function CreateClipInputs({
           </CrRadioPublicScopButton>
         </CrRadioButtonSpanBox>
         <CrRadioButtonSpanBox>
-          <span>클립 소개</span>
+          <span>클립 소개 *</span>
           <CrRadioPublicScopButton>
             <Input
               register={register}
@@ -113,7 +113,7 @@ function CreateClipInputs({
           </CrRadioPublicScopButton>
         </CrRadioButtonSpanBox>
         <CrRadioButtonSpanBox>
-          <span>오디오 업로드</span>
+          <span>오디오 업로드 *</span>
           <CrRadioPublicScopButton>
             <CrFileInput
               type="file"
@@ -121,7 +121,7 @@ function CreateClipInputs({
               onChange={handleFileChange}
             />
           </CrRadioPublicScopButton>
-          <span>대표 이미지</span>
+          <span>대표 이미지 *</span>
           <CrRadioPublicScopButton>
             <CrFileInput type="file" accept="image/*" onChange={onChangeimge} />
           </CrRadioPublicScopButton>
