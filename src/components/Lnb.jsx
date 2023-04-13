@@ -191,7 +191,7 @@ export default Lnb;
 
 const slideIn = keyframes`
   0% {
-    width: 10.625rem;
+    width: 12.5rem
   }
   100% {
     width: 21.875rem;
