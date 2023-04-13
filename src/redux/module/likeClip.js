@@ -3,11 +3,11 @@ import Axios from '../../util/api/axios';
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __removeClip = createAsyncThunk('removeClip', async (audioclipId, thunkAPI) => {
+export const __likeClip = createAsyncThunk('likeClip', async (audioclipId, thunkAPI) => {
     return await axios
-        .delete(`api/audioclip/deleted/${audioclipId}`)
+        .post(`api/audioclip/like/${audioclipId}`, {})
         .then((response) => thunkAPI.fulfillWithValue(response.data))
-        .catch((error) => alert(error && '없는 클립 이거나, 클립 생성자가 아닙니다.'));
+        .catch((error) => alert(error && '클립 좋아요에 실패하였습니다.'));
 });
 
 const initialState = {
@@ -16,25 +16,25 @@ const initialState = {
     error: null,
 };
 
-const removeClip = createSlice({
-    name: 'removeClip',
+const likeClip = createSlice({
+    name: 'likeClip',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(__removeClip.pending, (state) => {
+        builder.addCase(__likeClip.pending, (state) => {
             state.isLoading = true;
             state.error = null;
         });
-        builder.addCase(__removeClip.fulfilled, (state, action) => {
+        builder.addCase(__likeClip.fulfilled, (state, action) => {
             state.isLoading = false;
             state.clip = action.payload;
             state.error = null;
         });
-        builder.addCase(__removeClip.rejected, (state, action) => {
+        builder.addCase(__likeClip.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.payload;
         });
     },
 });
 
-export default removeClip;
+export default likeClip;

@@ -8,10 +8,8 @@ export const __siginup = createAsyncThunk(
   async (siginupInfo, thunkAPI) => {
     return await axios
       .post("api/member/signup", siginupInfo)
-      .then((response) => alert(response && "회원가입에 성공하였습니다."))
-      .catch((error) =>
-        alert(error && "중복되는 아이디 또는 이메일이 존재합니다.")
-      );
+      .then((response) => response.data.statusCode)
+      .catch((error) => thunkAPI.rejectWithValue(error.response));
   }
 );
 

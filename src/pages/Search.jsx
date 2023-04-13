@@ -12,6 +12,7 @@ import { addSearchHistory } from "../util/getUpdatedHistory";
 import SearchTap from "../components/SearchTap";
 import { StRadioContainer } from "../pages/Home";
 import { getLocalStorage } from "../util/localStorage";
+import { ReactComponent as NotResult } from "../asset/icon/notresult.svg";
 
 function Search() {
   const [isSearch, setIsSearch] = useState(false);
@@ -80,7 +81,13 @@ function Search() {
           {sort ? (
             <>
               {user?.data?.length === 0 ? (
-                <div>검색 결과가 없습니다. </div>
+                <>
+                  <NotResultContainer>
+                    <StNotResultSvg />
+                    <h3>검색 결과가 없습니다.</h3>
+                  </NotResultContainer>
+                </>
+
               ) : (
                 <>
                   <SearchUserContainer>
@@ -95,7 +102,12 @@ function Search() {
             <>
               {" "}
               {live?.data?.length === 0 ? (
-                <div>검색 결과가 없습니다.</div>
+                <>
+                  <NotResultContainer>
+                    <StNotResultSvg />
+                    <h3>검색 결과가 없습니다.</h3>
+                  </NotResultContainer>
+                </>
               ) : (
                 <>
                   <StRadioContainer>
@@ -129,20 +141,20 @@ const SearchbarBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 0px 30px;
+  padding: 0rem 1.875rem;
   min-height: 3.125rem;
   margin-top: 2.5rem;
 `;
 
 const SearchInput = styled.input`
-  width: 350px;
-  height: 35px;
-  padding-left: 55px;
-  border-radius: 15px;
-  margin-left: 20px;
-  font-size: 16px;
+  width: 23.75rem;
+  height: 2.1875rem;
+  padding-left: 3.4375rem;
+  border-radius: 0.9375rem;
+  margin-left: 1.25rem;
+  font-size: 1rem;
   background: url("https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-256.png")
-    12px center / contain no-repeat #f9f9fa;
+    0.75rem center / contain no-repeat #f9f9fa;
   border: none;
   outline: none;
 `;
@@ -154,8 +166,8 @@ const SearchUserContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  grid-gap: 20px;
-  padding: 20px 25px 0px 25px;
+  grid-gap: 1.25rem;
+  padding: 1.25rem 1.5625rem 0rem 1.5625rem;
   z-index: -1;
   overflow: auto;
 
@@ -164,3 +176,15 @@ const SearchUserContainer = styled.div`
     height: 0.1em;
   }
 `;
+
+const NotResultContainer = styled.div`
+  margin: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`
+
+const StNotResultSvg = styled(NotResult)`
+  width: 250px;
+`

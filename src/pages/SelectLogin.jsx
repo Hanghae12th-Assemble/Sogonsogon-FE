@@ -5,6 +5,7 @@ import Button from "../elements/Button";
 import { KAKAO_AUTH_URL } from "../constants/social";
 import { NAVER_AUTH_URL } from "../constants/social";
 import { ReactComponent as Logosymbol } from "../asset/logo/logosymbol.svg";
+import isLogin from "../util/checkCookie";
 
 function Login() {
   const navigate = useNavigate();
@@ -16,7 +17,10 @@ function Login() {
   };
 
   useEffect(() => {
-    alert("소셜 로그인 꼭! 전부 동의 해주세요. ");
+    if (isLogin() === true) {
+      alert("이미 로그인 하였습니다.");
+      navigate("/");
+    }
   }, []);
 
   return (
@@ -59,14 +63,6 @@ function Login() {
             <LoginSpanText>
               <div
                 onClick={() => {
-                  document.startViewTransition(() => navigate("/"));
-                }}
-              >
-                통합 회원정보 찾기
-              </div>{" "}
-              /{" "}
-              <div
-                onClick={() => {
                   document.startViewTransition(() => navigate("/signup"));
                 }}
               >
@@ -83,18 +79,15 @@ function Login() {
 export default Login;
 
 const LoginBox = styled.div`
-  //border: 1px solid black;
   height: 100%;
 `;
 
 const LoginContainer = styled.div`
-  //border: 1px solid black;
   height: 100%;
   overflow: auto;
 `;
 
 const LoginLogoBox = styled.div`
-  //border: 1px solid black;
   width: 100%;
   height: 18.75rem;
   display: flex;
@@ -103,7 +96,6 @@ const LoginLogoBox = styled.div`
 `;
 
 const LoginButtonBox = styled.div`
-  //border: 1px solid red;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -112,24 +104,20 @@ const LoginButtonBox = styled.div`
 `;
 
 const LoginButtonDiv = styled.div`
-  //border: 1px solid red;
   margin-top: 1.25rem;
 `;
 
 const LoginSpanDiv = styled.div`
-  //border: 1px solid red;
   margin-top: 3.125rem;
   cursor: pointer;
 `;
 const LoginSpanText = styled.span`
-  //border: 1px solid red;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 11.25rem;
 `;
 
 const LoginBackSpan = styled.div`
-  //border: 1px solid black;
   margin-top: 1.875rem;
   display: flex;
   justify-content: flex-end;
@@ -140,5 +128,5 @@ const LoginBackSpan = styled.div`
 `;
 
 const LoginLogo = styled(Logosymbol)`
-  width: 300px;
+  width: 18.75rem;
 `;

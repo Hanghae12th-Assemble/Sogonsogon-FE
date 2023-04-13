@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "../util/api/axios";
+import Loading from "../components/Loading";
 
 function NaverRedirect() {
   const navigate = useNavigate();
@@ -31,12 +32,7 @@ function NaverRedirect() {
     }
   };
 
-  return (
-    <div>
-      <h1>Loading...</h1>
-    </div>
-  );
-  return <div>NaverRedirect</div>;
+  return <Loading />;
 }
 
 export default NaverRedirect;

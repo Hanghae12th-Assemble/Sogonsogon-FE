@@ -18,6 +18,8 @@ import ClipList from "../components/ClipList";
 import { useDispatch, useSelector } from "react-redux";
 import { __getAlbumDetail } from "../redux/module/getAlbumDetail";
 import { __likeAlbum } from "../redux/module/likeAlbum";
+import { useThrottledCallback } from "../hooks/useThrottledCallback";
+import isLogin from "../util/checkCookie";
 
 function AlbumDetail() {
   const { id } = useParams();
@@ -36,11 +38,26 @@ function AlbumDetail() {
     dispatch(__getAlbumDetail(id));
   }, [likingAlbum]);
 
+  useEffect(() => {
+    if (isLogin() === false) {
+      alert("로그인부터 해주세요.");
+      navigate("/selectlogin");
+    }
+  }, []);
+
   const { editClicked, selectedContent, expanded } = state;
 
   const handleClick = () => {
     setState({ ...state, expanded: !expanded });
   };
+
+  const albumLike = useThrottledCallback(
+    () => {
+      dispatch(__likeAlbum(id));
+    },
+    1000,
+    [dispatch, id]
+  );
 
   return (
     <>
@@ -90,21 +107,17 @@ function AlbumDetail() {
                   size={20}
                   color={"ff9900"}
                   cursor={"pointer"}
-                  onClick={() => {
-                    dispatch(__likeAlbum(id));
-                  }}
+                  onClick={albumLike}
                 />
               ) : (
                 <AiOutlineHeart
                   size={20}
                   color={"77756f"}
                   cursor={"pointer"}
-                  onClick={() => {
-                    dispatch(__likeAlbum(id));
-                  }}
+                  onClick={albumLike}
                 />
               )}
-              <div>106</div>
+              <div>{gettingAlbumDetail?.album?.data?.result?.likesCount}</div>
             </AlbumDetailPgHeartContianer>
             {gettingAlbumDetail?.album?.data?.result?.mine === true ? (
               <Button
@@ -144,7 +157,9 @@ function AlbumDetail() {
         <AlbumDetailPgClipInfo>
           <ClipInfoLeftLayout>
             <ClipInfoLeftSubstance>클립</ClipInfoLeftSubstance>
-            <StContentCount>{gettingAlbumDetail?.album?.data?.metadata?.audioClipCount}</StContentCount>
+            <StContentCount>
+              {gettingAlbumDetail?.album?.data?.metadata?.audioClipCount}
+            </StContentCount>
           </ClipInfoLeftLayout>
           <StAllViewLayout
             onClick={() => {
@@ -176,7 +191,7 @@ function AlbumDetail() {
 export default AlbumDetail;
 
 const StEditSvg = styled(Edit)`
-  width: 25px;
+  width: 1.5625rem;
 `;
 
 const AlbumDetailPgContainer = styled.div`
@@ -194,17 +209,15 @@ const AlbumDetailPgContainer = styled.div`
 `;
 
 const AlbumDetailPgDescContainer = styled.div`
-  /* border: 1px solid black; */
-
   width: 100%;
   min-height: ${(props) => (props.expanded ? "520px" : "auto")};
-  padding: 15px 35px 0px 35px;
+  padding: 0.9375rem 2.1875rem 0rem 2.1875rem;
 `;
 const AlbumDetailPgImg = styled.div`
-  width: 210px;
-  height: 210px;
+  width: 13.125rem;
+  height: 13.125rem;
   background-color: #393b3a6e;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   margin: auto;
   background-image: ${({ backgroundImageUrl }) => `url(${backgroundImageUrl})`};
   background-repeat: no-repeat;
@@ -213,20 +226,19 @@ const AlbumDetailPgImg = styled.div`
   transition: all 0.5s ease-in-out 0s;
   :hover {
     transform: scale(1);
-    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0rem 0rem 0.3125rem 0.125rem rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease-in-out 0s;
   }
 `;
 
 const AlbumDetailPgDescLayout = styled.div`
-  /* border: 1px solid black; */
   position: relative;
-  margin-top: 25px;
+  margin-top: 1.5625rem;
   width: 100%;
 `;
 const AlbumDetailPgTitleLayout = styled.div`
   width: 100%;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: bold;
 `;
 const AlbumDetailPgNameLayout = styled.div`
@@ -234,16 +246,16 @@ const AlbumDetailPgNameLayout = styled.div`
   width: fit-content;
   display: flex;
   align-items: center;
-  margin: 11px 0px;
+  margin: 0.6875rem 0rem;
   p {
-    margin-right: 3px;
+    margin-right: 0.1875rem;
   }
 `;
 
 const AlbumDetailPgDateLayout = styled.div`
   width: fit-content;
-  font-size: 15px;
-  margin-bottom: 11px;
+  font-size: 0.9375rem;
+  margin-bottom: 0.6875rem;
   color: #77756f;
 `;
 const AlbumDetailPgHeartContianer = styled.div`
@@ -252,18 +264,18 @@ const AlbumDetailPgHeartContianer = styled.div`
   align-items: center;
   width: fit-content;
   div {
-    margin-left: 5px;
-    font-size: 15px;
+    margin-left: 0.3125rem;
+    font-size: 0.9375rem;
     color: #77756f;
   }
 `;
 
 const AlbumDetailPgIntroContainer = styled.div`
   width: 100%;
-  min-height: 130px;
-  margin-top: 20px;
-  border-radius: 10px;
-  padding: 20px;
+  min-height: 8.125rem;
+  margin-top: 1.25rem;
+  border-radius: 0.625rem;
+  padding: 1.25rem;
   background-color: #f8f7f6;
   display: flex;
   flex-direction: column;
@@ -274,27 +286,27 @@ const AlbumDetailPgIntroContainer = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: ${(props) => (props.expanded ? "3" : "")};
     -webkit-box-orient: vertical;
-    font-size: 16px;
-    line-height: 22px;
+    font-size: 1rem;
+    line-height: 1.375rem;
     color: #77756f;
   }
   p {
-    font-size: 17px;
+    font-size: 1.0625rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
   }
 `;
 const ExpandButtonContainer = styled.div`
   display: flex;
   align-items: center;
-  font-size: 17px;
+  font-size: 0.9375rem;
   width: fit-content;
-  margin: 7px auto auto auto;
+  margin: 0.4375rem auto auto auto;
   background-color: transparent;
   color: #77756f;
   cursor: pointer;
   div {
-    margin-right: 7px;
+    margin-right: 0.4375rem;
   }
 `;
 
@@ -302,10 +314,10 @@ const AlbumDetailPgClipInfo = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 1.25rem;
   width: 100%;
-  min-height: 60px;
-  padding: 0px 35px 0px 35px;
+  min-height: 3.75rem;
+  padding: 0rem 2.1875rem 0rem 2.1875rem;
 `;
 
 const ClipInfoLeftLayout = styled.div`
@@ -314,15 +326,15 @@ const ClipInfoLeftLayout = styled.div`
 `;
 
 const ClipInfoLeftSubstance = styled.div`
-  margin-right: 5px;
+  margin-right: 0.3125rem;
   color: black;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 1.25rem;
 `;
 const StContentCount = styled.span`
   display: flex;
   align-items: center;
-  font-size: 20px;
+  font-size: 1.25rem;
   color: #ff9900;
 `;
 const StAllViewLayout = styled.span`

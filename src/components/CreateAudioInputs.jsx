@@ -65,7 +65,7 @@ function CreateRadioInputs({
         : await dispatch(__updateAlbum({ albumInfo: formData, albumId: id }));
 
     if (action.payload && action.payload >= 200 && action.payload < 300) {
-      navigate("/");
+      navigate(-1);
     } else {
       alert("본인 엘범이 아니거나 중복된 앨범입니다.");
     }
@@ -92,7 +92,7 @@ function CreateRadioInputs({
           </CrRadioPublicScopButton>
         </CrRadioButtonSpanBox>
         <CrRadioButtonSpanBox>
-          <span>앨범 소개</span>
+          <span>앨범 소개 *</span>
           <CrRadioPublicScopButton>
             <Input
               register={register}
@@ -107,7 +107,7 @@ function CreateRadioInputs({
           </CrRadioPublicScopButton>
         </CrRadioButtonSpanBox>
         <CrRadioButtonSpanBox>
-          <span>이미지</span>
+          <span>이미지 *</span>
           <CrRadioPublicScopButton>
             <CrFileInput type="file" accept="image/*" onChange={onChangeimge} />
           </CrRadioPublicScopButton>
@@ -136,20 +136,20 @@ function CreateRadioInputs({
 export default CreateRadioInputs;
 
 const CrRadioButtonSpanBox = styled.div`
-  margin-top: 40px;
+  margin-top: 2.5rem;
 `;
 
 const CrRadioPublicScopButton = styled.div`
-  margin-top: 10px;
+  margin-top: 0.625rem;
 `;
 
 const CrFileInput = styled.input`
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem;
   ::file-selector-button {
-    width: 370px;
-    height: 48px;
+    width: 23.125rem;
+    height: 3rem;
     background: #f1f2f6;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     border: none;
     font-weight: bold;
     cursor: pointer;
@@ -161,18 +161,18 @@ const CrFileInput = styled.input`
 `;
 
 const CrPreviewDiv = styled.div`
-  height: 400px;
+  height: 25rem;
 `;
 
 const CrPreviewDivSpan = styled.div`
-  border: 1px solid black;
-  height: 400px;
-  border-radius: 10px;
+  border: 0.0625rem solid black;
+  height: 25rem;
+  border-radius: 0.625rem;
   display: flex;
   justify-content: center;
   align-items: center;
   span {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: bolder;
   }
 `;
@@ -180,15 +180,15 @@ const CrPreviewDivSpan = styled.div`
 const CrRadioImg = styled.img`
   object-fit: cover;
   width: 100%;
-  height: 400px;
-  border-radius: 10px;
+  height: 25rem;
+  border-radius: 0.625rem;
 `;
 
 const CrRadioButtonNext = styled.div`
-  margin-right: 10px;
-  height: 150px;
+  margin-right: 0.625rem;
+  height: 9.375rem;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 `;

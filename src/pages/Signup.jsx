@@ -8,6 +8,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 import styled from "styled-components";
 import Button from "../elements/Button";
+import { useNavigate } from "react-router";
 
 function Sginup() {
   const dispatch = useDispatch();
@@ -17,21 +18,30 @@ function Sginup() {
     formState: { errors },
     reset,
   } = useForm();
+  const navigate = useNavigate();
 
-  const handleLogin = (data) => {
+  const handleLogin = async (data) => {
     const signupInfo = {
       membername: data.membername,
       password: data.password,
       email: data.email,
       nickname: data.nickname,
     };
-    dispatch(__siginup(signupInfo));
+
+    const action = await dispatch(__siginup(signupInfo));
+
+    if (action.payload && action.payload >= 200 && action.payload < 300) {
+      navigate("/");
+    } else {
+      alert("유저 이름 혹은 이메일이 중복 됩니다.");
+    }
+
     reset();
   };
 
   return (
     <SignupContainer>
-      <SignupNavbarBox>
+      <div>
         <Navbar
           toNavigate={"/selectlogin"}
           iconleft={<AiOutlineArrowLeft size={20} />}
@@ -39,7 +49,7 @@ function Sginup() {
           iconright={<AiOutlineClose size={20} />}
           toClose={"/"}
         />
-      </SignupNavbarBox>
+      </div>
       <SignupForm onSubmit={handleSubmit(handleLogin)}>
         <SignupInputDivBox>
           <SignupInputTitle>
@@ -124,14 +134,10 @@ function Sginup() {
 export default Sginup;
 
 const SignupContainer = styled.div`
-  //border: 1px solid black;
   height: 90%;
 `;
 
-const SignupNavbarBox = styled.div``;
-
 const SignupForm = styled.form`
-  //border: 1px solid red;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -139,17 +145,14 @@ const SignupForm = styled.form`
 `;
 
 const SignupInputDivBox = styled.div`
-  //border: 1px solid black;
   margin-top: 3.125rem;
 `;
 
 const SignupInputTitle = styled.div`
-  //border: 1px solid black;
   margin-bottom: 0.625rem;
 `;
 
 const SignupButton = styled.div`
-  //border: 1px solid black;
   height: 100%;
   display: flex;
   align-items: flex-end;

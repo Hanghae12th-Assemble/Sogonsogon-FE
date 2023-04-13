@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
-import { AiOutlineClose, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaPlay, FaStop } from "react-icons/fa";
 import { BsFastForward, BsRewind } from "react-icons/bs";
 import { BiComment } from "react-icons/bi";
@@ -14,6 +14,8 @@ import { __getClipDetail } from "../redux/module/getClipDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { clickOut } from "../redux/module/reduxState/clickShutDown";
 import { useParams } from "react-router-dom";
+import { __likeClip } from "../redux/module/likeClip";
+import { __getAudioComment } from "../redux/module/getAudioComment";
 
 function ClipPlay() {
   const [playing, setPlaying] = useState(false);
@@ -21,12 +23,18 @@ function ClipPlay() {
   const [duration, setDuration] = useState(0);
   const { id } = useParams();
   const selectBtn = useSelector((state) => state.clickingModal);
-  const clipdata = useSelector((state) => state?.gettingClipDetail?.clip);
+  const clipdata = useSelector(
+    (state) => state?.gettingClipDetail?.clip?.result
+  );
+  const likeData = useSelector((state) => state.likingClip?.clip);
+  const ClipDetail = useSelector(
+    (state) => state?.gettingClipDetail?.clip?.totalCommentCount
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(__getClipDetail(id));
-  }, []);
+  }, [likeData, selectBtn]);
 
   const playerRef = useRef(null);
 
@@ -66,12 +74,16 @@ function ClipPlay() {
     playerRef.current.seekTo(newPlayed * duration);
   };
 
+  const albumClip = () => {
+    dispatch(__likeClip(id));
+  };
+
   return (
     <>
       <BackgroundImage src={clipdata?.audioclipImageUrl} alt="Background" />
       <TransparentLayer />
       <ClipplayContent>
-        <Navbar toNavigate={"/"} iconleft={<AiOutlineClose size={25} />} />
+        <Navbar toNavigate={-1} iconleft={<AiOutlineClose size={25} />} />
         <div>
           <ClipplayTitle>
             <h1>{clipdata?.title}</h1>
@@ -85,7 +97,20 @@ function ClipPlay() {
               <span>{clipdata?.membernickname}</span>
             </ClipplayAuthorProfile>
             <ClipplayLikeCount>
-              <AiOutlineHeart size={30} />
+              {clipdata?.likeCheck === true ? (
+                <AiFillHeart
+                  size={30}
+                  color={"ff9900"}
+                  cursor={"pointer"}
+                  onClick={albumClip}
+                />
+              ) : (
+                <AiOutlineHeart
+                  size={30}
+                  cursor={"pointer"}
+                  onClick={albumClip}
+                />
+              )}
               <span>{clipdata?.isLikeCount}</span>
             </ClipplayLikeCount>
           </ClipplayAuthorLike>
@@ -135,7 +160,7 @@ function ClipPlay() {
             <BiComment size={20} />
           </div>
           <span>댓글</span>
-          <ClipplayCommentCount>3</ClipplayCommentCount>
+          <ClipplayCommentCount>{ClipDetail}</ClipplayCommentCount>
         </ClipplayComment>
       </ClipplayContent>
     </>
@@ -153,7 +178,7 @@ const BackgroundImage = styled.img`
 
 const TransparentLayer = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(1.875rem);
   width: 100%;
   height: 100%;
   top: 0;
@@ -161,7 +186,6 @@ const TransparentLayer = styled.div`
 `;
 
 const ClipplayContent = styled.div`
-  //border: 1px solid red;
   padding: 0 1.25rem;
   z-index: 2;
   color: white;
@@ -170,7 +194,6 @@ const ClipplayContent = styled.div`
 `;
 
 const ClipplayTitle = styled.div`
-  //border: 1px solid red;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,7 +210,7 @@ const ClipplayAuthorProfile = styled.div`
   display: flex;
   align-items: center;
   span {
-    font-size: 17px;
+    font-size: 1.0625rem;
   }
 `;
 
@@ -207,7 +230,6 @@ const ClipplayLikeCount = styled.div`
 `;
 
 const ClipplayPlayBackImgDiv = styled.div`
-  //border: 1px solid black;
   margin-top: 5rem;
   height: 15rem;
   display: flex;
@@ -221,7 +243,6 @@ const ClipplayPlayBackImg = styled.img`
 `;
 
 const ClipplayRangeInputTime = styled.div`
-  //border: 1px solid red;
   margin-top: 5rem;
 `;
 
@@ -237,7 +258,7 @@ const ClipplayInput = styled.input`
     height: 1rem;
     width: 1rem;
     border-radius: 50%;
-    margin-top: -7px;
+    margin-top: -0.4375rem;
   }
 
   &::-webkit-slider-runnable-track {
@@ -247,13 +268,11 @@ const ClipplayInput = styled.input`
 `;
 
 const ClipplayPlaytime = styled.div`
-  //border: 1px solid black;
   display: flex;
   justify-content: space-between;
 `;
 
 const ClipplayPlayIcon = styled.div`
-  //border: 1px solid black;
   margin-top: 4.375rem;
   display: flex;
   justify-content: space-evenly;
@@ -272,14 +291,13 @@ const ClipplayForward = styled(BsFastForward)`
 `;
 
 const ClipplayComment = styled.div`
-  //border: 1px solid red;
   cursor: pointer;
-  margin-top: 135px;
+  margin-top: 8.4375rem;
   display: flex;
   justify-content: center;
-  padding-bottom: 35px;
+  padding-bottom: 2.1875rem;
   span {
-    margin-left: 10px;
+    margin-left: 0.625rem;
   }
 `;
 

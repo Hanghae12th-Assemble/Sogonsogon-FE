@@ -74,17 +74,15 @@ function CreateRadioButton() {
 export default CreateRadioButton;
 
 const CrRadioPublicScopButton = styled.div`
-  margin-top: 10px;
-  //border: 1px solid black;
+  margin-top: 0.625rem;
 `;
 
 const CrRadioButtonSpanBox = styled.div`
-  //border: 1px solid black;
-  margin-top: 40px;
+  margin-top: 2.5rem;
 `;
 
 const CrRadioButton = styled(Button)`
-  margin-right: 10px;
+  margin-right: 0.625rem;
   background-color: ${(props) => (props.isSelected ? "#262626" : "#f1f2f6")};
   color: ${(props) => (props.isSelected ? "white" : "black")};
 `;
@@ -97,7 +95,7 @@ const CrRadioBtn = styled.div`
 
 const StyledIcon = styled.div`
   svg {
-    width: 20px;
-    margin-right: 10px;
+    width: 1.25rem;
+    margin-right: 0.625rem;
   }
 `;

@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { clickModi } from "../redux/module/reduxState/clickModiComment";
+import { __removeAudioComment } from "../redux/module/removeAudioComment";
 
-function ClipCommentList({ props }) {
+function ClipCommentList({ props, title, id }) {
   const dateTime = props?.createdAt?.replace("T", " ").slice(0, 16);
+  const modiComment = useSelector((state) => state?.clickingModiComment);
+  const dispatch = useDispatch();
+
+  const ModifyCommnet = (id) => {
+    dispatch(clickModi({ modi: !modiComment.modi, id }));
+  };
+
+  const removeComment = (id) => {
+    dispatch(__removeAudioComment(id));
+  };
+
   return (
     <>
       <ClipplayCommentContainner>
@@ -15,8 +29,16 @@ function ClipCommentList({ props }) {
           <div>
             <ClipplayPhoto src={props?.memberImageUrl} />
           </div>
-          <p>{props?.content}</p>
+          <p>{title}</p>
         </ClipplayCommentBoxText>
+        <ClipplayCommentBoxBtn>
+          <ClipplayCommentModiRemove>
+            <span onClick={() => ModifyCommnet(id)}>수정</span>
+          </ClipplayCommentModiRemove>
+          <ClipplayCommentModiRemove>
+            <span onClick={() => removeComment(id)}>삭제</span>
+          </ClipplayCommentModiRemove>
+        </ClipplayCommentBoxBtn>
       </ClipplayCommentContainner>
     </>
   );
@@ -25,32 +47,44 @@ function ClipCommentList({ props }) {
 export default ClipCommentList;
 
 const ClipplayCommentContainner = styled.div`
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding-bottom: 30px;
-  margin-top: 30px;
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 1.875rem;
+  margin-top: 1.875rem;
 `;
 
 const ClipplayCommentNameDateBox = styled.div`
-  //border: 1px solid black;
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem;
   span {
     color: #77756f;
   }
 `;
 
 const ClipplayCommentBoxText = styled.div`
-  //border: 1px solid black;
   display: flex;
   align-items: center;
-  font-size: 15px;
+  font-size: 0.9375rem;
   p {
     color: #77756f;
   }
 `;
 
 const ClipplayPhoto = styled.img`
-  width: 70px;
-  height: 70px;
-  border-radius: 10px;
-  margin-right: 10px;
+  width: 4.375rem;
+  height: 4.375rem;
+  border-radius: 0.625rem;
+  margin-right: 0.625rem;
+`;
+
+const ClipplayCommentBoxBtn = styled.div`
+  //border: 1px solid red;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px;
+`;
+
+const ClipplayCommentModiRemove = styled.div`
+  margin-left: 20px;
+  span {
+    cursor: pointer;
+  }
 `;

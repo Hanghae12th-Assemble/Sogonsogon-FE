@@ -1,124 +1,97 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { ReactComponent as Person } from '../asset/icon/person.svg';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 function RadioContainer({ props }) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-        <>
-            <RadioLayout key={props?.id}>
-                <RadioImgContainer
-                    onClick={() => {
-                        document.startViewTransition(() => navigate(`/albumdetail/${props.id}`));
-                    }}
-                    style={{ backgroundImage: `url(${props?.backgroundImageUrl})` }}
-                >
-                </RadioImgContainer>
-                <RadioContentLayout>
-                    <RadionContentMiniLayout>
-                        <RadioTitleLayout to={`/albumdetail/${props?.id}`}>
-                            {props?.title}
-                        </RadioTitleLayout>
+  return (
+    <>
+      <RadioLayout key={props?.id}>
+        <RadioImgContainer
+          onClick={() => {
+            document.startViewTransition(() =>
+              navigate(`/albumdetail/${props.id}`)
+            );
+          }}
+          style={{ backgroundImage: `url(${props?.backgroundImageUrl})` }}
+        ></RadioImgContainer>
+        <RadioContentLayout>
+          <RadionContentMiniLayout>
+            <RadioTitleLayout to={`/albumdetail/${props?.id}`}>
+              {props?.title}
+            </RadioTitleLayout>
 
-                        <RadioNameLayout
-                            onClick={() => {
-                                document.startViewTransition(() =>
-                                    navigate(`/profile/${props?.memberName}`)
-                                );
-                            }}
-                        >
-                            {props?.meberNickname}
-                        </RadioNameLayout>
-                    </RadionContentMiniLayout>
-                </RadioContentLayout>
-            </RadioLayout>
-        </>
-    );
+            <RadioNameLayout
+              onClick={() => {
+                document.startViewTransition(() =>
+                  navigate(`/profile/${props?.memberName}`)
+                );
+              }}
+            >
+              {props?.meberNickname}
+            </RadioNameLayout>
+          </RadionContentMiniLayout>
+        </RadioContentLayout>
+      </RadioLayout>
+    </>
+  );
 }
 
 export default RadioContainer;
 
 const RadioImgContainer = styled.div`
-    min-height: 150px;
-    margin-bottom: 10px;
-    position: relative;
-    background-color: #f5f5f5;
-    border-radius: 15px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    align-items: flex-end;
-    display: flex;
-    flex-direction: row-reverse;
-    transition: all 0.5s ease-in-out 0s;
-    cursor: pointer;
-    :hover {
-        transform: scale(1.02);
-        box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease-in-out 0s;
-    }
+  min-height: 9.375rem;
+  margin-bottom: 0.625rem;
+  position: relative;
+  background-color: #f5f5f5;
+  border-radius: 0.9375rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row-reverse;
+  transition: all 0.5s ease-in-out 0s;
+  cursor: pointer;
+  :hover {
+    transform: scale(1.02);
+    box-shadow: 0rem 0rem 0.625rem 0.125rem rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out 0s;
+  }
 `;
 
 const RadioLayout = styled.div`
-    width: 200px;
-    min-height: 220px;
-    margin: 10px auto;
-`;
-
-const ViewerCounterContainer = styled.div`
-    background-color: #332d28;
-    width: 50px;
-    height: 28px;
-    color: white;
-    margin: 0px 13px 10px 0px; //  위,오른쪽,아래,왼쪽
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
-const ViewerCouterLayout = styled.div`
-    min-width: 20px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 12.5rem;
+  min-height: 13.75rem;
+  margin: 0.625rem auto;
 `;
 
 const RadioContentLayout = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    /* border: 1px solid black; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 const RadioTitleLayout = styled(Link)`
-    font-size: 14px;
-    font-weight: bold;
-    padding-left: 5px;
-    line-height: 1.5;
-    /* border: 1px solid black; */
+  font-size: 0.875rem;
+  font-weight: bold;
+  padding-left: 0.3125rem;
+  line-height: 1.5;
 `;
 
 const RadioNameLayout = styled.div`
-    width: 145px;
-    min-height: 20px;
-    padding: 5px 0px 0px 0px;
-    font-size: 12px;
-    padding-left: 5px;
-    color: #6d6d6d;
-    cursor: pointer;
+  width: 9.0625rem;
+  min-height: 1.25rem;
+  padding: 0.3125rem 0rem 0rem 0rem;
+  font-size: 0.75rem;
+  padding-left: 0.3125rem;
+  color: #6d6d6d;
+  cursor: pointer;
 `;
 
 const RadionContentMiniLayout = styled.div`
-    width: 150px;
-    min-height: 50px;
-    /* border: 1px solid black; */
-`;
-
-const StPersonSVg = styled(Person)`
-    width: 16px;
+  width: 9.375rem;
+  min-height: 3.125rem;
 `;

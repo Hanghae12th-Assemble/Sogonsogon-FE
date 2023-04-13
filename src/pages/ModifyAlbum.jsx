@@ -5,16 +5,23 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { __createClip } from "../redux/module/createClip";
 import CreateAudioButton from "../components/CreateAudioButton";
 import CreateAudioInputs from "../components/CreateAudioInputs";
+import { useSelector } from "react-redux";
+import Loading from "../components/Loading";
 
 function ModifyAudio() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
+  const modifyAlbum = useSelector((state) => state?.updatingAlbum);
+
+  if (modifyAlbum?.isLoading) {
+    return <Loading />;
+  }
 
   return (
     <CrRadioContainer>
       <CrRadioContainerBox>
         <Navbar
-          toNavigate={"/"}
+          toNavigate={-1}
           iconleft={<AiOutlineArrowLeft size={20} />}
           title={"앨범 수정하기"}
         />
@@ -34,14 +41,12 @@ function ModifyAudio() {
 export default ModifyAudio;
 
 const CrRadioContainer = styled.div`
-  //border: 1px solid red;
   height: 100%;
-  padding: 0 20px;
+  padding: 0 1.25rem;
   overflow-y: auto;
 `;
 
 const CrRadioContainerBox = styled.div`
-  //border: 1px solid black;
   position: relative;
   z-index: 999;
 `;

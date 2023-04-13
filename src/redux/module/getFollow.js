@@ -3,15 +3,13 @@ import Axios from "../../util/api/axios";
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __userFollow = createAsyncThunk(
-  "userFollow",
+export const __getFollow = createAsyncThunk(
+  "getFollow",
   async (membername, thunkAPI) => {
     return await axios
-      .post(`api/follow/${membername}`, {})
-      .then((response) => response.data)
-      .catch((error) =>
-        alert(error && "로그인 혹은 팔로우 대상이 잘못되었습니다.")
-      );
+      .get(`api/member/?membername=${membername}`)
+      .then((response) => thunkAPI.fulfillWithValue(response.data.data))
+      .catch((error) => console.log(error));
   }
 );
 
@@ -21,25 +19,25 @@ const initialState = {
   error: null,
 };
 
-const userFollow = createSlice({
-  name: "userFollow",
+const getFollow = createSlice({
+  name: "getFollow",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(__userFollow.pending, (state) => {
+    builder.addCase(__getFollow.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
-    builder.addCase(__userFollow.fulfilled, (state, action) => {
+    builder.addCase(__getFollow.fulfilled, (state, action) => {
       state.isLoading = false;
       state.follow = action.payload;
       state.error = null;
     });
-    builder.addCase(__userFollow.rejected, (state, action) => {
+    builder.addCase(__getFollow.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default userFollow;
+export default getFollow;

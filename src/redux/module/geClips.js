@@ -3,11 +3,11 @@ import Axios from '../../util/api/axios';
 
 const axios = new Axios(process.env.REACT_APP_BASE_URL);
 
-export const __getClips = createAsyncThunk('getClips', async ({ id, page }, thunkAPI) => {
+export const __getClips = createAsyncThunk('getClips', async ({ id, page, sortBy }, thunkAPI) => {
     return await axios
-        .get(`api/audioclip/clips/${id}?page=${page}&size=10&sortBy=createdAt`)
+        .get(`api/audioclip/clips/${id}?page=${page}&size=10&sortBy=${sortBy}`)
         .then((response) => thunkAPI.fulfillWithValue(response.data))
-        .catch((error) => alert(error && '앨범 조회에 실패하였습니다.'));
+        .catch((error) => error.message);
 });
 
 const initialState = {

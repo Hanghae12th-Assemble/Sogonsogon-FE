@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 import { __login } from "../redux/module/login";
 import { useNavigate } from "react-router-dom";
+import isLogin from "../util/checkCookie";
 
 function Emaillogin() {
   const dispatch = useDispatch();
@@ -30,6 +31,13 @@ function Emaillogin() {
     navigate("/");
     reset();
   };
+
+  useEffect(() => {
+    if (isLogin() === true) {
+      alert("이미 로그인 하였습니다.");
+      navigate("/");
+    }
+  }, []);
 
   return (
     <SignupContainer>
@@ -94,14 +102,12 @@ function Emaillogin() {
 export default Emaillogin;
 
 const SignupContainer = styled.div`
-  //border: 1px solid black;
   height: 90%;
 `;
 
 const SignupNavbarBox = styled.div``;
 
 const SignupForm = styled.form`
-  //border: 1px solid red;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -109,17 +115,14 @@ const SignupForm = styled.form`
 `;
 
 const SignupInputDivBox = styled.div`
-  //border: 1px solid black;
   margin-top: 3.125rem;
 `;
 
 const SignupInputTitle = styled.div`
-  //border: 1px solid black;
   margin-bottom: 0.625rem;
 `;
 
 const SignupButton = styled.div`
-  //border: 1px solid black;
   height: 100%;
   display: flex;
   align-items: flex-end;

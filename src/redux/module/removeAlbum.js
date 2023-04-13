@@ -8,7 +8,7 @@ export const __removeAlbum = createAsyncThunk(
   async (albumId, thunkAPI) => {
     return await axios
       .delete(`api/audioAlbum/delete/${albumId}`)
-      .then((response) => console.log(response))
+      .then((response) => response.data)
       .catch((error) => error.message);
   }
 );
