@@ -27,23 +27,27 @@ const Layout = ({ children }) => {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
+                    heartbeatTimeout: 120000,
+                    withCredentials: true,
                 }
             );
 
             eventSource.onmessage = async function (event) {
                 const checkJSON = event.data.split(" ")[0];
                 const data = checkJSON !== "EventStream" && JSON.parse(event.data);
+                console.log(data)
                 const message = data.message;
                 const notificationTitle = '새로운 알림이 있습니다!';
                 const notificationOptions = {
                     body: message,
                 };
                 setAlarm(true);
-                const notification = new Notification(notificationTitle, notificationOptions);
-                notification.onclick = function (event) {
-                    event.preventDefault();
-                };
-
+                if (notificationOptions.body !== "") {
+                    const notification = new Notification(notificationTitle, notificationOptions);
+                    notification.onclick = function (event) {
+                        event.preventDefault();
+                    };
+                }
             };
         } catch (error) {
             if (eventSource) eventSource.close();
