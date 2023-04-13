@@ -103,7 +103,7 @@ function Profile() {
         <form onSubmit={handleSubmit(submitForm)}>
           <div>
             <ProfileMidumInput>
-              <span>닉네임</span>
+              <span>닉네임 *</span>
               <ProfileMidumInputbox>
                 <Input
                   register={register}
@@ -120,7 +120,7 @@ function Profile() {
           <ProfileBottom>
             <div>
               <ProfileBottomTitle>
-                <span>자기소개</span>
+                <span>자기소개 *</span>
               </ProfileBottomTitle>
               <Input
                 textarea
@@ -136,7 +136,7 @@ function Profile() {
             </div>
           </ProfileBottom>
           <ProfileButtonSpanBox>
-            <span>이미지</span>
+            <span>이미지 *</span>
             <ProfilePublicScopButton>
               <ProfileFileInput
                 type="file"
@@ -220,7 +220,6 @@ const ProfileMidumInputbox = styled.div`
   height: 3rem;
   border-radius: 0.625rem;
   border: none;
-  background-color: #f1f2f6;
   display: flex;
   justify-content: flex-start;
   align-items: center;

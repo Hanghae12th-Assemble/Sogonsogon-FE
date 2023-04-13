@@ -92,7 +92,7 @@ function CreateRadioInputs({
           </CrRadioPublicScopButton>
         </CrRadioButtonSpanBox>
         <CrRadioButtonSpanBox>
-          <span>앨범 소개</span>
+          <span>앨범 소개 *</span>
           <CrRadioPublicScopButton>
             <Input
               register={register}
@@ -107,7 +107,7 @@ function CreateRadioInputs({
           </CrRadioPublicScopButton>
         </CrRadioButtonSpanBox>
         <CrRadioButtonSpanBox>
-          <span>이미지</span>
+          <span>이미지 *</span>
           <CrRadioPublicScopButton>
             <CrFileInput type="file" accept="image/*" onChange={onChangeimge} />
           </CrRadioPublicScopButton>

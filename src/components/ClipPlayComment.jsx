@@ -31,7 +31,7 @@ function ClipPlayComment() {
 
   const clickModalOut = () => {
     dispatch(clickOut(false));
-    dispatch(clickModi({ modi: !modiComment.modi, id }));
+    dispatch(clickModi({ modi: false, id }));
   };
 
   useEffect(() => {
@@ -52,7 +52,7 @@ function ClipPlayComment() {
   }, [inView]);
 
   const submitForm = async (data) => {
-    if (modiComment === false) {
+    if (modiComment.modi === false || modiComment.modi === undefined) {
       dispatch(
         __createAudioComment({
           audioId: id,
@@ -66,7 +66,7 @@ function ClipPlayComment() {
           commentInfo: { content: data.content },
         })
       );
-      dispatch(clickModi({ modi: !modiComment.modi, id }));
+      dispatch(clickModi({ modi: false, id }));
     }
 
     reset();

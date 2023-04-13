@@ -8,6 +8,7 @@ function ClipCommentList({ props, title, id }) {
   const dateTime = props?.createdAt?.replace("T", " ").slice(0, 16);
   const modiComment = useSelector((state) => state?.clickingModiComment);
   const dispatch = useDispatch();
+
   const ModifyCommnet = (id) => {
     dispatch(clickModi({ modi: !modiComment.modi, id }));
   };
