@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clickOut } from "../redux/module/reduxState/clickShutDown";
 import { useParams } from "react-router-dom";
 import { __likeClip } from "../redux/module/likeClip";
+import { __getAudioComment } from "../redux/module/getAudioComment";
 
 function ClipPlay() {
   const [playing, setPlaying] = useState(false);
@@ -22,9 +23,15 @@ function ClipPlay() {
   const [duration, setDuration] = useState(0);
   const { id } = useParams();
   const selectBtn = useSelector((state) => state.clickingModal);
-  const clipdata = useSelector((state) => state?.gettingClipDetail?.clip);
+  const clipdata = useSelector(
+    (state) => state?.gettingClipDetail?.clip?.result
+  );
   const likeData = useSelector((state) => state.likingClip?.clip);
+  const ClipDetail = useSelector(
+    (state) => state?.gettingClipDetail?.clip?.totalCommentCount
+  );
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(__getClipDetail(id));
   }, [likeData]);
@@ -153,6 +160,7 @@ function ClipPlay() {
             <BiComment size={20} />
           </div>
           <span>댓글</span>
+          <ClipplayCommentCount>{ClipDetail}</ClipplayCommentCount>
         </ClipplayComment>
       </ClipplayContent>
     </>
