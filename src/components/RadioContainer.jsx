@@ -81,7 +81,7 @@ const RadioImgContainer = styled.div`
   min-height: 9.375rem;
   margin-bottom: 0.625rem;
   position: relative;
-  background-color: #f5f5f5;
+  background-color: ${({ theme }) => theme.color.darkWhite_col};
   border-radius: 0.9375rem;
   background-repeat: no-repeat;
   background-size: cover;
@@ -124,7 +124,7 @@ const RadioNameLayout = styled.div`
   padding: 0.3125rem 0rem 0rem 0rem;
   font-size: 0.75rem;
   padding-left: 0.3125rem;
-  color: #6d6d6d;
+  color: ${({ theme }) => theme.color.darkGray_col};
   cursor: pointer;
 `;
 

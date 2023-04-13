@@ -56,7 +56,7 @@ const SearchUserLayout = styled(Link)`
 const RadioPreviewProfileImg = styled.div`
   min-width: 4.375rem;
   min-height: 4.375rem;
-  background-color: #393b3a6e;
+  background-color: ${({ theme }) => theme.color.darkWhite_col};
   border-radius: 100%;
   margin: 0rem 1.25rem 0rem 1.25rem;
   opacity: 0.9;
@@ -97,14 +97,14 @@ const SearchUserMembernameLayout = styled.div`
   font-size: 0.9375rem;
   display: flex;
   align-items: center;
-  color: #1a1919b3;
+  color: ${({ theme }) => theme.color.darkGray_col};
 `;
 
 const CenterLine = styled.div`
   width: 0.0625rem;
   margin: 0rem 0.3125rem 0rem 0.3125rem;
   height: 0.75rem;
-  border: 0.0625rem solid #1a1919b3;
+  border: 0.0625rem solid ${({ theme }) => theme.color.darkGray_col};
 `;
 
 const SearchUserDescLayout = styled.div`
@@ -113,5 +113,5 @@ const SearchUserDescLayout = styled.div`
   font-weight: 600;
   display: flex;
   align-items: center;
-  color: #1a1919b3;
+  color: ${({ theme }) => theme.color.darkGray_col};
 `;

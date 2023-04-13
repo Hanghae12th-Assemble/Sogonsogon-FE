@@ -7,7 +7,8 @@ const color = {
   darkGray_col: "#77756F",
   softBlack_col: "#262524",
   darkWhite_col: "#F0EFED",
-  coolOrange_col: "#fffaf1"
+  coolOrange_col: "#fffaf1",
+  coolGray_col: "#f9f9fa"
 };
 
 const theme = {

@@ -76,7 +76,7 @@ const ProfileTopFollow = styled.div`
   display: flex;
   border-radius: 0.625rem;
   box-shadow: 0.3125rem 0.3125rem 0.3125rem 0.3125rem rgba(228, 220, 207, 0.4);
-  background-color: #f5f4f2;
+  background-color: ${({ theme }) => theme.color.softGray_col};
 `;
 
 const ProfileTopFollower = styled.div`
@@ -107,7 +107,7 @@ const ProfileBottomBox = styled.div`
   height: 3rem;
   border-radius: 0.625rem;
   border: none;
-  background-color: #f1f2f6;
+  background-color: ${({ theme }) => theme.color.darkWhite_col};
   display: flex;
   justify-content: flex-start;
   align-items: center;
