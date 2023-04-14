@@ -16,6 +16,7 @@ import { useInView } from "react-intersection-observer";
 import { initInfinitiScroll } from "../redux/module/getAlbum";
 import RadioCountContainer from "../components/RadioCountContainer";
 import { ReactComponent as Logo } from "../asset/logo/logo.svg";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [isLnbOpen, setIsLnbOpen] = useState(false);
@@ -25,6 +26,7 @@ function Home() {
   const radioContainerRef = useRef();
   const scrollPos = useScroll(radioContainerRef);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   useEffect(() => {
     page.current = 1;
@@ -40,6 +42,11 @@ function Home() {
   }, [inView]);
 
   const toggleLnb = () => setIsLnbOpen((prev) => !prev);
+
+  if (data?.error) {
+    document.startViewTransition(() =>
+      navigate("/*"))
+  }
 
   return (
     <>
