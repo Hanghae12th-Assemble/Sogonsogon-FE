@@ -6,7 +6,7 @@ import { __removeAudioComment } from "../redux/module/removeAudioComment";
 import { getLocalStorage } from "../util/localStorage";
 
 function ClipCommentList({ props, title, id }) {
-  const dateTime = props?.createdAt?.replace("T", " ").slice(0, 16);
+  const dateTime = props?.createdAt?.slice(0, 10).replace(/-/g, ".");
   const modiComment = useSelector((state) => state?.clickingModiComment);
   const dispatch = useDispatch();
   const user = JSON.parse(getLocalStorage("userInfo"));
