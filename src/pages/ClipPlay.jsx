@@ -195,8 +195,8 @@ const ClipplayContent = styled.div`
 
 const ClipplayTitle = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
+  padding: 0 20px;
 `;
 
 const ClipplayAuthorLike = styled.div`
