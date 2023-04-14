@@ -49,10 +49,7 @@ function SearchHistory({
                   >
                     {data}
                   </RecentSearchValue>
-
-                  <AiOutlineCloseCircle
-                    cursor={"pointer"}
-                    color={"#ff9900"}
+                  <StAiOutlineCloseCircle
                     size={24}
                     onClick={() => deleteSearchHistory(idx, data)}
                   />
@@ -87,7 +84,7 @@ const SearchHistoryHeader = styled.div`
   padding: 0.625rem 0rem 0rem 2.0625rem;
   margin-top: 0.625rem;
   font-size: 1.25rem;
-  color: #000;
+  color: ${({ theme }) => theme.color.softBlack_col};
   font-weight: bold;
   flex-direction: row;
   justify-content: space-between;
@@ -124,3 +121,8 @@ const SearchHistoryBody = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+const StAiOutlineCloseCircle = styled(AiOutlineCloseCircle)`
+  cursor :pointer;
+  color :${({ theme }) => theme.color.orange_col};
+`

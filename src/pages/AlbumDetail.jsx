@@ -140,17 +140,13 @@ function AlbumDetail() {
             <AlbumDetailPgDateLayout>{formattedDate}</AlbumDetailPgDateLayout>
             <AlbumDetailPgHeartContianer>
               {gettingAlbumDetail?.album?.data?.result?.likeCheck === true ? (
-                <AiFillHeart
+                <StAiFillHeart
                   size={20}
-                  color={"ff9900"}
-                  cursor={"pointer"}
                   onClick={albumLike}
                 />
               ) : (
-                <AiOutlineHeart
+                <StAiOutlineHeart
                   size={20}
-                  color={"77756f"}
-                  cursor={"pointer"}
                   onClick={albumLike}
                 />
               )}
@@ -176,19 +172,19 @@ function AlbumDetail() {
             <span>{gettingAlbumDetail?.album?.data?.result?.instruction}</span>
             {gettingAlbumDetail?.album?.data?.result?.instruction?.length >
               3 && (
-              <ExpandButtonContainer onClick={handleClick}>
-                {expanded ? (
-                  <>
-                    <div>펼쳐보기</div> <AiOutlineDown />
-                  </>
-                ) : (
-                  <>
-                    <div>접기</div>
-                    <AiOutlineUp />
-                  </>
-                )}
-              </ExpandButtonContainer>
-            )}
+                <ExpandButtonContainer onClick={handleClick}>
+                  {expanded ? (
+                    <>
+                      <div>펼쳐보기</div> <AiOutlineDown />
+                    </>
+                  ) : (
+                    <>
+                      <div>접기</div>
+                      <AiOutlineUp />
+                    </>
+                  )}
+                </ExpandButtonContainer>
+              )}
           </AlbumDetailPgIntroContainer>
         </AlbumDetailPgDescContainer>
         <AlbumDetailPgClipInfo>
@@ -380,3 +376,13 @@ const StIconSvg = styled.div`
   width: 1.875rem;
   margin: 0.3125rem 0.625rem;
 `;
+
+const StAiFillHeart = styled(AiFillHeart)`
+  color: ${({ theme }) => theme.color.orange_col};
+  cursor: pointer;
+`
+
+const StAiOutlineHeart = styled(AiOutlineHeart)`
+  color: ${({ theme }) => theme.color.darkGray_col};
+  cursor: pointer;
+`

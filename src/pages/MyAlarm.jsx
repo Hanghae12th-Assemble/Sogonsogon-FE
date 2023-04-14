@@ -36,6 +36,9 @@ function MyAlarm() {
       });
     }
   };
+
+
+
   return (
     <>
       {gettingAlarm && (
@@ -66,6 +69,8 @@ function MyAlarm() {
             substance={"개의 안 읽은 알람이 있습니다."}
             state={state}
             setState={setState}
+            data={gettingAlarm}
+            __removeContent={__removeAlarm}
           />
           <MyAlarmContainer>
             {gettingAlarm?.alarm?.map((item, index) => {
