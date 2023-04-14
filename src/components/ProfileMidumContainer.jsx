@@ -75,7 +75,7 @@ const ProfileTopFollow = styled.div`
   margin-top: 1.25rem;
   display: flex;
   border-radius: 0.625rem;
-  box-shadow: 0.3125rem 0.3125rem 0.3125rem 0.3125rem rgba(228, 220, 207, 0.4);
+  box-shadow: 0.3125rem 0.3125rem 0.3125rem 0.3125rem rgba(228, 220, 207, 0.2);
   background-color: ${({ theme }) => theme.color.softGray_col};
 `;
 
