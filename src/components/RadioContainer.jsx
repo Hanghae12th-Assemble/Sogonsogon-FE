@@ -76,7 +76,7 @@ const RadioContentLayout = styled.div`
 
 const RadioTitleLayout = styled(Link)`
   font-size: 0.875rem;
-  font-weight: bold;
+  font-weight: 500;
   padding-left: 0.3125rem;
   line-height: 1.5;
 `;
