@@ -46,6 +46,18 @@ function AllViewAudioClip() {
   const sortByCreatedAtHandler = () => {
     setSortBy("createdAt");
   };
+  const AllContentRomoveHandler = () => {
+    if (
+      window.confirm("정말로 삭제 하시겠습니까? 확인시 모든 데이터가 삭제 됩니다.")
+    ) {
+      gettingClips?.clip?.map((item) => {
+        item?.data.result?.map((data) => {
+          dispatch(__removeClip(data?.id));
+        })
+      })
+    } else {
+    }
+  };
 
   const totalClipCount = gettingClips?.clip[0]?.data?.metadata?.audioClipCount;
   const clipWriter = gettingClips?.clip[0]?.data?.isMine;
@@ -54,10 +66,8 @@ function AllViewAudioClip() {
     <>
       <AllClipsNavBarBox>
         <AllClipsNavBarLeftLayout>
-          <AiOutlineArrowLeft
+          <StAiOutlineArrowLeft
             size={25}
-            cursor={"pointer"}
-            color="#283035"
             onClick={() => {
               document.startViewTransition(() => navigate(-1));
             }}
@@ -71,10 +81,8 @@ function AllViewAudioClip() {
           </p>
         </AllClipsNavBarLeftLayout>
         {clipWriter === true && (
-          <AiOutlinePlus
+          <StAiOutlinePlus
             size={25}
-            cursor={"pointer"}
-            color="#ff9900"
             onClick={() =>
               document.startViewTransition(() => navigate(`/createclip/${id}`))
             }
@@ -102,6 +110,7 @@ function AllViewAudioClip() {
           <>
             <StContentSlectedCount>
               <p>{selectedContent?.length}</p>개 선택
+              <div onClick={AllContentRomoveHandler}>전체삭제</div>
             </StContentSlectedCount>
             <MyDoneLayout
               onClick={() => {
@@ -162,9 +171,8 @@ const AllClipsNavBarBox = styled.div`
     font-weight: bold;
     margin-left: 0.625rem;
   }
-
   span {
-    color: #ff9900;
+    color: ${({ theme }) => theme.color.orange_col};
   }
 `;
 
@@ -195,7 +203,7 @@ const MyEditContainer = styled.div`
   align-items: center;
   width: 100%;
   min-height: 3.75rem;
-  border-bottom: 0.0625rem solid #f0efed;
+  border-bottom: 0.0625rem solid ${({ theme }) => theme.color.darkWhite_col};
   padding: 0rem 1.875rem 0rem 1.875rem;
 `;
 
@@ -203,22 +211,22 @@ const EditContainerLeftLayout = styled.div`
   display: flex;
   flex-direction: row;
   p {
-    color: #a5a29c;
+    color: ${({ theme }) => theme.color.darkGray_col};
   }
 `;
 
 const MyEditLayout = styled.div`
-  color: #a7a49e;
+  color: ${({ theme }) => theme.color.darkGray_col};
   cursor: pointer;
 `;
 
 const MyDoneLayout = styled(MyEditLayout)`
-  color: #ff9900;
+  color: ${({ theme }) => theme.color.orange_col};
 `;
 
 const StFrontSubstance = styled.div`
   margin-right: 0.3125rem;
-  color: black;
+  color: ${({ theme }) => theme.color.softBlack_col};
   font-weight: 600;
   font-size: 1.25rem;
 `;
@@ -227,11 +235,27 @@ const StContentCount = styled.span`
   display: flex;
   align-items: center;
   font-size: 1.25rem;
-  color: #ff9900;
+  color: ${({ theme }) => theme.color.orange_col};
 `;
 
 const StContentSlectedCount = styled.div`
   display: flex;
   flex-direction: row;
   font-weight: 600;
+  div{
+    margin-left: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    color: ${({ theme }) => theme.color.orange_col};
+  }
 `;
+
+const StAiOutlineArrowLeft = styled(AiOutlineArrowLeft)`
+  cursor: pointer;
+  color:${({ theme }) => theme.color.softBlack_col};
+`
+
+const StAiOutlinePlus = styled(AiOutlinePlus)`
+  cursor:pointer;
+  color:${({ theme }) => theme.color.orange_col};
+`

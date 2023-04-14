@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 function MyContentEditContainer({
@@ -9,7 +10,18 @@ function MyContentEditContainer({
   frontSubstance,
   state,
   setState,
+  data,
+  __removeContent,
 }) {
+  const dispatch = useDispatch();
+  const AllContentRomoveHandler = (data) => {
+    if (
+      window.confirm("정말로 삭제 하시겠습니까? 확인시 모든 데이터가 삭제 됩니다.")
+    ) {
+      dispatch(__removeContent(data?.notificationId));
+    } else {
+    }
+  };
   return (
     <>
       <MyEditContainer>
@@ -36,6 +48,7 @@ function MyContentEditContainer({
           <>
             <StContentSlectedCount>
               <p>{selectedContent?.length}</p>개 선택
+              <div onClick={() => AllContentRomoveHandler(data)}>전체삭제</div>
             </StContentSlectedCount>
             <MyDoneLayout
               onClick={() => {
@@ -101,4 +114,10 @@ const StContentSlectedCount = styled.div`
   display: flex;
   flex-direction: row;
   font-weight: 600;
+  div{
+    margin-left: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    color: ${({ theme }) => theme.color.orange_col};
+  }
 `;

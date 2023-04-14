@@ -59,6 +59,8 @@ function MyAlbum() {
         frontSubstance={"전체 앨범"}
         state={state}
         setState={setState}
+        data={gettingMyAlbum}
+        __removeContent={__removeAlbum}
       />
       <MyAlbumContainer>
         {gettingMyAlbum?.album?.map((item) => {

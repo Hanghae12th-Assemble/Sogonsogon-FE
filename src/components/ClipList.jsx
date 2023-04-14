@@ -171,8 +171,9 @@ const AllClipsEpisodeLayout = styled.div`
   display: flex;
   align-items: center;
   font-size: 0.8125rem;
+  font-weight: bold;
   color: ${({ theme }) => theme.color.orange_col};
-  background-color: ${({ theme }) => theme.color.softOrange_col};
+  background-color: ${({ theme }) => theme.color.coolOrange_col};
 `;
 
 const StEditSvg = styled(Edit)`

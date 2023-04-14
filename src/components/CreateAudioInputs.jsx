@@ -159,7 +159,7 @@ const CrFileInput = styled.input`
     font-weight: bold;
     cursor: pointer;
     &:hover {
-      background-color: #262626;
+      background-color: ${({ theme }) => theme.color.softBlack_col};
       color: ${({ theme }) => theme.color.white_col};
     }
   }
