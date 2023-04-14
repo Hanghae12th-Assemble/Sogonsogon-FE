@@ -20,10 +20,6 @@ import { __getAlbumDetail } from "../redux/module/getAlbumDetail";
 import { __likeAlbum } from "../redux/module/likeAlbum";
 import { useThrottledCallback } from "../hooks/useThrottledCallback";
 import isLogin from "../util/checkCookie";
-import { ReactComponent as Music } from "../asset/icon/music.svg";
-import { ReactComponent as Daily } from "../asset/icon/daily.svg";
-import { ReactComponent as Book } from "../asset/icon/book.svg";
-import { ReactComponent as Asmr } from "../asset/icon/asmr.svg";
 
 function AlbumDetail() {
   const { id } = useParams();
@@ -63,37 +59,6 @@ function AlbumDetail() {
     [dispatch, id]
   );
 
-  const renderIcon = (categoryType) => {
-    switch (categoryType) {
-      case "음악":
-        return (
-          <StIconSvg>
-            <Music />
-          </StIconSvg>
-        );
-      case "일상":
-        return (
-          <StIconSvg>
-            <Daily />
-          </StIconSvg>
-        );
-      case "도서":
-        return (
-          <StIconSvg>
-            <Book />
-          </StIconSvg>
-        );
-      case "ASMR":
-        return (
-          <StIconSvg>
-            <Asmr />
-          </StIconSvg>
-        );
-      default:
-        return null;
-    }
-  };
-
   return (
     <>
       <NavbarContainer>
@@ -116,7 +81,6 @@ function AlbumDetail() {
               gettingAlbumDetail?.album?.data?.result?.backgroundImageUrl
             }
           >
-            {renderIcon(gettingAlbumDetail?.album?.data?.result?.categoryType)}
           </AlbumDetailPgImg>
           <AlbumDetailPgDescLayout>
             <AlbumDetailPgTitleLayout>

@@ -9,7 +9,7 @@ export const __getAlbumCategory = createAsyncThunk(
         return await axios
             .get(`api/audioAlbum/${categoryType}?page=${page}&size=5&sortBy=createdAt`)
             .then((response) => thunkAPI.fulfillWithValue(response.data))
-            .catch((error) => alert(error && '앨범 조회에 실패하였습니다.'));
+            .catch((error) => thunkAPI.rejectWithValue(error));
     }
 );
 
