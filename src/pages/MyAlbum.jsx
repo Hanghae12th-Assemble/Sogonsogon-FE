@@ -40,7 +40,10 @@ function MyAlbum() {
   const { editClicked, selectedContent } = state;
   const totalAlbumCount =
     gettingMyAlbum?.album[0]?.data?.metadata?.audioAlbumCount;
-
+  const allAlbumDataID = gettingMyAlbum?.album?.map((item) => {
+    return item?.data?.result?.map((content) => content.id)
+  }
+  )
   return (
     <>
       <Lnb isOpen={isLnbOpen} handleItemClick={toggleLnb} />
@@ -59,7 +62,7 @@ function MyAlbum() {
         frontSubstance={"전체 앨범"}
         state={state}
         setState={setState}
-        data={gettingMyAlbum}
+        dataId={allAlbumDataID[0]}
         __removeContent={__removeAlbum}
       />
       <MyAlbumContainer>

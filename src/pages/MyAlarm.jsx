@@ -37,8 +37,7 @@ function MyAlarm() {
     }
   };
 
-
-
+  const allAlarmDataID = gettingAlarm?.alarm?.map((item) => item.notificationId)
   return (
     <>
       {gettingAlarm && (
@@ -69,7 +68,7 @@ function MyAlarm() {
             substance={"개의 안 읽은 알람이 있습니다."}
             state={state}
             setState={setState}
-            data={gettingAlarm}
+            dataId={allAlarmDataID}
             __removeContent={__removeAlarm}
           />
           <MyAlarmContainer>
