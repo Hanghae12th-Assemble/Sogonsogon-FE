@@ -14,7 +14,11 @@ function Navbar({ iconleft, title, iconright, toNavigate, toClose, icon }) {
       >
         {iconleft}
       </NavbarCursor>
-      <NavbarLogoTittle>
+      <NavbarLogoTittle
+        onClick={() => {
+          document.startViewTransition(() => navigate("/"));
+        }}
+      >
         {icon}
         {title}
       </NavbarLogoTittle>
@@ -51,4 +55,5 @@ const NavbarLogoTittle = styled.div`
   justify-content: center;
   font-weight: bolder;
   font-size: 1.25rem;
+  cursor: pointer;
 `;

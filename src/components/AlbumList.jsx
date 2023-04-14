@@ -137,7 +137,7 @@ const MyAlbumHeartContianer = styled.div`
 `;
 const MyAlbumTitleLayout = styled.div`
   font-size: 1.25rem;
-  font-weight: bold;
+  font-weight: 500;
 `;
 const MyAlbumDateLayout = styled.div`
   font-size: 0.875rem;

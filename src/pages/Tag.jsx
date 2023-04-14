@@ -23,6 +23,7 @@ import {
   __getAlbumCategory,
   initInfinitiScroll,
 } from "../redux/module/getAlbumCategory";
+import Loading from "../components/Loading";
 
 function Tag() {
   let { id } = useParams();
@@ -33,6 +34,7 @@ function Tag() {
   const data = useSelector((state) => state.gettingAlbumCategory);
   const [isLnbOpen, setIsLnbOpen] = useState(false);
   const scrollPos = useScroll(radioContainerRef);
+  const navigate = useNavigate()
 
   useEffect(() => {
     page.current = 1;
@@ -79,6 +81,12 @@ function Tag() {
         return null;
     }
   };
+
+  if (data?.error) {
+    document.startViewTransition(() =>
+      navigate("/*"))
+  }
+
 
   return (
     <>

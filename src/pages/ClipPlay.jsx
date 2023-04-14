@@ -14,8 +14,9 @@ import { __getClipDetail } from "../redux/module/getClipDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { clickOut } from "../redux/module/reduxState/clickShutDown";
 import { useParams } from "react-router-dom";
-import { __likeClip } from "../redux/module/likeClip";
-import { __getAudioComment } from "../redux/module/getAudioComment";
+import { __likeClip } from "../redux/module/likeClip"; import Loading from "../components/Loading";
+import { useNavigate } from "react-router-dom";
+
 
 function ClipPlay() {
   const [playing, setPlaying] = useState(false);
@@ -31,6 +32,7 @@ function ClipPlay() {
     (state) => state?.gettingClipDetail?.clip?.totalCommentCount
   );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(__getClipDetail(id));
@@ -94,7 +96,9 @@ function ClipPlay() {
               <div>
                 <ClipplayAuthorPhoto src={clipdata?.memberprofileImageUrl} />
               </div>
-              <span>{clipdata?.membernickname}</span>
+              <span onClick={() => {
+                document.startViewTransition(() => navigate(`/profile/${clipdata?.membername}`));
+              }} >{clipdata?.membernickname}</span>
             </ClipplayAuthorProfile>
             <ClipplayLikeCount>
               {clipdata?.likeCheck === true ? (
@@ -195,8 +199,8 @@ const ClipplayContent = styled.div`
 
 const ClipplayTitle = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
+  padding: 0 20px;
 `;
 
 const ClipplayAuthorLike = styled.div`
@@ -211,6 +215,7 @@ const ClipplayAuthorProfile = styled.div`
   align-items: center;
   span {
     font-size: 1.0625rem;
+    cursor: pointer;
   }
 `;
 
