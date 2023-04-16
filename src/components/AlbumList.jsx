@@ -10,7 +10,7 @@ import { ReactComponent as Asmr } from "../asset/icon/asmr.svg";
 
 function AlbumList({ editClicked, state, setState, selectedContent, data }) {
   const navigate = useNavigate();
-  const dateTime = data?.createdAt?.replace("T", " ").slice(0, 16);
+  const dateTime = data?.createdAt?.slice(0, 10).replace(/-/g, ".");
   const renderIcon = (categoryType) => {
     switch (categoryType) {
       case "음악":

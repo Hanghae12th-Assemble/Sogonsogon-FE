@@ -10,15 +10,17 @@ function MyContentEditContainer({
   frontSubstance,
   state,
   setState,
-  data,
+  dataId,
   __removeContent,
 }) {
   const dispatch = useDispatch();
-  const AllContentRomoveHandler = (data) => {
+  const AllContentRomoveHandler = (dataId) => {
     if (
       window.confirm("정말로 삭제 하시겠습니까? 확인시 모든 데이터가 삭제 됩니다.")
     ) {
-      dispatch(__removeContent(data?.notificationId));
+      dataId.map((id) => {
+        dispatch(__removeContent(id));
+      })
     } else {
     }
   };
@@ -48,7 +50,7 @@ function MyContentEditContainer({
           <>
             <StContentSlectedCount>
               <p>{selectedContent?.length}</p>개 선택
-              <div onClick={() => AllContentRomoveHandler(data)}>전체삭제</div>
+              <div onClick={() => AllContentRomoveHandler(dataId)}>전체삭제</div>
             </StContentSlectedCount>
             <MyDoneLayout
               onClick={() => {

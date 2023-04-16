@@ -7,7 +7,7 @@ import { ReactComponent as Edit } from "../asset/icon/edit.svg";
 
 function ClipList({ editClicked, state, setState, selectedContent, data }) {
   const navigate = useNavigate();
-  const dateTime = data?.createdAt?.replace("T", " ").slice(0, 16);
+  const dateTime = data?.createdAt?.slice(0, 10).replace(/-/g, ".");
 
   return (
     <>

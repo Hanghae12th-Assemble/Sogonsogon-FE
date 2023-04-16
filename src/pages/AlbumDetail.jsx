@@ -27,7 +27,7 @@ function AlbumDetail() {
   const navigate = useNavigate();
   const { gettingAlbumDetail, likingAlbum } = useSelector((state) => state);
   const formattedDate =
-    gettingAlbumDetail?.album?.data?.result?.createdAt?.substr(0, 10);
+    gettingAlbumDetail?.album?.data?.result?.createdAt?.slice(0, 10).replace(/-/g, ".");
   const [state, setState] = useState({
     editClicked: false,
     selectedContent: [],
