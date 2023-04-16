@@ -5,7 +5,7 @@ import { clickModi } from "../redux/module/reduxState/clickModiComment";
 import { __removeAudioComment } from "../redux/module/removeAudioComment";
 import { getLocalStorage } from "../util/localStorage";
 
-function ClipCommentList({ props, title, id }) {
+function ClipCommentList({ props, id }) {
   const dateTime = props?.createdAt?.slice(0, 10).replace(/-/g, ".");
   const modiComment = useSelector((state) => state?.clickingModiComment);
   const dispatch = useDispatch();
@@ -30,7 +30,6 @@ function ClipCommentList({ props, title, id }) {
           <div>
             <ClipplayPhoto src={props?.memberImageUrl} />
           </div>
-          <p>{title}</p>
         </ClipplayCommentBoxText>
         <ClipplayCommentBoxBtn>
           {props?.membername === user?.userName && (
@@ -61,6 +60,11 @@ const ClipplayCommentNameDateBox = styled.div`
   margin-bottom: 0.9375rem;
   span {
     color: ${({ theme }) => theme.color.darkGray_col};
+    opacity: 80%;
+  }
+
+  h4 {
+    font-weight: bold;
   }
 `;
 

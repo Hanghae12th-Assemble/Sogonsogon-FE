@@ -35,16 +35,18 @@ function ProfileMidumContainer() {
 
   return (
     <>
-      <ProfileTopFollow>
-        <ProfileTopFollower>
-          <span>팔로워</span>
-          <span>{getUserInfo?.followers}</span>
-        </ProfileTopFollower>
-        <ProfileTopFollowing>
-          <span>팔로잉</span>
-          <span>{getUserInfo?.followings}</span>
-        </ProfileTopFollowing>
-      </ProfileTopFollow>
+      <ProfileTopFollowBox>
+        <ProfileTopFollow>
+          <ProfileTopFollower>
+            <span>팔로워</span>
+            <span>{getUserInfo?.followers}</span>
+          </ProfileTopFollower>
+          <ProfileTopFollowing>
+            <span>팔로잉</span>
+            <span>{getUserInfo?.followings}</span>
+          </ProfileTopFollowing>
+        </ProfileTopFollow>
+      </ProfileTopFollowBox>
       <ProfileButtonBox>
         {id === info?.userName ? null : (
           <Button lgBtn onClick={followBtn}>
@@ -69,13 +71,19 @@ function ProfileMidumContainer() {
 
 export default ProfileMidumContainer;
 
+const ProfileTopFollowBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
 const ProfileTopFollow = styled.div`
   width: 28.125rem;
   height: 5.375rem;
-  margin-top: 1.25rem;
+  margin-top: 0.625rem;
   display: flex;
+  align-items: center;
   border-radius: 0.625rem;
-  box-shadow: 0.3125rem 0.3125rem 0.3125rem 0.3125rem rgba(228, 220, 207, 0.2);
   background-color: ${({ theme }) => theme.color.softGray_col};
 `;
 
@@ -100,6 +108,7 @@ const ProfileBottom = styled.div`
 
 const ProfileBottomTitle = styled.div`
   margin-bottom: 1.25rem;
+  font-weight: bold;
 `;
 
 const ProfileBottomBox = styled.div`

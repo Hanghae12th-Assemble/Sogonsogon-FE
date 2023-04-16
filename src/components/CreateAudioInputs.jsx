@@ -142,6 +142,7 @@ export default CreateRadioInputs;
 
 const CrRadioButtonSpanBox = styled.div`
   margin-top: 2.5rem;
+  font-weight: bold;
 `;
 
 const CrRadioPublicScopButton = styled.div`
@@ -192,6 +193,7 @@ const CrRadioImg = styled.img`
 const CrRadioButtonNext = styled.div`
   margin-right: 0.625rem;
   height: 9.375rem;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-end;

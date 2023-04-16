@@ -26,8 +26,9 @@ function AlbumDetail() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { gettingAlbumDetail, likingAlbum } = useSelector((state) => state);
-  const formattedDate =
-    gettingAlbumDetail?.album?.data?.result?.createdAt?.slice(0, 10).replace(/-/g, ".");
+  const formattedDate = gettingAlbumDetail?.album?.data?.result?.createdAt
+    ?.slice(0, 10)
+    .replace(/-/g, ".");
   const [state, setState] = useState({
     editClicked: false,
     selectedContent: [],
@@ -64,7 +65,7 @@ function AlbumDetail() {
       <NavbarContainer>
         <Navbar
           toNavigate={-1}
-          iconleft={<AiOutlineArrowLeft size={25} />}
+          iconleft={<AiOutlineArrowLeft size={30} />}
           title={""}
           iconright={
             gettingAlbumDetail?.album?.data?.result?.mine === true ? (
@@ -80,8 +81,7 @@ function AlbumDetail() {
             backgroundImageUrl={
               gettingAlbumDetail?.album?.data?.result?.backgroundImageUrl
             }
-          >
-          </AlbumDetailPgImg>
+          ></AlbumDetailPgImg>
           <AlbumDetailPgDescLayout>
             <AlbumDetailPgTitleLayout>
               {gettingAlbumDetail?.album?.data?.result?.title}
@@ -104,15 +104,9 @@ function AlbumDetail() {
             <AlbumDetailPgDateLayout>{formattedDate}</AlbumDetailPgDateLayout>
             <AlbumDetailPgHeartContianer>
               {gettingAlbumDetail?.album?.data?.result?.likeCheck === true ? (
-                <StAiFillHeart
-                  size={20}
-                  onClick={albumLike}
-                />
+                <StAiFillHeart size={20} onClick={albumLike} />
               ) : (
-                <StAiOutlineHeart
-                  size={20}
-                  onClick={albumLike}
-                />
+                <StAiOutlineHeart size={20} onClick={albumLike} />
               )}
               <div>{gettingAlbumDetail?.album?.data?.result?.likesCount}</div>
             </AlbumDetailPgHeartContianer>
@@ -136,19 +130,19 @@ function AlbumDetail() {
             <span>{gettingAlbumDetail?.album?.data?.result?.instruction}</span>
             {gettingAlbumDetail?.album?.data?.result?.instruction?.length >
               3 && (
-                <ExpandButtonContainer onClick={handleClick}>
-                  {expanded ? (
-                    <>
-                      <div>펼쳐보기</div> <AiOutlineDown />
-                    </>
-                  ) : (
-                    <>
-                      <div>접기</div>
-                      <AiOutlineUp />
-                    </>
-                  )}
-                </ExpandButtonContainer>
-              )}
+              <ExpandButtonContainer onClick={handleClick}>
+                {expanded ? (
+                  <>
+                    <div>펼쳐보기</div> <AiOutlineDown />
+                  </>
+                ) : (
+                  <>
+                    <div>접기</div>
+                    <AiOutlineUp />
+                  </>
+                )}
+              </ExpandButtonContainer>
+            )}
           </AlbumDetailPgIntroContainer>
         </AlbumDetailPgDescContainer>
         <AlbumDetailPgClipInfo>
@@ -188,7 +182,7 @@ function AlbumDetail() {
 export default AlbumDetail;
 
 const StEditSvg = styled(Edit)`
-  width: 1.5625rem;
+  width: 1.875rem;
 `;
 
 const AlbumDetailPgContainer = styled.div`
@@ -344,9 +338,9 @@ const StIconSvg = styled.div`
 const StAiFillHeart = styled(AiFillHeart)`
   color: ${({ theme }) => theme.color.orange_col};
   cursor: pointer;
-`
+`;
 
 const StAiOutlineHeart = styled(AiOutlineHeart)`
   color: ${({ theme }) => theme.color.darkGray_col};
   cursor: pointer;
-`
+`;

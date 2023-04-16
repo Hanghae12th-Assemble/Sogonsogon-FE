@@ -14,9 +14,10 @@ import { __getClipDetail } from "../redux/module/getClipDetail";
 import { useDispatch, useSelector } from "react-redux";
 import { clickOut } from "../redux/module/reduxState/clickShutDown";
 import { useParams } from "react-router-dom";
-import { __likeClip } from "../redux/module/likeClip"; import Loading from "../components/Loading";
+import { __likeClip } from "../redux/module/likeClip";
 import { useNavigate } from "react-router-dom";
-
+import { ReactComponent as Forward } from "../asset/icon/15secondA.svg";
+import { ReactComponent as Back } from "../asset/icon/15secondB.svg";
 
 function ClipPlay() {
   const [playing, setPlaying] = useState(false);
@@ -96,9 +97,15 @@ function ClipPlay() {
               <div>
                 <ClipplayAuthorPhoto src={clipdata?.memberprofileImageUrl} />
               </div>
-              <span onClick={() => {
-                document.startViewTransition(() => navigate(`/profile/${clipdata?.membername}`));
-              }} >{clipdata?.membernickname}</span>
+              <span
+                onClick={() => {
+                  document.startViewTransition(() =>
+                    navigate(`/profile/${clipdata?.membername}`)
+                  );
+                }}
+              >
+                {clipdata?.membernickname}
+              </span>
             </ClipplayAuthorProfile>
             <ClipplayLikeCount>
               {clipdata?.likeCheck === true ? (
@@ -287,12 +294,14 @@ const ClipplayButton = styled.div`
   cursor: pointer;
 `;
 
-const ClipplayRwind = styled(BsRewind)`
+const ClipplayRwind = styled(Back)`
   cursor: pointer;
+  width: 3.4375rem;
 `;
 
-const ClipplayForward = styled(BsFastForward)`
+const ClipplayForward = styled(Forward)`
   cursor: pointer;
+  width: 3.4375rem;
 `;
 
 const ClipplayComment = styled.div`

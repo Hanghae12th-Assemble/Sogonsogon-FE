@@ -79,12 +79,16 @@ const CrRadioPublicScopButton = styled.div`
 
 const CrRadioButtonSpanBox = styled.div`
   margin-top: 2.5rem;
+  span {
+    font-weight: bold;
+  }
 `;
 
 const CrRadioButton = styled(Button)`
   margin-right: 0.625rem;
   background-color: ${(props) => (props.isSelected ? "#262626" : "#F0EFED")};
   color: ${(props) => (props.isSelected ? "white" : "black")};
+  padding: 0 0.1875rem;
 `;
 
 const CrRadioBtn = styled.div`

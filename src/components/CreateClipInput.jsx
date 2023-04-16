@@ -67,8 +67,8 @@ function CreateClipInputs({
       formState === "create"
         ? await dispatch(__createCip({ clipInfo: formData, audioablumId: id }))
         : await dispatch(
-          __updateClip({ clipInfo: formData, audioablumId: id })
-        );
+            __updateClip({ clipInfo: formData, audioablumId: id })
+          );
 
     if (action.payload && action.payload >= 200 && action.payload < 300) {
       navigate(-1);
@@ -208,6 +208,7 @@ const CrRadioImg = styled.img`
 const CrRadioButtonNext = styled.div`
   margin-right: 0.625rem;
   height: 9.375rem;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-end;

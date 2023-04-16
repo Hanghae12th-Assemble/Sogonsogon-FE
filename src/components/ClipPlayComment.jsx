@@ -109,14 +109,7 @@ function ClipPlayComment() {
         <ClipPlayCommentOverflow>
           {commentlist?.comment?.map((item, index) => {
             return item?.result?.map((item, index) => {
-              return (
-                <ClipCommentList
-                  props={item}
-                  title={commentlist?.comment[0]?.AlbumTitle}
-                  id={item.id}
-                  key={index}
-                />
-              );
+              return <ClipCommentList props={item} id={item.id} key={index} />;
             });
           })}
           <div ref={ref}></div>
@@ -175,7 +168,7 @@ const ClipplayCommentTitle = styled.div`
   display: flex;
   justify-content: center;
   font-size: 1.25rem;
-  font-weight: bolder;
+  font-weight: bold;
   margin-top: 3.125rem;
 `;
 

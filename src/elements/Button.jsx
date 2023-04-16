@@ -30,18 +30,20 @@ const BtnStyle = styled.button`
   ${(props) =>
     props.lgBtn &&
     css`
-      width: 25rem;
+      width: 450px;
       height: 3rem;
       background-color: #ff9900;
+      color: white;
     `}
 
     ${(props) =>
     props.smCommentBtn &&
     css`
       width: 5rem;
-      height: 3rem;
+      height: 3.5rem;
       margin-left: 0.625rem;
       background-color: #ff9900;
+      color: white;
     `}
 
 

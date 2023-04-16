@@ -22,7 +22,7 @@ function ModifyClip() {
       <CrRadioContainerBox>
         <Navbar
           toNavigate={-1}
-          iconleft={<AiOutlineArrowLeft size={20} />}
+          iconleft={<AiOutlineArrowLeft size={30} />}
           title={"클립 수정하기"}
         />
 

@@ -12,7 +12,7 @@ import Input from "../elements/Input";
 import { useForm } from "react-hook-form";
 import { getLocalStorage } from "../util/localStorage";
 import { useNavigate, useParams } from "react-router";
-import isLogin from "../util/checkCookie";
+import { ReactComponent as Edit } from "../asset/icon/edit.svg";
 
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
@@ -75,7 +75,7 @@ function Profile() {
           title={"프로필"}
           iconright={
             id === user.userName && !modiSwitch ? (
-              <MdOutlineModeEdit onClick={onPageModiClick} size={20} />
+              <EditButton onClick={onPageModiClick} />
             ) : null
           }
         />
@@ -95,7 +95,7 @@ function Profile() {
             <ProfileTopMembername>{getUserInfo?.nickname}</ProfileTopMembername>
           </ProfileTopnicknameMembername>
           <ProfileTopnicknameMembername>
-            <span>@{getUserInfo?.membername}</span>
+            <ProfileTopnickName>@{getUserInfo?.membername}</ProfileTopnickName>
           </ProfileTopnicknameMembername>
         </ProfileTopName>
       </ProfileTop>
@@ -199,9 +199,15 @@ const ProfileTopnicknameMembername = styled.div`
   bottom: 0.625rem;
 `;
 
+const ProfileTopnickName = styled.span`
+  font-weight: 400;
+  opacity: 80%;
+`;
+
 const ProfileTopMembername = styled.span`
   font-size: 1.25rem;
-  font-weight: bolder;
+  font-weight: bold;
+  font-size: 20px;
 `;
 
 const ProfileTopName = styled.div`
@@ -264,4 +270,8 @@ const ProfileFileInput = styled.input`
       color: ${({ theme }) => theme.color.white_col};
     }
   }
+`;
+
+const EditButton = styled(Edit)`
+  width: 25px;
 `;

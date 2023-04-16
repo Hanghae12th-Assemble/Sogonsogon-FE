@@ -9,13 +9,10 @@ function RadioContainer({ props }) {
       <RadioLayout key={props?.id}>
         <RadioImgContainer
           onClick={() => {
-            document.startViewTransition(() =>
-              navigate(`/albumdetail/${props.id}`)
-            );
+            navigate(`/albumdetail/${props.id}`);
           }}
           style={{ backgroundImage: `url(${props?.backgroundImageUrl})` }}
-        >
-        </RadioImgContainer>
+        ></RadioImgContainer>
         <RadioContentLayout>
           <RadionContentMiniLayout>
             <RadioTitleLayout to={`/albumdetail/${props?.id}`}>

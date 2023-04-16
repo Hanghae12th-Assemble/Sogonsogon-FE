@@ -37,7 +37,7 @@ const InputBox = styled.input`
   height: 3rem;
   border-radius: 0.625rem;
   border: none;
-  background-color: #f1f2f6;
+  background-color: #f5f4f2;
   resize: none;
   ${(props) =>
     props.textarea &&
@@ -52,7 +52,7 @@ const InputBox = styled.input`
     props.commentInput &&
     css`
       width: 21.875rem;
-      height: 3.125rem;
+      height: 3.5rem;
       border-radius: 0.625rem;
       padding: 0.625rem;
     `}
