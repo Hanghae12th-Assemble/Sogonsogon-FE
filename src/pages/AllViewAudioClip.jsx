@@ -203,7 +203,6 @@ const MyEditContainer = styled.div`
   align-items: center;
   width: 100%;
   min-height: 3.75rem;
-  border-bottom: 0.0625rem solid ${({ theme }) => theme.color.darkWhite_col};
   padding: 0rem 1.875rem 0rem 1.875rem;
 `;
 
@@ -227,7 +226,7 @@ const MyDoneLayout = styled(MyEditLayout)`
 const StFrontSubstance = styled.div`
   margin-right: 0.3125rem;
   color: ${({ theme }) => theme.color.softBlack_col};
-  font-weight: 600;
+  font-weight: bold;
   font-size: 1.25rem;
 `;
 

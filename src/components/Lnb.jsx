@@ -13,6 +13,7 @@ import { ReactComponent as Asmr } from "../asset/icon/asmr.svg";
 import { ReactComponent as Notifications } from "../asset/icon/notifications.svg";
 import { ReactComponent as NotificationsOn } from "../asset/icon/notifications_on.svg";
 import { ReactComponent as Person } from "../asset/icon/person.svg";
+import { ReactComponent as Close } from "../asset/icon/close.svg";
 import { onMessage } from "../redux/module/reduxState/sseOnMessage";
 
 function Lnb({ isOpen, handleItemClick }) {
@@ -46,31 +47,33 @@ function Lnb({ isOpen, handleItemClick }) {
       <LnbLayout isOpen={isOpen}>
         {token && username ? (
           <>
-            {sseOnMessage ? (
-              <>
+            <LnbTopContainer>
+              <StCloseSvg onClick={() => handleItemClick()} />
+              {sseOnMessage ? (
+                <>
+                  <LnbAlarmBtnContainer>
+                    <LnbNotificationsOn
+                      onClick={() => {
+                        document.startViewTransition(() =>
+                          navigate(`/alarm/${username.userName}`)
+                        );
+                        dispatch(onMessage(false))
+                      }}
+                    />
+                  </LnbAlarmBtnContainer>
+                </>
+              ) : (
                 <LnbAlarmBtnContainer>
-                  <LnbNotificationsOn
+                  <LnbNotifications
                     onClick={() => {
                       document.startViewTransition(() =>
                         navigate(`/alarm/${username.userName}`)
                       );
-                      dispatch(onMessage(false))
                     }}
                   />
                 </LnbAlarmBtnContainer>
-              </>
-            ) : (
-              <LnbAlarmBtnContainer>
-                <LnbNotifications
-                  onClick={() => {
-                    document.startViewTransition(() =>
-                      navigate(`/alarm/${username.userName}`)
-                    );
-                  }}
-                />
-              </LnbAlarmBtnContainer>
-            )}
-
+              )}
+            </LnbTopContainer>
             <LoginTrueFalseContainer
               login={token && username}
               onClick={() => {
@@ -80,7 +83,7 @@ function Lnb({ isOpen, handleItemClick }) {
               }}
             >
               <p>{username.nickName}님</p>
-              <AiOutlineRight size={20} />
+              <StAiOutlineRight size={20} />
             </LoginTrueFalseContainer>
             <LoginHiLayout>안녕하세요!</LoginHiLayout>
           </>
@@ -92,7 +95,7 @@ function Lnb({ isOpen, handleItemClick }) {
               }}
             >
               <div>로그인/회원가입</div>
-              <AiOutlineRight size={20} />
+              <StAiOutlineRight size={20} />
             </LoginTrueFalseContainer>
             <LoginHiLayout />
           </>
@@ -162,10 +165,22 @@ const LnbLayout = styled.div`
     `};
 `;
 
+const LnbTopContainer = styled.div`
+  margin: 3.75rem 0rem 0rem 1.5625rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+const StCloseSvg = styled(Close)`
+  width: 2.1875rem;
+  cursor: pointer;
+`
+
 const LnbAlarmBtnContainer = styled.div`
   width: fit-content;
   height: fit-content;
-  margin: 3.75rem 0rem 0rem 1.5625rem;
+  margin-right: 1.4375rem
+  
 `;
 const LnbNotificationsOn = styled(NotificationsOn)`
   width: 1.75rem;
@@ -188,7 +203,7 @@ const LnbMenuLayout = styled.div`
     width: fit-content;
     height: fit-content;
     display: block;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: bold;
     margin-bottom: 0.625rem;
     display: flex;
@@ -205,7 +220,7 @@ const LoginTrueFalseContainer = styled.div`
   margin-top: ${({ login }) => (login ? "3.125rem" : "8.75rem")};
   width: 100%;
   height: 1.875rem;
-  padding: 0rem 0.625rem 0rem 1.5625rem;
+  padding: 0rem 1.625rem 0rem 1.5625rem;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -260,7 +275,7 @@ const MyAlbumBtn = styled.div`
     width: fit-content;
     height: fit-content;
     display: block;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: bold;
     margin-bottom: 0.625rem;
     display: flex;
@@ -272,3 +287,7 @@ const MyAlbumBtn = styled.div`
     margin-right: 0.625rem;
   }
 `;
+
+const StAiOutlineRight = styled(AiOutlineRight)`
+ opacity: 50%;
+`

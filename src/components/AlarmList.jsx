@@ -74,5 +74,6 @@ const MyAlarmDescLayout = styled.div`
   font-weight: 500;
 `;
 const MyAlarmTimeLayout = styled.div`
+  font-size: 0.9rem;
   color: ${({ theme }) => theme.color.gray_col};
 `;

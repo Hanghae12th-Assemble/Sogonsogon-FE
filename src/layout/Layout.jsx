@@ -32,7 +32,7 @@ const Layout = ({ children }) => {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
-                    heartbeatTimeout: 120000,
+                    heartbeatTimeout: 3600000,
                     withCredentials: true,
                 }
             );

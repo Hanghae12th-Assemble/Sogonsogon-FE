@@ -56,7 +56,7 @@ function MyAlarm() {
             editClicked={editClicked}
             contentType={unReadAlarm?.length}
             selectedContent={selectedContent}
-            substance={"개의 안 읽은 알람이 있습니다."}
+            substance={"개의 알림이 있습니다."}
             state={state}
             setState={setState}
             dataId={allAlarmDataID}
