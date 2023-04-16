@@ -11,7 +11,6 @@ import removeClip from "../module/removeClip";
 import getProfile from "../module/getProfile";
 import updateProfile from "../module/updateProfile";
 import getAlarm from "../module/getAlarm";
-import readAlarm from "../module/readAlarm";
 import removeAlarm from "../module/removeAlarm";
 import getClipDetail from "../module/getClipDetail";
 import updateClip from "../module/updateClip";
@@ -32,6 +31,7 @@ import getMyAlbum from "../module/getMyAlbum";
 import getFollow from "../module/getFollow";
 import likeClip from "../module/likeClip";
 import clickModiComment from "../module/reduxState/clickModiComment";
+import sseMessage from "../module/reduxState/sseOnMessage"
 
 const sotre = configureStore({
   reducer: {
@@ -47,7 +47,6 @@ const sotre = configureStore({
     gettingProfile: getProfile.reducer,
     updatingProfile: updateProfile.reducer,
     gettingAlarm: getAlarm.reducer,
-    readingAlarm: readAlarm.reducer,
     removingAlarm: removeAlarm.reducer,
     gettingClipDetail: getClipDetail.reducer,
     updatingClip: updateClip.reducer,
@@ -69,6 +68,7 @@ const sotre = configureStore({
     gettingFollow: getFollow.reducer,
     likingClip: likeClip.reducer,
     clickingModiComment: clickModiComment.reducer,
+    sseOnMessaging: sseMessage.reducer,
   },
 });
 

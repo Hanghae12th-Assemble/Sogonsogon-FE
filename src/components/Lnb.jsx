@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes, css } from "styled-components";
 import { AiOutlineRight } from "react-icons/ai";
 import { getCookie, removeCookie } from "../util/cookie";
 import { getLocalStorage, removeLocalStorage } from "../util/localStorage";
-import { EventSourcePolyfill } from "event-source-polyfill";
-import { __getAlarm } from "../redux/module/getAlarm";
 import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as Home } from "../asset/icon/home.svg";
 import { ReactComponent as Music } from "../asset/icon/music.svg";
@@ -15,65 +13,15 @@ import { ReactComponent as Asmr } from "../asset/icon/asmr.svg";
 import { ReactComponent as Notifications } from "../asset/icon/notifications.svg";
 import { ReactComponent as NotificationsOn } from "../asset/icon/notifications_on.svg";
 import { ReactComponent as Person } from "../asset/icon/person.svg";
+import { ReactComponent as Close } from "../asset/icon/close.svg";
+import { onMessage } from "../redux/module/reduxState/sseOnMessage";
 
 function Lnb({ isOpen, handleItemClick }) {
   const token = getCookie("access-token");
   const username = JSON.parse(getLocalStorage("userInfo"));
   const navigate = useNavigate();
-  const [alarm, setAlarm] = useState(false);
-  const data = useSelector((state) => state.gettingAlarm);
+  const sseOnMessage = useSelector((state) => state.sseOnMessaging)
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (token) {
-      // fetchSse();
-      if (isOpen === true) {
-        dispatch(__getAlarm());
-      }
-      // return () => {
-      //     eventSource && eventSource.close();
-      // };
-    }
-  }, [isOpen, alarm]);
-
-  useEffect(() => {
-    const unreadAlarms = data?.alarm?.some((item) => !item.readStatus);
-    setAlarm(unreadAlarms);
-  }, [data]);
-
-  // let eventSource;
-  // const fetchSse = async () => {
-  //     try {
-  //         //EventSource생성.
-  //         eventSource = new EventSourcePolyfill(
-  //             `${process.env.REACT_APP_BASE_URL}api/notificaiton/`,
-  //             {
-  //                 headers: {
-  //                     Authorization: `Bearer ${token}`,
-  //                 },
-  //             }
-  //         );
-
-  //         eventSource.onmessage = async function (event) {
-  //             if (event.data !== `EventStream Created. [userId=${username.id}]`) {
-  //                 const data = JSON.parse(event.data);
-  //                 const message = data.message;
-  //                 const notificationTitle = '새로운 알림이 있습니다!';
-  //                 const notificationOptions = {
-  //                     body: message,
-  //                 };
-  //                 setAlarm(true);
-  //                 const notification = new Notification(notificationTitle, notificationOptions);
-  //                 notification.onclick = function (event) {
-  //                     event.preventDefault();
-  //                     document.startViewTransition(() => navigate(`/alarm/${username.userName}`));
-  //                 };
-  //             }
-  //         };
-  //     } catch (error) {
-  //         if (eventSource) eventSource.close();
-  //     }
-  // };
 
   const [items, setItems] = useState([
     { id: 1, icon: <Home />, name: "홈", link: "/" },
@@ -99,10 +47,24 @@ function Lnb({ isOpen, handleItemClick }) {
       <LnbLayout isOpen={isOpen}>
         {token && username ? (
           <>
-            {alarm ? (
-              <>
+            <LnbTopContainer>
+              <StCloseSvg onClick={() => handleItemClick()} />
+              {sseOnMessage ? (
+                <>
+                  <LnbAlarmBtnContainer>
+                    <LnbNotificationsOn
+                      onClick={() => {
+                        document.startViewTransition(() =>
+                          navigate(`/alarm/${username.userName}`)
+                        );
+                        dispatch(onMessage(false))
+                      }}
+                    />
+                  </LnbAlarmBtnContainer>
+                </>
+              ) : (
                 <LnbAlarmBtnContainer>
-                  <LnbNotificationsOn
+                  <LnbNotifications
                     onClick={() => {
                       document.startViewTransition(() =>
                         navigate(`/alarm/${username.userName}`)
@@ -110,19 +72,8 @@ function Lnb({ isOpen, handleItemClick }) {
                     }}
                   />
                 </LnbAlarmBtnContainer>
-              </>
-            ) : (
-              <LnbAlarmBtnContainer>
-                <LnbNotifications
-                  onClick={() => {
-                    document.startViewTransition(() =>
-                      navigate(`/alarm/${username.userName}`)
-                    );
-                  }}
-                />
-              </LnbAlarmBtnContainer>
-            )}
-
+              )}
+            </LnbTopContainer>
             <LoginTrueFalseContainer
               login={token && username}
               onClick={() => {
@@ -132,7 +83,7 @@ function Lnb({ isOpen, handleItemClick }) {
               }}
             >
               <p>{username.nickName}님</p>
-              <AiOutlineRight size={20} />
+              <StAiOutlineRight size={20} />
             </LoginTrueFalseContainer>
             <LoginHiLayout>안녕하세요!</LoginHiLayout>
           </>
@@ -144,7 +95,7 @@ function Lnb({ isOpen, handleItemClick }) {
               }}
             >
               <div>로그인/회원가입</div>
-              <AiOutlineRight size={20} />
+              <StAiOutlineRight size={20} />
             </LoginTrueFalseContainer>
             <LoginHiLayout />
           </>
@@ -214,10 +165,22 @@ const LnbLayout = styled.div`
     `};
 `;
 
+const LnbTopContainer = styled.div`
+  margin: 3.75rem 0rem 0rem 1.5625rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+const StCloseSvg = styled(Close)`
+  width: 2.1875rem;
+  cursor: pointer;
+`
+
 const LnbAlarmBtnContainer = styled.div`
   width: fit-content;
   height: fit-content;
-  margin: 3.75rem 0rem 0rem 1.5625rem;
+  margin-right: 1.4375rem
+  
 `;
 const LnbNotificationsOn = styled(NotificationsOn)`
   width: 1.75rem;
@@ -240,7 +203,7 @@ const LnbMenuLayout = styled.div`
     width: fit-content;
     height: fit-content;
     display: block;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: bold;
     margin-bottom: 0.625rem;
     display: flex;
@@ -257,7 +220,7 @@ const LoginTrueFalseContainer = styled.div`
   margin-top: ${({ login }) => (login ? "3.125rem" : "8.75rem")};
   width: 100%;
   height: 1.875rem;
-  padding: 0rem 0.625rem 0rem 1.5625rem;
+  padding: 0rem 1.625rem 0rem 1.5625rem;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -312,7 +275,7 @@ const MyAlbumBtn = styled.div`
     width: fit-content;
     height: fit-content;
     display: block;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: bold;
     margin-bottom: 0.625rem;
     display: flex;
@@ -324,3 +287,7 @@ const MyAlbumBtn = styled.div`
     margin-right: 0.625rem;
   }
 `;
+
+const StAiOutlineRight = styled(AiOutlineRight)`
+ opacity: 50%;
+`

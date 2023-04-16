@@ -5,7 +5,7 @@ import SelectBtnContainer from "./SelectBtnContainer";
 function AlarmList({ state, setState, editClicked, selectedContent, data }) {
   return (
     <>
-      <MyAlarmLayout isRead={data.readStatus}>
+      <MyAlarmLayout>
         <SelectBtnContainer
           editClicked={editClicked}
           state={state}
@@ -30,7 +30,7 @@ export default AlarmList;
 
 const MyAlarmLayout = styled.div`
   width: 31.25rem;
-  background-color: ${({ isRead }) => (isRead ? "none" : "#fffaf1")};
+  background-color: ${({ theme }) => theme.color.white_col};
   border-bottom: 0.0625rem solid ${({ theme }) => theme.color.softGray_col};
   display: flex;
   flex-direction: row;
@@ -74,5 +74,6 @@ const MyAlarmDescLayout = styled.div`
   font-weight: 500;
 `;
 const MyAlarmTimeLayout = styled.div`
+  font-size: 0.9rem;
   color: ${({ theme }) => theme.color.gray_col};
 `;

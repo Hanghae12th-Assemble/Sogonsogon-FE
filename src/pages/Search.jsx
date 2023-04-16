@@ -147,7 +147,7 @@ const SearchbarBox = styled.div`
 
 const SearchInput = styled.input`
   width: 23.75rem;
-  height: 2.1875rem;
+  height: 2.5rem;
   padding-left: 3.4375rem;
   border-radius: 0.9375rem;
   margin-left: 1.25rem;

@@ -87,7 +87,7 @@ const EditContainerLeftLayout = styled.div`
 `;
 
 const MyEditLayout = styled.div`
-  color:${({ theme }) => theme.color.darkGray_col};
+  color:${({ theme }) => theme.color.orange_col};
   cursor: pointer;
 `;
 

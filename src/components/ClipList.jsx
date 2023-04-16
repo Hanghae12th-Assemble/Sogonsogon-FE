@@ -136,6 +136,7 @@ const AllClipsDottedLine = styled.div`
   top: 1.25rem;
   width: 0.0625rem;
   height: 8.75rem;
+  opacity: 50%;
   border: 0.0625rem dotted ${({ theme }) => theme.color.darkGray_col};
 `;
 

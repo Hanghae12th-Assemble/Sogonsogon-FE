@@ -2,8 +2,61 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Logo } from '../asset/logo/logo.svg';
 import { ReactComponent as Symbol } from '../asset/logo/symbol.svg';
+import { getCookie } from "../util/cookie";
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { EventSourcePolyfill } from 'event-source-polyfill';
+import { useDispatch } from 'react-redux';
+import { onMessage } from '../redux/module/reduxState/sseOnMessage';
+
 
 const Layout = ({ children }) => {
+    const token = getCookie("access-token");
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (token) {
+            fetchSse();
+            return () => {
+                eventSource && eventSource.close();
+            };
+        }
+    }, []);
+    let eventSource;
+    const fetchSse = async () => {
+        try {
+            //EventSource생성.
+            eventSource = new EventSourcePolyfill(
+                `${process.env.REACT_APP_BASE_URL}api/notificaiton/`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                    heartbeatTimeout: 3600000,
+                    withCredentials: true,
+                }
+            );
+
+            eventSource.onmessage = async function (event) {
+                const checkJSON = event.data.split(" ")[0];
+                const data = checkJSON !== "EventStream" && JSON.parse(event.data);
+                const message = data.message;
+                dispatch(onMessage(true))
+                const notificationTitle = '새로운 알림이 있습니다!';
+                const notificationOptions = {
+                    body: message,
+                };
+                if (notificationOptions.body !== undefined) {
+                    const notification = new Notification(notificationTitle, notificationOptions);
+                    notification.onclick = function (event) {
+                        event.preventDefault();
+                    };
+                }
+            };
+        } catch (error) {
+            if (eventSource) eventSource.close();
+        }
+    };
     return (
         <>
             <LayoutBox>

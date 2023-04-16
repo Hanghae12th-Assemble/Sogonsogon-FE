@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __getAlarm } from "../redux/module/getAlarm";
-import { __readAlarm } from "../redux/module/readAlarm";
 import { __removeAlarm } from "../redux/module/removeAlarm";
 import Navbar from "../components/Navbar";
 import { AiOutlineArrowLeft, AiOutlineSync } from "react-icons/ai";
@@ -11,7 +10,7 @@ import SelectedContentRemoveBtn from "../components/SelectedContentRemoveBtn";
 import AlarmList from "../components/AlarmList";
 
 function MyAlarm() {
-  const { gettingAlarm, readingAlarm, removingAlarm } = useSelector(
+  const { gettingAlarm, removingAlarm } = useSelector(
     (state) => state
   );
   const dispatch = useDispatch();
@@ -24,18 +23,11 @@ function MyAlarm() {
 
   useEffect(() => {
     dispatch(__getAlarm());
-  }, [readingAlarm, removingAlarm]);
+  }, [removingAlarm]);
 
   const unReadAlarm = gettingAlarm?.alarm?.filter(
     (alarm) => alarm.readStatus !== true
   );
-  const unReadAlarmHandler = () => {
-    if (unReadAlarm?.length > 0) {
-      unReadAlarm?.forEach((alarm) => {
-        dispatch(__readAlarm(alarm.notificationId));
-      });
-    }
-  };
 
   const allAlarmDataID = gettingAlarm?.alarm?.map((item) => item.notificationId)
   return (
@@ -46,7 +38,7 @@ function MyAlarm() {
             <Navbar
               toNavigate={"/"}
               iconleft={
-                <AiOutlineArrowLeft size={25} onClick={unReadAlarmHandler} />
+                <AiOutlineArrowLeft size={25} />
               }
               title={"알림"}
               iconright={
@@ -55,7 +47,6 @@ function MyAlarm() {
                   cursor={"pointer"}
                   onClick={() => {
                     dispatch(__getAlarm());
-                    unReadAlarmHandler();
                   }}
                 />
               }
@@ -65,7 +56,7 @@ function MyAlarm() {
             editClicked={editClicked}
             contentType={unReadAlarm?.length}
             selectedContent={selectedContent}
-            substance={"개의 안 읽은 알람이 있습니다."}
+            substance={"개의 알림이 있습니다."}
             state={state}
             setState={setState}
             dataId={allAlarmDataID}

@@ -66,7 +66,7 @@ function SearchHistory({
 export default SearchHistory;
 
 const SearchHistoryContainer = styled.div`
-  background-color: ${({ theme }) => theme.color.coolGray_col};
+  background-color: ${({ theme }) => theme.color.softGray_col};
   position: relative;
   width: 100%;
   height: 100%;
@@ -77,11 +77,12 @@ const SearchHistoryContainer = styled.div`
 `;
 
 const SearchHistoryHeader = styled.div`
-  background-color: ${({ theme }) => theme.color.coolGray_col};
+  background-color: ${({ theme }) => theme.color.softGray_col};
   min-height: 3.125rem;
   display: flex;
   align-items: center;
-  padding: 0.625rem 0rem 0rem 2.0625rem;
+  align-items: flex-end;
+  padding: .125rem 0rem .3125rem 2.0625rem;
   margin-top: 0.625rem;
   font-size: 1.25rem;
   color: ${({ theme }) => theme.color.softBlack_col};
@@ -101,7 +102,7 @@ const SearchHistoryLayout = styled.div`
   padding: 0rem 1.25rem 0rem 0.625rem;
   width: 100%;
   min-height: 2.5rem;
-  background-color: ${({ theme }) => theme.color.coolGray_col};
+  background-color: ${({ theme }) => theme.color.softGray_col};
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
