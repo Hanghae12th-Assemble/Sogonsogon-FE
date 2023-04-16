@@ -16,7 +16,6 @@ import { ReactComponent as Edit } from "../asset/icon/edit.svg";
 
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
-  const navigate = useNavigate();
   const [preview, setPreview] = useState("");
   const { id } = useParams();
   const [pageState] = useState(false);
@@ -25,6 +24,7 @@ function Profile() {
   const dispatch = useDispatch();
   const selectBtn = useSelector((state) => state.profileButn);
   const getUserInfo = useSelector((state) => state?.gettingProfile?.profile);
+  console.log(getUserInfo);
   const modiSwitch = useSelector((state) => state?.profileButn);
 
   const onChangeimge = (e) => {
@@ -102,7 +102,7 @@ function Profile() {
       {selectBtn ? (
         <form onSubmit={handleSubmit(submitForm)}>
           <div>
-            <ProfileMidumInput>
+            <div>
               <span>닉네임 *</span>
               <ProfileMidumInputbox>
                 <Input
@@ -116,7 +116,7 @@ function Profile() {
                   }}
                 />
               </ProfileMidumInputbox>
-            </ProfileMidumInput>
+            </div>
           </div>
           <ProfileBottom>
             <div>
@@ -128,6 +128,7 @@ function Profile() {
                 asFor={"textarea"}
                 register={register}
                 type={"text"}
+                value={getUserInfo?.introduction}
                 name={"memberInfo"}
                 placeholder={"자기소개를 입력해주세요."}
                 validation={{
@@ -214,10 +215,6 @@ const ProfileTopName = styled.div`
   margin-top: 1.25rem;
 `;
 
-const ProfileMidumInput = styled.div`
-  margin-bottom: 3.125rem;
-`;
-
 const ProfileMidumInputbox = styled.div`
   width: 28.75rem;
   height: 3rem;
@@ -231,7 +228,7 @@ const ProfileMidumInputbox = styled.div`
 `;
 
 const ProfileBottom = styled.div`
-  margin-top: 3.125rem;
+  margin-top: 2.5rem;
 `;
 
 const ProfileBottomTitle = styled.div`

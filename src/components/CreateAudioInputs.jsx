@@ -27,6 +27,7 @@ function CreateRadioInputs({
   const btninfo = useSelector((state) => state.radioButn[0]);
   const [formState, setFormState] = useState("");
   const navigate = useNavigate();
+  const { gettingAlbumDetail } = useSelector((state) => state);
 
   useEffect(() => {
     setFormState(formcheck);
@@ -67,7 +68,7 @@ function CreateRadioInputs({
       navigate(-1);
     } else {
       console.log(action);
-      alert("본인 엘범이 아니거나 중복된 앨범입니다.");
+      alert("본인 앨범이 아니거나 중복된 앨범입니다.");
     }
 
     reset();
@@ -83,6 +84,11 @@ function CreateRadioInputs({
               register={register}
               type={"text"}
               name={"title"}
+              value={
+                formState === "modify"
+                  ? gettingAlbumDetail?.album?.data?.result?.title
+                  : null
+              }
               placeholder={"앨범 제목을 입력해주세요."}
               validation={{
                 required: "앨범 제목을 입력해주세요.",
@@ -98,6 +104,11 @@ function CreateRadioInputs({
               register={register}
               type={"text"}
               name={"introduction"}
+              value={
+                formState === "modify"
+                  ? gettingAlbumDetail?.album?.data?.result?.instruction
+                  : null
+              }
               placeholder={"앨범 정보를 입력해주세요."}
               validation={{
                 required: "앨범 정보를 입력해주세요.",

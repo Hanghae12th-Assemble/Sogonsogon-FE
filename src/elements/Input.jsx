@@ -37,6 +37,7 @@ const InputBox = styled.input`
   height: 3rem;
   border-radius: 0.625rem;
   border: none;
+  padding: 0 0.625rem;
   background-color: #f5f4f2;
   resize: none;
   ${(props) =>
