@@ -31,10 +31,10 @@ function Lnb({ isOpen, handleItemClick }) {
     }
   }, [isOpen, alarm]);
 
-  useEffect(() => {
-    const unreadAlarms = data?.alarm?.some((item) => !item.readStatus);
-    setAlarm(unreadAlarms);
-  }, [data]);
+  // useEffect(() => {
+  //   const unreadAlarms = data?.alarm?.some((item) => !item.readStatus);
+  //   setAlarm(unreadAlarms);
+  // }, [data]);
 
   const [items, setItems] = useState([
     { id: 1, icon: <Home />, name: "홈", link: "/" },

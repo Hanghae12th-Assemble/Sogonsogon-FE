@@ -35,14 +35,13 @@ const Layout = ({ children }) => {
             eventSource.onmessage = async function (event) {
                 const checkJSON = event.data.split(" ")[0];
                 const data = checkJSON !== "EventStream" && JSON.parse(event.data);
-                console.log(data)
                 const message = data.message;
                 const notificationTitle = '새로운 알림이 있습니다!';
                 const notificationOptions = {
                     body: message,
                 };
                 setAlarm(true);
-                if (notificationOptions.body !== "") {
+                if (notificationOptions.body !== undefined) {
                     const notification = new Notification(notificationTitle, notificationOptions);
                     notification.onclick = function (event) {
                         event.preventDefault();
