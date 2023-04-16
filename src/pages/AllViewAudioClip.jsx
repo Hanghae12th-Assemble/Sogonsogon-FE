@@ -59,7 +59,7 @@ function AllViewAudioClip() {
     }
   };
 
-  const totalClipCount = gettingClips?.clip[0]?.data?.metadata?.audioClipCount;
+  const totalClipCount = gettingClips?.clip[1]?.data?.metadata?.audioClipCount;
   const clipWriter = gettingClips?.clip[0]?.data?.isMine;
 
   return (
