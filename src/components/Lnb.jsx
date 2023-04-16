@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes, css } from "styled-components";
 import { AiOutlineRight } from "react-icons/ai";
 import { getCookie, removeCookie } from "../util/cookie";
 import { getLocalStorage, removeLocalStorage } from "../util/localStorage";
-import { EventSourcePolyfill } from "event-source-polyfill";
-import { __getAlarm } from "../redux/module/getAlarm";
 import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as Home } from "../asset/icon/home.svg";
 import { ReactComponent as Music } from "../asset/icon/music.svg";
@@ -15,65 +13,14 @@ import { ReactComponent as Asmr } from "../asset/icon/asmr.svg";
 import { ReactComponent as Notifications } from "../asset/icon/notifications.svg";
 import { ReactComponent as NotificationsOn } from "../asset/icon/notifications_on.svg";
 import { ReactComponent as Person } from "../asset/icon/person.svg";
+import { onMessage } from "../redux/module/reduxState/sseOnMessage";
 
 function Lnb({ isOpen, handleItemClick }) {
   const token = getCookie("access-token");
   const username = JSON.parse(getLocalStorage("userInfo"));
   const navigate = useNavigate();
-  const [alarm, setAlarm] = useState(false);
-  const data = useSelector((state) => state.gettingAlarm);
+  const sseOnMessage = useSelector((state) => state.sseOnMessaging)
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (token) {
-      // fetchSse();
-      if (isOpen === true) {
-        dispatch(__getAlarm());
-      }
-      // return () => {
-      //     eventSource && eventSource.close();
-      // };
-    }
-  }, [isOpen, alarm]);
-
-  useEffect(() => {
-    const unreadAlarms = data?.alarm?.some((item) => !item.readStatus);
-    setAlarm(unreadAlarms);
-  }, [data]);
-
-  // let eventSource;
-  // const fetchSse = async () => {
-  //     try {
-  //         //EventSource생성.
-  //         eventSource = new EventSourcePolyfill(
-  //             `${process.env.REACT_APP_BASE_URL}api/notificaiton/`,
-  //             {
-  //                 headers: {
-  //                     Authorization: `Bearer ${token}`,
-  //                 },
-  //             }
-  //         );
-
-  //         eventSource.onmessage = async function (event) {
-  //             if (event.data !== `EventStream Created. [userId=${username.id}]`) {
-  //                 const data = JSON.parse(event.data);
-  //                 const message = data.message;
-  //                 const notificationTitle = '새로운 알림이 있습니다!';
-  //                 const notificationOptions = {
-  //                     body: message,
-  //                 };
-  //                 setAlarm(true);
-  //                 const notification = new Notification(notificationTitle, notificationOptions);
-  //                 notification.onclick = function (event) {
-  //                     event.preventDefault();
-  //                     document.startViewTransition(() => navigate(`/alarm/${username.userName}`));
-  //                 };
-  //             }
-  //         };
-  //     } catch (error) {
-  //         if (eventSource) eventSource.close();
-  //     }
-  // };
 
   const [items, setItems] = useState([
     { id: 1, icon: <Home />, name: "홈", link: "/" },
@@ -99,7 +46,7 @@ function Lnb({ isOpen, handleItemClick }) {
       <LnbLayout isOpen={isOpen}>
         {token && username ? (
           <>
-            {alarm ? (
+            {sseOnMessage ? (
               <>
                 <LnbAlarmBtnContainer>
                   <LnbNotificationsOn
@@ -107,6 +54,7 @@ function Lnb({ isOpen, handleItemClick }) {
                       document.startViewTransition(() =>
                         navigate(`/alarm/${username.userName}`)
                       );
+                      dispatch(onMessage(false))
                     }}
                   />
                 </LnbAlarmBtnContainer>
