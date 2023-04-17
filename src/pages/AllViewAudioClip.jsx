@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getClips, initInfinitiScroll } from "../redux/module/geClips";
 import { useInView } from "react-intersection-observer";
 import { __removeClip } from "../redux/module/removeClip";
+import Loading from "../components/Loading";
 
 function AllViewAudioClip() {
   const { id } = useParams();
@@ -64,6 +65,7 @@ function AllViewAudioClip() {
 
   return (
     <>
+      {gettingClips?.isLoading && <Loading />}
       <AllClipsNavBarBox>
         <AllClipsNavBarLeftLayout>
           <StAiOutlineArrowLeft
