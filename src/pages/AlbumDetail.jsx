@@ -34,7 +34,6 @@ function AlbumDetail() {
     selectedContent: [],
     expanded: true,
   });
-  const [url, setUrl] = useState("")
 
   useEffect(() => {
     dispatch(__getAlbumDetail(id));
@@ -63,7 +62,6 @@ function AlbumDetail() {
 
   const imageUrl = gettingAlbumDetail?.album?.data?.result?.backgroundImageUrl
   // const uniqueUrl = `${imageUrl}?timestamp=${Date.now()}`
-  console.log(gettingAlbumDetail?.album?.data?.result?.instruction?.length)
   return (
     <>
       <NavbarContainer>
@@ -131,7 +129,7 @@ function AlbumDetail() {
             <p>앨범 소개</p>
             <span>{gettingAlbumDetail?.album?.data?.result?.instruction}</span>
             {gettingAlbumDetail?.album?.data?.result?.instruction?.length >
-              100 && (
+              84 && (
                 <ExpandButtonContainer onClick={handleClick}>
                   {expanded ? (
                     <>
