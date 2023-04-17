@@ -39,7 +39,13 @@ function ClipList({ editClicked, state, setState, selectedContent, data }) {
               }}
             />
           )}
-          <AudioCilpImg backgroundImageUrl={data?.audioclipImageUrl} />
+          <AudioCilpImg backgroundImageUrl={data?.audioclipImageUrl}
+            onClick={() => {
+              document.startViewTransition(() =>
+                navigate(`/clipplay/${data?.id}`)
+              );
+            }}
+          />
           <AllClicpsDescLayout
             onClick={() => {
               document.startViewTransition(() =>
@@ -75,6 +81,7 @@ const AllClipsLayout = styled.div`
 const AudioCilpImg = styled.div`
   min-width: 4.6875rem;
   max-height: 4.6875rem;
+  cursor: pointer;
   position: relative;
   background-color: ${({ theme }) => theme.color.darkGray_col};
   border-radius: 0.625rem;
