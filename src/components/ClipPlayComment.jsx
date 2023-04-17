@@ -143,11 +143,11 @@ const ClipplayCommentBox = styled.div`
   border-top-left-radius: 1.875rem;
   border-top-right-radius: 1.875rem;
   height: 37.5rem;
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 29.375rem;
   z-index: 1;
+  width: 42%;
   background-color: ${({ theme }) => theme.color.white_col};
   color: ${({ theme }) => theme.color.softBlack_col};
   padding: 0 1.875rem;

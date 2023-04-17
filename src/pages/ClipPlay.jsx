@@ -166,13 +166,13 @@ function ClipPlay() {
             <ClipplayForward size={50} />
           </div>
         </ClipplayPlayIcon>
-        <ClipplayComment onClick={setCommentBox}>
+        <ClipplayComments onClick={setCommentBox}>
           <div>
             <BiComment size={20} />
           </div>
           <span>댓글</span>
           <ClipplayCommentCount>{ClipDetail}</ClipplayCommentCount>
-        </ClipplayComment>
+        </ClipplayComments>
       </ClipplayContent>
     </>
   );
@@ -306,7 +306,7 @@ const ClipplayForward = styled(Forward)`
   width: 3.4375rem;
 `;
 
-const ClipplayComment = styled.div`
+const ClipplayComments = styled.div`
   cursor: pointer;
   margin-top: 8.4375rem;
   display: flex;
