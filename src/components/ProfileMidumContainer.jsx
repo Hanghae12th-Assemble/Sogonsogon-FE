@@ -8,11 +8,13 @@ import { __getFollow } from "../redux/module/getFollow";
 import { useParams } from "react-router-dom";
 import { getLocalStorage } from "../util/localStorage";
 import { useThrottledCallback } from "../hooks/useThrottledCallback";
+import decryptData from "../util/decryptKey";
 
 function ProfileMidumContainer() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const info = JSON.parse(getLocalStorage("userInfo"));
+  const encryptedUserInfo = getLocalStorage("userInfo");
+  const info = decryptData(encryptedUserInfo);
   const userInfo = useSelector((state) => state?.updatingProfile?.profile);
   const getUserInfo = useSelector((state) => state?.gettingProfile?.profile);
   const getFollowing = useSelector(

@@ -15,12 +15,14 @@ import { ReactComponent as NotificationsOn } from "../asset/icon/notifications_o
 import { ReactComponent as Person } from "../asset/icon/person.svg";
 import { ReactComponent as Close } from "../asset/icon/close.svg";
 import { onMessage } from "../redux/module/reduxState/sseOnMessage";
+import decryptData from "../util/decryptKey";
 
 function Lnb({ isOpen, handleItemClick }) {
   const token = getCookie("access-token");
-  const username = JSON.parse(getLocalStorage("userInfo"));
+  const encryptedUserInfo = getLocalStorage("userInfo");
+  const username = decryptData(encryptedUserInfo);
   const navigate = useNavigate();
-  const sseOnMessage = useSelector((state) => state.sseOnMessaging)
+  const sseOnMessage = useSelector((state) => state.sseOnMessaging);
   const dispatch = useDispatch();
 
   const [items, setItems] = useState([
@@ -57,7 +59,7 @@ function Lnb({ isOpen, handleItemClick }) {
                         document.startViewTransition(() =>
                           navigate(`/alarm/${username.userName}`)
                         );
-                        dispatch(onMessage(false))
+                        dispatch(onMessage(false));
                       }}
                     />
                   </LnbAlarmBtnContainer>
@@ -170,17 +172,16 @@ const LnbTopContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-`
+`;
 const StCloseSvg = styled(Close)`
   width: 2.1875rem;
   cursor: pointer;
-`
+`;
 
 const LnbAlarmBtnContainer = styled.div`
   width: fit-content;
   height: fit-content;
-  margin-right: 1.4375rem
-  
+  margin-right: 1.4375rem;
 `;
 const LnbNotificationsOn = styled(NotificationsOn)`
   width: 1.75rem;
@@ -289,5 +290,5 @@ const MyAlbumBtn = styled.div`
 `;
 
 const StAiOutlineRight = styled(AiOutlineRight)`
- opacity: 50%;
-`
+  opacity: 50%;
+`;

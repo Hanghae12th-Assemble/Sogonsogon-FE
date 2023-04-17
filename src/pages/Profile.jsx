@@ -13,13 +13,15 @@ import { useForm } from "react-hook-form";
 import { getLocalStorage } from "../util/localStorage";
 import { useParams } from "react-router";
 import { ReactComponent as Edit } from "../asset/icon/edit.svg";
+import decryptData from "../util/decryptKey";
 
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
   const { id } = useParams();
   const [pageState] = useState(false);
-  const user = JSON.parse(getLocalStorage("userInfo"));
+  const encryptedUserInfo = getLocalStorage("userInfo");
+  const user = decryptData(encryptedUserInfo);
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
   const selectBtn = useSelector((state) => state.profileButn);
