@@ -31,7 +31,7 @@ import getMyAlbum from "../module/getMyAlbum";
 import getFollow from "../module/getFollow";
 import likeClip from "../module/likeClip";
 import clickModiComment from "../module/reduxState/clickModiComment";
-import sseMessage from "../module/reduxState/sseOnMessage"
+import sseMessage from "../module/reduxState/sseOnMessage";
 
 const sotre = configureStore({
   reducer: {

@@ -202,6 +202,8 @@ const ClipplayContent = styled.div`
   color: ${({ theme }) => theme.color.white_col};
   width: 100%;
   position: absolute;
+  overflow-y: scroll;
+  height: 101vh;
 `;
 
 const ClipplayTitle = styled.div`

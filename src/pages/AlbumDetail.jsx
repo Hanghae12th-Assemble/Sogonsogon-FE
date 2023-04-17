@@ -29,6 +29,7 @@ function AlbumDetail() {
   const formattedDate = gettingAlbumDetail?.album?.data?.result?.createdAt
     ?.slice(0, 10)
     .replace(/-/g, ".");
+
   const [state, setState] = useState({
     editClicked: false,
     selectedContent: [],

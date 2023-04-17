@@ -11,7 +11,7 @@ import { pageswitch } from "../redux/module/reduxState/profileModifyButton";
 import Input from "../elements/Input";
 import { useForm } from "react-hook-form";
 import { getLocalStorage } from "../util/localStorage";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { ReactComponent as Edit } from "../asset/icon/edit.svg";
 
 function Profile() {
@@ -24,7 +24,6 @@ function Profile() {
   const dispatch = useDispatch();
   const selectBtn = useSelector((state) => state.profileButn);
   const getUserInfo = useSelector((state) => state?.gettingProfile?.profile);
-  console.log(getUserInfo);
   const modiSwitch = useSelector((state) => state?.profileButn);
 
   const onChangeimge = (e) => {

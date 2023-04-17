@@ -30,13 +30,13 @@ function CreateClipInputs({
   const navigate = useNavigate();
   const { gettingClips } = useSelector((state) => state);
 
-  const Clipdata = gettingClips?.clip.map((item) => {
-    return item?.data?.result.map((object) => {
-      return object;
+  const ClipdataInfo = gettingClips?.clip.flatMap((item) => {
+    return item?.data?.result.filter((object) => {
+      return object.id === Number(id);
     });
   });
 
-  console.log(Clipdata[0]?.length === 0 ? Clipdata[1] : Clipdata[0]);
+  const dataClip = ClipdataInfo[0];
 
   useEffect(() => {
     setFormState(formcheck);
@@ -98,6 +98,7 @@ function CreateClipInputs({
               register={register}
               type={"text"}
               name={"title"}
+              value={formState === "modify" ? dataClip?.title : ""}
               placeholder={"클립 제목을 입력해주세요."}
               validation={{
                 required: "클립 제목을 입력해주세요.",
@@ -113,6 +114,7 @@ function CreateClipInputs({
               register={register}
               type={"text"}
               name={"introduction"}
+              value={formState === "modify" ? dataClip?.contents : ""}
               placeholder={"클립 정보를 입력해주세요."}
               validation={{
                 required: "클립 정보를 입력해주세요.",

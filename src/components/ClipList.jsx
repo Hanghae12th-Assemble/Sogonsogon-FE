@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import SelectBtnContainer from "../components/SelectBtnContainer";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
@@ -50,7 +50,11 @@ function ClipList({ editClicked, state, setState, selectedContent, data }) {
             <AllClicpsTitleLayout>{data?.title}</AllClicpsTitleLayout>
             <AllClicpsHeartContianer>
               <div>{dateTime}</div>
-              {data?.likeCheck === true ? <StAiFillHeart size={16} /> : <StAiOutlineHeart size={16} />}
+              {data?.likeCheck === true ? (
+                <StAiFillHeart size={16} />
+              ) : (
+                <StAiOutlineHeart size={16} />
+              )}
               <div>{data?.isLikeCount}</div>
             </AllClicpsHeartContianer>
           </AllClicpsDescLayout>
@@ -195,4 +199,3 @@ const StAiFillHeart = styled(AiFillHeart)`
   color: ${({ theme }) => theme.color.orange_col};
   margin-right: 0.3125rem;
 `;
-
