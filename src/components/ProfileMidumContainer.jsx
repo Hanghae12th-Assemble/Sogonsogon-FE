@@ -16,7 +16,9 @@ function ProfileMidumContainer() {
   const { id } = useParams();
   const encryptedUserInfo = getLocalStorage("userInfo");
   const info = decryptData(encryptedUserInfo);
-  const userInfo = useSelector((state) => state?.updatingProfile?.profile);
+  const updateUserInfo = useSelector(
+    (state) => state?.updatingProfile?.profile
+  );
   const getUserInfo = useSelector((state) => state?.gettingProfile?.profile);
   const getUserInfoLoding = useSelector((state) => state?.gettingProfile);
   const getFollowing = useSelector(
@@ -27,7 +29,7 @@ function ProfileMidumContainer() {
   useEffect(() => {
     dispatch(__getProfile(id));
     dispatch(__getFollow(id));
-  }, [userInfo, userFollow]);
+  }, [updateUserInfo, userFollow]);
 
   const followBtn = useThrottledCallback(
     () => {
@@ -37,12 +39,29 @@ function ProfileMidumContainer() {
     [dispatch, id]
   );
 
-  // if (getUserInfoLoding?.isLoading) {
-  //   return <Loading />;
-  // }
+  if (getUserInfoLoding?.isLoading) {
+    return (
+      <ProfileLoding>
+        <Loading />
+      </ProfileLoding>
+    );
+  }
 
   return (
     <>
+      <ProfileTop>
+        <ProfileTopPhoto>
+          <ProfileImg src={getUserInfo?.profileImageUrl} alt="Preview" />
+        </ProfileTopPhoto>
+        <ProfileTopName>
+          <ProfileTopnicknameMembername>
+            <ProfileTopMembername>{getUserInfo?.nickname}</ProfileTopMembername>
+          </ProfileTopnicknameMembername>
+          <ProfileTopnicknameMembername>
+            <ProfileTopnickName>@{getUserInfo?.membername}</ProfileTopnickName>
+          </ProfileTopnicknameMembername>
+        </ProfileTopName>
+      </ProfileTop>
       <ProfileTopFollowBox>
         <ProfileTopFollow>
           <ProfileTopFollower>
@@ -78,6 +97,56 @@ function ProfileMidumContainer() {
 }
 
 export default ProfileMidumContainer;
+
+const ProfileLoding = styled.div`
+  height: 100%;
+  width: 95%;
+  position: absolute;
+`;
+
+const ProfileTop = styled.div`
+  height: 12.5rem;
+  display: flex;
+  align-items: center;
+  margin-top: 5rem;
+`;
+
+const ProfileTopPhoto = styled.div`
+  border-radius: 50%;
+  width: 7.5rem;
+  height: 7.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ProfileImg = styled.img`
+  width: 6.25rem;
+  height: 6.25rem;
+  border-radius: 50%;
+`;
+
+const ProfileTopnicknameMembername = styled.div`
+  margin-bottom: 0.625rem;
+  margin-left: 0.625rem;
+  position: relative;
+  bottom: 0.625rem;
+`;
+
+const ProfileTopnickName = styled.span`
+  font-weight: 400;
+  opacity: 80%;
+`;
+
+const ProfileTopMembername = styled.span`
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-size: 20px;
+`;
+
+const ProfileTopName = styled.div`
+  margin-top: 1.25rem;
+`;
 
 const ProfileTopFollowBox = styled.div`
   width: 100%;

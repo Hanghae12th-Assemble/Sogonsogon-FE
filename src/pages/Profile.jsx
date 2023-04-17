@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { MdOutlineModeEdit } from "react-icons/md";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import Button from "../elements/Button";
@@ -14,7 +13,7 @@ import { getLocalStorage } from "../util/localStorage";
 import { useParams } from "react-router";
 import { ReactComponent as Edit } from "../asset/icon/edit.svg";
 import decryptData from "../util/decryptKey";
-import Loading from "../components/Loading";
+import { __getProfile } from "../redux/module/getProfile";
 
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
@@ -27,7 +26,6 @@ function Profile() {
   const dispatch = useDispatch();
   const selectBtn = useSelector((state) => state.profileButn);
   const getUserInfo = useSelector((state) => state?.gettingProfile?.profile);
-  const getUserInfoLoding = useSelector((state) => state?.gettingProfile);
   const modiSwitch = useSelector((state) => state?.profileButn);
 
   const onChangeimge = (e) => {
@@ -83,77 +81,83 @@ function Profile() {
           }
         />
       </ProfileNavbarfixed>
-      <ProfileTop>
-        <ProfileTopPhoto>
-          {preview ? (
-            <div>
-              <ProfileImg src={preview} alt="Preview" />
-            </div>
-          ) : (
-            <ProfileImg src={getUserInfo?.profileImageUrl} alt="Preview" />
-          )}
-        </ProfileTopPhoto>
-        <ProfileTopName>
-          <ProfileTopnicknameMembername>
-            <ProfileTopMembername>{getUserInfo?.nickname}</ProfileTopMembername>
-          </ProfileTopnicknameMembername>
-          <ProfileTopnicknameMembername>
-            <ProfileTopnickName>@{getUserInfo?.membername}</ProfileTopnickName>
-          </ProfileTopnicknameMembername>
-        </ProfileTopName>
-      </ProfileTop>
       {selectBtn ? (
-        <form onSubmit={handleSubmit(submitForm)}>
-          <div>
+        <>
+          <ProfileTop>
+            <ProfileTopPhoto>
+              {preview ? (
+                <div>
+                  <ProfileImg src={preview} alt="Preview" />
+                </div>
+              ) : (
+                <ProfileImg src={getUserInfo?.profileImageUrl} alt="Preview" />
+              )}
+            </ProfileTopPhoto>
+            <ProfileTopName>
+              <ProfileTopnicknameMembername>
+                <ProfileTopMembername>
+                  {getUserInfo?.nickname}
+                </ProfileTopMembername>
+              </ProfileTopnicknameMembername>
+              <ProfileTopnicknameMembername>
+                <ProfileTopnickName>
+                  @{getUserInfo?.membername}
+                </ProfileTopnickName>
+              </ProfileTopnicknameMembername>
+            </ProfileTopName>
+          </ProfileTop>
+          <form onSubmit={handleSubmit(submitForm)}>
             <div>
-              <span>닉네임 *</span>
-              <ProfileMidumInputbox>
+              <div>
+                <span>닉네임 *</span>
+                <ProfileMidumInputbox>
+                  <Input
+                    register={register}
+                    type={"text"}
+                    value={getUserInfo?.nickname}
+                    name={"nickname"}
+                    placeholder={"닉네임을 입력해주세요."}
+                    validation={{
+                      required: "닉네임을 입력해주세요.",
+                    }}
+                  />
+                </ProfileMidumInputbox>
+              </div>
+            </div>
+            <ProfileBottom>
+              <div>
+                <ProfileBottomTitle>
+                  <span>자기소개 *</span>
+                </ProfileBottomTitle>
                 <Input
+                  textarea
+                  asFor={"textarea"}
                   register={register}
                   type={"text"}
-                  value={getUserInfo?.nickname}
-                  name={"nickname"}
-                  placeholder={"닉네임을 입력해주세요."}
+                  value={getUserInfo?.introduction}
+                  name={"memberInfo"}
+                  placeholder={"자기소개를 입력해주세요."}
                   validation={{
-                    required: "닉네임을 입력해주세요.",
+                    required: "자기소개를 입력해주세요.",
                   }}
                 />
-              </ProfileMidumInputbox>
-            </div>
-          </div>
-          <ProfileBottom>
-            <div>
-              <ProfileBottomTitle>
-                <span>자기소개 *</span>
-              </ProfileBottomTitle>
-              <Input
-                textarea
-                asFor={"textarea"}
-                register={register}
-                type={"text"}
-                value={getUserInfo?.introduction}
-                name={"memberInfo"}
-                placeholder={"자기소개를 입력해주세요."}
-                validation={{
-                  required: "자기소개를 입력해주세요.",
-                }}
-              />
-            </div>
-          </ProfileBottom>
-          <ProfileButtonSpanBox>
-            <span>이미지 *</span>
-            <ProfilePublicScopButton>
-              <ProfileFileInput
-                type="file"
-                accept="image/*"
-                onChange={onChangeimge}
-              />
-            </ProfilePublicScopButton>
-          </ProfileButtonSpanBox>
-          <ProfileBottomButton>
-            <Button lgBtn>완료</Button>
-          </ProfileBottomButton>
-        </form>
+              </div>
+            </ProfileBottom>
+            <ProfileButtonSpanBox>
+              <span>이미지 *</span>
+              <ProfilePublicScopButton>
+                <ProfileFileInput
+                  type="file"
+                  accept="image/*"
+                  onChange={onChangeimge}
+                />
+              </ProfilePublicScopButton>
+            </ProfileButtonSpanBox>
+            <ProfileBottomButton>
+              <Button lgBtn>완료</Button>
+            </ProfileBottomButton>
+          </form>
+        </>
       ) : (
         <ProfileMidumContainer />
       )}
