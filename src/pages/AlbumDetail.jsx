@@ -61,6 +61,8 @@ function AlbumDetail() {
     [dispatch, id]
   );
 
+  const imageUrl = gettingAlbumDetail?.album?.data?.result?.backgroundImageUrl
+  // const uniqueUrl = `${imageUrl}?timestamp=${Date.now()}`
   return (
     <>
       <NavbarContainer>
@@ -79,9 +81,7 @@ function AlbumDetail() {
       <AlbumDetailPgContainer>
         <AlbumDetailPgDescContainer>
           <AlbumDetailPgImg
-            backgroundImageUrl={
-              gettingAlbumDetail?.album?.data?.result?.backgroundImageUrl
-            }
+            backgroundImageUrl={imageUrl}
           ></AlbumDetailPgImg>
           <AlbumDetailPgDescLayout>
             <AlbumDetailPgTitleLayout>
@@ -130,20 +130,20 @@ function AlbumDetail() {
             <p>앨범 소개</p>
             <span>{gettingAlbumDetail?.album?.data?.result?.instruction}</span>
             {gettingAlbumDetail?.album?.data?.result?.instruction?.length >
-              3 && (
-              <ExpandButtonContainer onClick={handleClick}>
-                {expanded ? (
-                  <>
-                    <div>펼쳐보기</div> <AiOutlineDown />
-                  </>
-                ) : (
-                  <>
-                    <div>접기</div>
-                    <AiOutlineUp />
-                  </>
-                )}
-              </ExpandButtonContainer>
-            )}
+              84 && (
+                <ExpandButtonContainer onClick={handleClick}>
+                  {expanded ? (
+                    <>
+                      <div>펼쳐보기</div> <AiOutlineDown />
+                    </>
+                  ) : (
+                    <>
+                      <div>접기</div>
+                      <AiOutlineUp />
+                    </>
+                  )}
+                </ExpandButtonContainer>
+              )}
           </AlbumDetailPgIntroContainer>
         </AlbumDetailPgDescContainer>
         <AlbumDetailPgClipInfo>
@@ -317,7 +317,7 @@ const ClipInfoLeftLayout = styled.div`
 
 const ClipInfoLeftSubstance = styled.div`
   margin-right: 0.3125rem;
-  font-weight: 600;
+  font-weight: bold;
   font-size: 1.25rem;
 `;
 const StContentCount = styled.span`
