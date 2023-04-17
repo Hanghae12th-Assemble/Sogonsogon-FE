@@ -24,13 +24,12 @@ function Lnb({ isOpen, handleItemClick }) {
   const username = decryptData(encryptedUserInfo);
   const navigate = useNavigate();
   const { sseOnMessaging, gettingProfile } = useSelector((state) => state);
-  console.log(gettingProfile)
   const dispatch = useDispatch();
   useEffect(() => {
     if (token && username) {
       dispatch(__getProfile(username?.userName));
     }
-  }, []);
+  }, [isOpen]);
 
   const [items, setItems] = useState([
     { id: 1, icon: <Home />, name: "홈", link: "/" },
