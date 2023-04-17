@@ -9,7 +9,7 @@ export const __createAlbum = createAsyncThunk(
     return await axios
       .post(`api/audioAlbum/upload`, albumInfo)
       .then((response) => response.data.statusCode)
-      .catch((error) => thunkAPI.rejectWithValue(error.response));
+      .catch((error) => console.log(error));
   }
 );
 

@@ -67,7 +67,6 @@ function CreateRadioInputs({
     if (action.payload && action.payload >= 200 && action.payload < 300) {
       navigate(-1);
     } else {
-      console.log(action);
       alert("본인 앨범이 아니거나 중복된 앨범입니다.");
     }
 

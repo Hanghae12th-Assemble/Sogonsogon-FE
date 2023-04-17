@@ -30,11 +30,13 @@ function CreateClipInputs({
   const navigate = useNavigate();
   const { gettingClips } = useSelector((state) => state);
 
-  // console.log(gettingClips?.clip[1]?.data?.result[0]?.title);
-  // console.log(gettingClips?.clip[1]?.data?.result[0]?.contents);
+  const Clipdata = gettingClips?.clip.map((item) => {
+    return item?.data?.result.map((object) => {
+      return object;
+    });
+  });
 
-  // console.log(gettingClips?.clip[0]?.data?.result[0]?.title);
-  // console.log(gettingClips?.clip[0]?.data?.result[0]?.contents);
+  console.log(Clipdata[0]?.length === 0 ? Clipdata[1] : Clipdata[0]);
 
   useEffect(() => {
     setFormState(formcheck);
