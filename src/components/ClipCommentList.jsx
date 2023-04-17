@@ -4,12 +4,14 @@ import styled from "styled-components";
 import { clickModi } from "../redux/module/reduxState/clickModiComment";
 import { __removeAudioComment } from "../redux/module/removeAudioComment";
 import { getLocalStorage } from "../util/localStorage";
+import decryptData from "../util/decryptKey";
 
 function ClipCommentList({ props, id }) {
   const dateTime = props?.createdAt?.slice(0, 10).replace(/-/g, ".");
   const modiComment = useSelector((state) => state?.clickingModiComment);
   const dispatch = useDispatch();
-  const user = JSON.parse(getLocalStorage("userInfo"));
+  const encryptedUserInfo = getLocalStorage("userInfo");
+  const user = decryptData(encryptedUserInfo);
   const ModifyCommnet = (id) => {
     dispatch(clickModi({ modi: !modiComment.modi, id }));
   };
@@ -26,11 +28,6 @@ function ClipCommentList({ props, id }) {
           <h4>{props?.content}</h4>
           <span>{dateTime}</span>
         </ClipplayCommentNameDateBox>
-        <ClipplayCommentBoxText>
-          <div>
-            <ClipplayPhoto src={props?.memberImageUrl} />
-          </div>
-        </ClipplayCommentBoxText>
         <ClipplayCommentBoxBtn>
           {props?.membername === user?.userName && (
             <>

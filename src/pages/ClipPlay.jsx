@@ -18,6 +18,7 @@ import { __likeClip } from "../redux/module/likeClip";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as Forward } from "../asset/icon/15secondA.svg";
 import { ReactComponent as Back } from "../asset/icon/15secondB.svg";
+import Loading from "../components/Loading";
 
 function ClipPlay() {
   const [playing, setPlaying] = useState(false);
@@ -32,6 +33,7 @@ function ClipPlay() {
   const ClipDetail = useSelector(
     (state) => state?.gettingClipDetail?.clip?.totalCommentCount
   );
+  const ClipDetailLoading = useSelector((state) => state?.gettingClipDetail);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -80,6 +82,10 @@ function ClipPlay() {
   const albumClip = () => {
     dispatch(__likeClip(id));
   };
+
+  if (ClipDetailLoading?.isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>

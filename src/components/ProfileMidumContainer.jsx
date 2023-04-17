@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { getLocalStorage } from "../util/localStorage";
 import { useThrottledCallback } from "../hooks/useThrottledCallback";
 import decryptData from "../util/decryptKey";
+import Loading from "../components/Loading";
 
 function ProfileMidumContainer() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function ProfileMidumContainer() {
   const info = decryptData(encryptedUserInfo);
   const userInfo = useSelector((state) => state?.updatingProfile?.profile);
   const getUserInfo = useSelector((state) => state?.gettingProfile?.profile);
+  const getUserInfoLoding = useSelector((state) => state?.gettingProfile);
   const getFollowing = useSelector(
     (state) => state?.gettingFollow?.follow?.isFollowCheck
   );
@@ -34,6 +36,10 @@ function ProfileMidumContainer() {
     1000,
     [dispatch, id]
   );
+
+  // if (getUserInfoLoding?.isLoading) {
+  //   return <Loading />;
+  // }
 
   return (
     <>

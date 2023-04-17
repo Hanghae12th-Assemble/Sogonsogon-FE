@@ -14,6 +14,7 @@ import { getLocalStorage } from "../util/localStorage";
 import { useParams } from "react-router";
 import { ReactComponent as Edit } from "../asset/icon/edit.svg";
 import decryptData from "../util/decryptKey";
+import Loading from "../components/Loading";
 
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
@@ -26,6 +27,7 @@ function Profile() {
   const dispatch = useDispatch();
   const selectBtn = useSelector((state) => state.profileButn);
   const getUserInfo = useSelector((state) => state?.gettingProfile?.profile);
+  const getUserInfoLoding = useSelector((state) => state?.gettingProfile);
   const modiSwitch = useSelector((state) => state?.profileButn);
 
   const onChangeimge = (e) => {
@@ -71,7 +73,7 @@ function Profile() {
     <ProfileContainer>
       <ProfileNavbarfixed>
         <Navbar
-          toNavigate={"/"}
+          toNavigate={-1}
           iconleft={<AiOutlineArrowLeft size={20} onClick={onPageClick} />}
           title={"프로필"}
           iconright={
@@ -224,7 +226,6 @@ const ProfileMidumInputbox = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 0.625rem;
   margin-top: 1.25rem;
 `;
 
