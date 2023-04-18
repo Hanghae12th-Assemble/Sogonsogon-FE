@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import SelectBtnContainer from "../components/SelectBtnContainer";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
@@ -12,58 +12,54 @@ function ClipList({ editClicked, state, setState, selectedContent, data }) {
   return (
     <>
       <AllClipsLayout>
-        <AllClipsInfoContainer>
-          <AllClipsEpisodeLayout>No.{data?.order}</AllClipsEpisodeLayout>
-        </AllClipsInfoContainer>
         <AllClicpsDescContainer>
-          <SelectBtnContainer
-            editClicked={editClicked}
-            state={state}
-            setState={setState}
-            selectedContent={selectedContent}
-            contentId={data?.id}
-          />
-          {!editClicked ? (
-            <>
-              <AllCilpsMiniBox />
-              <AllClipsDotted />
-              <AllClipsDottedLine />
-              <AllClipsDotted2 />
-            </>
-          ) : (
-            <StEditSvg
+          <AllClipsInfoContainer>
+            {editClicked ? <LayoutBox /> : null}
+            <AllClipsEpisodeLayout>No.{data?.order}</AllClipsEpisodeLayout>
+          </AllClipsInfoContainer>
+          <AllClipDescLayout>
+            <SelectBtnContainer
+              editClicked={editClicked}
+              state={state}
+              setState={setState}
+              selectedContent={selectedContent}
+              contentId={data?.id}
+            />
+            {!editClicked ? (null) : (
+              <StEditSvg
+                onClick={() => {
+                  document.startViewTransition(() =>
+                    navigate(`/modifyclip/${data?.id}`)
+                  );
+                }}
+              />
+            )}
+            <AudioCilpImg backgroundImageUrl={data?.audioclipImageUrl}
               onClick={() => {
                 document.startViewTransition(() =>
-                  navigate(`/modifyclip/${data?.id}`)
+                  navigate(`/clipplay/${data?.id}`)
                 );
               }}
             />
-          )}
-          <AudioCilpImg backgroundImageUrl={data?.audioclipImageUrl}
-            onClick={() => {
-              document.startViewTransition(() =>
-                navigate(`/clipplay/${data?.id}`)
-              );
-            }}
-          />
-          <AllClicpsDescLayout
-            onClick={() => {
-              document.startViewTransition(() =>
-                navigate(`/clipplay/${data?.id}`)
-              );
-            }}
-          >
-            <AllClicpsTitleLayout>{data?.title}</AllClicpsTitleLayout>
-            <AllClicpsHeartContianer>
-              <div>{dateTime}</div>
-              {data?.likeCheck === true ? (
-                <StAiFillHeart size={16} />
-              ) : (
-                <StAiOutlineHeart size={16} />
-              )}
-              <div>{data?.isLikeCount}</div>
-            </AllClicpsHeartContianer>
-          </AllClicpsDescLayout>
+            <AllClicpsDescLayout
+              onClick={() => {
+                document.startViewTransition(() =>
+                  navigate(`/clipplay/${data?.id}`)
+                );
+              }}
+            >
+              <AllClicpsTitleLayout>{data?.title}</AllClicpsTitleLayout>
+              <AllClicpsHeartContianer>
+                <div>{dateTime}</div>
+                {data?.likeCheck === true ? (
+                  <StAiFillHeart size={16} />
+                ) : (
+                  <StAiOutlineHeart size={16} />
+                )}
+                <div>{data?.isLikeCount}</div>
+              </AllClicpsHeartContianer>
+            </AllClicpsDescLayout>
+          </AllClipDescLayout>
         </AllClicpsDescContainer>
       </AllClipsLayout>
     </>
@@ -105,12 +101,12 @@ const AudioCilpImg = styled.div`
 const AllClipsInfoContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 0rem 0rem 0.3125rem 3.4375rem;
+  margin: 0rem 0rem 0.3125rem 0rem;
 `;
 
 const AllClicpsDescContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 0rem 0rem 0rem 0.3125rem;
 `;
 
@@ -141,44 +137,11 @@ const AllClicpsHeartContianer = styled.div`
   }
 `;
 
-const AllClipsDottedLine = styled.div`
-  position: absolute;
-  left: 2.1875rem;
-  top: 1.25rem;
-  width: 0.0625rem;
-  height: 8.75rem;
-  opacity: 50%;
-  border: 0.0625rem dotted ${({ theme }) => theme.color.darkGray_col};
-`;
-
-const AllClipsDotted = styled.div`
-  position: absolute;
-  top: 1rem;
-  left: 2.0625rem;
-  width: 0.375rem;
-  height: 0.375rem;
-  border-radius: 100%;
-  background-color: ${({ theme }) => theme.color.darkGray_col};
-`;
-
-const AllClipsDotted2 = styled.div`
-  position: absolute;
-  top: 9.75rem;
-  left: 2.0625rem;
-  width: 0.375rem;
-  height: 0.375rem;
-  border-radius: 100%;
-  background-color: ${({ theme }) => theme.color.darkGray_col};
-`;
-
-const AllCilpsMiniBox = styled.div`
-  min-width: 2.1875rem;
-`;
-
 const AllClipsEpisodeLayout = styled.div`
   width: fit-content;
   height: fit-content;
   padding: 0.25rem 0.375rem;
+  margin: 0rem 0rem 0rem .9375rem;
   border-radius: 0.8125rem;
   display: flex;
   align-items: center;
@@ -206,3 +169,14 @@ const StAiFillHeart = styled(AiFillHeart)`
   color: ${({ theme }) => theme.color.orange_col};
   margin-right: 0.3125rem;
 `;
+
+const AllClipDescLayout = styled.div`
+  display: flex;
+  flex-direction: row;
+
+`
+const LayoutBox = styled.div`
+  width: 2.125rem;
+  height: .625rem
+`
+
