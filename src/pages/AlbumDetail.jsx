@@ -20,7 +20,6 @@ import { __getAlbumDetail } from "../redux/module/getAlbumDetail";
 import { __likeAlbum } from "../redux/module/likeAlbum";
 import { useThrottledCallback } from "../hooks/useThrottledCallback";
 import isLogin from "../util/checkCookie";
-import Loading from "../components/Loading";
 
 function AlbumDetail() {
   const { id } = useParams();
@@ -329,11 +328,6 @@ const StContentCount = styled.span`
 const StAllViewLayout = styled.span`
   color: ${({ theme }) => theme.color.darkGray_col};
   cursor: pointer;
-`;
-
-const StIconSvg = styled.div`
-  width: 1.875rem;
-  margin: 0.3125rem 0.625rem;
 `;
 
 const StAiFillHeart = styled(AiFillHeart)`
