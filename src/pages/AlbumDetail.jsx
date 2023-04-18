@@ -63,11 +63,9 @@ function AlbumDetail() {
   );
 
   if (gettingAlbumDetail?.isLoading) {
-    return <Loading />;
+    return
   }
 
-  const imageUrl = gettingAlbumDetail?.album?.data?.result?.backgroundImageUrl;
-  // const uniqueUrl = `${imageUrl}?timestamp=${Date.now()}`
   return (
     <>
       <NavbarContainer>
@@ -85,7 +83,7 @@ function AlbumDetail() {
       </NavbarContainer>
       <AlbumDetailPgContainer>
         <AlbumDetailPgDescContainer>
-          <AlbumDetailPgImg backgroundImageUrl={imageUrl}></AlbumDetailPgImg>
+          <AlbumDetailPgImg backgroundImageUrl={gettingAlbumDetail?.album?.data?.result?.backgroundImageUrl}></AlbumDetailPgImg>
           <AlbumDetailPgDescLayout>
             <AlbumDetailPgTitleLayout>
               {gettingAlbumDetail?.album?.data?.result?.title}
@@ -134,19 +132,19 @@ function AlbumDetail() {
             <span>{gettingAlbumDetail?.album?.data?.result?.instruction}</span>
             {gettingAlbumDetail?.album?.data?.result?.instruction?.length >
               84 && (
-              <ExpandButtonContainer onClick={handleClick}>
-                {expanded ? (
-                  <>
-                    <div>펼쳐보기</div> <AiOutlineDown />
-                  </>
-                ) : (
-                  <>
-                    <div>접기</div>
-                    <AiOutlineUp />
-                  </>
-                )}
-              </ExpandButtonContainer>
-            )}
+                <ExpandButtonContainer onClick={handleClick}>
+                  {expanded ? (
+                    <>
+                      <div>펼쳐보기</div> <AiOutlineDown />
+                    </>
+                  ) : (
+                    <>
+                      <div>접기</div>
+                      <AiOutlineUp />
+                    </>
+                  )}
+                </ExpandButtonContainer>
+              )}
           </AlbumDetailPgIntroContainer>
         </AlbumDetailPgDescContainer>
         <AlbumDetailPgClipInfo>
@@ -213,7 +211,6 @@ const AlbumDetailPgImg = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  transition: all 0.5s ease-in-out 0s;
   align-items: flex-end;
   display: flex;
   flex-direction: row-reverse;
