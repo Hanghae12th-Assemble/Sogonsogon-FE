@@ -73,7 +73,7 @@ function ClipPlayComment() {
   };
 
   return (
-    <>
+    <div>
       <CommentBoxLayer onClick={clickModalOut} />
       <ClipplayCommentBox isVisible={isVisible}>
         <ClipplayCommentTitle>
@@ -115,19 +115,21 @@ function ClipPlayComment() {
           <div ref={ref}></div>
         </ClipPlayCommentOverflow>
       </ClipplayCommentBox>
-    </>
+    </div>
   );
 }
 
 export default ClipPlayComment;
 
 const CommentBoxLayer = styled.div`
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 105%;
+  height: 100vh;
   top: 0;
   left: 0;
+  bottom: 0;
   position: absolute;
+  z-index: 1;
 `;
 
 const slideUp = keyframes`
@@ -140,14 +142,12 @@ const slideUp = keyframes`
 `;
 
 const ClipplayCommentBox = styled.div`
-  border-top-left-radius: 1.875rem;
-  border-top-right-radius: 1.875rem;
+  border-radius: 1.875rem;
   height: 37.5rem;
-  position: fixed;
-  bottom: 0;
-  left: 29.375rem;
+  position: absolute;
+  left: 0;
+  right: 0;
   z-index: 1;
-  width: 42%;
   background-color: ${({ theme }) => theme.color.white_col};
   color: ${({ theme }) => theme.color.softBlack_col};
   padding: 0 1.875rem;

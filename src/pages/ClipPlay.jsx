@@ -33,7 +33,6 @@ function ClipPlay() {
   const ClipDetail = useSelector(
     (state) => state?.gettingClipDetail?.clip?.totalCommentCount
   );
-  const ClipDetailLoading = useSelector((state) => state?.gettingClipDetail);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -82,10 +81,6 @@ function ClipPlay() {
   const albumClip = () => {
     dispatch(__likeClip(id));
   };
-
-  if (ClipDetailLoading?.isLoading) {
-    return <Loading />;
-  }
 
   return (
     <>
