@@ -123,12 +123,13 @@ export default ClipPlayComment;
 
 const CommentBoxLayer = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
-  width: 105%;
-  height: 100vh;
+  width: 100%;
+  height: 60.75rem;
   top: 0;
   left: 0;
   bottom: 0;
   position: absolute;
+  overflow: hidden;
   z-index: 1;
 `;
 
