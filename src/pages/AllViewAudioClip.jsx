@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getClips, initInfinitiScroll } from "../redux/module/geClips";
 import { useInView } from "react-intersection-observer";
 import { __removeClip } from "../redux/module/removeClip";
-import Loading from "../components/Loading";
 
 function AllViewAudioClip() {
   const { id } = useParams();
@@ -65,7 +64,6 @@ function AllViewAudioClip() {
 
   return (
     <>
-      {gettingClips?.isLoading && <Loading />}
       <AllClipsNavBarBox>
         <AllClipsNavBarLeftLayout>
           <StAiOutlineArrowLeft
@@ -244,8 +242,8 @@ const StContentSlectedCount = styled.div`
   flex-direction: row;
   font-weight: 600;
   div{
-    margin-left: 20px;
-    font-size: 16px;
+    margin-left: 1.25rem;
+    font-size: 1rem;
     cursor: pointer;
     color: ${({ theme }) => theme.color.orange_col};
   }
