@@ -36,18 +36,15 @@ function AlbumDetail() {
     expanded: true,
   });
 
-  useEffect(() => {
-    dispatch(__getAlbumDetail(id));
-  }, [likingAlbum]);
+  const { editClicked, selectedContent, expanded } = state;
 
   useEffect(() => {
+    dispatch(__getAlbumDetail(id));
     if (isLogin() === false) {
       alert("로그인부터 해주세요.");
       navigate("/selectlogin");
     }
-  }, []);
-
-  const { editClicked, selectedContent, expanded } = state;
+  }, [id, likingAlbum, dispatch, navigate]);
 
   const handleClick = () => {
     setState({ ...state, expanded: !expanded });
@@ -62,7 +59,7 @@ function AlbumDetail() {
   );
 
   if (gettingAlbumDetail?.isLoading) {
-    return
+    return null
   }
 
   return (
