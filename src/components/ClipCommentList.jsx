@@ -12,6 +12,7 @@ function ClipCommentList({ props, id }) {
   const dispatch = useDispatch();
   const encryptedUserInfo = getLocalStorage("userInfo");
   const user = decryptData(encryptedUserInfo);
+
   const ModifyCommnet = (id) => {
     dispatch(clickModi({ modi: !modiComment.modi, id }));
   };

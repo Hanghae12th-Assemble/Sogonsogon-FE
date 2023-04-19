@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import { AiOutlineClose, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaPlay, FaStop } from "react-icons/fa";
-import { BsFastForward, BsRewind } from "react-icons/bs";
 import { BiComment } from "react-icons/bi";
 import { useState } from "react";
 import { useRef } from "react";
@@ -18,7 +17,6 @@ import { __likeClip } from "../redux/module/likeClip";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as Forward } from "../asset/icon/15secondA.svg";
 import { ReactComponent as Back } from "../asset/icon/15secondB.svg";
-import Loading from "../components/Loading";
 
 function ClipPlay() {
   const [playing, setPlaying] = useState(false);

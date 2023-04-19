@@ -24,9 +24,9 @@ function CreateRadioInputs({
 
   const dispatch = useDispatch();
   const { id } = useParams();
-  const btninfo = useSelector((state) => state.radioButn[0]);
   const [formState, setFormState] = useState("");
   const navigate = useNavigate();
+  const btninfo = useSelector((state) => state.radioButn[0]);
   const { gettingAlbumDetail } = useSelector((state) => state);
 
   useEffect(() => {

@@ -18,8 +18,8 @@ import { __getProfile } from "../redux/module/getProfile";
 function Profile() {
   const [formImagin, setFormformImagin] = useState(new FormData());
   const [preview, setPreview] = useState("");
-  const { id } = useParams();
   const [pageState] = useState(false);
+  const { id } = useParams();
   const encryptedUserInfo = getLocalStorage("userInfo");
   const user = decryptData(encryptedUserInfo);
   const { register, handleSubmit, reset } = useForm();
