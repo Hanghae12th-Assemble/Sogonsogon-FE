@@ -14,15 +14,15 @@ import { __removeAlbum } from "../redux/module/removeAlbum";
 
 function MyAlbum() {
   const [isLnbOpen, setIsLnbOpen] = useState(false);
+  const [state, setState] = useState({
+    editClicked: false,
+    selectedContent: [],
+  });
   const toggleLnb = () => setIsLnbOpen((prev) => !prev);
   const dispatch = useDispatch();
   const { gettingMyAlbum, removingMyAlbum } = useSelector((state) => state);
   const page = useRef(1);
   const [ref, inView] = useInView();
-  const [state, setState] = useState({
-    editClicked: false,
-    selectedContent: [],
-  });
 
   useEffect(() => {
     page.current = 1;
@@ -41,9 +41,8 @@ function MyAlbum() {
   const totalAlbumCount =
     gettingMyAlbum?.album[0]?.data?.metadata?.audioAlbumCount;
   const allAlbumDataID = gettingMyAlbum?.album?.map((item) => {
-    return item?.data?.result?.map((content) => content.id)
-  }
-  )
+    return item?.data?.result?.map((content) => content.id);
+  });
   return (
     <>
       <Lnb isOpen={isLnbOpen} handleItemClick={toggleLnb} />

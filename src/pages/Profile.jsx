@@ -26,7 +26,6 @@ function Profile() {
   const dispatch = useDispatch();
   const selectBtn = useSelector((state) => state.profileButn);
   const getUserInfo = useSelector((state) => state?.gettingProfile?.profile);
-  const modiSwitch = useSelector((state) => state?.profileButn);
 
   const onChangeimge = (e) => {
     const img = e.target.files[0];
@@ -75,7 +74,7 @@ function Profile() {
           iconleft={<AiOutlineArrowLeft size={20} onClick={onPageClick} />}
           title={"프로필"}
           iconright={
-            id === user.userName && !modiSwitch ? (
+            id === user.userName && !selectBtn ? (
               <EditButton onClick={onPageModiClick} />
             ) : null
           }

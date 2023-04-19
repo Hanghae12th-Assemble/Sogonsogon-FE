@@ -40,11 +40,8 @@ function AllViewAudioClip() {
     }
   }, [sortBy, inView]);
 
-  const sortByLikesCoutHandler = () => {
-    setSortBy("likesCount");
-  };
-  const sortByCreatedAtHandler = () => {
-    setSortBy("createdAt");
+  const sortByHandler = (sortBy) => {
+    setSortBy(sortBy);
   };
 
   const AllContentRomoveHandler = () => {
@@ -127,9 +124,9 @@ function AllViewAudioClip() {
       </MyEditContainer>
       <StSortBtnSvg>
         {sortBy === "createdAt" ? (
-          <LatestList onClick={sortByLikesCoutHandler} />
+          <LatestList onClick={() => sortByHandler("likesCount")} />
         ) : (
-          <LikeList onClick={sortByCreatedAtHandler} />
+          <LikeList onClick={() => sortByHandler("createdAt")} />
         )}
       </StSortBtnSvg>
       <AllClipsContainer>
