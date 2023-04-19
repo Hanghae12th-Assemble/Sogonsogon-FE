@@ -4,8 +4,6 @@ import styled from "styled-components";
 import { AiOutlineClose, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaPlay, FaStop } from "react-icons/fa";
 import { BiComment } from "react-icons/bi";
-import { useState } from "react";
-import { useRef } from "react";
 import ReactPlayer from "react-player";
 import formatTime from "../util/formatTime";
 import ClipPlayComment from "../components/ClipPlayComment";
@@ -17,11 +15,9 @@ import { __likeClip } from "../redux/module/likeClip";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as Forward } from "../asset/icon/15secondA.svg";
 import { ReactComponent as Back } from "../asset/icon/15secondB.svg";
+import { useClipPlayControls } from "../hooks/useClipPlayControls";
 
 function ClipPlay() {
-  const [playing, setPlaying] = useState(false);
-  const [played, setPlayed] = useState(0);
-  const [duration, setDuration] = useState(0);
   const { id } = useParams();
   const selectBtn = useSelector((state) => state.clickingModal);
   const clipdata = useSelector(
@@ -33,47 +29,25 @@ function ClipPlay() {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {
+    playing,
+    played,
+    duration,
+    playerRef,
+    handlePlayPause,
+    handleProgress,
+    handleDuration,
+    handleRewind,
+    handleFastForward,
+    handleSeekChange,
+  } = useClipPlayControls();
 
   useEffect(() => {
     dispatch(__getClipDetail(id));
   }, [likeData, selectBtn]);
 
-  const playerRef = useRef(null);
-
-  useEffect(() => {
-    if (played === 1) {
-      setPlaying(false);
-    }
-  }, [played]);
-
-  const handlePlayPause = () => {
-    setPlaying(!playing);
-  };
-
-  const handleProgress = (progress) => {
-    setPlayed(progress.played);
-  };
-
-  const handleDuration = (duration) => {
-    setDuration(duration);
-  };
-
   const setCommentBox = () => {
     dispatch(clickOut(true));
-  };
-
-  const handleRewind = () => {
-    playerRef.current.seekTo(playerRef.current.getCurrentTime() - 15);
-  };
-
-  const handleFastForward = () => {
-    playerRef.current.seekTo(playerRef.current.getCurrentTime() + 15);
-  };
-
-  const handleSeekChange = (e) => {
-    const newPlayed = parseFloat(e.target.value);
-    setPlayed(newPlayed);
-    playerRef.current.seekTo(newPlayed * duration);
   };
 
   const albumClip = () => {
