@@ -51,26 +51,30 @@ function CreateRadioInputs({
   };
 
   const submitForm = async (data) => {
-    const formData = new FormData();
-    formData.append("categoryType", btninfo.title);
-    formData.append("title ", data.title);
-    formData.append("instruction", data.introduction);
-    for (const keyValue of formImagin) {
-      formData.append(keyValue[0], keyValue[1]);
-    }
-
-    const action =
-      formState === "create"
-        ? await dispatch(__createAlbum(formData))
-        : await dispatch(__updateAlbum({ albumInfo: formData, albumId: id }));
-
-    if (action.payload && action.payload >= 200 && action.payload < 300) {
-      navigate(-1);
+    if (btninfo?.title === undefined) {
+      alert("앨범 주제를 골라주세요.");
     } else {
-      alert("본인 앨범이 아니거나 중복된 앨범입니다.");
-    }
+      const formData = new FormData();
+      formData.append("categoryType", btninfo.title);
+      formData.append("title ", data.title);
+      formData.append("instruction", data.introduction);
+      for (const keyValue of formImagin) {
+        formData.append(keyValue[0], keyValue[1]);
+      }
 
-    reset();
+      const action =
+        formState === "create"
+          ? await dispatch(__createAlbum(formData))
+          : await dispatch(__updateAlbum({ albumInfo: formData, albumId: id }));
+
+      if (action.payload && action.payload >= 200 && action.payload < 300) {
+        navigate(-1);
+      } else {
+        alert("본인 앨범이 아니거나 중복된 앨범입니다.");
+      }
+
+      reset();
+    }
   };
 
   return (
