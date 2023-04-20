@@ -92,8 +92,3 @@ const RadionContentMiniLayout = styled.div`
   width: 9.375rem;
   min-height: 3.125rem;
 `;
-
-const StIconSvg = styled.div`
-  width: 1.5625rem;
-  margin: 0.3125rem 0.625rem;
-`;
