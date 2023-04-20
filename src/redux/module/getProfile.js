@@ -22,7 +22,10 @@ const initialState = {
 const getProfile = createSlice({
   name: "getProfile",
   initialState,
-  reducers: {},
+  reducers: {
+    resetProfile: (state, action) =>
+      (state = { ...state, profile: action.payload }),
+  },
   extraReducers: (builder) => {
     builder.addCase(__getProfile.pending, (state) => {
       state.isLoading = true;
@@ -40,4 +43,5 @@ const getProfile = createSlice({
   },
 });
 
+export const { resetProfile } = getProfile.actions;
 export default getProfile;

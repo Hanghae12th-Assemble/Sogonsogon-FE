@@ -23,7 +23,6 @@ import {
 import { __likeAlbum } from "../redux/module/likeAlbum";
 import { useThrottledCallback } from "../hooks/useThrottledCallback";
 import isLogin from "../util/checkCookie";
-import Loading from "../components/Loading";
 
 function AlbumDetail() {
   const { id } = useParams();
