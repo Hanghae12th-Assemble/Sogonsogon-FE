@@ -16,7 +16,7 @@ import { ReactComponent as Edit } from "../asset/icon/edit.svg";
 import Button from "../elements/Button";
 import ClipList from "../components/ClipList";
 import { useDispatch, useSelector } from "react-redux";
-import { __getAlbumDetail } from "../redux/module/getAlbumDetail";
+import { __getAlbumDetail, resetAlbumDetail } from "../redux/module/getAlbumDetail";
 import { __likeAlbum } from "../redux/module/likeAlbum";
 import { useThrottledCallback } from "../hooks/useThrottledCallback";
 import isLogin from "../util/checkCookie";
@@ -39,6 +39,10 @@ function AlbumDetail() {
   const { editClicked, selectedContent, expanded } = state;
 
   useEffect(() => {
+    dispatch(resetAlbumDetail(null))
+  }, [])
+
+  useEffect(() => {
     dispatch(__getAlbumDetail(id));
     if (isLogin() === false) {
       alert("로그인부터 해주세요.");
@@ -57,10 +61,6 @@ function AlbumDetail() {
     1000,
     [dispatch, id]
   );
-
-  if (gettingAlbumDetail?.isLoading) {
-    return null
-  }
 
   return (
     <>
