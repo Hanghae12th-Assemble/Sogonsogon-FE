@@ -20,6 +20,7 @@ import { __getAlbumDetail } from "../redux/module/getAlbumDetail";
 import { __likeAlbum } from "../redux/module/likeAlbum";
 import { useThrottledCallback } from "../hooks/useThrottledCallback";
 import isLogin from "../util/checkCookie";
+import Loading from "../components/Loading";
 
 function AlbumDetail() {
   const { id } = useParams();
@@ -59,7 +60,7 @@ function AlbumDetail() {
   );
 
   if (gettingAlbumDetail?.isLoading) {
-    return null
+    return <Loading />;
   }
 
   return (
@@ -79,7 +80,11 @@ function AlbumDetail() {
       </NavbarContainer>
       <AlbumDetailPgContainer>
         <AlbumDetailPgDescContainer>
-          <AlbumDetailPgImg backgroundImageUrl={gettingAlbumDetail?.album?.data?.result?.backgroundImageUrl}></AlbumDetailPgImg>
+          <AlbumDetailPgImg
+            backgroundImageUrl={
+              gettingAlbumDetail?.album?.data?.result?.backgroundImageUrl
+            }
+          ></AlbumDetailPgImg>
           <AlbumDetailPgDescLayout>
             <AlbumDetailPgTitleLayout>
               {gettingAlbumDetail?.album?.data?.result?.title}
@@ -128,19 +133,19 @@ function AlbumDetail() {
             <span>{gettingAlbumDetail?.album?.data?.result?.instruction}</span>
             {gettingAlbumDetail?.album?.data?.result?.instruction?.length >
               84 && (
-                <ExpandButtonContainer onClick={handleClick}>
-                  {expanded ? (
-                    <>
-                      <div>펼쳐보기</div> <AiOutlineDown />
-                    </>
-                  ) : (
-                    <>
-                      <div>접기</div>
-                      <AiOutlineUp />
-                    </>
-                  )}
-                </ExpandButtonContainer>
-              )}
+              <ExpandButtonContainer onClick={handleClick}>
+                {expanded ? (
+                  <>
+                    <div>펼쳐보기</div> <AiOutlineDown />
+                  </>
+                ) : (
+                  <>
+                    <div>접기</div>
+                    <AiOutlineUp />
+                  </>
+                )}
+              </ExpandButtonContainer>
+            )}
           </AlbumDetailPgIntroContainer>
         </AlbumDetailPgDescContainer>
         <AlbumDetailPgClipInfo>

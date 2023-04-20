@@ -39,14 +39,6 @@ function ProfileMidumContainer() {
     [dispatch, id]
   );
 
-  if (getUserInfoLoding?.isLoading) {
-    return (
-      <ProfileLoding>
-        <Loading />
-      </ProfileLoding>
-    );
-  }
-
   return (
     <>
       <ProfileTop>
