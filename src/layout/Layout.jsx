@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { ReactComponent as Logo } from "../asset/logo/logo.svg";
 import { ReactComponent as Symbol } from "../asset/logo/symbol.svg";
 import { getCookie } from "../util/cookie";
-import { useState } from "react";
 import { useEffect } from "react";
 import { EventSourcePolyfill } from "event-source-polyfill";
 import { useDispatch } from "react-redux";
